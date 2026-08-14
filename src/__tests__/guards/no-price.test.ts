@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 /**
@@ -6,15 +6,16 @@ import { join, relative } from 'node:path';
  * Falha o build se vocabulário de preço/compra/checkout aparecer no código-fonte
  * (UI, modelo de dados, dataLayer, schema.org, nomes de variáveis, rotas).
  *
- * Escopo: código em src/ (exceto dicionários de conteúdo e este próprio teste).
- * Conteúdo editorial legítimo pode citar "preço"/"valor" (ex.: FAQ "Os preços aparecem no site? NÃO"),
- * por isso os dicionários e o CMS não são varridos aqui — a regra é sobre CÓDIGO.
+ * Escopo: código em src/ (Next) e os schemas do modelo em cms/src (Strapi) — é onde um campo
+ * de preço mais perigosamente apareceria. Dicionários de conteúdo e este teste são excluídos:
+ * conteúdo editorial pode citar "preço"/"valor" (ex.: FAQ "Os preços aparecem no site? NÃO").
  *
  * Exceção aprovada (docs/00-divergencias.md #15): campo "Faixa de investimento" em US$
  * é budget do cliente, não preço de produto. `US$` está na allowlist.
  */
 
 const SRC_DIR = join(process.cwd(), 'src');
+const CMS_SRC_DIR = join(process.cwd(), 'cms', 'src');
 
 const EXCLUDE_DIRS = new Set(['dictionaries']);
 const EXCLUDE_FILE_SUFFIXES = ['no-price.test.ts'];
@@ -35,15 +36,16 @@ const FORBIDDEN: { label: string; re: RegExp }[] = [
   { label: 'gateway de pagamento', re: /payment[_]?gateway|gateway[_]?de[_]?pagamento/i },
 ];
 
-function walk(dir: string): string[] {
+function walk(dir: string, extensoes: RegExp): string[] {
+  if (!existsSync(dir)) return [];
   const out: string[] = [];
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);
     const st = statSync(full);
     if (st.isDirectory()) {
       if (EXCLUDE_DIRS.has(entry)) continue;
-      out.push(...walk(full));
-    } else if (/\.(ts|tsx|js|jsx)$/.test(entry)) {
+      out.push(...walk(full, extensoes));
+    } else if (extensoes.test(entry)) {
       if (EXCLUDE_FILE_SUFFIXES.some((s) => full.endsWith(s))) continue;
       out.push(full);
     }
@@ -52,7 +54,8 @@ function walk(dir: string): string[] {
 }
 
 describe('guarda anti-preço', () => {
-  const files = walk(SRC_DIR);
+  // Next: código-fonte. CMS: código + schemas .json (modelo de dados do Strapi).
+  const files = [...walk(SRC_DIR, /\.(ts|tsx|js|jsx)$/), ...walk(CMS_SRC_DIR, /\.(ts|js|json)$/)];
 
   it('encontra ao menos um arquivo para varrer', () => {
     expect(files.length).toBeGreaterThan(0);
