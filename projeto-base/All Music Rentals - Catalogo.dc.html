@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F1F2F2;color:#0B0C0D;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1A7F82;text-decoration:none}
+a:hover{color:#0B0C0D}
+input,select,button,textarea{font-family:inherit}
+@keyframes amrToast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes amrSpin{to{transform:rotate(360deg)}}
+@keyframes amrPulse{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes amrDrawer{from{transform:translateY(100%)}to{transform:translateY(0)}}
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:hidden;padding-bottom:88px">
+
+<div style="display:{{ topbarDisplay }};background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between">
+    <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#9EA3A5">Locação Premium e Soluções em Painéis de LED para Eventos na Flórida</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:500 13px/1.4 'Public Sans',sans-serif">
+      <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">(689) 242-1871</a>
+      <span style="color:#3A3E40">·</span>
+      <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">contato@allmusicbr.com</a>
+      <span style="color:#3A3E40">·</span>
+      <div style="display:flex;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
+        <a href="#en" style="color:#9EA3A5" style-hover="color:#2FB6B9">EN</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#pt" style="color:#2FB6B9;font-weight:500">PT</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#es" style="color:#9EA3A5" style-hover="color:#2FB6B9">ES</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px">
+    <a href="#inicio" aria-label="All Music Rentals — início" style="display:flex;align-items:center;flex:none" style-focus="outline:2px solid #2FB6B9;outline-offset:4px">
+      <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:38px;width:auto">
+    </a>
+    <div style="flex:1;display:{{ deskDisplay }};align-items:center;gap:20px;min-width:0">
+      <nav style="flex:1;display:flex;flex-wrap:wrap;gap:4px 16px;font:500 15px/1.2 'Public Sans',sans-serif">
+        <a href="#inicio" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Início</a>
+        <a href="#estruturas" style="color:#F1F2F2;padding:4px 0;border-bottom:2px solid #2FB6B9">Catálogo</a>
+        <a href="#led" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Telas de LED</a>
+        <a href="#luzsom" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Luz &amp; Som</a>
+        <a href="#tendas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Tendas</a>
+        <a href="#moveis" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Móveis</a>
+        <a href="#sobre" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Sobre Nós</a>
+        <a href="#contato" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Contato</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none">
+        <a href="#orcamento" aria-label="Carrinho de orçamento" style="display:flex;align-items:center;gap:8px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;border:1px solid #3A3E40;padding:8px 10px" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+          ORÇAMENTO
+          <span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font-weight:500;padding:0 5px">{{ count }}</span>
+        </a>
+        <a href="#solicitar" style="background:#2FB6B9;color:#0B0C0D;padding:11px 16px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;letter-spacing:-0.01em;white-space:nowrap" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+    <div style="flex:1;display:{{ mobDisplay }};justify-content:flex-end;align-items:center;gap:10px">
+      <a href="#orcamento" aria-label="Carrinho de orçamento" style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:16px;height:13px;border:2px solid currentColor;border-top:0"></span>
+        <span style="position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 12px 'IBM Plex Mono',monospace;border-radius:2px">{{ count }}</span>
+      </a>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menu" style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:4px;align-items:center;background:transparent;border:1px solid #3A3E40;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+      </button>
+    </div>
+  </div>
+  <div style="display:{{ menuDisplay }};background:#1C1E20;border-top:1px solid #3A3E40;box-shadow:0 6px 0 rgba(11,12,13,0.35);padding:16px 20px 24px">
+    <nav style="display:grid;gap:2px;font:500 17px/1.2 'Public Sans',sans-serif">
+      <a href="#inicio" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Início</a>
+      <a href="#catalogo" style="color:#2FB6B9;padding:12px 0;border-bottom:1px solid #3A3E40">Catálogo</a>
+      <a href="#led" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Telas de LED</a>
+      <a href="#luzsom" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Luz &amp; Som</a>
+      <a href="#tendas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Tendas</a>
+      <a href="#moveis" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Móveis</a>
+      <a href="#sobre" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Sobre Nós</a>
+      <a href="#contato" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Contato</a>
+    </nav>
+    <a href="#solicitar" style="display:block;text-align:center;margin-top:16px;background:#2FB6B9;color:#0B0C0D;padding:15px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px">SOLICITAR ORÇAMENTO</a>
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid #3A3E40;display:grid;gap:16px">
+      <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">CONTATO</p>
+      <div style="display:grid;gap:2px">
+        <a href="tel:+16892421871" style="display:flex;align-items:center;min-height:44px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:17px;border-bottom:1px solid #3A3E40">(689) 242-1871</a>
+        <a href="mailto:contato@allmusicbr.com" style="display:flex;align-items:center;min-height:44px;color:#F1F2F2;font:400 17px 'Public Sans',sans-serif;border-bottom:1px solid #3A3E40">contato@allmusicbr.com</a>
+        <a href="#contato" style="display:flex;align-items:center;min-height:44px;color:#F1F2F2;font:500 17px 'Public Sans',sans-serif">Contato</a>
+      </div>
+      <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">IDIOMA</p>
+      <div style="display:flex;gap:8px">
+        <a href="#en" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;border-radius:2px;color:#C7CACB;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em">EN</a>
+        <a href="#pt" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #2FB6B9;background:#2FB6B9;border-radius:2px;color:#0B0C0D;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:13px;letter-spacing:0.06em">PT</a>
+        <a href="#es" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;border-radius:2px;color:#C7CACB;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em">ES</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="catalogo" style="background:#0B0C0D;color:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(32px,4vw,64px) 20px clamp(40px,5vw,64px)">
+    <nav aria-label="Trilha de navegação" style="margin-bottom:24px;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">
+      <a href="#inicio" style="color:#9EA3A5" style-hover="color:#2FB6B9">INÍCIO</a>
+      <span style="padding:0 8px">/</span>
+      <span style="color:#F1F2F2">CATÁLOGO</span>
+    </nav>
+    <div style="display:grid;grid-template-columns:{{ heroCols }};gap:clamp(24px,3vw,48px);align-items:start">
+      <div>
+        <h1 style="margin:0 0 20px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5vw,72px);line-height:0.92;text-wrap:balance">Catálogo de Produtos para Eventos</h1>
+        <p style="margin:0;font:400 clamp(16px,1.2vw,17px)/1.55 'Public Sans',sans-serif;color:#C7CACB;max-width:56ch">Navegue pelo catálogo, escolha os produtos e adicione os itens desejados ao seu orçamento.</p>
+      </div>
+      <div style="border:1px solid #3A3E40;background:#1C1E20;border-radius:2px;padding:24px;display:grid;gap:12px">
+        <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">SOBRE OS VALORES</p>
+        <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#DDE0E0">Os preços não são exibidos online. Os valores dependem da quantidade, data, endereço, entrega, montagem e necessidades do evento.</p>
+      </div>
+    </div>
+
+    <form onSubmit="{{ onBusca }}" style="margin-top:clamp(24px,3vw,40px);max-width:640px">
+      <label for="busca-catalogo" style="display:block;margin-bottom:10px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#9EA3A5">BUSCAR PRODUTOS NO CATÁLOGO</label>
+      <div style="display:flex;border:1px solid #3A3E40;background:#1C1E20">
+        <input id="busca-catalogo" type="search" value="{{ buscaValor }}" onInput="{{ onBuscaInput }}" placeholder="Busque por mesa, capa, guarda-sol, painel de LED..." style="flex:1;min-width:0;background:transparent;border:0;padding:15px;color:#F1F2F2;font-size:16px" style-focus="outline:2px solid #2FB6B9;outline-offset:-2px">
+        <button type="submit" style="border:0;background:#2FB6B9;color:#0B0C0D;padding:0 24px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">BUSCAR</button>
+      </div>
+    </form>
+  </div>
+  <div style="height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+</section>
+
+<div style="max-width:1280px;margin:0 auto;padding:clamp(32px,4vw,64px) 20px">
+  <div style="display:grid;grid-template-columns:{{ layoutCols }};gap:clamp(24px,3vw,40px);align-items:start">
+
+    <aside style="display:{{ asideDisplay }};position:sticky;top:96px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:2px solid #0B0C0D;margin-bottom:20px">
+        <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Filtros</h2>
+        <button type="button" onClick="{{ limparTudo }}" style="border:0;background:transparent;padding:4px 0;cursor:pointer;font:500 13px/1 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#1A7F82;text-decoration:underline" style-hover="color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">LIMPAR</button>
+      </div>
+      <div style="max-height:calc(100vh - 200px);overflow-y:auto;padding-right:4px">
+        {{ painelFiltros }}
+      </div>
+    </aside>
+
+    <main>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;margin-bottom:20px">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <button type="button" onClick="{{ abrirDrawer }}" style="display:{{ btnFiltroDisplay }};align-items:center;gap:10px;min-height:44px;border:1px solid #0B0C0D;background:#FFFFFF;color:#0B0C0D;padding:0 16px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">
+            FILTROS
+            <sc-if value="{{ temFiltros }}" hint-placeholder-val="{{ false }}"><span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 12px 'IBM Plex Mono',monospace;border-radius:2px;padding:0 5px">{{ nFiltros }}</span></sc-if>
+          </button>
+          <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">{{ contagem }}</p>
+        </div>
+        <label style="display:flex;align-items:center;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif;color:#4A4E50">Ordenar por
+          <select onChange="{{ onOrdenar }}" value="{{ ordem }}" style="min-height:44px;border:1px solid #C9CBCC;border-radius:2px;background:#FFFFFF;padding:0 12px;font-size:15px;color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:2px">
+            <option value="Produtos em destaque">Produtos em destaque</option>
+            <option value="Mais solicitados">Mais solicitados</option>
+            <option value="Mais recentes">Mais recentes</option>
+            <option value="Nome de A a Z">Nome de A a Z</option>
+            <option value="Nome de Z a A">Nome de Z a A</option>
+          </select>
+        </label>
+      </div>
+
+      <sc-if value="{{ temFiltros }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid #C9CBCC">
+          <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072;margin-right:4px">FILTROS ATIVOS</span>
+          {{ chips }}
+          <button type="button" onClick="{{ limparTudo }}" style="min-height:32px;border:0;background:transparent;padding:0 4px;cursor:pointer;font:500 13px/1 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#1A7F82;text-decoration:underline" style-hover="color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">LIMPAR TUDO</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ estadoCarregando }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:{{ gridProdutos }};gap:24px" aria-busy="true">
+          {{ esqueletos }}
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ estadoVazio }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:clamp(28px,4vw,48px);display:grid;gap:24px;max-width:720px">
+          <div>
+            <p style="margin:0 0 12px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">BUSCA SEM CORRESPONDÊNCIA</p>
+            <h3 style="margin:0 0 10px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.6vw,30px);line-height:1;letter-spacing:-0.01em">Amplie a busca ou fale com a equipe</h3>
+            <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:52ch">Nenhum produto do catálogo combina com todos os filtros aplicados ao mesmo tempo. Tente remover o filtro mais específico, ou envie sua necessidade — trabalhamos com itens que ainda não estão publicados.</p>
+          </div>
+          <div style="display:grid;gap:12px">
+            <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">SUGESTÕES</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <button type="button" onClick="{{ limparTudo }}" style="min-height:44px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;padding:0 16px;border-radius:2px;cursor:pointer;font:500 15px 'Public Sans',sans-serif" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">Remover todos os filtros</button>
+              <button type="button" onClick="{{ verLed }}" style="min-height:44px;border:1px solid #C9CBCC;background:#FFFFFF;color:#0B0C0D;padding:0 16px;border-radius:2px;cursor:pointer;font:500 15px 'Public Sans',sans-serif" style-hover="border-color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">Ver painéis de LED</button>
+              <button type="button" onClick="{{ verMesas }}" style="min-height:44px;border:1px solid #C9CBCC;background:#FFFFFF;color:#0B0C0D;padding:0 16px;border-radius:2px;cursor:pointer;font:500 15px 'Public Sans',sans-serif" style-hover="border-color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">Ver mesas de coquetel</button>
+            </div>
+          </div>
+          <div style="border-top:1px solid #C9CBCC;padding-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+            <a href="#solicitar" style="background:#2FB6B9;color:#0B0C0D;padding:15px 22px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#1A7F82;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">Descreva o item e a data — a equipe responde com o que temos disponível.</p>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ estadoLista }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:{{ gridProdutos }};gap:24px">
+          <sc-for list="{{ produtos }}" as="p" hint-placeholder-count="8">
+            <article onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" style="min-width:0;display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #C9CBCC;border-radius:2px;transition:border-color .15s" style-hover="border-color:#0B0C0D">
+              <div style="position:relative;aspect-ratio:4/3;background:#E4E6E6;overflow:hidden">
+                <sc-if value="{{ p.hasFoto }}" hint-placeholder-val="{{ false }}">
+                  <div role="img" aria-label="{{ p.nome }}" style="width:100%;height:100%;background:#FFFFFF;background-image:{{ p.fotoBg }};background-size:cover;background-position:center;background-repeat:no-repeat"></div>
+                </sc-if>
+                <sc-if value="{{ p.semFoto }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,#DADCDC 0 6px,#E4E6E6 6px 12px);display:flex;align-items:flex-end;padding:12px">
+                    <span style="font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">{{ p.placeholder }}</span>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ p.ehServico }}" hint-placeholder-val="{{ false }}">
+                  <span style="position:absolute;top:12px;left:12px;background:#0B0C0D;color:#2FB6B9;padding:6px 10px;border-radius:2px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em">SERVIÇO TÉCNICO</span>
+                </sc-if>
+                <div style="position:absolute;left:0;right:0;bottom:0;background:#0B0C0D;color:#F1F2F2;padding:10px 12px;font:500 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;transform:{{ p.specTransform }};transition:transform .18s ease-out">{{ p.spec }}</div>
+              </div>
+              <div style="padding:20px;display:flex;flex-direction:column;gap:12px;flex:1">
+                <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">{{ p.categoria }}</p>
+                <h3 style="margin:0;font:500 22px/1.3 'Public Sans',sans-serif">{{ p.nome }}</h3>
+                <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;flex:1">{{ p.desc }}</p>
+
+                <sc-if value="{{ p.temCor }}" hint-placeholder-val="{{ false }}">
+                  <div>
+                    <p style="margin:0 0 8px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">COR · {{ p.corAtual }}</p>
+                    <div style="display:flex;gap:8px">
+                      <sc-for list="{{ p.cores }}" as="c" hint-placeholder-count="3">
+                        <button type="button" onClick="{{ c.onPick }}" aria-label="{{ c.nome }}" title="{{ c.nome }}" style="width:32px;height:32px;padding:0;border-radius:2px;cursor:pointer;background:{{ c.hex }};border:{{ c.borda }};box-shadow:{{ c.anel }}" style-focus="outline:2px solid #1A7F82;outline-offset:3px"></button>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <sc-if value="{{ p.ehServico }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;gap:12px;align-items:flex-start;background:#F1F2F2;border-left:2px solid #1A7F82;padding:12px 14px;border-radius:2px">
+                    <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82;padding-top:3px">ESCOPO</span>
+                    <p style="margin:0;font:400 13px/1.45 'Public Sans',sans-serif;color:#4A4E50">{{ p.escopo }}</p>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ p.temQtd }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;align-items:center;gap:12px">
+                    <label style="font:400 15px/1.4 'Public Sans',sans-serif;color:#4A4E50" for="{{ p.qtyId }}">Quantidade</label>
+                    <div style="display:flex;border:1px solid #C9CBCC;border-radius:2px;overflow:hidden">
+                      <button type="button" onClick="{{ p.onDec }}" aria-label="Diminuir quantidade" style="width:40px;min-height:44px;border:0;border-right:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">−</button>
+                      <input id="{{ p.qtyId }}" type="text" inputmode="numeric" value="{{ p.qty }}" onChange="{{ p.onQty }}" style="width:52px;border:0;text-align:center;font:500 15px 'IBM Plex Mono',monospace;background:#FFFFFF" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">
+                      <button type="button" onClick="{{ p.onInc }}" aria-label="Aumentar quantidade" style="width:40px;min-height:44px;border:0;border-left:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">+</button>
+                    </div>
+                  </div>
+                </sc-if>
+
+                <div style="display:grid;gap:8px">
+                  <a href="#produto" style="text-align:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:13px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">{{ p.btnPrimario }}</a>
+                  <button type="button" onClick="{{ p.onAdd }}" style="border:0;background:#2FB6B9;color:#0B0C0D;padding:14px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;min-height:44px" style-hover="background:#1A7F82;color:#F1F2F2" style-active="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">{{ p.btnSecundario }}</button>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+</div>
+
+<div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+
+<footer id="contato" style="background:#0B0C0D;color:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:34px;width:auto;margin-bottom:20px">
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:34ch">Locação de equipamentos, mobiliário e painéis de LED para eventos na Flórida.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">PRODUTOS</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#estruturas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Estruturas</a>
+          <a href="#led" style="color:#DDE0E0" style-hover="color:#2FB6B9">Telas de LED</a>
+          <a href="#luzsom" style="color:#DDE0E0" style-hover="color:#2FB6B9">Luz &amp; Som</a>
+          <a href="#tendas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Tendas</a>
+          <a href="#moveis" style="color:#DDE0E0" style-hover="color:#2FB6B9">Móveis</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">EMPRESA</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#sobre" style="color:#DDE0E0" style-hover="color:#2FB6B9">Sobre Nós</a>
+          <a href="#contato" style="color:#DDE0E0" style-hover="color:#2FB6B9">Contato</a>
+          <a href="#solicitar" style="color:#DDE0E0" style-hover="color:#2FB6B9">Solicitar Orçamento</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">INFORMAÇÕES</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#faq" style="color:#DDE0E0" style-hover="color:#2FB6B9">Perguntas Frequentes</a>
+          <a href="#privacidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Política de Privacidade</a>
+          <a href="#termos" style="color:#DDE0E0" style-hover="color:#2FB6B9">Termos de Uso</a>
+          <a href="#politicas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Políticas de Locação</a>
+          <a href="#entrega" style="color:#DDE0E0" style-hover="color:#2FB6B9">Entrega e Montagem</a>
+          <a href="#cancelamento" style="color:#DDE0E0" style-hover="color:#2FB6B9">Cancelamento</a>
+          <a href="#acessibilidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Acessibilidade</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">CONTATO</p>
+        <div style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#2FB6B9">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9">contato@allmusicbr.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;padding-top:24px">
+      <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:60ch">Os produtos estão sujeitos à disponibilidade. O envio de uma solicitação não cria uma reserva.</p>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">© 2026 All Music Rentals. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:50;background:#0B0C0D;border-top:1px solid #2FB6B9;box-shadow:0 -4px 0 rgba(11,12,13,0.35)">
+  <div style="max-width:1280px;margin:0 auto;padding:12px 20px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:14px;min-width:0">
+      <span style="flex:none;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 15px 'IBM Plex Mono',monospace;border-radius:2px;padding:0 8px">{{ count }}</span>
+      <div style="min-width:0">
+        <p style="margin:0;font:500 15px/1.3 'Public Sans',sans-serif;color:#F1F2F2">{{ barraTitulo }}</p>
+        <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#6B7072">{{ barraSub }}</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex:none">
+      <a href="#orcamento" style="min-height:44px;display:flex;align-items:center;border:1px solid #F1F2F2;color:#F1F2F2;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">VER ORÇAMENTO</a>
+      <a href="#solicitar" style="min-height:44px;display:flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR</a>
+    </div>
+  </div>
+</div>
+
+<sc-if value="{{ drawerAberto }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:70;display:flex;flex-direction:column;justify-content:flex-end">
+    <button type="button" onClick="{{ fecharDrawer }}" aria-label="Fechar filtros" style="position:absolute;inset:0;border:0;background:rgba(11,12,13,0.6);cursor:pointer"></button>
+    <div role="dialog" aria-label="Filtros" style="position:relative;background:#F1F2F2;border-top:2px solid #0B0C0D;max-height:88vh;display:flex;flex-direction:column;animation:amrDrawer .22s ease-out both">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid #C9CBCC;background:#FFFFFF">
+        <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Filtros</h2>
+        <button type="button" onClick="{{ fecharDrawer }}" aria-label="Fechar" style="width:44px;height:44px;border:1px solid #C9CBCC;background:transparent;border-radius:2px;cursor:pointer;font-size:20px;color:#0B0C0D" style-hover="border-color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:2px">×</button>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:20px">
+        {{ painelFiltrosMobile }}
+      </div>
+      <div style="display:flex;gap:8px;padding:16px 20px;border-top:1px solid #C9CBCC;background:#FFFFFF">
+        <button type="button" onClick="{{ limparTudo }}" style="flex:1;min-height:48px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">LIMPAR</button>
+        <button type="button" onClick="{{ fecharDrawer }}" style="flex:2;min-height:48px;border:0;background:#2FB6B9;color:#0B0C0D;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#1A7F82;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">{{ drawerCta }}</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ toastAberto }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:20px;right:20px;bottom:96px;z-index:60;display:flex;justify-content:center;pointer-events:none">
+    <div style="pointer-events:auto;max-width:520px;width:100%;background:#0B0C0D;color:#F1F2F2;border:1px solid #2FB6B9;border-radius:2px;box-shadow:6px 6px 0 rgba(11,12,13,0.35);padding:20px;animation:amrToast .18s ease-out both;display:grid;gap:14px">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <span style="flex:none;width:10px;height:10px;background:#2FB6B9;margin-top:7px"></span>
+        <div>
+          <p style="margin:0 0 4px;font:500 17px/1.4 'Public Sans',sans-serif">Produto adicionado ao seu orçamento</p>
+          <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#9EA3A5">{{ toastItem }}</p>
+        </div>
+        <button type="button" onClick="{{ fecharToast }}" aria-label="Fechar aviso" style="margin-left:auto;flex:none;width:32px;height:32px;background:transparent;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px;cursor:pointer" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:2px">×</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button type="button" onClick="{{ fecharToast }}" style="flex:1;min-width:160px;border:1px solid #F1F2F2;background:transparent;color:#F1F2F2;padding:13px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">CONTINUAR NAVEGANDO</button>
+        <a href="#orcamento" style="flex:1;min-width:160px;text-align:center;background:#2FB6B9;color:#0B0C0D;padding:14px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">VER MEU ORÇAMENTO</a>
+      </div>
+      <p style="margin:0;font:400 13px/1.45 'Public Sans',sans-serif;color:#6B7072">Os produtos não ficam reservados ao serem adicionados ao carrinho. A disponibilidade será confirmada pela equipe.</p>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;estado&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;lista&quot;,&quot;carregando&quot;,&quot;vazio&quot;],&quot;default&quot;:&quot;lista&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Estados da grade&quot;}}">
+const GRUPOS = [
+  { id: 'categoria', rotulo: 'Categoria', aberto: true,
+    opcoes: ['Área externa', 'Mesas de coquetel', 'Capas de mesa', 'Painéis de LED'],
+    nota: 'Novas categorias entram nesta lista conforme forem cadastradas.' },
+  { id: 'tipo', rotulo: 'Tipo de item', aberto: true,
+    opcoes: ['Produto físico', 'Produto com variação', 'Serviço técnico', 'Pacote'] },
+  { id: 'cor', rotulo: 'Cor', aberto: true, swatch: true,
+    opcoes: ['Bege', 'Preto', 'Branco'],
+    nota: 'Outras cores cadastradas aparecem aqui.' },
+  { id: 'evento', rotulo: 'Tipo de evento', aberto: false,
+    opcoes: ['Evento corporativo', 'Casamento', 'Aniversário', 'Festa', 'Show', 'Festival', 'Feira', 'Ativação de marca', 'Evento ao ar livre'] },
+  { id: 'ambiente', rotulo: 'Ambiente', aberto: false,
+    opcoes: ['Interno', 'Externo', 'Interno ou externo'] }
+];
+
+const HEX = { 'Bege': '#D8C9A8', 'Preto': '#0B0C0D', 'Branco': '#FFFFFF' };
+
+const CATALOGO = [
+  { id: 'guarda-sol', nome: 'Guarda-sol Externo Bege de 10 Pés', categoria: 'ÁREA EXTERNA',
+    desc: 'Proteção e conforto para piscinas, jardins, pátios e eventos ao ar livre.',
+    foto: 'uploads/UMBRELLA4.jpg', spec: '10 PÉS · BASE SOB CONSULTA',
+    f: { categoria: ['Área externa'], tipo: ['Produto físico'], cor: ['Bege'],
+      evento: ['Casamento', 'Aniversário', 'Festa', 'Evento ao ar livre', 'Feira'], ambiente: ['Externo'] } },
+  { id: 'mesa-alta', nome: 'Mesa Alta Redonda de Alumínio', categoria: 'MESAS DE COQUETEL',
+    desc: 'Mesa portátil com tampo dobrável para coquetéis, recepções, casamentos e eventos corporativos.',
+    foto: 'uploads/HIGH TABLE ALUMINIUM 6-12bcd805.jpg', fotoHover: 'uploads/HIGH TABLE ALUMINUM 5 (1).jpg',
+    spec: '23,25" / 25,75" / 150 LB',
+    f: { categoria: ['Mesas de coquetel'], tipo: ['Produto físico'],
+      evento: ['Evento corporativo', 'Casamento', 'Aniversário', 'Festa', 'Feira', 'Ativação de marca'], ambiente: ['Interno ou externo'] } },
+  { id: 'capa-spandex', nome: 'Capa de Spandex para Mesa de Coquetel', categoria: 'CAPAS DE MESA',
+    desc: 'Capa ajustada disponível em diferentes cores para mesas altas, mesas bistrô e mesas de coquetel.',
+    foto: 'uploads/COVERS HIGH TABLE.jpg', spec: 'SPANDEX · 3 CORES CADASTRADAS',
+    cores: ['Preto', 'Branco', 'Bege'],
+    f: { categoria: ['Capas de mesa'], tipo: ['Produto com variação'], cor: ['Preto', 'Branco', 'Bege'],
+      evento: ['Evento corporativo', 'Casamento', 'Feira', 'Ativação de marca'], ambiente: ['Interno ou externo'] } },
+  { id: 'capa-6', nome: 'Capa Preta para Mesa Retangular de 6 Pés', categoria: 'CAPAS DE MESA',
+    desc: 'Capa ajustada para feiras, recepções, buffets, casamentos e eventos empresariais.',
+    foto: 'uploads/COVERS TABLE BUFFET.jpg', spec: '6 PÉS · POLIÉSTER',
+    f: { categoria: ['Capas de mesa'], tipo: ['Produto físico'], cor: ['Preto'],
+      evento: ['Evento corporativo', 'Casamento', 'Feira'], ambiente: ['Interno'] } },
+  { id: 'led-p19', nome: 'Painel de LED P1.9mm', categoria: 'PAINÉIS DE LED',
+    desc: 'Alta densidade de pixel para plateias próximas, transmissões e conteúdos com texto fino.',
+    foto: 'uploads/LED SCREEN 5.jpg', fotoHover: 'uploads/LED SCRRENN 2.jpg',
+    spec: 'P1.9MM · MÓDULO 500×500MM', btnPrimario: 'VER SOLUÇÕES EM LED',
+    f: { categoria: ['Painéis de LED'], tipo: ['Produto físico'],
+      evento: ['Evento corporativo', 'Casamento', 'Show', 'Ativação de marca'], ambiente: ['Interno'] } },
+  { id: 'led-p39', nome: 'Painel de LED P3.9mm', categoria: 'PAINÉIS DE LED',
+    desc: 'Configuração para plateias maiores, palcos abertos e áreas com distância de visão ampla.',
+    foto: 'uploads/LED SCREEN 3-e4d7e4d4.jpg', fotoHover: 'uploads/LED SCREEN 4.jpg',
+    spec: 'P3.9MM · MÓDULO 500×1000MM', btnPrimario: 'VER SOLUÇÕES EM LED',
+    f: { categoria: ['Painéis de LED'], tipo: ['Produto físico'],
+      evento: ['Show', 'Festival', 'Evento ao ar livre', 'Ativação de marca'], ambiente: ['Externo'] } },
+  { id: 'led-pacote', nome: 'Pacote Palco + Painel de LED', categoria: 'PAINÉIS DE LED',
+    desc: 'Estrutura de palco, treliça e painel de LED em uma única solicitação, com montagem incluída.',
+    placeholder: 'FOTO · PALCO COM PAINEL DE LED · AMBIENTADA · 4:3',
+    spec: 'PACOTE · CONFIGURAÇÃO SOB MEDIDA', btnPrimario: 'VER O QUE INCLUI',
+    f: { categoria: ['Painéis de LED'], tipo: ['Pacote'],
+      evento: ['Show', 'Festival', 'Evento corporativo', 'Ativação de marca'], ambiente: ['Interno ou externo'] } },
+  { id: 'operacao-led', nome: 'Operação Técnica de Painel de LED', categoria: 'PAINÉIS DE LED',
+    servico: true,
+    desc: 'Técnico dedicado para operar o painel durante o evento, com processador de vídeo e conteúdo do cliente.',
+    placeholder: 'FOTO · OPERADOR EM MESA DE VÍDEO · AMBIENTADA · 4:3',
+    spec: 'SERVIÇO · POR DIÁRIA DE EVENTO', btnPrimario: 'VER DETALHES DO SERVIÇO',
+    escopo: 'Informe a duração do evento e o número de diárias na etapa de dados. A equipe dimensiona a operação.',
+    f: { categoria: ['Painéis de LED'], tipo: ['Serviço técnico'],
+      evento: ['Show', 'Festival', 'Evento corporativo', 'Ativação de marca'], ambiente: ['Interno ou externo'] } },
+  { id: 'lounge', nome: 'Lounge Externo com Sofá e Mesa Baixa', categoria: 'ÁREA EXTERNA',
+    desc: 'Conjunto de estar para áreas de convivência, terraços e espaços de patrocinador.',
+    placeholder: 'FOTO · LOUNGE EXTERNO · AMBIENTADA · 4:3',
+    spec: 'CONJUNTO · 4 LUGARES',
+    f: { categoria: ['Área externa'], tipo: ['Produto físico'], cor: ['Bege', 'Preto'],
+      evento: ['Casamento', 'Festa', 'Ativação de marca', 'Evento ao ar livre'], ambiente: ['Externo'] } },
+  { id: 'mesa-bistro', nome: 'Mesa Bistrô Preta com Tampo Redondo', categoria: 'MESAS DE COQUETEL',
+    desc: 'Mesa de apoio para recepções curtas, coffee breaks e áreas de credenciamento.',
+    placeholder: 'FOTO · MESA BISTRÔ PRETA · ISOLADA · 4:3',
+    spec: 'Ø 60CM · ALTURA 110CM',
+    f: { categoria: ['Mesas de coquetel'], tipo: ['Produto físico'], cor: ['Preto'],
+      evento: ['Evento corporativo', 'Feira', 'Festa'], ambiente: ['Interno'] } }
+];
+
+class Component extends DCLogic {
+  state = {
+    count: 0, qty: {}, hover: null, toast: null, menu: false, mobile: false,
+    vw: 1440, drawer: false, filtros: {}, abertos: {}, ordem: 'Produtos em destaque',
+    busca: '', corSel: {}
+  };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const m = window.innerWidth < 1080;
+      this.setState({ vw: window.innerWidth });
+      if (m !== this.state.mobile) this.setState({ mobile: m, menu: false, drawer: false });
+    };
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+    const ab = {};
+    GRUPOS.forEach(g => { ab[g.id] = g.aberto; });
+    this.setState({ abertos: ab });
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._t) clearTimeout(this._t);
+  }
+
+  ativos() {
+    const f = this.state.filtros, out = [];
+    GRUPOS.forEach(g => (f[g.id] || []).forEach(v => out.push({ grupo: g.id, rotulo: g.rotulo, valor: v })));
+    return out;
+  }
+
+  toggle(grupo, valor) {
+    this.setState(s => {
+      const cur = s.filtros[grupo] || [];
+      const next = cur.indexOf(valor) >= 0 ? cur.filter(v => v !== valor) : cur.concat([valor]);
+      return { filtros: Object.assign({}, s.filtros, { [grupo]: next }) };
+    });
+  }
+
+  filtrados() {
+    const f = this.state.filtros;
+    const q = this.state.busca.trim().toLowerCase();
+    let list = CATALOGO.filter(p => {
+      for (const g of GRUPOS) {
+        const sel = f[g.id] || [];
+        if (!sel.length) continue;
+        const val = (p.f[g.id] || []);
+        if (!sel.some(s => val.indexOf(s) >= 0)) return false;
+      }
+      if (q && (p.nome + ' ' + p.desc + ' ' + p.categoria).toLowerCase().indexOf(q) < 0) return false;
+      return true;
+    });
+    const o = this.state.ordem;
+    if (o === 'Nome de A a Z') list = list.slice().sort((a, b) => a.nome.localeCompare(b.nome, 'pt'));
+    if (o === 'Nome de Z a A') list = list.slice().sort((a, b) => b.nome.localeCompare(a.nome, 'pt'));
+    if (o === 'Mais recentes') list = list.slice().reverse();
+    return list;
+  }
+
+  grupoBloco(g, mobile) {
+    const aberto = !!this.state.abertos[g.id];
+    const sel = this.state.filtros[g.id] || [];
+    const head = React.createElement('button', {
+      type: 'button',
+      onClick: () => this.setState(s => ({ abertos: Object.assign({}, s.abertos, { [g.id]: !s.abertos[g.id] }) })),
+      'aria-expanded': aberto ? 'true' : 'false',
+      style: {
+        width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        gap: '12px', minHeight: '48px', padding: '0', border: 0, background: 'transparent',
+        cursor: 'pointer', textAlign: 'left', color: '#0B0C0D'
+      }
+    },
+      React.createElement('span', { style: { display: 'flex', alignItems: 'center', gap: '8px', font: "500 17px/1.3 'Public Sans',sans-serif" } },
+        g.rotulo,
+        sel.length ? React.createElement('span', { style: { minWidth: '20px', height: '20px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: '#2FB6B9', color: '#0B0C0D', font: "500 12px 'IBM Plex Mono',monospace", borderRadius: '2px', padding: '0 5px' } }, sel.length) : null
+      ),
+      React.createElement('span', { 'aria-hidden': 'true', style: { font: "400 15px 'IBM Plex Mono',monospace", color: '#6B7072' } }, aberto ? '–' : '+')
+    );
+
+    const opts = g.opcoes.map(o => {
+      const on = sel.indexOf(o) >= 0;
+      if (g.swatch) {
+        return React.createElement('button', {
+          key: o, type: 'button', onClick: () => this.toggle(g.id, o), 'aria-pressed': on ? 'true' : 'false',
+          style: {
+            display: 'flex', alignItems: 'center', gap: '10px', minHeight: '44px', padding: '0 12px 0 8px',
+            border: '1px solid ' + (on ? '#0B0C0D' : '#C9CBCC'), background: on ? '#FFFFFF' : 'transparent',
+            borderRadius: '2px', cursor: 'pointer', font: "400 15px 'Public Sans',sans-serif", color: '#0B0C0D'
+          }
+        },
+          React.createElement('span', { style: { width: '24px', height: '24px', borderRadius: '2px', background: HEX[o], border: '1px solid ' + (o === 'Branco' ? '#C9CBCC' : 'rgba(11,12,13,0.25)'), boxShadow: on ? '0 0 0 2px #2FB6B9' : 'none' } }),
+          o
+        );
+      }
+      return React.createElement('label', {
+        key: o,
+        style: { display: 'flex', alignItems: 'center', gap: '10px', minHeight: '40px', cursor: 'pointer', font: "400 15px/1.4 'Public Sans',sans-serif", color: on ? '#0B0C0D' : '#4A4E50' }
+      },
+        React.createElement('input', {
+          type: 'checkbox', checked: on, onChange: () => this.toggle(g.id, o),
+          style: { width: '18px', height: '18px', accentColor: '#1A7F82', flex: 'none', cursor: 'pointer' }
+        }),
+        o
+      );
+    });
+
+    const body = aberto ? React.createElement('div', {
+      style: g.swatch
+        ? { display: 'flex', flexWrap: 'wrap', gap: '8px', paddingBottom: '16px' }
+        : { display: mobile ? 'grid' : 'grid', gridTemplateColumns: mobile ? '1fr 1fr' : '1fr', gap: g.swatch ? '8px' : '2px', paddingBottom: '16px' }
+    }, opts,
+      g.nota ? React.createElement('p', { style: { gridColumn: '1/-1', margin: '8px 0 0', font: "400 13px/1.4 'IBM Plex Mono',monospace", color: '#6B7072' } }, g.nota) : null
+    ) : null;
+
+    return React.createElement('div', { key: g.id, style: { borderBottom: '1px solid #C9CBCC' } }, head, body);
+  }
+
+  painel(mobile) {
+    return React.createElement('div', { style: { display: 'grid' } }, GRUPOS.map(g => this.grupoBloco(g, mobile)));
+  }
+
+  chips() {
+    return this.ativos().map(a => React.createElement('button', {
+      key: a.grupo + a.valor, type: 'button', onClick: () => this.toggle(a.grupo, a.valor),
+      'aria-label': 'Remover filtro ' + a.rotulo + ': ' + a.valor,
+      style: {
+        display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: '32px', padding: '0 10px',
+        border: '1px solid #0B0C0D', background: '#FFFFFF', borderRadius: '2px', cursor: 'pointer',
+        font: "400 13px/1 'Public Sans',sans-serif", color: '#0B0C0D'
+      }
+    },
+      React.createElement('span', { style: { font: "500 11px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#6B7072' } }, a.rotulo.toUpperCase()),
+      a.valor,
+      React.createElement('span', { 'aria-hidden': 'true', style: { color: '#6B7072', fontSize: '15px' } }, '×')
+    ));
+  }
+
+  esqueletos() {
+    return [0, 1, 2, 3, 4, 5].map(i => React.createElement('div', {
+      key: i,
+      style: { border: '1px solid #C9CBCC', background: '#FFFFFF', borderRadius: '2px', animation: 'amrPulse 1.3s ease-in-out infinite', animationDelay: (i * 0.09) + 's' }
+    },
+      React.createElement('div', { style: { aspectRatio: '4/3', background: '#E4E6E6' } }),
+      React.createElement('div', { style: { padding: '20px', display: 'grid', gap: '12px' } },
+        React.createElement('div', { style: { height: '12px', width: '38%', background: '#E4E6E6' } }),
+        React.createElement('div', { style: { height: '18px', width: '80%', background: '#E4E6E6' } }),
+        React.createElement('div', { style: { height: '12px', width: '100%', background: '#E4E6E6' } }),
+        React.createElement('div', { style: { height: '12px', width: '62%', background: '#E4E6E6' } }),
+        React.createElement('div', { style: { height: '44px', width: '100%', background: '#E4E6E6', marginTop: '4px' } })
+      )
+    ));
+  }
+
+  bump(id, d) {
+    this.setState(s => ({ qty: Object.assign({}, s.qty, { [id]: Math.max(1, (s.qty[id] ?? 1) + d) }) }));
+  }
+
+  add(p) {
+    const q = p.servico ? 1 : (this.state.qty[p.id] ?? 1);
+    const cor = this.state.corSel[p.id];
+    this.setState(s => ({ count: s.count + q, toast: p.nome.toUpperCase() + (cor ? ' · ' + cor.toUpperCase() : '') + (p.servico ? ' · SERVIÇO' : ' · QTD ' + q) }));
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+
+  cards(list) {
+    return list.map(p => {
+      const hovered = this.state.hover === p.id;
+      const foto = hovered && p.fotoHover ? p.fotoHover : p.foto;
+      const corAtual = this.state.corSel[p.id] || (p.cores ? p.cores[0] : null);
+      return {
+        id: p.id, nome: p.nome, categoria: p.categoria, desc: p.desc, spec: p.spec,
+        placeholder: p.placeholder, escopo: p.escopo,
+        hasFoto: !!foto, semFoto: !p.foto,
+        fotoBg: foto ? "url('" + foto + "')" : 'none',
+        ehServico: !!p.servico, temQtd: !p.servico,
+        temCor: !!p.cores, corAtual: corAtual,
+        cores: (p.cores || []).map(c => ({
+          nome: c, hex: HEX[c],
+          borda: '1px solid ' + (c === 'Branco' ? '#C9CBCC' : 'rgba(11,12,13,0.25)'),
+          anel: corAtual === c ? '0 0 0 2px #2FB6B9' : 'none',
+          onPick: () => this.setState(s => ({ corSel: Object.assign({}, s.corSel, { [p.id]: c }) }))
+        })),
+        qty: this.state.qty[p.id] ?? 1, qtyId: 'qty-' + p.id,
+        specTransform: hovered ? 'translateY(0)' : 'translateY(101%)',
+        btnPrimario: p.btnPrimario || 'VER DETALHES',
+        btnSecundario: p.servico ? 'ADICIONAR SERVIÇO' : 'ADICIONAR AO ORÇAMENTO',
+        onEnter: () => this.setState({ hover: p.id }),
+        onLeave: () => this.setState(s => (s.hover === p.id ? { hover: null } : null)),
+        onDec: () => this.bump(p.id, -1),
+        onInc: () => this.bump(p.id, 1),
+        onQty: e => {
+          const n = parseInt(String(e.target.value).replace(/\D/g, ''), 10);
+          this.setState(s => ({ qty: Object.assign({}, s.qty, { [p.id]: isNaN(n) || n < 1 ? 1 : n }) }));
+        },
+        onAdd: () => this.add(p)
+      };
+    });
+  }
+
+  renderVals() {
+    const mobile = this.state.mobile;
+    const vw = this.state.vw;
+    const estado = this.props.estado ?? 'lista';
+    const list = this.filtrados();
+    const ativos = this.ativos();
+    const vazio = estado === 'vazio' || (estado === 'lista' && list.length === 0);
+    const carregando = estado === 'carregando';
+    const cols = vw < 700 ? '1fr' : vw < 1080 ? 'repeat(2,1fr)' : vw < 1400 ? 'repeat(2,1fr)' : 'repeat(3,1fr)';
+    const n = this.state.count;
+
+    return {
+      count: n,
+      topbarDisplay: mobile ? 'none' : 'block',
+      deskDisplay: mobile ? 'none' : 'flex',
+      mobDisplay: mobile ? 'flex' : 'none',
+      menuDisplay: mobile && this.state.menu ? 'block' : 'none',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      heroCols: vw < 900 ? '1fr' : 'minmax(0,1.35fr) minmax(280px,0.9fr)',
+      layoutCols: mobile ? '1fr' : '272px minmax(0,1fr)',
+      asideDisplay: mobile ? 'none' : 'block',
+      btnFiltroDisplay: mobile ? 'inline-flex' : 'none',
+      gridProdutos: cols,
+
+      painelFiltros: this.painel(false),
+      painelFiltrosMobile: this.painel(true),
+      chips: this.chips(),
+      temFiltros: ativos.length > 0,
+      nFiltros: ativos.length,
+      limparTudo: () => this.setState({ filtros: {}, busca: '' }),
+      verLed: () => this.setState({ filtros: { categoria: ['Painéis de LED'] }, busca: '' }),
+      verMesas: () => this.setState({ filtros: { categoria: ['Mesas de coquetel'] }, busca: '' }),
+
+      contagem: carregando ? 'CARREGANDO PRODUTOS' : list.length === 1 ? '1 PRODUTO' : list.length + ' PRODUTOS',
+      ordem: this.state.ordem,
+      onOrdenar: e => this.setState({ ordem: e.target.value }),
+      buscaValor: this.state.busca,
+      onBuscaInput: e => this.setState({ busca: e.target.value }),
+      onBusca: e => e.preventDefault(),
+
+      estadoLista: !vazio && !carregando,
+      estadoVazio: vazio && !carregando,
+      estadoCarregando: carregando,
+      esqueletos: this.esqueletos(),
+      produtos: this.cards(list),
+
+      drawerAberto: mobile && this.state.drawer,
+      abrirDrawer: () => this.setState({ drawer: true }),
+      fecharDrawer: () => this.setState({ drawer: false }),
+      drawerCta: list.length === 1 ? 'VER 1 PRODUTO' : 'VER ' + list.length + ' PRODUTOS',
+
+      barraTitulo: n === 0 ? 'Seu orçamento está vazio' : n === 1 ? '1 item no seu orçamento' : n + ' itens no seu orçamento',
+      barraSub: n === 0 ? 'Adicione produtos para solicitar uma proposta.' : 'Os produtos não ficam reservados. A disponibilidade será confirmada pela equipe.',
+
+      toastAberto: !!this.state.toast,
+      toastItem: this.state.toast,
+      fecharToast: () => this.setState({ toast: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

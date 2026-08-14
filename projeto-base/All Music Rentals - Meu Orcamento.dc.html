@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F1F2F2;color:#0B0C0D;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#166D70;text-decoration:none}
+a:hover{color:#0B0C0D}
+input,select,button,textarea{font-family:inherit}
+@keyframes amrToast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:hidden;padding-bottom:{{ padBase }}">
+
+<div style="display:{{ topbarDisplay }};background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between">
+    <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#9EA3A5">Locação Premium e Soluções em Painéis de LED para Eventos na Flórida</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:500 13px/1.4 'Public Sans',sans-serif">
+      <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">(689) 242-1871</a>
+      <span style="color:#3A3E40">·</span>
+      <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">contato@allmusicbr.com</a>
+      <span style="color:#3A3E40">·</span>
+      <div style="display:flex;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
+        <a href="#en" style="color:#9EA3A5" style-hover="color:#2FB6B9">EN</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#pt" style="color:#2FB6B9;font-weight:500">PT</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#es" style="color:#9EA3A5" style-hover="color:#2FB6B9">ES</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px">
+    <a href="#inicio" aria-label="All Music Rentals — início" style="display:flex;align-items:center;flex:none" style-focus="outline:2px solid #2FB6B9;outline-offset:4px">
+      <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:38px;width:auto">
+    </a>
+    <div style="flex:1;display:{{ deskDisplay }};align-items:center;gap:20px;min-width:0">
+      <nav style="flex:1;display:flex;flex-wrap:wrap;gap:4px 16px;font:500 15px/1.2 'Public Sans',sans-serif">
+        <a href="#inicio" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Início</a>
+        <a href="#estruturas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Estruturas</a>
+        <a href="#led" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Telas de LED</a>
+        <a href="#luzsom" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Luz &amp; Som</a>
+        <a href="#tendas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Tendas</a>
+        <a href="#moveis" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Móveis</a>
+        <a href="#sobre" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Sobre Nós</a>
+        <a href="#contato" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Contato</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none">
+        <span style="display:flex;align-items:center;gap:8px;color:#0B0C0D;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;border:1px solid #2FB6B9;background:#2FB6B9;padding:8px 10px">
+          ORÇAMENTO
+          <span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#0B0C0D;color:#2FB6B9;font-weight:500;padding:0 5px">{{ nItens }}</span>
+        </span>
+        <a href="#solicitar" style="border:1px solid #F1F2F2;color:#F1F2F2;padding:11px 16px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;letter-spacing:-0.01em;white-space:nowrap" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+    <div style="flex:1;display:{{ mobDisplay }};justify-content:flex-end;align-items:center;gap:10px">
+      <span aria-label="Itens no orçamento" style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #2FB6B9;background:#2FB6B9;color:#0B0C0D;border-radius:2px">
+        <span style="display:block;width:16px;height:13px;border:2px solid currentColor;border-top:0"></span>
+        <span style="position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:#0B0C0D;color:#2FB6B9;font:500 12px 'IBM Plex Mono',monospace;border-radius:2px">{{ nItens }}</span>
+      </span>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menu" style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:4px;align-items:center;background:transparent;border:1px solid #3A3E40;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+      </button>
+    </div>
+  </div>
+  <div style="display:{{ menuDisplay }};background:#1C1E20;border-top:1px solid #3A3E40;padding:16px 20px 24px">
+    <nav style="display:grid;gap:2px;font:500 17px/1.2 'Public Sans',sans-serif">
+      <a href="#inicio" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Início</a>
+      <a href="#estruturas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Estruturas</a>
+      <a href="#led" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Telas de LED</a>
+      <a href="#luzsom" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Luz &amp; Som</a>
+      <a href="#tendas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Tendas</a>
+      <a href="#moveis" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Móveis</a>
+      <a href="#sobre" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Sobre Nós</a>
+      <a href="#contato" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<div style="max-width:1280px;margin:0 auto;padding:20px 20px 0">
+  <nav aria-label="Trilha de navegação" style="font:400 13px/1.6 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">
+    <a href="#inicio" style="color:#4A4E50" style-hover="color:#166D70">INÍCIO</a>
+    <span style="padding:0 8px">/</span>
+    <span style="color:#0B0C0D">MEU ORÇAMENTO</span>
+  </nav>
+</div>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(24px,3vw,40px) 20px clamp(24px,3vw,32px)">
+  <div style="display:grid;grid-template-columns:{{ colsCabecalho }};gap:clamp(24px,3vw,48px);align-items:start">
+    <div>
+      <h1 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5vw,72px);line-height:0.92">Meu Orçamento</h1>
+      <p style="margin:0;font:400 clamp(16px,1.2vw,17px)/1.55 'Public Sans',sans-serif;color:#2A2D2F;max-width:54ch">Revise os produtos, as opções e as quantidades antes de enviar sua solicitação.</p>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;background:#0B0C0D;color:#F1F2F2;padding:20px 24px;border-radius:2px">
+      <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9;padding-top:4px">AVISO</span>
+      <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#DDE0E0">Este carrinho não representa uma compra ou reserva. Os valores e a disponibilidade serão confirmados pela equipe.</p>
+    </div>
+  </div>
+</section>
+
+<sc-if value="{{ vazio }}" hint-placeholder-val="{{ false }}">
+  <section style="max-width:1280px;margin:0 auto;padding:0 20px clamp(64px,9vw,144px)">
+    <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;display:grid;grid-template-columns:{{ colsVazio }};gap:0">
+      <div style="padding:clamp(32px,5vw,64px);display:grid;gap:24px;align-content:center">
+        <div>
+          <p style="margin:0 0 14px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">0 ITENS</p>
+          <h2 style="margin:0 0 12px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.4vw,44px);line-height:0.98">Seu carrinho está vazio</h2>
+          <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:46ch">Explore o catálogo e adicione os produtos que deseja solicitar.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <a href="#catalogo" style="background:#2FB6B9;color:#0B0C0D;padding:17px 26px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#1A7F82;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">IR PARA O CATÁLOGO</a>
+        </div>
+      </div>
+      <div style="border-left:1px solid #C9CBCC;background:#F1F2F2;padding:clamp(24px,3vw,40px);display:grid;gap:20px;align-content:start">
+        <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">COMO FUNCIONA</p>
+        <div style="display:grid;gap:2px">
+          <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #C9CBCC">
+            <span style="flex:none;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:22px;line-height:1;color:#0B0C0D;width:28px">1</span>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">Escolha os produtos no catálogo e adicione ao orçamento.</p>
+          </div>
+          <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #C9CBCC">
+            <span style="flex:none;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:22px;line-height:1;color:#0B0C0D;width:28px">2</span>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">Ajuste quantidades, cores e observações nesta página.</p>
+          </div>
+          <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid #C9CBCC">
+            <span style="flex:none;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:22px;line-height:1;color:#0B0C0D;width:28px">3</span>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">Envie os dados do evento e receba a proposta da equipe.</p>
+          </div>
+        </div>
+        <p style="margin:0;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Nenhum valor é exibido no site. A proposta é preparada caso a caso.</p>
+      </div>
+    </div>
+  </section>
+</sc-if>
+
+<sc-if value="{{ comItens }}" hint-placeholder-val="{{ true }}">
+  <section style="max-width:1280px;margin:0 auto;padding:0 20px clamp(48px,6vw,96px)">
+    <div style="display:grid;grid-template-columns:{{ colsCarrinho }};gap:clamp(24px,3vw,40px);align-items:start">
+
+      <div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;padding-bottom:14px;border-bottom:2px solid #0B0C0D;margin-bottom:0">
+          <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Itens selecionados</h2>
+          <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">{{ resumoLinha }}</p>
+        </div>
+
+        <sc-for list="{{ itens }}" as="i" hint-placeholder-count="4">
+          <article style="border-bottom:1px solid #C9CBCC;padding:24px 0;display:grid;grid-template-columns:{{ colsItem }};gap:20px;align-items:start">
+            <a href="#produto" aria-label="{{ i.nome }}" style="display:block;position:relative;aspect-ratio:4/3;border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;overflow:hidden" style-hover="border-color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">
+              <sc-if value="{{ i.temFoto }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;inset:0;background-image:{{ i.bg }};background-size:cover;background-position:center"></span>
+              </sc-if>
+              <sc-if value="{{ i.semFoto }}" hint-placeholder-val="{{ true }}">
+                <span style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,#DADCDC 0 6px,#E4E6E6 6px 12px);display:flex;align-items:flex-end;padding:10px;font:400 12px/1.4 'IBM Plex Mono',monospace;color:#5A5F61">{{ i.placeholder }}</span>
+              </sc-if>
+              <sc-if value="{{ i.ehServico }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;top:8px;left:8px;background:#0B0C0D;color:#2FB6B9;padding:4px 8px;border-radius:2px;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em">SERVIÇO</span>
+              </sc-if>
+            </a>
+
+            <div style="min-width:0;display:grid;gap:14px">
+              <div>
+                <p style="margin:0 0 6px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">{{ i.categoria }}</p>
+                <h3 style="margin:0 0 8px;font:500 22px/1.3 'Public Sans',sans-serif">
+                  <a href="#produto" style="color:#0B0C0D" style-hover="color:#166D70" style-focus="outline:2px solid #1A7F82;outline-offset:3px">{{ i.nome }}</a>
+                </h3>
+                <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">{{ i.codigo }}</p>
+              </div>
+
+              <div style="display:flex;flex-wrap:wrap;gap:8px">
+                <sc-for list="{{ i.atributos }}" as="a" hint-placeholder-count="2">
+                  <span style="display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 10px;border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px">
+                    <sc-if value="{{ a.temSwatch }}" hint-placeholder-val="{{ false }}">
+                      <span style="width:16px;height:16px;border-radius:2px;background:{{ a.hex }};border:1px solid rgba(11,12,13,0.25)"></span>
+                    </sc-if>
+                    <span style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">{{ a.k }}</span>
+                    <span style="font:400 13px/1 'Public Sans',sans-serif;color:#0B0C0D">{{ a.v }}</span>
+                  </span>
+                </sc-for>
+              </div>
+
+              <div style="display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center">
+                <sc-if value="{{ i.temQtd }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">QUANTIDADE</span>
+                    <div style="display:flex;border:1px solid #C9CBCC;border-radius:2px;overflow:hidden;background:#FFFFFF">
+                      <button type="button" onClick="{{ i.onDec }}" aria-label="Diminuir quantidade" style="width:40px;min-height:44px;border:0;border-right:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">−</button>
+                      <input type="text" inputmode="numeric" value="{{ i.qty }}" onChange="{{ i.onQty }}" aria-label="Quantidade" style="width:56px;border:0;text-align:center;font:500 15px 'IBM Plex Mono',monospace;background:#FFFFFF" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">
+                      <button type="button" onClick="{{ i.onInc }}" aria-label="Aumentar quantidade" style="width:40px;min-height:44px;border:0;border-left:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">+</button>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ i.semQtd }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">QUANTIDADE DEFINIDA NA ANÁLISE TÉCNICA</p>
+                </sc-if>
+
+                <div style="display:flex;gap:16px;align-items:center;margin-left:auto">
+                  <a href="#produto" style="min-height:44px;display:inline-flex;align-items:center;font:500 15px 'Public Sans',sans-serif;color:#166D70" style-hover="color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">Editar</a>
+                  <button type="button" onClick="{{ i.onRemove }}" style="min-height:44px;border:0;background:transparent;padding:0;cursor:pointer;font:500 15px 'Public Sans',sans-serif;color:#8C2A2A" style-hover="color:#0B0C0D" style-focus="outline:2px solid #8C2A2A;outline-offset:3px">Remover</button>
+                </div>
+              </div>
+
+              <div style="border:1px solid {{ i.obsBorda }};background:{{ i.obsFundo }};border-radius:2px;padding:14px 16px">
+                <label style="display:grid;gap:8px">
+                  <span style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between">
+                    <span style="font:500 15px/1.3 'Public Sans',sans-serif;color:#0B0C0D">{{ i.obsRotulo }}</span>
+                    <span style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:{{ i.obsTagCor }}">{{ i.obsTag }}</span>
+                  </span>
+                  <textarea rows="2" value="{{ i.obs }}" onInput="{{ i.onObs }}" placeholder="{{ i.obsPlaceholder }}" style="width:100%;border:1px solid #C9CBCC;border-radius:2px;padding:10px 12px;font:400 15px/1.5 'Public Sans',sans-serif;color:#0B0C0D;background:#FFFFFF;resize:vertical" style-focus="outline:2px solid #1A7F82;outline-offset:-2px"></textarea>
+                </label>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+
+        <div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:24px">
+          <a href="#catalogo" style="min-height:52px;display:inline-flex;align-items:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:0 24px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">CONTINUAR NAVEGANDO</a>
+          <button type="button" onClick="{{ limparTudo }}" style="min-height:52px;border:0;background:transparent;padding:0 8px;cursor:pointer;font:500 15px 'Public Sans',sans-serif;color:#5A5F61;text-decoration:underline" style-hover="color:#8C2A2A" style-focus="outline:2px solid #8C2A2A;outline-offset:3px">Esvaziar carrinho</button>
+        </div>
+      </div>
+
+      <aside style="position:{{ asidePos }};top:96px;display:grid;gap:16px">
+        <div style="border:1px solid #0B0C0D;background:#0B0C0D;color:#F1F2F2;border-radius:2px;overflow:hidden">
+          <div style="padding:20px 24px;border-bottom:1px solid #2A2D2F">
+            <p style="margin:0 0 14px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">O QUE A EQUIPE VAI RECEBER</p>
+            <dl style="margin:0;display:grid;gap:10px">
+              <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline">
+                <dt style="margin:0;font:400 15px/1.4 'Public Sans',sans-serif;color:#C7CACB">Itens</dt>
+                <dd style="margin:0;font:500 17px/1.2 'IBM Plex Mono',monospace;color:#F1F2F2">{{ nItens }}</dd>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline">
+                <dt style="margin:0;font:400 15px/1.4 'Public Sans',sans-serif;color:#C7CACB">Unidades</dt>
+                <dd style="margin:0;font:500 17px/1.2 'IBM Plex Mono',monospace;color:#F1F2F2">{{ nUnidades }}</dd>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline">
+                <dt style="margin:0;font:400 15px/1.4 'Public Sans',sans-serif;color:#C7CACB">Categorias</dt>
+                <dd style="margin:0;font:500 17px/1.2 'IBM Plex Mono',monospace;color:#F1F2F2">{{ nCategorias }}</dd>
+              </div>
+              <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline">
+                <dt style="margin:0;font:400 15px/1.4 'Public Sans',sans-serif;color:#C7CACB">Com observação</dt>
+                <dd style="margin:0;font:500 17px/1.2 'IBM Plex Mono',monospace;color:{{ obsCor }}">{{ nComObs }}</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div style="padding:20px 24px;border-bottom:1px solid #2A2D2F">
+            <div style="display:flex;justify-content:space-between;gap:16px;align-items:baseline;margin-bottom:12px">
+              <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">DETALHAMENTO</p>
+              <p style="margin:0;font:500 13px/1 'IBM Plex Mono',monospace;color:#F1F2F2">{{ prontidao }}%</p>
+            </div>
+            <div style="display:flex;gap:2px;height:8px;margin-bottom:14px">{{ barraProntidao }}</div>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#C7CACB">{{ prontidaoTexto }}</p>
+          </div>
+
+          <div style="padding:20px 24px">
+            <p style="margin:0 0 12px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">PRÓXIMOS PASSOS</p>
+            <div style="display:grid;gap:2px">
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #2A2D2F">
+                <span style="flex:none;font:500 13px/1.5 'IBM Plex Mono',monospace;color:#2FB6B9">01</span>
+                <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#DDE0E0">Você envia os dados do evento: data, endereço e montagem.</p>
+              </div>
+              <div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #2A2D2F">
+                <span style="flex:none;font:500 13px/1.5 'IBM Plex Mono',monospace;color:#2FB6B9">02</span>
+                <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#DDE0E0">A equipe confere disponibilidade e logística para a sua data.</p>
+              </div>
+              <div style="display:flex;gap:12px;padding:10px 0">
+                <span style="flex:none;font:500 13px/1.5 'IBM Plex Mono',monospace;color:#2FB6B9">03</span>
+                <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#DDE0E0">Você recebe a proposta com valores, entrega e montagem.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:{{ ctaAsideDisplay }};gap:8px;flex-direction:column">
+          <a href="#solicitar" style="text-align:center;background:#2FB6B9;color:#0B0C0D;padding:20px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:17px;letter-spacing:-0.01em" style-hover="background:#1A7F82;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+          <a href="#catalogo" style="text-align:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:16px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">CONTINUAR NAVEGANDO</a>
+          <p style="margin:6px 0 0;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Nenhum valor é exibido no site. Nenhum pagamento é feito por aqui.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</sc-if>
+
+<footer id="contato" style="background:#0B0C0D;color:#F1F2F2;border-top:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:34px;width:auto;margin-bottom:20px">
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:34ch">Locação de equipamentos, mobiliário e painéis de LED para eventos na Flórida.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">PRODUTOS</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#estruturas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Estruturas</a>
+          <a href="#led" style="color:#DDE0E0" style-hover="color:#2FB6B9">Telas de LED</a>
+          <a href="#luzsom" style="color:#DDE0E0" style-hover="color:#2FB6B9">Luz &amp; Som</a>
+          <a href="#tendas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Tendas</a>
+          <a href="#moveis" style="color:#DDE0E0" style-hover="color:#2FB6B9">Móveis</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">EMPRESA</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#sobre" style="color:#DDE0E0" style-hover="color:#2FB6B9">Sobre Nós</a>
+          <a href="#contato" style="color:#DDE0E0" style-hover="color:#2FB6B9">Contato</a>
+          <a href="#solicitar" style="color:#DDE0E0" style-hover="color:#2FB6B9">Solicitar Orçamento</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">INFORMAÇÕES</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#faq" style="color:#DDE0E0" style-hover="color:#2FB6B9">Perguntas Frequentes</a>
+          <a href="#privacidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Política de Privacidade</a>
+          <a href="#termos" style="color:#DDE0E0" style-hover="color:#2FB6B9">Termos de Uso</a>
+          <a href="#politicas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Políticas de Locação</a>
+          <a href="#entrega" style="color:#DDE0E0" style-hover="color:#2FB6B9">Entrega e Montagem</a>
+          <a href="#cancelamento" style="color:#DDE0E0" style-hover="color:#2FB6B9">Cancelamento</a>
+          <a href="#acessibilidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Acessibilidade</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">CONTATO</p>
+        <div style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#2FB6B9">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9">contato@allmusicbr.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;padding-top:24px">
+      <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:60ch">Os produtos estão sujeitos à disponibilidade. O envio de uma solicitação não cria uma reserva.</p>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#8A8F91">© 2026 All Music Rentals. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<div style="display:{{ barraMobileDisplay }};position:fixed;left:0;right:0;bottom:0;z-index:50;background:#0B0C0D;border-top:1px solid #2FB6B9;box-shadow:0 -4px 0 rgba(11,12,13,0.35);padding:12px 20px 14px">
+  <div style="display:flex;gap:14px;align-items:center;margin-bottom:10px">
+    <span style="flex:none;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 15px 'IBM Plex Mono',monospace;border-radius:2px;padding:0 8px">{{ nItens }}</span>
+    <div style="min-width:0">
+      <p style="margin:0;font:500 15px/1.3 'Public Sans',sans-serif;color:#F1F2F2">{{ barraTitulo }}</p>
+      <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#8A8F91">{{ prontidaoTexto }}</p>
+    </div>
+  </div>
+  <a href="#solicitar" style="display:flex;align-items:center;justify-content:center;min-height:52px;background:#2FB6B9;color:#0B0C0D;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+</div>
+
+<sc-if value="{{ toastAberto }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:20px;right:20px;bottom:{{ toastBottom }};z-index:60;display:flex;justify-content:center;pointer-events:none">
+    <div style="pointer-events:auto;max-width:520px;width:100%;background:#0B0C0D;color:#F1F2F2;border:1px solid #2FB6B9;border-radius:2px;box-shadow:6px 6px 0 rgba(11,12,13,0.35);padding:20px;animation:amrToast .18s ease-out both;display:flex;gap:14px;align-items:center">
+      <span style="flex:none;width:10px;height:10px;background:#2FB6B9"></span>
+      <p style="margin:0;flex:1;font:400 15px/1.4 'Public Sans',sans-serif;color:#DDE0E0">{{ toastItem }}</p>
+      <button type="button" onClick="{{ desfazer }}" style="flex:none;min-height:40px;border:1px solid #F1F2F2;background:transparent;color:#F1F2F2;padding:0 14px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:13px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">DESFAZER</button>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const HEX = { 'Preto': '#0B0C0D', 'Branco': '#FFFFFF', 'Bege': '#D8C9A8', 'Azul-marinho': '#1F2A44', 'Bordô': '#5A1F24' };
+
+const INICIAIS = [
+  {
+    id: 'mesa-alta', nome: 'Mesa Alta Redonda de Alumínio de 23,25 Polegadas',
+    codigo: 'AMR-MOV-MA-2325', categoria: 'MÓVEIS',
+    foto: 'uploads/HIGH TABLE ALUMINIUM 2.webp', qty: 12,
+    atributos: [{ k: 'MEDIDA', v: '23,25"' }, { k: 'ACABAMENTO', v: 'Aço inox' }],
+    obs: 'Chegada liberada a partir das 14h pela doca de serviço.'
+  },
+  {
+    id: 'capa-spandex', nome: 'Capa de Spandex para Mesa de Coquetel',
+    codigo: 'AMR-MOV-CS-COQ', categoria: 'MÓVEIS',
+    foto: 'uploads/COVERS HIGH TABLE.jpg', qty: 12,
+    atributos: [{ k: 'COR', v: 'Preto', cor: 'Preto' }, { k: 'VARIAÇÃO', v: 'Mesa alta' }],
+    obs: ''
+  },
+  {
+    id: 'led', nome: 'Locação de Painel de LED na Flórida',
+    codigo: 'AMR-LED-LOC-FL', categoria: 'TELAS DE LED', servico: true,
+    foto: 'uploads/LED SCREEN 5.jpg', semQtd: true, qty: 1,
+    atributos: [{ k: 'TAMANHO', v: 'A definir' }, { k: 'AMBIENTE', v: 'Interno' }, { k: 'INSTALAÇÃO', v: 'Em palco' }, { k: 'SUPORTE', v: 'Preciso de operador' }],
+    obs: 'Palco de 8 × 6 m, público a cerca de 6 m da tela. Vamos exibir vídeo e apresentação.'
+  },
+  {
+    id: 'guarda-sol', nome: 'Guarda-sol Externo Bege de 10 Pés',
+    codigo: 'AMR-EXT-GS-10', categoria: 'ÁREA EXTERNA',
+    foto: 'uploads/UMBRELLA4.jpg', qty: 6,
+    atributos: [{ k: 'COR', v: 'Bege', cor: 'Bege' }, { k: 'MEDIDA', v: '10 pés' }],
+    obs: ''
+  },
+  {
+    id: 'praticavel', nome: 'Praticável 2 × 1 m com Altura Regulável',
+    codigo: 'AMR-EST-PR-21', categoria: 'ESTRUTURAS',
+    placeholder: 'FOTO · PRATICÁVEL · ISOLADA · 4:3', qty: 4,
+    atributos: [{ k: 'ALTURA', v: '0,6 m' }],
+    obs: ''
+  }
+];
+
+class Component extends DCLogic {
+  state = {
+    itens: INICIAIS.map(i => Object.assign({}, i)),
+    removido: null, toast: null, menu: false, mobile: false, vw: 1440
+  };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const m = window.innerWidth < 1080;
+      this.setState({ vw: window.innerWidth });
+      if (m !== this.state.mobile) this.setState({ mobile: m, menu: false });
+    };
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._t) clearTimeout(this._t);
+  }
+
+  aviso(texto, restaurar) {
+    this.setState({ toast: texto, removido: restaurar || null });
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: null, removido: null }), 8000);
+  }
+
+  patch(id, campos) {
+    this.setState(s => ({ itens: s.itens.map(i => (i.id === id ? Object.assign({}, i, campos) : i)) }));
+  }
+
+  remove(id) {
+    const idx = this.state.itens.findIndex(i => i.id === id);
+    if (idx < 0) return;
+    const item = this.state.itens[idx];
+    this.setState(s => ({ itens: s.itens.filter(i => i.id !== id) }));
+    this.aviso('“' + item.nome + '” foi removido do orçamento.', { item: item, idx: idx });
+  }
+
+  barra(pct) {
+    const total = 10;
+    const cheios = Math.round((pct / 100) * total);
+    const blocos = [];
+    for (let i = 0; i < total; i++) {
+      blocos.push(React.createElement('span', {
+        key: i,
+        style: { flex: 1, background: i < cheios ? '#2FB6B9' : '#2A2D2F', borderRadius: '1px' }
+      }));
+    }
+    return blocos;
+  }
+
+  renderVals() {
+    const mobile = this.state.mobile;
+    const vw = this.state.vw;
+    const itens = this.state.itens;
+    const n = itens.length;
+    const unidades = itens.reduce((a, i) => a + (i.semQtd ? 0 : i.qty), 0);
+    const cats = {};
+    itens.forEach(i => { cats[i.categoria] = 1; });
+    const comObs = itens.filter(i => i.obs && i.obs.trim()).length;
+    const pct = n ? Math.round((comObs / n) * 100) : 0;
+
+    let prontidaoTexto;
+    if (n === 0) prontidaoTexto = 'Adicione produtos para começar.';
+    else if (comObs === n) prontidaoTexto = 'Todos os itens têm observação. A equipe consegue orçar com precisão.';
+    else if (comObs === 0) prontidaoTexto = 'Nenhum item tem observação ainda. Uma linha por item já muda a qualidade da proposta.';
+    else prontidaoTexto = (n - comObs) + ' ' + (n - comObs === 1 ? 'item ainda não tem' : 'itens ainda não têm') + ' observação. Quanto mais contexto, melhor a proposta.';
+
+    return {
+      nItens: n,
+      nUnidades: unidades,
+      nCategorias: Object.keys(cats).length,
+      nComObs: comObs + ' / ' + n,
+      obsCor: comObs === n && n > 0 ? '#2FB6B9' : '#F1F2F2',
+      prontidao: pct,
+      barraProntidao: this.barra(pct),
+      prontidaoTexto: prontidaoTexto,
+      resumoLinha: n + (n === 1 ? ' ITEM · ' : ' ITENS · ') + unidades + ' UNIDADES',
+
+      vazio: n === 0,
+      comItens: n > 0,
+      carregarExemplo: () => this.setState({ itens: INICIAIS.map(i => Object.assign({}, i)), toast: null, removido: null }),
+      limparTudo: () => {
+        const anteriores = this.state.itens;
+        this.setState({ itens: [] });
+        this.aviso('Carrinho esvaziado.', { todos: anteriores });
+      },
+
+      itens: itens.map(i => ({
+        id: i.id, nome: i.nome, codigo: i.codigo, categoria: i.categoria,
+        temFoto: !!i.foto, semFoto: !i.foto,
+        bg: i.foto ? "url('" + i.foto + "')" : 'none',
+        placeholder: i.placeholder || '',
+        ehServico: !!i.servico,
+        temQtd: !i.semQtd, semQtd: !!i.semQtd, qty: i.qty,
+        atributos: (i.atributos || []).map(a => ({
+          k: a.k, v: a.v, temSwatch: !!a.cor, hex: a.cor ? HEX[a.cor] : 'transparent'
+        })),
+        obs: i.obs,
+        obsRotulo: i.servico ? 'Detalhes do evento para a análise técnica' : 'Observação para a equipe',
+        obsPlaceholder: i.servico
+          ? 'Distância do público, tipo de conteúdo, horário de montagem...'
+          : 'Cor preferida, horário de entrega, onde vai ficar montado...',
+        obsTag: i.obs && i.obs.trim() ? 'PREENCHIDA' : 'AJUDA A ORÇAR',
+        obsTagCor: i.obs && i.obs.trim() ? '#166D70' : '#4F5456',
+        obsBorda: i.obs && i.obs.trim() ? '#C9CBCC' : '#1A7F82',
+        obsFundo: i.obs && i.obs.trim() ? '#FFFFFF' : '#E7EFEF',
+        onObs: e => this.patch(i.id, { obs: e.target.value }),
+        onDec: () => this.patch(i.id, { qty: Math.max(1, i.qty - 1) }),
+        onInc: () => this.patch(i.id, { qty: i.qty + 1 }),
+        onQty: e => {
+          const v = parseInt(String(e.target.value).replace(/\D/g, ''), 10);
+          this.patch(i.id, { qty: isNaN(v) || v < 1 ? 1 : v });
+        },
+        onRemove: () => this.remove(i.id)
+      })),
+
+      topbarDisplay: mobile ? 'none' : 'block',
+      deskDisplay: mobile ? 'none' : 'flex',
+      mobDisplay: mobile ? 'flex' : 'none',
+      menuDisplay: mobile && this.state.menu ? 'block' : 'none',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+
+      colsCabecalho: vw < 900 ? '1fr' : 'minmax(0,1.4fr) minmax(280px,0.9fr)',
+      colsCarrinho: vw < 1000 ? '1fr' : 'minmax(0,1fr) minmax(300px,340px)',
+      colsItem: vw < 640 ? '1fr' : 'minmax(120px,180px) minmax(0,1fr)',
+      colsVazio: vw < 900 ? '1fr' : 'minmax(0,1.3fr) minmax(260px,0.8fr)',
+      asidePos: vw < 1000 ? 'static' : 'sticky',
+      ctaAsideDisplay: vw < 1000 ? 'none' : 'flex',
+      barraMobileDisplay: vw < 1000 && n > 0 ? 'block' : 'none',
+      padBase: vw < 1000 && n > 0 ? '132px' : '0px',
+      toastBottom: vw < 1000 && n > 0 ? '148px' : '20px',
+      barraTitulo: n === 1 ? '1 item no seu orçamento' : n + ' itens no seu orçamento',
+
+      toastAberto: !!this.state.toast,
+      toastItem: this.state.toast,
+      desfazer: () => {
+        const r = this.state.removido;
+        if (!r) { this.setState({ toast: null }); return; }
+        if (r.todos) this.setState({ itens: r.todos, toast: null, removido: null });
+        else this.setState(s => {
+          const arr = s.itens.slice();
+          arr.splice(Math.min(r.idx, arr.length), 0, r.item);
+          return { itens: arr, toast: null, removido: null };
+        });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

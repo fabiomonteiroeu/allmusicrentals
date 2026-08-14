@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc><helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F1F2F2;color:#0B0C0D;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#166D70;text-decoration:none}
+a:hover{color:#0B0C0D}
+input,select,button,textarea{font-family:inherit}
+@keyframes amrFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes amrPulso{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes amrSpin{to{transform:rotate(360deg)}}
+@keyframes amrErro{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:hidden">
+
+<div style="display:{{ topbarDisplay }};background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between">
+    <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#9EA3A5">Locação Premium e Soluções em Painéis de LED para Eventos na Flórida</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:500 13px/1.4 'Public Sans',sans-serif">
+      <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">(689) 242-1871</a>
+      <span style="color:#5A5F61">·</span>
+      <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">contato@allmusicbr.com</a>
+      <span style="color:#5A5F61">·</span>
+      <div style="display:flex;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
+        <a href="#en" style="color:#9EA3A5" style-hover="color:#2FB6B9">EN</a>
+        <span style="color:#5A5F61">|</span>
+        <a href="#pt" style="color:#2FB6B9;font-weight:500">PT</a>
+        <span style="color:#5A5F61">|</span>
+        <a href="#es" style="color:#9EA3A5" style-hover="color:#2FB6B9">ES</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px">
+    <a href="#inicio" aria-label="All Music Rentals — início" style="display:flex;align-items:center;flex:none" style-focus="outline:2px solid #2FB6B9;outline-offset:4px">
+      <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:38px;width:auto">
+    </a>
+    <div style="flex:1;display:{{ deskDisplay }};align-items:center;gap:20px;min-width:0">
+      <nav style="flex:1;display:flex;flex-wrap:wrap;gap:4px 16px;font:500 15px/1.2 'Public Sans',sans-serif">
+        <a href="#inicio" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Início</a>
+        <a href="#estruturas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Estruturas</a>
+        <a href="#led" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Telas de LED</a>
+        <a href="#luzsom" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Luz &amp; Som</a>
+        <a href="#tendas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Tendas</a>
+        <a href="#moveis" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Móveis</a>
+        <a href="#sobre" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Sobre Nós</a>
+        <a href="#contato" style="color:#F1F2F2;padding:4px 0;border-bottom:2px solid #2FB6B9" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Contato</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none">
+        <a href="#orcamento" aria-label="Carrinho de orçamento" style="display:flex;align-items:center;gap:8px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;border:1px solid #3A3E40;padding:8px 10px;border-radius:2px" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+          ORÇAMENTO
+          <span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font-weight:500;padding:0 5px">{{ nItens }}</span>
+        </a>
+        <a href="#solicitar" style="background:#2FB6B9;color:#0B0C0D;padding:11px 16px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;letter-spacing:-0.01em;white-space:nowrap" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+    <div style="flex:1;display:{{ mobDisplay }};justify-content:flex-end;align-items:center;gap:10px">
+      <a href="#orcamento" aria-label="Carrinho de orçamento" style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:16px;height:13px;border:2px solid currentColor;border-top:0"></span>
+        <span style="position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 12px 'IBM Plex Mono',monospace;border-radius:2px">{{ nItens }}</span>
+      </a>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menu" style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:4px;align-items:center;background:transparent;border:1px solid #3A3E40;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+      </button>
+    </div>
+  </div>
+  <div style="display:{{ menuDisplay }};background:#1C1E20;border-top:1px solid #3A3E40;padding:16px 20px 24px">
+    <nav style="display:grid;gap:2px;font:500 17px/1.2 'Public Sans',sans-serif">
+      <a href="#inicio" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Início</a>
+      <a href="#estruturas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Estruturas</a>
+      <a href="#led" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Telas de LED</a>
+      <a href="#luzsom" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Luz &amp; Som</a>
+      <a href="#tendas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Tendas</a>
+      <a href="#moveis" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Móveis</a>
+      <a href="#sobre" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Sobre Nós</a>
+      <a href="#contato" style="color:#2FB6B9;padding:12px 0;border-bottom:1px solid #3A3E40">Contato</a>
+    </nav>
+    <a href="#solicitar" style="display:block;text-align:center;margin-top:16px;background:#2FB6B9;color:#0B0C0D;padding:15px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px">SOLICITAR ORÇAMENTO</a>
+  </div>
+</header>
+
+<section style="background:#0B0C0D;color:#F1F2F2;animation:amrFade .2s ease-out both">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,80px) 20px clamp(32px,4vw,56px)">
+      <nav aria-label="Trilha de navegação" style="margin-bottom:24px;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#8A8F91">
+        <a href="#inicio" style="color:#9EA3A5" style-hover="color:#2FB6B9">INÍCIO</a>
+        <span style="padding:0 8px">/</span>
+        <span style="color:#F1F2F2">CONTATO</span>
+      </nav>
+      <div style="display:grid;grid-template-columns:{{ colsContatoHero }};gap:clamp(24px,3vw,48px);align-items:end">
+        <div>
+          <h1 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5.4vw,72px);line-height:0.92">Entre em contato</h1>
+          <p style="margin:0;font:400 clamp(16px,1.2vw,17px)/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:52ch">Tem alguma dúvida sobre nossos produtos ou sobre seu evento? Envie sua mensagem para nossa equipe.</p>
+        </div>
+        <div style="display:grid;gap:12px">
+          <a href="tel:+16892421871" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;border:1px solid #3A3E40;background:#1C1E20;padding:0 18px;border-radius:2px;color:#F1F2F2" style-hover="border-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+            <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">TELEFONE</span>
+            <span style="font:500 17px 'IBM Plex Mono',monospace">(689) 242-1871</span>
+          </a>
+          <a href="mailto:contato@allmusicbr.com" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;border:1px solid #3A3E40;background:#1C1E20;padding:0 18px;border-radius:2px;color:#F1F2F2" style-hover="border-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+            <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">E-MAIL</span>
+            <span style="font:400 15px 'Public Sans',sans-serif">contato@allmusicbr.com</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div style="height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+  </section>
+
+  <section style="background:#F1F2F2">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(32px,4vw,56px) 20px clamp(48px,6vw,96px)">
+      <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;overflow:hidden;margin-bottom:clamp(32px,4vw,48px)">
+        <p style="margin:0;padding:14px 20px;border-bottom:1px solid #C9CBCC;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">ESCOLHA O CAMINHO CERTO</p>
+        <div style="display:grid;grid-template-columns:{{ gridCaminhos }};gap:1px;background:#C9CBCC">
+          <div style="background:#FFFFFF;padding:clamp(20px,3vw,28px);display:grid;gap:12px;align-content:start;border-left:2px solid #2FB6B9">
+            <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">VOCÊ ESTÁ AQUI</p>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Dúvida rápida</h2>
+            <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#2A2D2F">Uma pergunta sobre produto, disponibilidade de região ou como funciona a locação. Oito campos, resposta por e-mail ou telefone.</p>
+            <p style="margin:0;font:400 13px/1.5 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">SEM PRODUTOS · SEM CRONOGRAMA · SEM PROPOSTA</p>
+          </div>
+          <div style="background:#FFFFFF;padding:clamp(20px,3vw,28px);display:grid;gap:12px;align-content:start">
+            <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">SE VOCÊ QUER UM ORÇAMENTO</p>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Solicitação completa</h2>
+            <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#2A2D2F">Você escolhe os produtos no catálogo e envia os dados do evento. A equipe responde com uma proposta.</p>
+            <a href="#solicitar" style="justify-self:start;min-height:48px;display:inline-flex;align-items:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #166D70;outline-offset:3px">IR PARA A SOLICITAÇÃO</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:{{ colsContatoCorpo }};gap:clamp(24px,4vw,48px);align-items:start">
+        <div>
+          <sc-if value="{{ msgEnviada }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #0B0C0D;background:#FFFFFF;border-radius:2px;padding:clamp(24px,4vw,40px);display:grid;gap:20px;animation:amrFade .22s ease-out both">
+              <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">MENSAGEM ENVIADA</p>
+              <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Sua mensagem foi enviada</h2>
+              <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#2A2D2F;max-width:48ch">Nossa equipe entrará em contato após analisar as informações.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:12px">
+                <a href="#catalogo" style="min-height:52px;display:inline-flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 22px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#166D70;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">VER O CATÁLOGO</a>
+                <button type="button" onClick="{{ novaMensagem }}" style="min-height:52px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;padding:0 22px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #166D70;outline-offset:3px">ENVIAR OUTRA MENSAGEM</button>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ msgFormulario }}" hint-placeholder-val="{{ true }}">
+            <div>
+              <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Envie sua mensagem</h2>
+
+              <sc-if value="{{ erroResumo }}" hint-placeholder-val="{{ false }}">
+                <div role="alert" style="border:1px solid #8C2A2A;background:#FBF0F0;border-radius:2px;padding:16px 18px;margin-bottom:24px;animation:amrErro .24s ease-out">
+                  <p style="margin:0;font:500 15px/1.4 'Public Sans',sans-serif;color:#8C2A2A">Faltam campos obrigatórios. Os campos com problema estão destacados abaixo.</p>
+                </div>
+              </sc-if>
+
+              <div style="display:grid;gap:20px">
+                <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px">
+                  <label style="display:grid;gap:8px">
+                    <span style="font:500 15px/1.3 'Public Sans',sans-serif">Nome <span style="color:#8C2A2A">*</span></span>
+                    <input type="text" autocomplete="name" value="{{ c_nome }}" onInput="{{ onc_nome }}" style="min-height:52px;border:1px solid {{ cb_nome }};border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                    <sc-if value="{{ ce_nome }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Informe seu nome.</span></sc-if>
+                  </label>
+                  <label style="display:grid;gap:8px">
+                    <span style="font:500 15px/1.3 'Public Sans',sans-serif">E-mail <span style="color:#8C2A2A">*</span></span>
+                    <input type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" value="{{ c_email }}" onInput="{{ onc_email }}" placeholder="nome@empresa.com" style="min-height:52px;border:1px solid {{ cb_email }};border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                    <sc-if value="{{ ce_email }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>{{ cmsg_email }}</span></sc-if>
+                  </label>
+                </div>
+                <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px">
+                  <label style="display:grid;gap:8px">
+                    <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Telefone <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+                    <input type="tel" inputmode="tel" autocomplete="tel" value="{{ c_telefone }}" onInput="{{ onc_telefone }}" placeholder="(000) 000-0000" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  </label>
+                  <label style="display:grid;gap:8px">
+                    <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Empresa <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+                    <input type="text" autocomplete="organization" value="{{ c_empresa }}" onInput="{{ onc_empresa }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  </label>
+                </div>
+                <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px">
+                  <label style="display:grid;gap:8px">
+                    <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Cidade <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+                    <input type="text" autocomplete="address-level2" value="{{ c_cidade }}" onInput="{{ onc_cidade }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  </label>
+                  <label style="display:grid;gap:8px">
+                    <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Data do evento <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">se já tiver</span></span>
+                    <input type="date" value="{{ c_data }}" onInput="{{ onc_data }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  </label>
+                </div>
+                <label style="display:grid;gap:8px">
+                  <span style="font:500 15px/1.3 'Public Sans',sans-serif">Assunto <span style="color:#8C2A2A">*</span></span>
+                  <select value="{{ c_assunto }}" onChange="{{ onc_assunto }}" style="min-height:52px;border:1px solid {{ cb_assunto }};border-radius:2px;padding:0 12px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                    <option value="">Selecionar assunto</option>
+                    <option value="Dúvida sobre produto">Dúvida sobre produto</option>
+                    <option value="Disponibilidade de região">Disponibilidade de região</option>
+                    <option value="Telas de LED">Telas de LED</option>
+                    <option value="Entrega e montagem">Entrega e montagem</option>
+                    <option value="Parceria ou fornecimento">Parceria ou fornecimento</option>
+                    <option value="Outro assunto">Outro assunto</option>
+                  </select>
+                  <sc-if value="{{ ce_assunto }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Escolha um assunto.</span></sc-if>
+                </label>
+                <label style="display:grid;gap:8px">
+                  <span style="font:500 15px/1.3 'Public Sans',sans-serif">Mensagem <span style="color:#8C2A2A">*</span></span>
+                  <textarea rows="5" value="{{ c_mensagem }}" onInput="{{ onc_mensagem }}" placeholder="Conte o que você precisa saber" style="border:1px solid {{ cb_mensagem }};border-radius:2px;padding:12px 14px;font:400 16px/1.6 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #166D70;outline-offset:-2px"></textarea>
+                  <sc-if value="{{ ce_mensagem }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Escreva sua mensagem.</span></sc-if>
+                </label>
+                <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding-top:4px">
+                  <button type="button" onClick="{{ enviarMensagem }}" disabled="{{ enviando }}" style="min-height:56px;border:0;background:#2FB6B9;color:#0B0C0D;padding:0 28px;border-radius:2px;cursor:{{ enviarCursor }};display:flex;align-items:center;gap:12px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#166D70;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">
+                    {{ rotuloEnviar }}
+                    <sc-if value="{{ enviando }}" hint-placeholder-val="{{ false }}"><span style="display:block;width:14px;height:14px;border:2px solid rgba(11,12,13,0.3);border-top-color:#0B0C0D;border-radius:50%;animation:amrSpin .7s linear infinite"></span></sc-if>
+                  </button>
+                  <p style="margin:0;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61;max-width:34ch">Usamos seus dados apenas para responder esta mensagem.</p>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <aside style="display:grid;gap:16px">
+          <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;overflow:hidden">
+            <p style="margin:0;padding:14px 18px;border-bottom:1px solid #C9CBCC;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">ATENDIMENTO</p>
+            <div style="padding:18px;display:grid;gap:18px">
+              <div>
+                <p style="margin:0 0 6px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">REGIÃO</p>
+                <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#2A2D2F">Eventos em regiões selecionadas da Flórida.</p>
+              </div>
+              <div>
+                <p style="margin:0 0 6px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">IDIOMAS</p>
+                <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#2A2D2F">Inglês, português e espanhol.</p>
+              </div>
+              <div style="display:grid;gap:2px;border-top:1px solid #C9CBCC;padding-top:14px">
+                <a href="tel:+16892421871" style="display:flex;align-items:center;min-height:48px;border-bottom:1px solid #E4E6E6;color:#0B0C0D;font-family:'IBM Plex Mono',monospace;font-size:16px" style-hover="color:#166D70" style-focus="outline:2px solid #166D70;outline-offset:2px">(689) 242-1871</a>
+                <a href="mailto:contato@allmusicbr.com" style="display:flex;align-items:center;min-height:48px;color:#0B0C0D;font:400 15px 'Public Sans',sans-serif" style-hover="color:#166D70" style-focus="outline:2px solid #166D70;outline-offset:2px">contato@allmusicbr.com</a>
+              </div>
+            </div>
+          </div>
+          <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:18px">
+            <p style="margin:0 0 8px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">ANTES DE ESCREVER</p>
+            <p style="margin:0 0 14px;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">Dez perguntas comuns já estão respondidas, inclusive sobre preços.</p>
+            <a href="#faq" style="min-height:44px;display:inline-flex;align-items:center;font:500 15px 'Public Sans',sans-serif;color:#166D70" style-hover="color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:3px">Ver perguntas frequentes →</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+<footer id="contato-rodape" style="background:#0B0C0D;color:#F1F2F2;border-top:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:34px;width:auto;margin-bottom:20px">
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:34ch">Locação de equipamentos, mobiliário e painéis de LED para eventos na Flórida.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">PRODUTOS</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#estruturas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Estruturas</a>
+          <a href="#led" style="color:#DDE0E0" style-hover="color:#2FB6B9">Telas de LED</a>
+          <a href="#luzsom" style="color:#DDE0E0" style-hover="color:#2FB6B9">Luz &amp; Som</a>
+          <a href="#tendas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Tendas</a>
+          <a href="#moveis" style="color:#DDE0E0" style-hover="color:#2FB6B9">Móveis</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">EMPRESA</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#sobre" style="color:#DDE0E0" style-hover="color:#2FB6B9">Sobre Nós</a>
+          <a href="#contato" style="color:#DDE0E0" style-hover="color:#2FB6B9">Contato</a>
+          <a href="#solicitar" style="color:#DDE0E0" style-hover="color:#2FB6B9">Solicitar Orçamento</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">INFORMAÇÕES</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#faq" style="color:#DDE0E0" style-hover="color:#2FB6B9">Perguntas Frequentes</a>
+          <a href="#privacidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Política de Privacidade</a>
+          <a href="#termos" style="color:#DDE0E0" style-hover="color:#2FB6B9">Termos de Uso</a>
+          <a href="#politicas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Políticas de Locação</a>
+          <a href="#entrega" style="color:#DDE0E0" style-hover="color:#2FB6B9">Entrega e Montagem</a>
+          <a href="#cancelamento" style="color:#DDE0E0" style-hover="color:#2FB6B9">Cancelamento</a>
+          <a href="#acessibilidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Acessibilidade</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">CONTATO</p>
+        <div style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#2FB6B9">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9">contato@allmusicbr.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;padding-top:24px">
+      <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:60ch">Os produtos estão sujeitos à disponibilidade. O envio de uma solicitação não cria uma reserva.</p>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#8A8F91">© 2026 All Music Rentals. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const ETAPAS_CONFIRM = [
+  { n: '01', titulo: 'Análise', desc: 'Nossa equipe revisará todas as informações enviadas.' },
+  { n: '02', titulo: 'Disponibilidade', desc: 'Verificaremos os produtos e as quantidades solicitadas.' },
+  { n: '03', titulo: 'Logística', desc: 'Avaliaremos entrega, montagem, desmontagem e acesso ao local.' },
+  { n: '04', titulo: 'Proposta', desc: 'Entraremos em contato com o orçamento personalizado.' }
+];
+
+const FATORES = ['Quantidade de itens', 'Data do evento', 'Período de locação', 'Endereço e distância', 'Entrega e retirada', 'Montagem e desmontagem', 'Necessidades técnicas'];
+
+const FAQ_OUTRAS = [
+  { q: 'O site funciona como uma loja virtual?', a: 'Sim. Você pode pesquisar produtos, selecionar opções, informar quantidades e adicionar tudo ao carrinho de orçamento.' },
+  { q: 'Adicionar ao carrinho reserva o produto?', a: 'Não. A disponibilidade será confirmada após a análise da solicitação.' },
+  { q: 'Como receberei o orçamento?', a: 'Nossa equipe receberá os produtos e as informações do evento e enviará uma proposta personalizada.' },
+  { q: 'Posso adicionar produtos de categorias diferentes?', a: 'Sim. Todos os produtos podem ser adicionados ao mesmo carrinho.' },
+  { q: 'Posso alterar as quantidades?', a: 'Sim. As quantidades podem ser alteradas antes do envio da solicitação.' },
+  { q: 'Vocês entregam e montam?', a: 'Entrega, montagem, desmontagem e retirada podem ser incluídas conforme o produto, o endereço e o cronograma.' },
+  { q: 'Vocês atendem toda a Flórida?', a: 'O atendimento depende da cidade, da data, do tamanho da solicitação e da logística necessária.' },
+  { q: 'Posso enviar fotos e plantas do local?', a: 'Sim. O formulário permite enviar fotos, plantas, referências e documentos técnicos.' },
+  { q: 'Quando a reserva será confirmada?', a: 'A reserva será confirmada após aprovação da proposta, assinatura do contrato e pagamento solicitado.' }
+];
+
+const RESUMO = [
+  { k: 'ITENS NO ORÇAMENTO', v: '4' },
+  { k: 'UNIDADES', v: '28' },
+  { k: 'CATEGORIAS', v: '3' },
+  { k: 'DATA DO EVENTO', v: '14/11/2026' },
+  { k: 'CIDADE', v: 'ORLANDO, FL' },
+  { k: 'ARQUIVOS ANEXADOS', v: '3' }
+];
+
+class Component extends DCLogic {
+  state = {
+    menu: false, vw: 1440, faqAberta: -1,
+    msgEnviada: false, enviando: false, erros: {}, erroResumo: false,
+    c: { nome: '', email: '', telefone: '', empresa: '', cidade: '', data: '', assunto: '', mensagem: '' }
+  };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._t) clearTimeout(this._t);
+  }
+
+  etapasConfirm() {
+    const vw = this.state.vw;
+    const cols = vw < 700 ? '1fr' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(4,1fr)';
+    return React.createElement('ol', {
+      style: { margin: 0, padding: 0, listStyle: 'none', display: 'grid', gridTemplateColumns: cols, gap: '24px' }
+    }, ETAPAS_CONFIRM.map((e, i) => {
+      const ativa = i === 0;
+      return React.createElement('li', {
+        key: e.n,
+        style: {
+          border: '1px solid ' + (ativa ? '#0B0C0D' : '#C9CBCC'),
+          background: ativa ? '#0B0C0D' : '#FFFFFF',
+          color: ativa ? '#F1F2F2' : '#0B0C0D',
+          borderRadius: '2px', padding: '24px', display: 'grid', gap: '12px', alignContent: 'start'
+        }
+      },
+        React.createElement('div', { style: { display: 'flex', gap: '10px', alignItems: 'center', justifyContent: 'space-between' } },
+          React.createElement('span', { style: { font: "500 12px/1 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: ativa ? '#2FB6B9' : '#5A5F61' } }, e.n),
+          ativa
+            ? React.createElement('span', { style: { display: 'inline-flex', alignItems: 'center', gap: '8px', font: "500 11px/1 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#2FB6B9' } },
+                React.createElement('span', { style: { width: '7px', height: '7px', background: '#2FB6B9', animation: 'amrPulso 1.6s ease-in-out infinite' } }), 'AGORA')
+            : React.createElement('span', { style: { font: "500 11px/1 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#5A5F61' } }, 'A SEGUIR')
+        ),
+        React.createElement('h3', { style: { margin: 0, fontFamily: 'Archivo,sans-serif', fontVariationSettings: "'wdth' 75", fontWeight: 800, textTransform: 'uppercase', fontSize: '22px', letterSpacing: '-0.01em', lineHeight: 1 } }, e.titulo),
+        React.createElement('p', { style: { margin: 0, font: "400 15px/1.55 'Public Sans',sans-serif", color: ativa ? '#DDE0E0' : '#4A4E50' } }, e.desc),
+        React.createElement('div', {
+          style: { height: '4px', display: 'flex', gap: '2px', marginTop: '4px' }
+        }, [0, 1, 2, 3].map(k => React.createElement('span', {
+          key: k,
+          style: { flex: 1, background: k === 0 ? '#2FB6B9' : (ativa ? '#2A2D2F' : '#E4E6E6') }
+        })))
+      );
+    }));
+  }
+
+  listaFaq() {
+    return FAQ_OUTRAS.map((it, i) => {
+      const aberta = this.state.faqAberta === i;
+      return React.createElement('div', { key: i, style: { borderBottom: '1px solid #C9CBCC' } },
+        React.createElement('button', {
+          type: 'button', onClick: () => this.setState(s => ({ faqAberta: s.faqAberta === i ? -1 : i })),
+          'aria-expanded': aberta ? 'true' : 'false',
+          style: { width: '100%', display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: '16px', alignItems: 'baseline', minHeight: '64px', padding: '18px 0', border: 0, background: 'transparent', cursor: 'pointer', textAlign: 'left', color: '#0B0C0D' }
+        },
+          React.createElement('span', { style: { font: "500 12px/1.6 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#5A5F61' } }, String(i + 2).padStart(2, '0')),
+          React.createElement('span', { style: { font: "500 17px/1.4 'Public Sans',sans-serif" } }, it.q),
+          React.createElement('span', { 'aria-hidden': 'true', style: { font: "400 17px 'IBM Plex Mono',monospace", color: '#166D70' } }, aberta ? '–' : '+')
+        ),
+        aberta ? React.createElement('p', {
+          style: { margin: '0 0 22px', paddingLeft: '44px', paddingRight: '40px', font: "400 15px/1.6 'Public Sans',sans-serif", color: '#4A4E50', maxWidth: '64ch' }
+        }, it.a) : null
+      );
+    });
+  }
+
+  setC(campo, valor) {
+    this.setState(s => {
+      const erros = Object.assign({}, s.erros);
+      delete erros[campo];
+      return { c: Object.assign({}, s.c, { [campo]: valor }), erros: erros };
+    });
+  }
+
+  enviarMensagem() {
+    const c = this.state.c, e = {};
+    if (!c.nome.trim()) e.nome = 1;
+    if (!c.email.trim()) e.email = 'vazio';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(c.email.trim())) e.email = 'formato';
+    if (!c.assunto) e.assunto = 1;
+    if (!c.mensagem.trim()) e.mensagem = 1;
+    if (Object.keys(e).length) { this.setState({ erros: e, erroResumo: true }); return; }
+    this.setState({ enviando: true, erroResumo: false });
+    setTimeout(() => {
+      this.setState({ enviando: false, msgEnviada: true });
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 1200);
+  }
+
+  renderVals() {
+    const vw = this.state.vw;
+    const mobile = vw < 1080;
+    const c = this.state.c;
+    const agora = new Date();
+    const hora = agora.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+    const v = {
+      nItens: 4,
+      topbarDisplay: mobile ? 'none' : 'block',
+      deskDisplay: mobile ? 'none' : 'flex',
+      mobDisplay: mobile ? 'flex' : 'none',
+      menuDisplay: mobile && this.state.menu ? 'block' : 'none',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      protocolo: 'AMR-4182',
+      recebidaEm: 'HOJE ' + hora,
+      resumoEnvio: RESUMO,
+      etapasConfirm: this.etapasConfirm(),
+      fatoresPreco: FATORES,
+      listaFaq: this.listaFaq(),
+
+      colsConfirm: vw < 900 ? '1fr' : 'minmax(0,1.45fr) minmax(280px,0.85fr)',
+      gridSobreTexto: vw < 800 ? '1fr' : 'repeat(3,1fr)',
+      gridDois: vw < 700 ? '1fr' : 'repeat(2,1fr)',
+      gridQuatro: vw < 700 ? '1fr' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(4,1fr)',
+      gridDestaqueFaq: vw < 900 ? '1fr' : 'minmax(0,1.25fr) minmax(260px,0.85fr)',
+      gridFaqLista: vw < 900 ? '1fr' : 'minmax(0,0.75fr) minmax(0,1.5fr)',
+      colsContatoHero: vw < 900 ? '1fr' : 'minmax(0,1.4fr) minmax(280px,0.8fr)',
+      colsContatoCorpo: vw < 900 ? '1fr' : 'minmax(0,1.5fr) minmax(280px,0.75fr)',
+      gridCaminhos: vw < 800 ? '1fr' : 'repeat(2,1fr)',
+
+      msgEnviada: this.state.msgEnviada,
+      msgFormulario: !this.state.msgEnviada,
+      novaMensagem: () => this.setState({ msgEnviada: false, c: { nome: '', email: '', telefone: '', empresa: '', cidade: '', data: '', assunto: '', mensagem: '' }, erros: {}, erroResumo: false }),
+      erroResumo: this.state.erroResumo,
+      enviando: this.state.enviando,
+      enviarCursor: this.state.enviando ? 'progress' : 'pointer',
+      rotuloEnviar: this.state.enviando ? 'ENVIANDO' : 'ENVIAR MENSAGEM',
+      enviarMensagem: () => this.enviarMensagem(),
+      cmsg_email: this.state.erros.email === 'formato' ? 'Confira o endereço: falta o @ ou o domínio.' : 'Informe um e-mail para receber a resposta.'
+    };
+
+    ['nome', 'email', 'telefone', 'empresa', 'cidade', 'data', 'assunto', 'mensagem'].forEach(k => {
+      v['c_' + k] = c[k];
+      v['onc_' + k] = e => this.setC(k, e.target.value);
+      v['ce_' + k] = !!this.state.erros[k];
+      v['cb_' + k] = this.state.erros[k] ? '#8C2A2A' : '#C9CBCC';
+    });
+
+    return v;
+  }
+}
+</script>
+</body>
+</html>

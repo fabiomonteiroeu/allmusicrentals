@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F1F2F2;color:#0B0C0D;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1A7F82;text-decoration:none}
+a:hover{color:#0B0C0D}
+input,select,button,textarea{font-family:inherit}
+@keyframes amrToast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes amrErro{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:hidden;padding-bottom:88px">
+
+<div style="display:{{ topbarDisplay }};background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between">
+    <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#9EA3A5">Locação Premium e Soluções em Painéis de LED para Eventos na Flórida</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:500 13px/1.4 'Public Sans',sans-serif">
+      <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">(689) 242-1871</a>
+      <span style="color:#3A3E40">·</span>
+      <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">contato@allmusicbr.com</a>
+      <span style="color:#3A3E40">·</span>
+      <div style="display:flex;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
+        <a href="#en" style="color:#9EA3A5" style-hover="color:#2FB6B9">EN</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#pt" style="color:#2FB6B9;font-weight:500">PT</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#es" style="color:#9EA3A5" style-hover="color:#2FB6B9">ES</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px">
+    <a href="#inicio" aria-label="All Music Rentals — início" style="display:flex;align-items:center;flex:none" style-focus="outline:2px solid #2FB6B9;outline-offset:4px">
+      <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:38px;width:auto">
+    </a>
+    <div style="flex:1;display:{{ deskDisplay }};align-items:center;gap:20px;min-width:0">
+      <nav style="flex:1;display:flex;flex-wrap:wrap;gap:4px 16px;font:500 15px/1.2 'Public Sans',sans-serif">
+        <a href="#inicio" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Início</a>
+        <a href="#estruturas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Estruturas</a>
+        <a href="#led" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Telas de LED</a>
+        <a href="#luzsom" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Luz &amp; Som</a>
+        <a href="#tendas" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Tendas</a>
+        <a href="#moveis" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Móveis</a>
+        <a href="#sobre" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Sobre Nós</a>
+        <a href="#contato" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Contato</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none">
+        <a href="#orcamento" aria-label="Carrinho de orçamento" style="display:flex;align-items:center;gap:8px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;border:1px solid #3A3E40;padding:8px 10px" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+          ORÇAMENTO
+          <span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font-weight:500;padding:0 5px">{{ count }}</span>
+        </a>
+        <a href="#solicitar" style="background:#2FB6B9;color:#0B0C0D;padding:11px 16px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;letter-spacing:-0.01em;white-space:nowrap" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+    <div style="flex:1;display:{{ mobDisplay }};justify-content:flex-end;align-items:center;gap:10px">
+      <a href="#orcamento" aria-label="Carrinho de orçamento" style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:16px;height:13px;border:2px solid currentColor;border-top:0"></span>
+        <span style="position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 12px 'IBM Plex Mono',monospace;border-radius:2px">{{ count }}</span>
+      </a>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menu" style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:4px;align-items:center;background:transparent;border:1px solid #3A3E40;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+      </button>
+    </div>
+  </div>
+  <div style="display:{{ menuDisplay }};background:#1C1E20;border-top:1px solid #3A3E40;padding:16px 20px 24px">
+    <nav style="display:grid;gap:2px;font:500 17px/1.2 'Public Sans',sans-serif">
+      <a href="#inicio" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Início</a>
+      <a href="#estruturas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Estruturas</a>
+      <a href="#led" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Telas de LED</a>
+      <a href="#luzsom" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Luz &amp; Som</a>
+      <a href="#tendas" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Tendas</a>
+      <a href="#moveis" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Móveis</a>
+      <a href="#sobre" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Sobre Nós</a>
+      <a href="#contato" style="color:#F1F2F2;padding:12px 0;border-bottom:1px solid #3A3E40">Contato</a>
+    </nav>
+    <a href="#solicitar" style="display:block;text-align:center;margin-top:16px;background:#2FB6B9;color:#0B0C0D;padding:15px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px">SOLICITAR ORÇAMENTO</a>
+  </div>
+</header>
+
+<div style="background:#1C1E20;border-bottom:1px solid #3A3E40">
+  <div style="max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center">
+    <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">MODELO APLICADO A</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">{{ trocador }}</div>
+  </div>
+</div>
+
+<div style="max-width:1280px;margin:0 auto;padding:20px 20px 0">
+  <nav aria-label="Trilha de navegação" style="font:400 13px/1.6 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">
+    <a href="#inicio" style="color:#4A4E50" style-hover="color:#1A7F82">INÍCIO</a>
+    <span style="padding:0 8px">/</span>
+    <a href="#categoria" style="color:#4A4E50" style-hover="color:#1A7F82">{{ categoriaMono }}</a>
+    <span style="padding:0 8px">/</span>
+    <span style="color:#0B0C0D">{{ tituloMono }}</span>
+  </nav>
+</div>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(24px,3vw,40px) 20px clamp(40px,5vw,64px)">
+  <div style="display:grid;grid-template-columns:{{ colsPrincipais }};gap:clamp(24px,4vw,64px);align-items:start">
+
+    <div>
+      <div onMouseEnter="{{ zoomOn }}" onMouseLeave="{{ zoomOff }}" onMouseMove="{{ zoomMove }}" style="position:relative;aspect-ratio:4/3;border:1px solid #C9CBCC;background:#FFFFFF;overflow:hidden;cursor:{{ zoomCursor }}">
+        <sc-if value="{{ imgTemFoto }}" hint-placeholder-val="{{ false }}">
+          <div role="img" aria-label="{{ imgAlt }}" style="position:absolute;inset:0;background-image:{{ imgBg }};background-size:cover;background-position:{{ zoomPos }};transform:scale({{ zoomEscala }});transition:transform .18s ease-out"></div>
+        </sc-if>
+        <sc-if value="{{ imgSemFoto }}" hint-placeholder-val="{{ true }}">
+          <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,#E4E6E6 0 8px,#EDEEEE 8px 16px);display:flex;align-items:flex-end;padding:16px">
+            <span style="font:400 13px/1.5 'IBM Plex Mono',monospace;color:#6B7072">{{ imgPlaceholder }}</span>
+          </div>
+        </sc-if>
+        <span style="position:absolute;top:12px;left:12px;background:#0B0C0D;color:#F1F2F2;padding:6px 10px;border-radius:2px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em">{{ imgRotulo }}</span>
+        <span style="position:absolute;bottom:12px;right:12px;display:{{ zoomDicaDisplay }};background:rgba(11,12,13,0.85);color:#F1F2F2;padding:6px 10px;border-radius:2px;font:400 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em">PASSE O CURSOR PARA AMPLIAR</span>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px">
+        <sc-for list="{{ miniaturas }}" as="m" hint-placeholder-count="4">
+          <button type="button" onClick="{{ m.onPick }}" aria-label="{{ m.alt }}" aria-pressed="{{ m.ativa }}" style="position:relative;aspect-ratio:1/1;padding:0;border:{{ m.borda }};background:#FFFFFF;border-radius:2px;cursor:pointer;overflow:hidden" style-focus="outline:2px solid #1A7F82;outline-offset:3px">
+            <sc-if value="{{ m.temFoto }}" hint-placeholder-val="{{ false }}">
+              <span style="position:absolute;inset:0;background-image:{{ m.bg }};background-size:cover;background-position:center"></span>
+            </sc-if>
+            <sc-if value="{{ m.semFoto }}" hint-placeholder-val="{{ true }}">
+              <span style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,#E4E6E6 0 6px,#EDEEEE 6px 12px)"></span>
+            </sc-if>
+            <span style="position:absolute;left:0;right:0;bottom:0;background:rgba(11,12,13,0.82);color:#F1F2F2;padding:4px;font:500 10px/1.2 'IBM Plex Mono',monospace;letter-spacing:0.04em">{{ m.tag }}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div>
+      <p style="margin:0 0 12px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">{{ categoriaMono }}</p>
+      <h1 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.6vw,44px);line-height:0.98;text-wrap:balance">{{ titulo }}</h1>
+
+      <dl style="display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0 0 20px;padding:0 0 20px;border-bottom:1px solid #C9CBCC;font:400 13px/1.5 'IBM Plex Mono',monospace;letter-spacing:0.04em">
+        <dt style="margin:0;color:#6B7072">CÓDIGO</dt><dd style="margin:0;color:#0B0C0D">{{ codigo }}</dd>
+        <dt style="margin:0;color:#6B7072">URL</dt><dd style="margin:0;color:#6B7072">{{ url }}</dd>
+      </dl>
+
+      <p style="margin:0 0 24px;font:400 17px/1.55 'Public Sans',sans-serif;color:#2A2D2F;max-width:52ch">{{ descCurta }}</p>
+
+      <sc-if value="{{ temCores }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-bottom:24px;padding:20px;border:1px solid {{ corBorda }};background:#FFFFFF;border-radius:2px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:14px">
+            <p style="margin:0;font:500 17px/1.3 'Public Sans',sans-serif">Selecione a cor <span style="color:#8C2A2A">*</span></p>
+            <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">{{ corEstado }}</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ cores }}" as="c" hint-placeholder-count="4">
+              <button type="button" onClick="{{ c.onPick }}" aria-pressed="{{ c.ativa }}" style="display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px 0 8px;border:{{ c.borda }};background:#FFFFFF;border-radius:2px;cursor:pointer;font:400 15px 'Public Sans',sans-serif;color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">
+                <span style="width:28px;height:28px;border-radius:2px;background:{{ c.hex }};border:{{ c.swatchBorda }};box-shadow:{{ c.anel }}"></span>
+                {{ c.nome }}
+              </button>
+            </sc-for>
+          </div>
+          <sc-if value="{{ corErro }}" hint-placeholder-val="{{ false }}">
+            <p role="alert" style="margin:14px 0 0;display:flex;gap:10px;align-items:center;font:500 15px/1.4 'Public Sans',sans-serif;color:#8C2A2A;animation:amrErro .24s ease-out">
+              <span style="flex:none;display:block;width:14px;height:14px;background:#8C2A2A"></span>
+              Escolha uma cor antes de adicionar este item ao orçamento.
+            </p>
+          </sc-if>
+          <p style="margin:14px 0 0;font:400 13px/1.5 'Public Sans',sans-serif;color:#4A4E50">As cores e quantidades disponíveis serão confirmadas após a análise da solicitação.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ ehConfiguravel }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-bottom:24px;border:1px solid #0B0C0D;background:#FFFFFF;border-radius:2px">
+          <div style="padding:16px 20px;background:#0B0C0D;color:#F1F2F2;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between">
+            <p style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:17px;letter-spacing:-0.01em">Configure sua tela</p>
+            <p style="margin:0;font:400 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#9EA3A5">TODOS OS CAMPOS SÃO OPCIONAIS</p>
+          </div>
+          <div style="padding:20px;display:grid;gap:24px">
+
+            <fieldset style="margin:0;padding:0;border:0">
+              <legend style="padding:0;margin:0 0 6px;font:500 17px/1.3 'Public Sans',sans-serif">Tamanho desejado</legend>
+              <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#6B7072">Se ainda não tem a medida, siga sem ela. A equipe dimensiona a partir do local.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end">
+                <label style="display:grid;gap:6px;font:400 13px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">LARGURA
+                  <span style="display:flex;align-items:center;border:1px solid {{ medidaBorda }};border-radius:2px;background:{{ medidaFundo }}">
+                    <input type="text" inputmode="decimal" value="{{ largura }}" onInput="{{ onLargura }}" disabled="{{ semMedida }}" placeholder="0,0" style="width:88px;min-height:48px;border:0;background:transparent;padding:0 12px;font:500 15px 'IBM Plex Mono',monospace;color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">
+                    <span style="padding-right:12px;font:400 13px 'IBM Plex Mono',monospace;color:#6B7072">m</span>
+                  </span>
+                </label>
+                <span aria-hidden="true" style="padding-bottom:14px;font:400 15px 'IBM Plex Mono',monospace;color:#6B7072">×</span>
+                <label style="display:grid;gap:6px;font:400 13px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">ALTURA
+                  <span style="display:flex;align-items:center;border:1px solid {{ medidaBorda }};border-radius:2px;background:{{ medidaFundo }}">
+                    <input type="text" inputmode="decimal" value="{{ altura }}" onInput="{{ onAltura }}" disabled="{{ semMedida }}" placeholder="0,0" style="width:88px;min-height:48px;border:0;background:transparent;padding:0 12px;font:500 15px 'IBM Plex Mono',monospace;color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">
+                    <span style="padding-right:12px;font:400 13px 'IBM Plex Mono',monospace;color:#6B7072">m</span>
+                  </span>
+                </label>
+                <button type="button" onClick="{{ toggleSemMedida }}" aria-pressed="{{ semMedidaAria }}" style="min-height:48px;padding:0 16px;border:{{ semMedidaBorda }};background:{{ semMedidaFundo }};color:{{ semMedidaCor }};border-radius:2px;cursor:pointer;font:500 15px 'Public Sans',sans-serif" style-focus="outline:2px solid #1A7F82;outline-offset:3px">Ainda não sei</button>
+              </div>
+              <sc-if value="{{ semMedida }}" hint-placeholder-val="{{ false }}">
+                <p style="margin:12px 0 0;padding-left:14px;border-left:2px solid #1A7F82;font:400 15px/1.5 'Public Sans',sans-serif;color:#2A2D2F;max-width:48ch">Sem problema. A equipe calcula a área da tela pela distância do público e pelas medidas do local que você informar depois.</p>
+              </sc-if>
+            </fieldset>
+
+            {{ blocosConfig }}
+
+            <label style="display:grid;gap:8px">
+              <span style="font:500 17px/1.3 'Public Sans',sans-serif">Observações</span>
+              <textarea rows="3" value="{{ obs }}" onInput="{{ onObs }}" placeholder="Conte-nos como pretende utilizar o painel" style="width:100%;border:1px solid #C9CBCC;border-radius:2px;padding:12px;font:400 15px/1.5 'Public Sans',sans-serif;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #1A7F82;outline-offset:-2px"></textarea>
+            </label>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ temQuantidade }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+          <label style="font:500 17px/1.3 'Public Sans',sans-serif" for="qtd-produto">Quantidade</label>
+          <div style="display:flex;border:1px solid #C9CBCC;border-radius:2px;overflow:hidden;background:#FFFFFF">
+            <button type="button" onClick="{{ onDec }}" aria-label="Diminuir quantidade" style="width:48px;min-height:52px;border:0;border-right:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:20px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">−</button>
+            <input id="qtd-produto" type="text" inputmode="numeric" value="{{ qty }}" onChange="{{ onQty }}" style="width:64px;border:0;text-align:center;font:500 17px 'IBM Plex Mono',monospace;background:#FFFFFF" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">
+            <button type="button" onClick="{{ onInc }}" aria-label="Aumentar quantidade" style="width:48px;min-height:52px;border:0;border-left:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:20px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">+</button>
+          </div>
+        </div>
+      </sc-if>
+
+      <button type="button" onClick="{{ onAdd }}" style="width:100%;border:0;background:#2FB6B9;color:#0B0C0D;padding:20px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:18px;letter-spacing:-0.01em;min-height:56px" style-hover="background:#1A7F82;color:#F1F2F2" style-active="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">{{ btnAdicionar }}</button>
+
+      <div style="margin-top:16px;display:grid;gap:8px">
+        <div style="display:flex;gap:12px;align-items:flex-start;background:#E4E6E6;border-left:2px solid #1A7F82;padding:14px 16px;border-radius:2px">
+          <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82;padding-top:3px">AVISO</span>
+          <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#2A2D2F">{{ avisoPrincipal }}</p>
+        </div>
+        <sc-if value="{{ temAvisoExtra }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:12px;align-items:flex-start;border:1px solid #C9CBCC;padding:14px 16px;border-radius:2px">
+            <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072;padding-top:3px">NÃO INCLUÍDO</span>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">{{ avisoExtra }}</p>
+          </div>
+        </sc-if>
+        <p style="margin:0;font:400 13px/1.5 'Public Sans',sans-serif;color:#6B7072">Os produtos não ficam reservados ao serem adicionados ao carrinho. A disponibilidade será confirmada pela equipe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px">
+  <div style="display:grid;grid-template-columns:{{ colsDetalhe }};gap:clamp(32px,5vw,64px);align-items:start">
+    <div>
+      <h2 style="margin:0 0 20px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.6vw,30px);line-height:1">Descrição</h2>
+      {{ descCompleta }}
+
+      <sc-if value="{{ temNotaResolucao }}" hint-placeholder-val="{{ false }}">
+        <div style="margin-top:24px;border:1px solid #C9CBCC;background:#FFFFFF;padding:20px;border-radius:2px">
+          <p style="margin:0 0 8px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">SOBRE A RESOLUÇÃO</p>
+          <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#2A2D2F;max-width:52ch">{{ notaResolucao }}</p>
+        </div>
+      </sc-if>
+
+      <h2 style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.6vw,30px);line-height:1">{{ caracTitulo }}</h2>
+      <div style="display:grid;grid-template-columns:{{ gridCarac }};gap:1px;background:#C9CBCC;border:1px solid #C9CBCC">
+        <sc-for list="{{ caracteristicas }}" as="c" hint-placeholder-count="12">
+          <div style="background:#F1F2F2;padding:14px 16px;display:flex;gap:10px;align-items:baseline">
+            <span style="flex:none;font:500 12px/1.4 'IBM Plex Mono',monospace;color:#1A7F82">{{ c.n }}</span>
+            <span style="font:400 15px/1.45 'Public Sans',sans-serif;color:#2A2D2F">{{ c.t }}</span>
+          </div>
+        </sc-for>
+      </div>
+
+      <h2 style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.6vw,30px);line-height:1">Aplicações</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ aplicacoes }}" as="a" hint-placeholder-count="10">
+          <span style="display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;font:400 15px/1 'Public Sans',sans-serif;color:#2A2D2F">{{ a }}</span>
+        </sc-for>
+      </div>
+
+      <h2 style="margin:40px 0 20px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.6vw,30px);line-height:1">Informações importantes</h2>
+      <div style="display:grid;gap:2px">
+        <sc-for list="{{ informacoes }}" as="i" hint-placeholder-count="4">
+          <div style="display:flex;gap:14px;align-items:flex-start;border-bottom:1px solid #C9CBCC;padding:14px 0">
+            <span style="flex:none;width:6px;height:6px;background:#1A7F82;margin-top:9px"></span>
+            <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#2A2D2F;max-width:64ch">{{ i }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <aside style="position:{{ asidePos }};top:96px;display:grid;gap:24px">
+      <div style="border:1px solid #0B0C0D;background:#FFFFFF;border-radius:2px;overflow:hidden">
+        <p style="margin:0;padding:14px 20px;background:#0B0C0D;color:#F1F2F2;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:15px;letter-spacing:-0.01em">{{ fichaTitulo }}</p>
+        <dl style="margin:0;display:grid">
+          <sc-for list="{{ ficha }}" as="f" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:1fr auto;gap:16px;padding:12px 20px;border-bottom:1px solid #C9CBCC;align-items:baseline">
+              <dt style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">{{ f.k }}</dt>
+              <dd style="margin:0;text-align:right;font:500 15px/1.4 'IBM Plex Mono',monospace;color:#0B0C0D">{{ f.v }}</dd>
+            </div>
+          </sc-for>
+        </dl>
+      </div>
+
+      <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:20px">
+        <p style="margin:0 0 6px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">PRECISA DE AJUDA</p>
+        <p style="margin:0 0 16px;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50">Fale com quem monta. A equipe responde com o que faz sentido para a sua data.</p>
+        <div style="display:grid;gap:2px">
+          <a href="tel:+16892421871" style="display:flex;align-items:center;min-height:44px;border-bottom:1px solid #C9CBCC;color:#0B0C0D;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#1A7F82" style-focus="outline:2px solid #1A7F82;outline-offset:2px">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="display:flex;align-items:center;min-height:44px;color:#0B0C0D;font:400 15px 'Public Sans',sans-serif" style-hover="color:#1A7F82" style-focus="outline:2px solid #1A7F82;outline-offset:2px">contato@allmusicbr.com</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section style="background:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px">
+    <h2 style="margin:0 0 8px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.8vw,30px);line-height:1">Frequentemente alugado com</h2>
+    <p style="margin:0 0 24px;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Itens que costumam entrar no mesmo orçamento. Adicione junto ou avalie depois.</p>
+    <div style="display:grid;grid-template-columns:{{ gridJunto }};gap:16px">
+      <sc-for list="{{ juntos }}" as="j" hint-placeholder-count="5">
+        <div style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #C9CBCC;border-radius:2px" style-hover="border-color:#0B0C0D">
+          <div style="aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid #C9CBCC">
+            <sc-if value="{{ j.temFoto }}" hint-placeholder-val="{{ false }}">
+              <div role="img" aria-label="{{ j.nome }}" style="width:100%;height:100%;background:#FFFFFF;background-image:{{ j.bg }};background-size:cover;background-position:center"></div>
+            </sc-if>
+            <sc-if value="{{ j.semFoto }}" hint-placeholder-val="{{ true }}">
+              <div style="width:100%;height:100%;background-image:repeating-linear-gradient(135deg,#DADCDC 0 6px,#E4E6E6 6px 12px);display:flex;align-items:flex-end;padding:10px">
+                <span style="font:400 12px/1.4 'IBM Plex Mono',monospace;color:#6B7072">{{ j.placeholder }}</span>
+              </div>
+            </sc-if>
+          </div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px;flex:1">
+            <p style="margin:0;font:500 17px/1.3 'Public Sans',sans-serif;flex:1">{{ j.nome }}</p>
+            <button type="button" onClick="{{ j.onAdd }}" style="min-height:44px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:13px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">{{ j.btn }}</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+</section>
+
+<section style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px">
+  <h2 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.8vw,30px);line-height:1">Produtos relacionados</h2>
+  <div style="display:grid;grid-template-columns:{{ gridRelac }};gap:24px">
+    <sc-for list="{{ relacionados }}" as="r" hint-placeholder-count="4">
+      <a href="#produto" style="display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #C9CBCC;border-radius:2px;color:#0B0C0D" style-hover="border-color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">
+        <div style="aspect-ratio:4/3;overflow:hidden;border-bottom:1px solid #C9CBCC">
+          <sc-if value="{{ r.temFoto }}" hint-placeholder-val="{{ false }}">
+            <div role="img" aria-label="{{ r.nome }}" style="width:100%;height:100%;background:#FFFFFF;background-image:{{ r.bg }};background-size:cover;background-position:center"></div>
+          </sc-if>
+          <sc-if value="{{ r.semFoto }}" hint-placeholder-val="{{ true }}">
+            <div style="width:100%;height:100%;background-image:repeating-linear-gradient(135deg,#DADCDC 0 6px,#E4E6E6 6px 12px);display:flex;align-items:flex-end;padding:10px">
+              <span style="font:400 12px/1.4 'IBM Plex Mono',monospace;color:#6B7072">{{ r.placeholder }}</span>
+            </div>
+          </sc-if>
+        </div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:8px;flex:1">
+          <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">{{ r.cat }}</p>
+          <p style="margin:0;font:500 17px/1.3 'Public Sans',sans-serif;flex:1">{{ r.nome }}</p>
+          <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:13px;color:#1A7F82">VER DETALHES →</span>
+        </div>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
+<section style="background:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px">
+    <div style="display:grid;grid-template-columns:{{ gridFaq }};gap:clamp(24px,4vw,64px);align-items:start">
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">DÚVIDAS SOBRE ESTE ITEM</p>
+        <h2 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(24px,2.8vw,30px);line-height:1">Perguntas frequentes</h2>
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;max-width:38ch">Outras perguntas são respondidas junto com a proposta, depois que a equipe recebe os dados do evento.</p>
+      </div>
+      <div style="border-top:2px solid #0B0C0D">{{ faq }}</div>
+    </div>
+  </div>
+</section>
+
+<section id="solicitar" style="background:#0B0C0D;color:#F1F2F2">
+  <div style="height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,96px) 20px">
+    <div style="display:grid;grid-template-columns:{{ gridCta }};gap:40px;align-items:end">
+      <div>
+        <h2 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,4vw,44px);line-height:0.98">Adicione e envie sua solicitação</h2>
+        <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:52ch">Informe a data, o endereço e as necessidades de montagem. A equipe analisa e envia a proposta.</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#catalogo" style="border:1px solid #F1F2F2;color:#F1F2F2;padding:17px 26px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">VER TODO O CATÁLOGO</a>
+        <a href="#orcamento" style="background:#2FB6B9;color:#0B0C0D;padding:17px 26px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contato" style="background:#0B0C0D;color:#F1F2F2;border-top:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:34px;width:auto;margin-bottom:20px">
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:34ch">Locação de equipamentos, mobiliário e painéis de LED para eventos na Flórida.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">PRODUTOS</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#estruturas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Estruturas</a>
+          <a href="#led" style="color:#DDE0E0" style-hover="color:#2FB6B9">Telas de LED</a>
+          <a href="#luzsom" style="color:#DDE0E0" style-hover="color:#2FB6B9">Luz &amp; Som</a>
+          <a href="#tendas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Tendas</a>
+          <a href="#moveis" style="color:#DDE0E0" style-hover="color:#2FB6B9">Móveis</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">EMPRESA</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#sobre" style="color:#DDE0E0" style-hover="color:#2FB6B9">Sobre Nós</a>
+          <a href="#contato" style="color:#DDE0E0" style-hover="color:#2FB6B9">Contato</a>
+          <a href="#solicitar" style="color:#DDE0E0" style-hover="color:#2FB6B9">Solicitar Orçamento</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">INFORMAÇÕES</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#faq" style="color:#DDE0E0" style-hover="color:#2FB6B9">Perguntas Frequentes</a>
+          <a href="#privacidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Política de Privacidade</a>
+          <a href="#termos" style="color:#DDE0E0" style-hover="color:#2FB6B9">Termos de Uso</a>
+          <a href="#politicas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Políticas de Locação</a>
+          <a href="#entrega" style="color:#DDE0E0" style-hover="color:#2FB6B9">Entrega e Montagem</a>
+          <a href="#cancelamento" style="color:#DDE0E0" style-hover="color:#2FB6B9">Cancelamento</a>
+          <a href="#acessibilidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Acessibilidade</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">CONTATO</p>
+        <div style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#2FB6B9">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9">contato@allmusicbr.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;padding-top:24px">
+      <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:60ch">Os produtos estão sujeitos à disponibilidade. O envio de uma solicitação não cria uma reserva.</p>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">© 2026 All Music Rentals. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:50;background:#0B0C0D;border-top:1px solid #2FB6B9;box-shadow:0 -4px 0 rgba(11,12,13,0.35)">
+  <div style="max-width:1280px;margin:0 auto;padding:12px 20px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:14px;min-width:0">
+      <span style="flex:none;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 15px 'IBM Plex Mono',monospace;border-radius:2px;padding:0 8px">{{ count }}</span>
+      <div style="min-width:0">
+        <p style="margin:0;font:500 15px/1.3 'Public Sans',sans-serif;color:#F1F2F2">{{ barraTitulo }}</p>
+        <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#6B7072">{{ barraSub }}</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex:none">
+      <a href="#orcamento" style="min-height:44px;display:flex;align-items:center;border:1px solid #F1F2F2;color:#F1F2F2;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">VER ORÇAMENTO</a>
+      <a href="#solicitar" style="min-height:44px;display:flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR</a>
+    </div>
+  </div>
+</div>
+
+<sc-if value="{{ toastAberto }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:20px;right:20px;bottom:96px;z-index:60;display:flex;justify-content:center;pointer-events:none">
+    <div style="pointer-events:auto;max-width:520px;width:100%;background:#0B0C0D;color:#F1F2F2;border:1px solid #2FB6B9;border-radius:2px;box-shadow:6px 6px 0 rgba(11,12,13,0.35);padding:20px;animation:amrToast .18s ease-out both;display:grid;gap:14px">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <span style="flex:none;width:10px;height:10px;background:#2FB6B9;margin-top:7px"></span>
+        <div>
+          <p style="margin:0 0 4px;font:500 17px/1.4 'Public Sans',sans-serif">Produto adicionado ao seu orçamento</p>
+          <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#9EA3A5">{{ toastItem }}</p>
+        </div>
+        <button type="button" onClick="{{ fecharToast }}" aria-label="Fechar aviso" style="margin-left:auto;flex:none;width:32px;height:32px;background:transparent;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px;cursor:pointer" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:2px">×</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button type="button" onClick="{{ fecharToast }}" style="flex:1;min-width:160px;border:1px solid #F1F2F2;background:transparent;color:#F1F2F2;padding:13px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">CONTINUAR NAVEGANDO</button>
+        <a href="#orcamento" style="flex:1;min-width:160px;text-align:center;background:#2FB6B9;color:#0B0C0D;padding:14px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">VER MEU ORÇAMENTO</a>
+      </div>
+      <p style="margin:0;font:400 13px/1.45 'Public Sans',sans-serif;color:#6B7072">Os produtos não ficam reservados ao serem adicionados ao carrinho. A disponibilidade será confirmada pela equipe.</p>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;produto&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;mesa-alta&quot;,&quot;capa-spandex&quot;,&quot;led&quot;],&quot;default&quot;:null,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Produto&quot;}}">
+const HEX = { 'Preto': '#0B0C0D', 'Branco': '#FFFFFF', 'Bege': '#D8C9A8', 'Azul-marinho': '#1F2A44', 'Bordô': '#5A1F24' };
+
+const PRODUTOS = {
+  'mesa-alta': {
+    slug: 'mesa-alta', rotulo: 'Produto físico',
+    titulo: 'Mesa Alta Redonda de Alumínio de 23,25 Polegadas',
+    tituloMono: 'MESA ALTA REDONDA DE ALUMÍNIO',
+    categoria: 'Móveis', categoriaMono: 'MÓVEIS',
+    codigo: 'AMR-MOV-MA-2325',
+    url: '/pt/moveis/mesa-alta-redonda-aluminio/',
+    descCurta: 'Mesa alta e portátil com tampo de aço inoxidável e sistema dobrável para eventos internos e externos.',
+    descCompleta: [
+      'Adicione um espaço funcional para coquetéis, recepções e networking com esta mesa alta redonda de alumínio.',
+      'O produto possui tampo de aço inoxidável, base em alumínio e um sistema que permite dobrar o tampo por meio de um botão localizado abaixo da superfície.',
+      'Seu design leve facilita o transporte e a utilização em eventos corporativos, casamentos, feiras, festas, pátios e áreas VIP.'
+    ],
+    imagens: [
+      { src: 'uploads/HIGH TABLE ALUMINIUM 2.webp', tag: 'ISOLADA', alt: 'Mesa alta redonda de alumínio, foto isolada' },
+      { src: 'uploads/HIGH TABLE ALUMINIUM 6-12bcd805.jpg', tag: 'AMBIENTADA', alt: 'Mesas altas montadas em evento' },
+      { src: 'uploads/HIGH TABLE ALUMINUM 5 (1).jpg', tag: 'DETALHE', alt: 'Detalhe da base e do sistema dobrável' },
+      { src: 'uploads/HIGH TABLE ALUMINIUM 4.jpg', tag: 'AMBIENTADA', alt: 'Mesa alta em uso durante recepção' }
+    ],
+    caracTitulo: 'Características',
+    caracteristicas: ['Tampo redondo de 23,25 polegadas', 'Altura de bar', 'Tampo em aço inoxidável', 'Base em alumínio', 'Tampo dobrável', 'Sistema acionado por botão', 'Base de 25,75 polegadas', 'Capacidade de até 150 libras', 'Protetores para o piso', 'Estrutura leve', 'Produto portátil', 'Uso interno e externo'],
+    ficha: [
+      { k: 'TAMPO', v: '23,25"' },
+      { k: 'BASE', v: '25,75"' },
+      { k: 'ALTURA', v: 'BAR' },
+      { k: 'CAPACIDADE', v: '150 LB' },
+      { k: 'MATERIAL DO TAMPO', v: 'AÇO INOX' },
+      { k: 'MATERIAL DA BASE', v: 'ALUMÍNIO' },
+      { k: 'DOBRÁVEL', v: 'SIM · BOTÃO' },
+      { k: 'AMBIENTE', v: 'INT. / EXT.' }
+    ],
+    fichaTitulo: 'Medidas e material',
+    aplicacoes: ['Coquetéis', 'Recepções', 'Eventos corporativos', 'Casamentos', 'Feiras', 'Networking', 'Áreas VIP', 'Festas', 'Exposições', 'Pátios'],
+    informacoes: [
+      'A quantidade disponível é confirmada pela equipe conforme a data do evento.',
+      'Entrega, montagem, desmontagem e retirada podem ser incluídas na proposta.',
+      'A capa de mesa não acompanha o produto e deve ser solicitada separadamente.',
+      'Para uso em área externa, informe as condições do piso e a previsão de vento na solicitação.'
+    ],
+    avisoPrincipal: 'A disponibilidade e o valor serão confirmados pela equipe após a análise da solicitação.',
+    temQuantidade: true,
+    btnAdicionar: 'ADICIONAR AO ORÇAMENTO',
+    juntos: [
+      { nome: 'Capa de spandex para mesa de coquetel', foto: 'uploads/COVERS HIGH TABLE.jpg' },
+      { nome: 'Guarda-sol', foto: 'uploads/UMBRELLA4.jpg' },
+      { nome: 'Iluminação', placeholder: 'FOTO · ILUMINAÇÃO DE AMBIENTE · 4:3' },
+      { nome: 'Banquetas', placeholder: 'FOTO · BANQUETA ALTA · ISOLADA · 4:3' },
+      { nome: 'Bar portátil', placeholder: 'FOTO · BAR PORTÁTIL · ISOLADA · 4:3' }
+    ],
+    relacionados: [
+      { nome: 'Mesa Bistrô Preta com Tampo Redondo', cat: 'MÓVEIS', placeholder: 'FOTO · MESA BISTRÔ · ISOLADA · 4:3' },
+      { nome: 'Capa Preta para Mesa Retangular de 6 Pés', cat: 'MÓVEIS', foto: 'uploads/COVERS TABLE BUFFET.jpg' },
+      { nome: 'Capa de Spandex para Mesa de Coquetel', cat: 'MÓVEIS', foto: 'uploads/COVERS HIGH TABLE.jpg' },
+      { nome: 'Lounge Externo com Sofá e Mesa Baixa', cat: 'ÁREA EXTERNA', placeholder: 'FOTO · LOUNGE EXTERNO · 4:3' }
+    ],
+    faq: [
+      { q: 'A mesa vem com capa?', a: 'Não. A capa é um item separado do catálogo e pode ser adicionada ao mesmo orçamento, com a cor escolhida na página do produto.' },
+      { q: 'Quantas pessoas ficam em volta de uma mesa?', a: 'Em coquetel, de três a quatro pessoas em pé por mesa é o uso mais comum. Informe o número de convidados e a equipe sugere a quantidade.' },
+      { q: 'Posso usar na área da piscina ou no jardim?', a: 'Sim. A estrutura é leve e tem protetores de piso. Para piso irregular ou grama, informe na solicitação para que a equipe avalie a estabilidade.' },
+      { q: 'A mesa é entregue montada?', a: 'O tampo é dobrável e o produto chega pronto para uso. A montagem no local pode ser incluída na proposta.' }
+    ]
+  },
+
+  'capa-spandex': {
+    slug: 'capa-spandex', rotulo: 'Produto com variação',
+    titulo: 'Capa de Spandex para Mesa de Coquetel — Várias Cores',
+    tituloMono: 'CAPA DE SPANDEX PARA MESA DE COQUETEL',
+    categoria: 'Móveis', categoriaMono: 'MÓVEIS',
+    codigo: 'AMR-MOV-CS-COQ',
+    url: '/pt/moveis/capa-spandex-mesa-coquetel/',
+    descCurta: 'Capa ajustada em tecido elástico para mesas altas, mesas bistrô e mesas de coquetel, disponível em diferentes cores.',
+    descCompleta: [
+      'Dê acabamento à mesa de coquetel com uma capa ajustada que veste a estrutura por inteiro, sem dobras aparentes.',
+      'O tecido elástico se adapta ao tampo e à base, e volta ao formato depois de lavado, o que mantém o visual uniforme em eventos com muitas mesas.',
+      'Disponível em cores diferentes para acompanhar a identidade do evento ou da marca.'
+    ],
+    imagens: [
+      { src: 'uploads/COVERS HIGH TABLE.jpg', tag: 'AMBIENTADA', alt: 'Capas de spandex vestindo mesas de coquetel' },
+      { placeholder: 'FOTO · CAPA PRETA · ISOLADA · 4:3', tag: 'ISOLADA', alt: 'Capa preta isolada' },
+      { placeholder: 'FOTO · CAPA BRANCA · ISOLADA · 4:3', tag: 'ISOLADA', alt: 'Capa branca isolada' },
+      { placeholder: 'FOTO · DETALHE DO CAIMENTO · 4:3', tag: 'DETALHE', alt: 'Detalhe do caimento do tecido' }
+    ],
+    cores: ['Preto', 'Branco', 'Bege', 'Azul-marinho', 'Bordô'],
+    corObrigatoria: true,
+    caracTitulo: 'Características',
+    caracteristicas: ['Tecido spandex elástico', 'Caimento ajustado ao tampo e à base', 'Para mesa alta, bistrô e coquetel', 'Costura reforçada', 'Lavável', 'Volta ao formato após lavagem', 'Cores sob disponibilidade', 'Uso interno e externo'],
+    ficha: [
+      { k: 'MATERIAL', v: 'SPANDEX' },
+      { k: 'FORMATO', v: 'AJUSTADO' },
+      { k: 'MESA COMPATÍVEL', v: '23"–32"' },
+      { k: 'CORES CADASTRADAS', v: '5' },
+      { k: 'LAVÁVEL', v: 'SIM' },
+      { k: 'AMBIENTE', v: 'INT. / EXT.' }
+    ],
+    fichaTitulo: 'Medidas e material',
+    aplicacoes: ['Coquetéis', 'Recepções', 'Eventos corporativos', 'Casamentos', 'Feiras', 'Ativações de marca', 'Festas', 'Buffets'],
+    informacoes: [
+      'As cores e quantidades disponíveis serão confirmadas após a análise da solicitação.',
+      'A capa é vendida separadamente da mesa.',
+      'Para grandes quantidades da mesma cor, confirme com a equipe antes de fechar a produção do evento.',
+      'Entrega, montagem, desmontagem e retirada podem ser incluídas na proposta.'
+    ],
+    avisoPrincipal: 'A disponibilidade da cor escolhida e o valor serão confirmados pela equipe após a análise da solicitação.',
+    avisoExtra: 'A mesa não está incluída automaticamente. Caso precise da mesa, ela deverá ser solicitada separadamente.',
+    temQuantidade: true,
+    btnAdicionar: 'ADICIONAR AO ORÇAMENTO',
+    juntos: [
+      { nome: 'Mesa Alta Redonda de Alumínio', foto: 'uploads/HIGH TABLE ALUMINIUM 2.webp' },
+      { nome: 'Capa Preta para Mesa Retangular de 6 Pés', foto: 'uploads/COVERS TABLE BUFFET.jpg' },
+      { nome: 'Iluminação', placeholder: 'FOTO · ILUMINAÇÃO DE AMBIENTE · 4:3' },
+      { nome: 'Banquetas', placeholder: 'FOTO · BANQUETA ALTA · ISOLADA · 4:3' },
+      { nome: 'Bar portátil', placeholder: 'FOTO · BAR PORTÁTIL · ISOLADA · 4:3' }
+    ],
+    relacionados: [
+      { nome: 'Mesa Alta Redonda de Alumínio', cat: 'MÓVEIS', foto: 'uploads/HIGH TABLE ALUMINIUM 2.webp' },
+      { nome: 'Capa Preta para Mesa Retangular de 6 Pés', cat: 'MÓVEIS', foto: 'uploads/COVERS TABLE BUFFET.jpg' },
+      { nome: 'Mesa Bistrô Preta com Tampo Redondo', cat: 'MÓVEIS', placeholder: 'FOTO · MESA BISTRÔ · ISOLADA · 4:3' },
+      { nome: 'Guarda-sol Externo Bege de 10 Pés', cat: 'ÁREA EXTERNA', foto: 'uploads/UMBRELLA4.jpg' }
+    ],
+    faq: [
+      { q: 'A mesa vem junto com a capa?', a: 'Não. A mesa é um item separado do catálogo e precisa ser adicionada ao orçamento por conta própria.' },
+      { q: 'A cor que eu escolher está garantida?', a: 'A seleção registra sua preferência na solicitação. As cores e quantidades disponíveis são confirmadas pela equipe conforme a data do evento.' },
+      { q: 'Serve em qualquer mesa alta?', a: 'A capa atende mesas com tampo entre 23 e 32 polegadas. Se a sua mesa é de outro modelo, informe as medidas na solicitação.' },
+      { q: 'Posso pedir uma cor que não está na lista?', a: 'Descreva a cor desejada no campo de observações do orçamento. A equipe verifica a disponibilidade e responde na proposta.' }
+    ]
+  },
+
+  'led': {
+    slug: 'led', rotulo: 'Serviço configurável',
+    titulo: 'Locação de Painel de LED na Flórida',
+    tituloMono: 'LOCAÇÃO DE PAINEL DE LED',
+    categoria: 'Telas de LED', categoriaMono: 'TELAS DE LED',
+    codigo: 'AMR-LED-LOC-FL',
+    url: '/pt/telas-de-led/locacao-tela-led-florida/',
+    descCurta: 'Leve mais impacto e tecnologia para seu evento com soluções profissionais em painéis de LED.',
+    descCompleta: [
+      'Leve mais impacto e tecnologia para seu evento com soluções profissionais em painéis de LED.',
+      'A All Music Rentals oferece configurações para aniversários, casamentos, eventos corporativos, apresentações, festivais, shows e produções de diferentes tamanhos.',
+      'Nossa equipe analisa o local, a distância de visualização, o tamanho necessário, a estrutura, o conteúdo e o suporte técnico antes de preparar a proposta.'
+    ],
+    notaResolucao: 'A resolução final depende do tamanho completo da tela, da quantidade de painéis, da configuração e do processador de vídeo utilizado.',
+    imagens: [
+      { src: 'uploads/LED SCREEN 5.jpg', tag: 'AMBIENTADA', alt: 'Tela de LED montada em palco' },
+      { src: 'uploads/LED SCRRENN 2.jpg', tag: 'AMBIENTADA', alt: 'Tela de LED de grande formato em evento externo' },
+      { src: 'uploads/LED SCREEN 3-e4d7e4d4.jpg', tag: 'AMBIENTADA', alt: 'Palco com tela de LED e iluminação cênica' },
+      { src: 'uploads/LED SCREEN 4.jpg', tag: 'DETALHE', alt: 'Detalhe dos módulos da tela' }
+    ],
+    caracTitulo: 'Informações técnicas',
+    caracteristicas: ['Painéis P1.9mm', 'Painéis P3.9mm', 'Tamanhos personalizados', 'Instalação profissional', 'Suporte técnico disponível', 'Configuração interna ou externa', 'Compatibilidade com conteúdo em alta resolução', 'Estrutura analisada de acordo com o local'],
+    ficha: [
+      { k: 'PIXEL PITCH', v: 'P1.9 / P3.9' },
+      { k: 'MÓDULO P1.9', v: '500×500 MM' },
+      { k: 'MÓDULO P3.9', v: '500×1000 MM' },
+      { k: 'TAMANHO', v: 'SOB MEDIDA' },
+      { k: 'AMBIENTE', v: 'INT. / EXT.' },
+      { k: 'ESTRUTURA', v: 'ANALISADA' },
+      { k: 'OPERADOR', v: 'OPCIONAL' },
+      { k: 'RESOLUÇÃO', v: 'POR CONFIG.' }
+    ],
+    fichaTitulo: 'Especificação técnica',
+    aplicacoes: ['Aniversários', 'Casamentos', 'Eventos corporativos', 'Apresentações', 'Festivais', 'Shows', 'Ativações de marca', 'Transmissões ao vivo'],
+    informacoes: [
+      'O tamanho, a configuração, a instalação, a disponibilidade e o valor serão definidos após análise técnica.',
+      'A estrutura de sustentação é dimensionada conforme a área da tela e é orçada separadamente.',
+      'Para uso em área externa, a configuração de brilho e a proteção contra intempéries são avaliadas pela equipe.',
+      'O conteúdo a ser exibido deve ser enviado com antecedência para teste antes do evento.'
+    ],
+    avisoPrincipal: 'O tamanho, a configuração, a instalação, a disponibilidade e o valor serão definidos após análise técnica.',
+    configurador: true,
+    btnAdicionar: 'ADICIONAR PAINEL AO ORÇAMENTO',
+    juntos: [
+      { nome: 'Ground support para tela de LED', foto: 'uploads/LED SCRRENN 2.jpg' },
+      { nome: 'Operador técnico', placeholder: 'FOTO · OPERADOR EM MESA DE VÍDEO · 4:3' },
+      { nome: 'Processador de vídeo', placeholder: 'FOTO · PROCESSADOR DE VÍDEO · ISOLADA · 4:3' },
+      { nome: 'Palco modular', placeholder: 'FOTO · PALCO MODULAR · AMBIENTADA · 4:3' },
+      { nome: 'Iluminação de palco', placeholder: 'FOTO · ILUMINAÇÃO DE PALCO · 4:3' }
+    ],
+    relacionados: [
+      { nome: 'Tela de LED P1.9mm', cat: 'TELAS DE LED', foto: 'uploads/LED SCREEN 5.jpg' },
+      { nome: 'Tela de LED P3.9mm', cat: 'TELAS DE LED', foto: 'uploads/LED SCREEN 3-e4d7e4d4.jpg' },
+      { nome: 'Ground Support para Tela de LED', cat: 'ESTRUTURAS', foto: 'uploads/LED SCRRENN 2.jpg' },
+      { nome: 'Transmissão ao Vivo com Exibição na Tela', cat: 'TELAS DE LED', placeholder: 'FOTO · CÂMERA E SWITCHER · 4:3' }
+    ],
+    faq: [
+      { q: 'Preciso saber o tamanho da tela para pedir orçamento?', a: 'Não. Escolha "Ainda não sei" no configurador e informe o local e a distância do público. A equipe dimensiona a tela e apresenta as opções na proposta.' },
+      { q: 'Qual a diferença entre P1.9 e P3.9?', a: 'É a distância entre os pontos de luz. O P1.9 permite público mais próximo com imagem limpa; o P3.9 atende plateias mais distantes com área de tela maior pelo mesmo investimento.' },
+      { q: 'A instalação está incluída?', a: 'A instalação profissional pode ser incluída na proposta. Indique no configurador como a tela será apoiada para que a equipe dimensione a montagem.' },
+      { q: 'Preciso contratar operador?', a: 'Para conteúdo em loop, nem sempre. Para troca de fontes, apresentação ao vivo ou câmera, o operador é recomendado. Marque "Não tenho certeza" e a equipe orienta.' },
+      { q: 'Em que formato envio o conteúdo?', a: 'Vídeo e apresentação são compatíveis. A resolução exata depende da composição final de painéis e é informada depois de fechada a configuração.' }
+    ]
+  }
+};
+
+const ORDEM = ['mesa-alta', 'capa-spandex', 'led'];
+
+const CONFIG_BLOCOS = [
+  { id: 'ambiente', rotulo: 'Ambiente', opcoes: ['Interno', 'Externo'] },
+  { id: 'instalacao', rotulo: 'Instalação', opcoes: ['Em palco', 'Apoiada no chão', 'Em estrutura existente', 'Ainda não sei'] },
+  { id: 'conteudo', rotulo: 'Tipo de conteúdo', multi: true, ajuda: 'Marque quantos precisar.', opcoes: ['Apresentação', 'Vídeo', 'Fotografias', 'Transmissão ao vivo', 'Conteúdo de patrocinadores', 'Outro'] },
+  { id: 'suporte', rotulo: 'Suporte técnico', opcoes: ['Preciso de operador', 'Não tenho certeza', 'Não preciso'] }
+];
+
+class Component extends DCLogic {
+  state = {
+    prod: 'mesa-alta', count: 0, qty: 1, img: 0, cor: null, corErro: false,
+    toast: null, menu: false, mobile: false, vw: 1440, faqAberta: 0,
+    zoom: false, zx: 50, zy: 50,
+    cfg: {}, largura: '', altura: '', semMedida: false, obs: ''
+  };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const m = window.innerWidth < 1080;
+      this.setState({ vw: window.innerWidth });
+      if (m !== this.state.mobile) this.setState({ mobile: m, menu: false });
+    };
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._t) clearTimeout(this._t);
+  }
+
+  p() { return PRODUTOS[this.props.produto ?? this.state.prod] || PRODUTOS['mesa-alta']; }
+
+  troca(slug) {
+    this.setState({ prod: slug, img: 0, cor: null, corErro: false, qty: 1, faqAberta: 0, zoom: false, cfg: {}, largura: '', altura: '', semMedida: false, obs: '' });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  trocador() {
+    const atual = this.p().slug;
+    return ORDEM.map(s => {
+      const p = PRODUTOS[s];
+      const on = s === atual;
+      return React.createElement('button', {
+        key: s, type: 'button', onClick: () => this.troca(s),
+        style: {
+          display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: '34px', padding: '0 12px',
+          border: '1px solid ' + (on ? '#2FB6B9' : '#3A3E40'), background: on ? '#2FB6B9' : 'transparent',
+          color: on ? '#0B0C0D' : '#C7CACB', borderRadius: '2px', cursor: 'pointer', font: "500 13px/1 'Public Sans',sans-serif"
+        }
+      },
+        p.rotulo,
+        React.createElement('span', { style: { font: "400 11px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: on ? 'rgba(11,12,13,0.6)' : '#6B7072' } }, p.categoriaMono)
+      );
+    });
+  }
+
+  setCfg(id, valor, multi) {
+    this.setState(s => {
+      if (multi) {
+        const cur = s.cfg[id] || [];
+        const next = cur.indexOf(valor) >= 0 ? cur.filter(v => v !== valor) : cur.concat([valor]);
+        return { cfg: Object.assign({}, s.cfg, { [id]: next }) };
+      }
+      return { cfg: Object.assign({}, s.cfg, { [id]: s.cfg[id] === valor ? null : valor }) };
+    });
+  }
+
+  blocosConfig() {
+    return CONFIG_BLOCOS.map(b => {
+      const val = this.state.cfg[b.id];
+      return React.createElement('fieldset', { key: b.id, style: { margin: 0, padding: 0, border: 0 } },
+        React.createElement('legend', { style: { padding: 0, margin: '0 0 ' + (b.ajuda ? '6px' : '12px'), font: "500 17px/1.3 'Public Sans',sans-serif" } }, b.rotulo),
+        b.ajuda ? React.createElement('p', { style: { margin: '0 0 12px', font: "400 13px/1.5 'Public Sans',sans-serif", color: '#6B7072' } }, b.ajuda) : null,
+        React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '8px' } },
+          b.opcoes.map(o => {
+            const on = b.multi ? (val || []).indexOf(o) >= 0 : val === o;
+            const incerto = o === 'Ainda não sei' || o === 'Não tenho certeza';
+            return React.createElement('button', {
+              key: o, type: 'button', onClick: () => this.setCfg(b.id, o, b.multi), 'aria-pressed': on ? 'true' : 'false',
+              style: {
+                minHeight: '48px', padding: '0 16px', borderRadius: '2px', cursor: 'pointer',
+                border: '1px solid ' + (on ? '#0B0C0D' : '#C9CBCC'),
+                background: on ? '#0B0C0D' : '#FFFFFF',
+                color: on ? '#F1F2F2' : (incerto ? '#2A2D2F' : '#4A4E50'),
+                font: (incerto ? '500' : '400') + " 15px/1 'Public Sans',sans-serif"
+              }
+            }, o);
+          })
+        )
+      );
+    });
+  }
+
+  descCompleta() {
+    return React.createElement('div', { style: { display: 'grid', gap: '16px' } },
+      this.p().descCompleta.map((t, i) => React.createElement('p', {
+        key: i, style: { margin: 0, font: "400 17px/1.6 'Public Sans',sans-serif", color: '#2A2D2F', maxWidth: '64ch" '.trim().replace('"', '') }
+      }, t))
+    );
+  }
+
+  faq() {
+    return this.p().faq.map((it, i) => {
+      const aberta = this.state.faqAberta === i;
+      return React.createElement('div', { key: i, style: { borderBottom: '1px solid #C9CBCC' } },
+        React.createElement('button', {
+          type: 'button', onClick: () => this.setState(s => ({ faqAberta: s.faqAberta === i ? -1 : i })),
+          'aria-expanded': aberta ? 'true' : 'false',
+          style: { width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '20px', minHeight: '64px', padding: '18px 0', border: 0, background: 'transparent', cursor: 'pointer', textAlign: 'left', color: '#0B0C0D' }
+        },
+          React.createElement('span', { style: { font: "500 17px/1.4 'Public Sans',sans-serif" } }, it.q),
+          React.createElement('span', { 'aria-hidden': 'true', style: { flex: 'none', font: "400 17px 'IBM Plex Mono',monospace", color: '#1A7F82' } }, aberta ? '–' : '+')
+        ),
+        aberta ? React.createElement('p', { style: { margin: '0 0 22px', paddingRight: '40px', font: "400 15px/1.6 'Public Sans',sans-serif", color: '#4A4E50', maxWidth: '62ch' } }, it.a) : null
+      );
+    });
+  }
+
+  add() {
+    const p = this.p();
+    if (p.corObrigatoria && !this.state.cor) {
+      this.setState({ corErro: true });
+      return;
+    }
+    const q = p.configurador ? 1 : this.state.qty;
+    let detalhe = p.tituloMono;
+    if (this.state.cor) detalhe += ' · ' + this.state.cor.toUpperCase();
+    if (p.configurador) {
+      detalhe += this.state.semMedida ? ' · MEDIDA A DEFINIR' : (this.state.largura && this.state.altura ? ' · ' + this.state.largura + ' × ' + this.state.altura + ' M' : ' · CONFIGURAÇÃO ENVIADA');
+    } else {
+      detalhe += ' · QTD ' + q;
+    }
+    this.setState(s => ({ count: s.count + q, toast: detalhe, corErro: false }));
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+
+  addJunto(nome) {
+    this.setState(s => ({ count: s.count + 1, toast: nome.toUpperCase() + ' · QTD 1' }));
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+
+  renderVals() {
+    const p = this.p();
+    const mobile = this.state.mobile;
+    const vw = this.state.vw;
+    const img = p.imagens[Math.min(this.state.img, p.imagens.length - 1)];
+    const n = this.state.count;
+    const zoomAtivo = this.state.zoom && !!img.src;
+
+    return {
+      count: n,
+      topbarDisplay: mobile ? 'none' : 'block',
+      deskDisplay: mobile ? 'none' : 'flex',
+      mobDisplay: mobile ? 'flex' : 'none',
+      menuDisplay: mobile && this.state.menu ? 'block' : 'none',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      trocador: this.trocador(),
+
+      titulo: p.titulo, tituloMono: p.tituloMono,
+      categoriaMono: p.categoriaMono, codigo: p.codigo, url: p.url,
+      descCurta: p.descCurta, descCompleta: this.descCompleta(),
+      caracTitulo: p.caracTitulo,
+      caracteristicas: p.caracteristicas.map((t, i) => ({ n: String(i + 1).padStart(2, '0'), t: t })),
+      ficha: p.ficha, fichaTitulo: p.fichaTitulo,
+      aplicacoes: p.aplicacoes, informacoes: p.informacoes,
+      avisoPrincipal: p.avisoPrincipal,
+      temAvisoExtra: !!p.avisoExtra, avisoExtra: p.avisoExtra || '',
+      temNotaResolucao: !!p.notaResolucao, notaResolucao: p.notaResolucao || '',
+      btnAdicionar: p.btnAdicionar,
+      faq: this.faq(),
+
+      imgBg: img.src ? "url('" + img.src + "')" : 'none',
+      imgTemFoto: !!img.src, imgSemFoto: !img.src,
+      imgPlaceholder: img.placeholder || '', imgRotulo: img.tag, imgAlt: img.alt,
+      miniaturas: p.imagens.map((m, i) => ({
+        alt: m.alt, tag: m.tag, ativa: i === this.state.img ? 'true' : 'false',
+        temFoto: !!m.src, semFoto: !m.src,
+        bg: m.src ? "url('" + m.src + "')" : 'none',
+        borda: '1px solid ' + (i === this.state.img ? '#0B0C0D' : '#C9CBCC'),
+        onPick: () => this.setState({ img: i, zoom: false })
+      })),
+      zoomOn: () => this.setState({ zoom: true }),
+      zoomOff: () => this.setState({ zoom: false, zx: 50, zy: 50 }),
+      zoomMove: e => {
+        const r = e.currentTarget.getBoundingClientRect();
+        this.setState({ zx: ((e.clientX - r.left) / r.width) * 100, zy: ((e.clientY - r.top) / r.height) * 100 });
+      },
+      zoomEscala: zoomAtivo ? 2 : 1,
+      zoomPos: zoomAtivo ? this.state.zx + '% ' + this.state.zy + '%' : 'center',
+      zoomCursor: img.src ? 'zoom-in' : 'default',
+      zoomDicaDisplay: img.src && !this.state.zoom && !mobile ? 'block' : 'none',
+
+      temCores: !!p.cores,
+      cores: (p.cores || []).map(c => ({
+        nome: c, hex: HEX[c], ativa: this.state.cor === c ? 'true' : 'false',
+        borda: '1px solid ' + (this.state.cor === c ? '#0B0C0D' : (this.state.corErro ? '#8C2A2A' : '#C9CBCC')),
+        swatchBorda: '1px solid ' + (c === 'Branco' ? '#C9CBCC' : 'rgba(11,12,13,0.25)'),
+        anel: this.state.cor === c ? '0 0 0 2px #2FB6B9' : 'none',
+        onPick: () => this.setState({ cor: c, corErro: false })
+      })),
+      corErro: this.state.corErro,
+      corBorda: this.state.corErro ? '#8C2A2A' : '#C9CBCC',
+      corEstado: this.state.cor ? this.state.cor.toUpperCase() : 'OBRIGATÓRIO',
+
+      ehConfiguravel: !!p.configurador,
+      blocosConfig: this.blocosConfig(),
+      largura: this.state.largura, altura: this.state.altura,
+      onLargura: e => this.setState({ largura: e.target.value }),
+      onAltura: e => this.setState({ altura: e.target.value }),
+      semMedida: this.state.semMedida,
+      semMedidaAria: this.state.semMedida ? 'true' : 'false',
+      semMedidaBorda: '1px solid ' + (this.state.semMedida ? '#0B0C0D' : '#C9CBCC'),
+      semMedidaFundo: this.state.semMedida ? '#0B0C0D' : '#FFFFFF',
+      semMedidaCor: this.state.semMedida ? '#F1F2F2' : '#2A2D2F',
+      medidaBorda: this.state.semMedida ? '#E4E6E6' : '#C9CBCC',
+      medidaFundo: this.state.semMedida ? '#F1F2F2' : '#FFFFFF',
+      toggleSemMedida: () => this.setState(s => ({ semMedida: !s.semMedida })),
+      obs: this.state.obs,
+      onObs: e => this.setState({ obs: e.target.value }),
+
+      temQuantidade: !p.configurador,
+      qty: this.state.qty,
+      onDec: () => this.setState(s => ({ qty: Math.max(1, s.qty - 1) })),
+      onInc: () => this.setState(s => ({ qty: s.qty + 1 })),
+      onQty: e => {
+        const v = parseInt(String(e.target.value).replace(/\D/g, ''), 10);
+        this.setState({ qty: isNaN(v) || v < 1 ? 1 : v });
+      },
+      onAdd: () => this.add(),
+
+      juntos: p.juntos.map(j => ({
+        nome: j.nome, temFoto: !!j.foto, semFoto: !j.foto,
+        bg: j.foto ? "url('" + j.foto + "')" : 'none',
+        placeholder: j.placeholder || '', btn: 'ADICIONAR',
+        onAdd: () => this.addJunto(j.nome)
+      })),
+      relacionados: p.relacionados.map(r => ({
+        nome: r.nome, cat: r.cat, temFoto: !!r.foto, semFoto: !r.foto,
+        bg: r.foto ? "url('" + r.foto + "')" : 'none',
+        placeholder: r.placeholder || ''
+      })),
+
+      colsPrincipais: vw < 900 ? '1fr' : 'minmax(0,1fr) minmax(0,1fr)',
+      colsDetalhe: vw < 900 ? '1fr' : 'minmax(0,1.5fr) minmax(280px,0.7fr)',
+      asidePos: vw < 900 ? 'static' : 'sticky',
+      gridCarac: vw < 700 ? '1fr' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(3,1fr)',
+      gridJunto: vw < 700 ? 'repeat(2,1fr)' : vw < 1100 ? 'repeat(3,1fr)' : 'repeat(5,1fr)',
+      gridRelac: vw < 700 ? 'repeat(2,1fr)' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(4,1fr)',
+      gridFaq: vw < 900 ? '1fr' : 'minmax(0,0.8fr) minmax(0,1.4fr)',
+      gridCta: vw < 900 ? '1fr' : 'minmax(0,1.2fr) auto',
+
+      barraTitulo: n === 0 ? 'Seu orçamento está vazio' : n === 1 ? '1 item no seu orçamento' : n + ' itens no seu orçamento',
+      barraSub: n === 0 ? 'Adicione produtos para solicitar uma proposta.' : 'Os produtos não ficam reservados. A disponibilidade será confirmada pela equipe.',
+
+      toastAberto: !!this.state.toast,
+      toastItem: this.state.toast,
+      fecharToast: () => this.setState({ toast: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

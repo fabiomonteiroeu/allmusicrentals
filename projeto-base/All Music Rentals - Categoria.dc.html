@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F1F2F2;color:#0B0C0D;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#1A7F82;text-decoration:none}
+a:hover{color:#0B0C0D}
+input,select,button,textarea{font-family:inherit}
+@keyframes amrToast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:hidden;padding-bottom:88px">
+
+<div style="display:{{ topbarDisplay }};background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:8px 20px;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between">
+    <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#9EA3A5">Locação Premium e Soluções em Painéis de LED para Eventos na Flórida</p>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font:500 13px/1.4 'Public Sans',sans-serif">
+      <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">(689) 242-1871</a>
+      <span style="color:#3A3E40">·</span>
+      <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">contato@allmusicbr.com</a>
+      <span style="color:#3A3E40">·</span>
+      <div style="display:flex;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.06em">
+        <a href="#en" style="color:#9EA3A5" style-hover="color:#2FB6B9">EN</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#pt" style="color:#2FB6B9;font-weight:500">PT</a>
+        <span style="color:#3A3E40">|</span>
+        <a href="#es" style="color:#9EA3A5" style-hover="color:#2FB6B9">ES</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<header style="position:sticky;top:0;z-index:40;background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px">
+    <a href="#inicio" aria-label="All Music Rentals — início" style="display:flex;align-items:center;flex:none" style-focus="outline:2px solid #2FB6B9;outline-offset:4px">
+      <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:38px;width:auto">
+    </a>
+    <div style="flex:1;display:{{ deskDisplay }};align-items:center;gap:20px;min-width:0">
+      <nav style="flex:1;display:flex;flex-wrap:wrap;gap:4px 16px;font:500 15px/1.2 'Public Sans',sans-serif">
+        <a href="#inicio" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Início</a>
+        {{ navPrincipal }}
+        <a href="#sobre" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Sobre Nós</a>
+        <a href="#contato" style="color:#C7CACB;padding:4px 0;border-bottom:2px solid transparent" style-hover="color:#F1F2F2;border-bottom-color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">Contato</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:14px;flex:none">
+        <a href="#orcamento" aria-label="Carrinho de orçamento" style="display:flex;align-items:center;gap:8px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;border:1px solid #3A3E40;padding:8px 10px" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+          ORÇAMENTO
+          <span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font-weight:500;padding:0 5px">{{ count }}</span>
+        </a>
+        <a href="#solicitar" style="background:#2FB6B9;color:#0B0C0D;padding:11px 16px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;letter-spacing:-0.01em;white-space:nowrap" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+    <div style="flex:1;display:{{ mobDisplay }};justify-content:flex-end;align-items:center;gap:10px">
+      <a href="#orcamento" aria-label="Carrinho de orçamento" style="position:relative;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:16px;height:13px;border:2px solid currentColor;border-top:0"></span>
+        <span style="position:absolute;top:-6px;right:-6px;min-width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 12px 'IBM Plex Mono',monospace;border-radius:2px">{{ count }}</span>
+      </a>
+      <button type="button" onClick="{{ toggleMenu }}" aria-label="Abrir menu" style="width:44px;height:44px;display:flex;flex-direction:column;justify-content:center;gap:4px;align-items:center;background:transparent;border:1px solid #3A3E40;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+        <span style="display:block;width:18px;height:2px;background:#F1F2F2"></span>
+      </button>
+    </div>
+  </div>
+  <div style="display:{{ menuDisplay }};background:#1C1E20;border-top:1px solid #3A3E40;box-shadow:0 6px 0 rgba(11,12,13,0.35);padding:16px 20px 24px">
+    {{ navMobile }}
+    <a href="#solicitar" style="display:block;text-align:center;margin-top:16px;background:#2FB6B9;color:#0B0C0D;padding:15px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px">SOLICITAR ORÇAMENTO</a>
+    <div style="margin-top:24px;padding-top:20px;border-top:1px solid #3A3E40;display:grid;gap:16px">
+      <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">CONTATO</p>
+      <div style="display:grid;gap:2px">
+        <a href="tel:+16892421871" style="display:flex;align-items:center;min-height:44px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:17px;border-bottom:1px solid #3A3E40">(689) 242-1871</a>
+        <a href="mailto:contato@allmusicbr.com" style="display:flex;align-items:center;min-height:44px;color:#F1F2F2;font:400 17px 'Public Sans',sans-serif;border-bottom:1px solid #3A3E40">contato@allmusicbr.com</a>
+        <a href="#contato" style="display:flex;align-items:center;min-height:44px;color:#F1F2F2;font:500 17px 'Public Sans',sans-serif">Contato</a>
+      </div>
+      <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">IDIOMA</p>
+      <div style="display:flex;gap:8px">
+        <a href="#en" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;border-radius:2px;color:#C7CACB;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em">EN</a>
+        <a href="#pt" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #2FB6B9;background:#2FB6B9;border-radius:2px;color:#0B0C0D;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:13px;letter-spacing:0.06em">PT</a>
+        <a href="#es" style="flex:1;min-height:44px;display:flex;align-items:center;justify-content:center;border:1px solid #3A3E40;border-radius:2px;color:#C7CACB;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em">ES</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div style="background:#1C1E20;border-bottom:1px solid #3A3E40">
+  <div style="max-width:1280px;margin:0 auto;padding:10px 20px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center">
+    <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">MODELO APLICADO A</span>
+    <div style="display:flex;flex-wrap:wrap;gap:8px">{{ trocador }}</div>
+  </div>
+</div>
+
+<section style="position:relative;background:#0B0C0D;color:#F1F2F2;overflow:hidden">
+  <div style="position:absolute;inset:0">
+    <div role="img" aria-label="{{ heroAlt }}" style="position:absolute;inset:0;background-image:{{ heroBg }};background-size:cover;background-position:center"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,12,13,0.97) 0%,rgba(11,12,13,0.90) 40%,rgba(11,12,13,0.66) 64%,rgba(11,12,13,0.28) 100%)"></div>
+  </div>
+  <div style="position:relative;max-width:1280px;margin:0 auto;padding:0 20px">
+    <nav aria-label="Trilha de navegação" style="padding-top:24px;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">
+      <a href="#inicio" style="color:#9EA3A5" style-hover="color:#2FB6B9">INÍCIO</a>
+      <span style="padding:0 8px">/</span>
+      <a href="#catalogo" style="color:#9EA3A5" style-hover="color:#2FB6B9">CATÁLOGO</a>
+      <span style="padding:0 8px">/</span>
+      <span style="color:#F1F2F2">{{ tituloMono }}</span>
+    </nav>
+    <div style="padding:clamp(40px,6vw,96px) 0 clamp(40px,5vw,72px);max-width:660px">
+      <p style="margin:0 0 20px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">{{ eyebrow }}</p>
+      <h1 style="margin:0 0 24px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5.6vw,72px);line-height:0.92;text-wrap:balance">{{ titulo }}</h1>
+      <p style="margin:0 0 32px;font:400 clamp(16px,1.2vw,17px)/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:54ch">{{ descricao }}</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#produtos" style="background:#2FB6B9;color:#0B0C0D;padding:16px 24px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">VER PRODUTOS</a>
+        <a href="#solicitar" style="border:1px solid #F1F2F2;color:#F1F2F2;padding:16px 24px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+</section>
+
+<section style="background:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;justify-content:space-between;margin-bottom:24px">
+      <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.4vw,44px);line-height:0.98">{{ subTitulo }}</h2>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">{{ subContagem }}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:{{ gridSub }};gap:1px;background:#C9CBCC;border:1px solid #C9CBCC">{{ subcategorias }}</div>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+</section>
+
+<sc-if value="{{ ehLed }}" hint-placeholder-val="{{ false }}">
+  <section id="comparativo" style="background:#0B0C0D;color:#F1F2F2">
+    <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,144px) 20px">
+      <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">ESCOLHA DA TELA</p>
+      <h2 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.8vw,44px);line-height:0.98">P1.9 ou P3.9: qual tela o seu evento pede</h2>
+      <p style="margin:0 0 12px;font:400 17px/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:62ch">A tela de LED é formada por módulos cobertos de pontos de luz. A medida em milímetros é a distância entre o centro de dois pontos vizinhos — a especificação técnica chama isso de <em style="font-style:normal;font-family:'IBM Plex Mono',monospace;font-size:15px;color:#2FB6B9">pixel pitch</em>.</p>
+      <p style="margin:0 0 40px;font:400 17px/1.55 'Public Sans',sans-serif;color:#9EA3A5;max-width:62ch">Quanto menor esse número, mais pontos cabem no mesmo metro e mais perto o público pode ficar sem enxergar os pontos separados. Não existe tela melhor: existe a tela certa para a distância do seu público.</p>
+
+      <div style="display:grid;grid-template-columns:{{ gridDois }};gap:24px;margin-bottom:24px">
+        <div style="border:1px solid #2FB6B9;background:#1C1E20;border-radius:2px;overflow:hidden">
+          <div style="padding:24px;border-bottom:1px solid #3A3E40">
+            <p style="margin:0 0 8px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">PIXEL PITCH</p>
+            <p style="margin:0 0 10px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:52px;line-height:1">P1.9<span style="font-size:26px">mm</span></p>
+            <p style="margin:0;font:400 17px/1.5 'Public Sans',sans-serif;color:#DDE0E0">Indicado para ambientes em que o público ficará mais próximo da tela e será necessária maior definição de imagem.</p>
+          </div>
+          <div style="height:120px;background-color:#0B0C0D;background-image:radial-gradient(#2FB6B9 32%,transparent 33%);background-size:7px 7px" aria-hidden="true"></div>
+          <div style="padding:14px 24px;border-top:1px solid #3A3E40;display:flex;justify-content:space-between;gap:12px;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#9EA3A5">
+            <span>DENSIDADE DE PONTOS</span><span style="color:#2FB6B9">ALTA</span>
+          </div>
+        </div>
+        <div style="border:1px solid #3A3E40;background:#1C1E20;border-radius:2px;overflow:hidden">
+          <div style="padding:24px;border-bottom:1px solid #3A3E40">
+            <p style="margin:0 0 8px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#9EA3A5">PIXEL PITCH</p>
+            <p style="margin:0 0 10px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:52px;line-height:1">P3.9<span style="font-size:26px">mm</span></p>
+            <p style="margin:0;font:400 17px/1.5 'Public Sans',sans-serif;color:#DDE0E0">Indicado para palcos, shows, festivais, eventos corporativos e ambientes com maior distância de visualização.</p>
+          </div>
+          <div style="height:120px;background-color:#0B0C0D;background-image:radial-gradient(#2FB6B9 32%,transparent 33%);background-size:15px 15px" aria-hidden="true"></div>
+          <div style="padding:14px 24px;border-top:1px solid #3A3E40;display:flex;justify-content:space-between;gap:12px;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#9EA3A5">
+            <span>DENSIDADE DE PONTOS</span><span style="color:#F1F2F2">MÉDIA</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid #3A3E40;background:#1C1E20;border-radius:2px;padding:24px;margin-bottom:24px">
+        <p style="margin:0 0 6px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9">REGRA PRÁTICA</p>
+        <p style="margin:0 0 24px;font:400 17px/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:62ch">A distância mínima confortável de visualização, em metros, é próxima do número do pitch. Quem estiver mais perto do que isso começa a distinguir os pontos.</p>
+        <div style="position:relative;height:2px;background:#3A3E40;margin:0 0 24px">
+          <div style="position:absolute;left:0;top:-7px;bottom:-7px;width:2px;background:#2FB6B9"></div>
+          <div style="position:absolute;left:19%;top:-7px;bottom:-7px;width:2px;background:#2FB6B9"></div>
+          <div style="position:absolute;left:39%;top:-7px;bottom:-7px;width:2px;background:#F1F2F2"></div>
+          <div style="position:absolute;right:0;top:-7px;bottom:-7px;width:2px;background:#3A3E40"></div>
+          <p style="position:absolute;left:0;top:14px;margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">0 M</p>
+          <p style="position:absolute;right:0;top:14px;margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">10 M</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 24px;margin:0 0 24px;padding-top:20px">
+          <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1.4 'IBM Plex Mono',monospace;color:#2FB6B9"><span style="display:block;width:2px;height:14px;background:#2FB6B9"></span>1,9 M · P1.9</span>
+          <span style="display:inline-flex;align-items:center;gap:8px;font:500 13px/1.4 'IBM Plex Mono',monospace;color:#F1F2F2"><span style="display:block;width:2px;height:14px;background:#F1F2F2"></span>3,9 M · P3.9</span>
+        </div>
+        <div style="display:grid;grid-template-columns:{{ gridDois }};gap:16px">
+          <p style="margin:0;padding-left:14px;border-left:2px solid #2FB6B9;font:400 15px/1.5 'Public Sans',sans-serif;color:#C7CACB">Público a menos de 2 metros: mesa de recepção, backdrop de fotos, estande de feira, altar de casamento.</p>
+          <p style="margin:0;padding-left:14px;border-left:2px solid #3A3E40;font:400 15px/1.5 'Public Sans',sans-serif;color:#C7CACB">Público a mais de 4 metros: palco de show, plateia sentada, telão de festival, área aberta.</p>
+        </div>
+      </div>
+
+      <div style="border:1px solid #3A3E40;border-radius:2px;overflow:hidden">
+        {{ tabelaComparativa }}
+      </div>
+
+      <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+        <a href="#solicitar" style="background:#2FB6B9;color:#0B0C0D;padding:17px 26px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">NÃO SEI QUAL ESCOLHER — QUERO AJUDA</a>
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:44ch">Informe o local, a distância do público e o tipo de conteúdo. A equipe indica a configuração.</p>
+      </div>
+    </div>
+    <div style="height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+  </section>
+</sc-if>
+
+<section id="produtos" style="background:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,96px) 20px">
+    <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;justify-content:space-between;margin-bottom:24px">
+      <div>
+        <p style="margin:0 0 12px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">CATÁLOGO DA CATEGORIA</p>
+        <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.4vw,44px);line-height:0.98">{{ produtosTitulo }}</h2>
+      </div>
+      <label style="display:flex;align-items:center;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif;color:#4A4E50">Ordenar por
+        <select onChange="{{ onOrdenar }}" value="{{ ordem }}" style="min-height:44px;border:1px solid #C9CBCC;border-radius:2px;background:#FFFFFF;padding:0 12px;font-size:15px;color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:2px">
+          <option value="Produtos em destaque">Produtos em destaque</option>
+          <option value="Mais solicitados">Mais solicitados</option>
+          <option value="Mais recentes">Mais recentes</option>
+          <option value="Nome de A a Z">Nome de A a Z</option>
+          <option value="Nome de Z a A">Nome de Z a A</option>
+        </select>
+      </label>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:24px 32px;padding:20px 0;border-top:1px solid #C9CBCC;border-bottom:1px solid #C9CBCC;margin-bottom:8px">{{ filtros }}</div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:52px;padding:12px 0 20px">
+      <sc-if value="{{ temFiltros }}" hint-placeholder-val="{{ false }}">
+        <span style="font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072;margin-right:4px">FILTROS ATIVOS</span>
+        {{ chips }}
+        <button type="button" onClick="{{ limparTudo }}" style="min-height:32px;border:0;background:transparent;padding:0 4px;cursor:pointer;font:500 13px/1 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#1A7F82;text-decoration:underline" style-hover="color:#0B0C0D" style-focus="outline:2px solid #1A7F82;outline-offset:3px">LIMPAR TUDO</button>
+      </sc-if>
+      <sc-if value="{{ semFiltros }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#6B7072">{{ contagem }}</p>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ temResultado }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:{{ gridProdutos }};gap:24px">
+        <sc-for list="{{ produtos }}" as="p" hint-placeholder-count="6">
+          <article onMouseEnter="{{ p.onEnter }}" onMouseLeave="{{ p.onLeave }}" style="min-width:0;display:flex;flex-direction:column;background:#FFFFFF;border:1px solid #C9CBCC;border-radius:2px;transition:border-color .15s" style-hover="border-color:#0B0C0D">
+            <div style="position:relative;aspect-ratio:4/3;background:#E4E6E6;overflow:hidden">
+              <sc-if value="{{ p.hasFoto }}" hint-placeholder-val="{{ false }}">
+                <div role="img" aria-label="{{ p.nome }}" style="width:100%;height:100%;background:#FFFFFF;background-image:{{ p.fotoBg }};background-size:cover;background-position:center;background-repeat:no-repeat"></div>
+              </sc-if>
+              <sc-if value="{{ p.semFoto }}" hint-placeholder-val="{{ false }}">
+                <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,#DADCDC 0 6px,#E4E6E6 6px 12px);display:flex;align-items:flex-end;padding:12px">
+                  <span style="font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">{{ p.placeholder }}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.ehServico }}" hint-placeholder-val="{{ false }}">
+                <span style="position:absolute;top:12px;left:12px;background:#0B0C0D;color:#2FB6B9;padding:6px 10px;border-radius:2px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em">SERVIÇO TÉCNICO</span>
+              </sc-if>
+              <div style="position:absolute;left:0;right:0;bottom:0;background:#0B0C0D;color:#F1F2F2;padding:10px 12px;font:500 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;transform:{{ p.specTransform }};transition:transform .18s ease-out">{{ p.spec }}</div>
+            </div>
+            <div style="padding:20px;display:flex;flex-direction:column;gap:12px;flex:1">
+              <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">{{ p.sub }}</p>
+              <h3 style="margin:0;font:500 22px/1.3 'Public Sans',sans-serif">{{ p.nome }}</h3>
+              <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;flex:1">{{ p.desc }}</p>
+              <sc-if value="{{ p.ehServico }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;gap:12px;align-items:flex-start;background:#F1F2F2;border-left:2px solid #1A7F82;padding:12px 14px;border-radius:2px">
+                  <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82;padding-top:3px">ESCOPO</span>
+                  <p style="margin:0;font:400 13px/1.45 'Public Sans',sans-serif;color:#4A4E50">{{ p.escopo }}</p>
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.temQtd }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <label style="font:400 15px/1.4 'Public Sans',sans-serif;color:#4A4E50" for="{{ p.qtyId }}">Quantidade</label>
+                  <div style="display:flex;border:1px solid #C9CBCC;border-radius:2px;overflow:hidden">
+                    <button type="button" onClick="{{ p.onDec }}" aria-label="Diminuir quantidade" style="width:40px;min-height:44px;border:0;border-right:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">−</button>
+                    <input id="{{ p.qtyId }}" type="text" inputmode="numeric" value="{{ p.qty }}" onChange="{{ p.onQty }}" style="width:52px;border:0;text-align:center;font:500 15px 'IBM Plex Mono',monospace;background:#FFFFFF" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">
+                    <button type="button" onClick="{{ p.onInc }}" aria-label="Aumentar quantidade" style="width:40px;min-height:44px;border:0;border-left:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #1A7F82;outline-offset:-2px">+</button>
+                  </div>
+                </div>
+              </sc-if>
+              <div style="display:grid;gap:8px">
+                <a href="#produto" style="text-align:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:13px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">VER DETALHES</a>
+                <button type="button" onClick="{{ p.onAdd }}" style="border:0;background:#2FB6B9;color:#0B0C0D;padding:14px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px;min-height:44px" style-hover="background:#1A7F82;color:#F1F2F2" style-active="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">{{ p.btnSecundario }}</button>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ emPreparacao }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:clamp(28px,4vw,48px);display:grid;gap:24px;max-width:720px">
+        <div>
+          <p style="margin:0 0 12px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">{{ nSubs }} SUBCATEGORIAS MAPEADAS · CADASTRO EM ANDAMENTO</p>
+          <h3 style="margin:0 0 10px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.6vw,30px);line-height:1;letter-spacing:-0.01em">Os itens desta categoria ainda não estão publicados</h3>
+          <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:52ch">Já trabalhamos com os equipamentos listados acima. Enquanto o cadastro é concluído, descreva o que seu evento precisa e a equipe responde com o que temos disponível na data.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <a href="#solicitar" style="min-height:44px;display:inline-flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 20px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#1A7F82;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+          <a href="#catalogo" style="min-height:44px;display:inline-flex;align-items:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:0 20px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">VER TODO O CATÁLOGO</a>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ semResultado }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:clamp(28px,4vw,48px);display:grid;gap:24px;max-width:720px">
+        <div>
+          <p style="margin:0 0 12px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">NENHUM ITEM COM ESSA COMBINAÇÃO</p>
+          <h3 style="margin:0 0 10px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.6vw,30px);line-height:1;letter-spacing:-0.01em">Amplie a busca ou fale com a equipe</h3>
+          <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:52ch">Tente remover o filtro mais específico. Se o item que você procura não estiver publicado, descreva a necessidade — trabalhamos com configurações sob medida.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">
+          <button type="button" onClick="{{ limparTudo }}" style="min-height:44px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;padding:0 16px;border-radius:2px;cursor:pointer;font:500 15px 'Public Sans',sans-serif" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #1A7F82;outline-offset:3px">Remover todos os filtros</button>
+          <a href="#solicitar" style="min-height:44px;display:inline-flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 20px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#1A7F82;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+        </div>
+      </div>
+    </sc-if>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+</section>
+
+<section style="background:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:64px 20px">
+    <h2 style="margin:0 0 12px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.4vw,44px);line-height:0.98">{{ aplicTitulo }}</h2>
+    <p style="margin:0 0 32px;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:58ch">{{ aplicSub }}</p>
+    <sc-if value="{{ temAplicacoes }}" hint-placeholder-val="{{ true }}">
+      <div style="display:grid;grid-template-columns:{{ gridAplic }};gap:1px;background:#C9CBCC;border:1px solid #C9CBCC">{{ aplicacoes }}</div>
+    </sc-if>
+    <sc-if value="{{ semAplicacoes }}" hint-placeholder-val="{{ false }}">
+      <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:clamp(24px,3vw,32px);max-width:720px">
+        <p style="margin:0 0 10px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">CONTEÚDO EM PREPARAÇÃO</p>
+        <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:52ch">As aplicações desta categoria serão publicadas junto com os produtos. Descreva o tipo de evento na solicitação e a equipe indica a configuração adequada.</p>
+      </div>
+    </sc-if>
+  </div>
+  <div style="max-width:1280px;margin:0 auto;padding:0 20px"><div style="height:2px;background:repeating-linear-gradient(90deg,#C9CBCC 0 22px,transparent 22px 24px)"></div></div>
+</section>
+
+<section style="background:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(48px,6vw,96px) 20px">
+    <div style="display:grid;grid-template-columns:{{ gridFaq }};gap:clamp(24px,4vw,64px);align-items:start">
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#1A7F82">DÚVIDAS DA CATEGORIA</p>
+        <h2 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,3.4vw,44px);line-height:0.98">{{ faqTitulo }}</h2>
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;max-width:40ch">{{ faqApoio }}</p>
+      </div>
+      <sc-if value="{{ temFaq }}" hint-placeholder-val="{{ true }}">
+        <div style="border-top:2px solid #0B0C0D">{{ faq }}</div>
+      </sc-if>
+      <sc-if value="{{ semFaq }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:clamp(24px,3vw,32px);display:grid;gap:20px">
+          <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:52ch">Ainda não publicamos as perguntas frequentes de {{ nomeCategoria }}. Enquanto isso, fale direto com a equipe — respondemos por telefone, e-mail ou junto com a proposta.</p>
+          <div style="display:grid;gap:2px;max-width:360px">
+            <a href="tel:+16892421871" style="display:flex;align-items:center;min-height:48px;border-bottom:1px solid #C9CBCC;color:#0B0C0D;font-family:'IBM Plex Mono',monospace;font-size:17px" style-hover="color:#1A7F82" style-focus="outline:2px solid #1A7F82;outline-offset:2px">(689) 242-1871</a>
+            <a href="mailto:contato@allmusicbr.com" style="display:flex;align-items:center;min-height:48px;color:#0B0C0D;font:400 17px 'Public Sans',sans-serif" style-hover="color:#1A7F82" style-focus="outline:2px solid #1A7F82;outline-offset:2px">contato@allmusicbr.com</a>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</section>
+
+<section id="solicitar" style="background:#0B0C0D;color:#F1F2F2">
+  <div style="height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(56px,8vw,144px) 20px">
+    <div style="display:grid;grid-template-columns:{{ gridCta }};gap:40px;align-items:end">
+      <div>
+        <h2 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(30px,4vw,44px);line-height:0.98">{{ ctaTitulo }}</h2>
+        <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:52ch">{{ ctaSub }}</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px">
+        <a href="#catalogo" style="border:1px solid #F1F2F2;color:#F1F2F2;padding:17px 26px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">VER TODO O CATÁLOGO</a>
+        <a href="#orcamento" style="background:#2FB6B9;color:#0B0C0D;padding:17px 26px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR ORÇAMENTO</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contato" style="background:#0B0C0D;color:#F1F2F2;border-top:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(40px,5vw,64px) 20px 32px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px">
+      <div>
+        <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:34px;width:auto;margin-bottom:20px">
+        <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:34ch">Locação de equipamentos, mobiliário e painéis de LED para eventos na Flórida.</p>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">PRODUTOS</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#estruturas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Estruturas</a>
+          <a href="#telas-de-led" style="color:#DDE0E0" style-hover="color:#2FB6B9">Telas de LED</a>
+          <a href="#luz-e-som" style="color:#DDE0E0" style-hover="color:#2FB6B9">Luz &amp; Som</a>
+          <a href="#tendas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Tendas</a>
+          <a href="#moveis" style="color:#DDE0E0" style-hover="color:#2FB6B9">Móveis</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">EMPRESA</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#sobre" style="color:#DDE0E0" style-hover="color:#2FB6B9">Sobre Nós</a>
+          <a href="#contato" style="color:#DDE0E0" style-hover="color:#2FB6B9">Contato</a>
+          <a href="#solicitar" style="color:#DDE0E0" style-hover="color:#2FB6B9">Solicitar Orçamento</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">INFORMAÇÕES</p>
+        <nav style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="#faq" style="color:#DDE0E0" style-hover="color:#2FB6B9">Perguntas Frequentes</a>
+          <a href="#privacidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Política de Privacidade</a>
+          <a href="#termos" style="color:#DDE0E0" style-hover="color:#2FB6B9">Termos de Uso</a>
+          <a href="#politicas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Políticas de Locação</a>
+          <a href="#entrega" style="color:#DDE0E0" style-hover="color:#2FB6B9">Entrega e Montagem</a>
+          <a href="#cancelamento" style="color:#DDE0E0" style-hover="color:#2FB6B9">Cancelamento</a>
+          <a href="#acessibilidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Acessibilidade</a>
+        </nav>
+      </div>
+      <div>
+        <p style="margin:0 0 16px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#6B7072">CONTATO</p>
+        <div style="display:grid;gap:10px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#2FB6B9">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9">contato@allmusicbr.com</a>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:48px;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;padding-top:24px">
+      <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:60ch">Os produtos estão sujeitos à disponibilidade. O envio de uma solicitação não cria uma reserva.</p>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#6B7072">© 2026 All Music Rentals. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:50;background:#0B0C0D;border-top:1px solid #2FB6B9;box-shadow:0 -4px 0 rgba(11,12,13,0.35)">
+  <div style="max-width:1280px;margin:0 auto;padding:12px 20px;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:center;gap:14px;min-width:0">
+      <span style="flex:none;min-width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font:500 15px 'IBM Plex Mono',monospace;border-radius:2px;padding:0 8px">{{ count }}</span>
+      <div style="min-width:0">
+        <p style="margin:0;font:500 15px/1.3 'Public Sans',sans-serif;color:#F1F2F2">{{ barraTitulo }}</p>
+        <p style="margin:0;font:400 13px/1.4 'Public Sans',sans-serif;color:#6B7072">{{ barraSub }}</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex:none">
+      <a href="#orcamento" style="min-height:44px;display:flex;align-items:center;border:1px solid #F1F2F2;color:#F1F2F2;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">VER ORÇAMENTO</a>
+      <a href="#solicitar" style="min-height:44px;display:flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 18px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">SOLICITAR</a>
+    </div>
+  </div>
+</div>
+
+<sc-if value="{{ toastAberto }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:20px;right:20px;bottom:96px;z-index:60;display:flex;justify-content:center;pointer-events:none">
+    <div style="pointer-events:auto;max-width:520px;width:100%;background:#0B0C0D;color:#F1F2F2;border:1px solid #2FB6B9;border-radius:2px;box-shadow:6px 6px 0 rgba(11,12,13,0.35);padding:20px;animation:amrToast .18s ease-out both;display:grid;gap:14px">
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <span style="flex:none;width:10px;height:10px;background:#2FB6B9;margin-top:7px"></span>
+        <div>
+          <p style="margin:0 0 4px;font:500 17px/1.4 'Public Sans',sans-serif">Produto adicionado ao seu orçamento</p>
+          <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#9EA3A5">{{ toastItem }}</p>
+        </div>
+        <button type="button" onClick="{{ fecharToast }}" aria-label="Fechar aviso" style="margin-left:auto;flex:none;width:32px;height:32px;background:transparent;border:1px solid #3A3E40;color:#F1F2F2;border-radius:2px;cursor:pointer" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:2px">×</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <button type="button" onClick="{{ fecharToast }}" style="flex:1;min-width:160px;border:1px solid #F1F2F2;background:transparent;color:#F1F2F2;padding:13px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2;color:#0B0C0D" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">CONTINUAR NAVEGANDO</button>
+        <a href="#orcamento" style="flex:1;min-width:160px;text-align:center;background:#2FB6B9;color:#0B0C0D;padding:14px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#F1F2F2" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">VER MEU ORÇAMENTO</a>
+      </div>
+      <p style="margin:0;font:400 13px/1.45 'Public Sans',sans-serif;color:#6B7072">Os produtos não ficam reservados ao serem adicionados ao carrinho. A disponibilidade será confirmada pela equipe.</p>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;categoria&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;estruturas&quot;,&quot;telas-de-led&quot;,&quot;luz-e-som&quot;,&quot;tendas&quot;,&quot;moveis&quot;],&quot;default&quot;:null,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Categoria&quot;}}">
+const CATS = {
+  estruturas: {
+    slug: 'estruturas', rota: '/pt/estruturas/', nome: 'Estruturas', mono: 'ESTRUTURAS',
+    titulo: 'Estruturas para Eventos',
+    descricao: 'Palcos, praticáveis, treliças e soluções estruturais para shows, festivais, eventos corporativos e produções.',
+    eyebrow: 'PALCO · PRATICÁVEL · TRELIÇA',
+    hero: 'uploads/estrutura-para-eventos.jpg',
+    heroAlt: 'Palco com treliça de alumínio montado ao ar livre',
+    subs: [
+      { nome: 'Palcos', desc: 'Palcos modulares em alturas e dimensões variadas.' },
+      { nome: 'Praticáveis e plataformas', desc: 'Elevações para bateria, coral, mesa diretiva e passarelas.' },
+      { nome: 'Treliças e truss', desc: 'Q30, Q40 e box truss para iluminação e sustentação.' },
+      { nome: 'Estruturas para telas de LED', desc: 'Ground support e torres para sustentar telas de LED.' },
+      { nome: 'Barreiras e organização de espaços', desc: 'Grades, barreiras de contenção e delimitação de áreas.' }
+    ],
+    filtros: [
+      { id: 'sub', rotulo: 'Subcategoria', opcoes: ['Palcos', 'Praticáveis e plataformas', 'Treliças e truss', 'Estruturas para telas de LED', 'Barreiras e organização de espaços'] },
+      { id: 'ambiente', rotulo: 'Ambiente', opcoes: ['Interno', 'Externo', 'Interno ou externo'] },
+      { id: 'porte', rotulo: 'Porte do evento', opcoes: ['Até 200 pessoas', '200 a 1.000 pessoas', 'Acima de 1.000 pessoas'] },
+      { id: 'montagem', rotulo: 'Montagem', opcoes: ['Montagem pela equipe', 'Retirada pelo cliente'] }
+    ],
+    produtos: [
+      { id: 'palco-modular', nome: 'Palco Modular 8 × 6 m', sub: 'PALCOS', desc: 'Palco em módulos de 2 × 1 m com altura regulável, saia frontal e escada de acesso.', placeholder: 'FOTO · PALCO MODULAR MONTADO · AMBIENTADA · 4:3', spec: '48 M² · ALTURA 0,4 A 1,2 M', f: { sub: ['Palcos'], ambiente: ['Interno ou externo'], porte: ['200 a 1.000 pessoas', 'Acima de 1.000 pessoas'], montagem: ['Montagem pela equipe'] } },
+      { id: 'palco-coberto', nome: 'Palco Coberto com Cobertura em Duas Águas', sub: 'PALCOS', desc: 'Estrutura com cobertura para eventos ao ar livre, com laterais opcionais e cálculo de carga.', foto: 'uploads/estrutura-para-eventos.jpg', spec: 'COBERTURA · PROJETO SOB MEDIDA', f: { sub: ['Palcos'], ambiente: ['Externo'], porte: ['Acima de 1.000 pessoas'], montagem: ['Montagem pela equipe'] } },
+      { id: 'praticavel', nome: 'Praticável 2 × 1 m com Altura Regulável', sub: 'PRATICÁVEIS E PLATAFORMAS', desc: 'Módulo individual para bateria, coral, mesa diretiva ou elevação de área técnica.', placeholder: 'FOTO · PRATICÁVEL ISOLADO · ISOLADA · 4:3', spec: '2 × 1 M · 750 KG/M²', f: { sub: ['Praticáveis e plataformas'], ambiente: ['Interno ou externo'], porte: ['Até 200 pessoas', '200 a 1.000 pessoas'], montagem: ['Montagem pela equipe', 'Retirada pelo cliente'] } },
+      { id: 'passarela', nome: 'Passarela Elevada para Desfile', sub: 'PRATICÁVEIS E PLATAFORMAS', desc: 'Conjunto de módulos em linha com acabamento em carpete ou laminado.', placeholder: 'FOTO · PASSARELA MONTADA · AMBIENTADA · 4:3', spec: 'COMPRIMENTO SOB MEDIDA', f: { sub: ['Praticáveis e plataformas'], ambiente: ['Interno'], porte: ['200 a 1.000 pessoas'], montagem: ['Montagem pela equipe'] } },
+      { id: 'truss-q30', nome: 'Treliça Q30 em Alumínio', sub: 'TRELIÇAS E TRUSS', desc: 'Treliça quadrada leve para iluminação, backdrop e sinalização suspensa.', placeholder: 'FOTO · TRELIÇA Q30 · ISOLADA · 4:3', spec: 'Q30 · BARRAS DE 1, 2 E 3 M', f: { sub: ['Treliças e truss'], ambiente: ['Interno ou externo'], porte: ['Até 200 pessoas', '200 a 1.000 pessoas'], montagem: ['Montagem pela equipe', 'Retirada pelo cliente'] } },
+      { id: 'box-truss', nome: 'Box Truss Q40 para Cargas Maiores', sub: 'TRELIÇAS E TRUSS', desc: 'Perfil reforçado para sustentação de iluminação de palco e sistemas de som.', placeholder: 'FOTO · BOX TRUSS Q40 · ISOLADA · 4:3', spec: 'Q40 · CARGA CONFORME VÃO', f: { sub: ['Treliças e truss'], ambiente: ['Interno ou externo'], porte: ['Acima de 1.000 pessoas'], montagem: ['Montagem pela equipe'] } },
+      { id: 'ground-support', nome: 'Ground Support para Tela de LED', sub: 'ESTRUTURAS PARA TELAS DE LED', desc: 'Torre de sustentação dimensionada para o peso e a área da tela contratada.', foto: 'uploads/LED SCRRENN 2.jpg', spec: 'DIMENSIONADO POR M² DE TELA', f: { sub: ['Estruturas para telas de LED'], ambiente: ['Interno ou externo'], porte: ['200 a 1.000 pessoas', 'Acima de 1.000 pessoas'], montagem: ['Montagem pela equipe'] } },
+      { id: 'grade', nome: 'Barreira de Contenção Metálica', sub: 'BARREIRAS E ORGANIZAÇÃO DE ESPAÇOS', desc: 'Módulos encaixáveis para frente de palco, filas e delimitação de áreas restritas.', placeholder: 'FOTO · BARREIRA DE CONTENÇÃO · ISOLADA · 4:3', spec: 'MÓDULO 2 M · AÇO GALVANIZADO', f: { sub: ['Barreiras e organização de espaços'], ambiente: ['Externo'], porte: ['Acima de 1.000 pessoas'], montagem: ['Montagem pela equipe', 'Retirada pelo cliente'] } },
+      { id: 'montagem-estrutura', nome: 'Montagem e Desmontagem de Estrutura', sub: 'SERVIÇO TÉCNICO', servico: true, desc: 'Equipe de montagem, ferramental e desmontagem ao fim do evento, com janela de horário combinada.', placeholder: 'FOTO · EQUIPE EM MONTAGEM · AMBIENTADA · 4:3', spec: 'SERVIÇO · POR PROJETO', escopo: 'Informe o local, o horário liberado para montagem e as condições de acesso na etapa de dados.', f: { sub: ['Palcos', 'Treliças e truss', 'Estruturas para telas de LED'], ambiente: ['Interno ou externo'], porte: ['Até 200 pessoas', '200 a 1.000 pessoas', 'Acima de 1.000 pessoas'], montagem: ['Montagem pela equipe'] } }
+    ],
+    aplicTitulo: 'Onde nossas estruturas são usadas',
+    aplicSub: 'A configuração muda conforme o público, o local e o tempo disponível para montagem.',
+    aplicacoes: [
+      { nome: 'Shows', desc: 'Palco com cobertura, ground support e barreira de frente de palco.' },
+      { nome: 'Festivais', desc: 'Múltiplos palcos, áreas técnicas elevadas e organização de fluxo.' },
+      { nome: 'Eventos corporativos', desc: 'Praticável para mesa diretiva, passarela e treliça para backdrop.' },
+      { nome: 'Produções e gravações', desc: 'Estruturas para sustentação de iluminação e cenografia.' },
+      { nome: 'Feiras', desc: 'Elevações de estande, sinalização suspensa e delimitação de áreas.' },
+      { nome: 'Casamentos', desc: 'Praticável de altar, treliça decorativa e piso elevado.' }
+    ],
+    faqTitulo: 'Estruturas: o que perguntam antes de contratar',
+    faq: [
+      { q: 'Vocês fazem o cálculo de carga da estrutura?', a: 'Sim. A configuração é dimensionada conforme o peso do que será sustentado — iluminação, som ou tela de LED — e as condições do local. Envie a lista de equipamentos junto com a solicitação.' },
+      { q: 'Quanto tempo antes a montagem precisa começar?', a: 'Depende do porte e do acesso ao local. Informe a janela de horário liberada pelo espaço na etapa de dados do evento e a equipe confirma se é suficiente.' },
+      { q: 'A estrutura funciona em piso irregular ou grama?', a: 'Sim, com sapatas e nivelamento. Descreva o tipo de piso no formulário para que a equipe inclua os acessórios necessários.' },
+      { q: 'Posso alugar só a treliça e montar por conta?', a: 'Alguns itens permitem retirada pelo cliente. Use o filtro Montagem para ver quais, e confirme com a equipe as condições de transporte e devolução.' },
+      { q: 'A montagem está incluída no orçamento?', a: 'Entrega, instalação, desmontagem e retirada podem ser incluídas na proposta. Indique no formulário se você precisa desses serviços.' }
+    ],
+    ctaTitulo: 'Monte a estrutura do seu evento',
+    ctaSub: 'Selecione os itens, informe o local e a data, e a equipe dimensiona a configuração completa.'
+  },
+
+  'telas-de-led': {
+    slug: 'telas-de-led', rota: '/pt/telas-de-led/', nome: 'Telas de LED', mono: 'TELAS DE LED',
+    titulo: 'Telas de LED para Eventos',
+    descricao: 'Telas profissionais para apresentações, transmissões, vídeos, shows, festivais, casamentos e experiências de marca.',
+    eyebrow: 'P1.9MM · P3.9MM · SOB MEDIDA',
+    hero: 'uploads/LED SCREEN 3-e4d7e4d4.jpg',
+    heroAlt: 'Tela de LED de grande formato instalada em palco',
+    subs: [
+      { nome: 'P1.9mm', desc: 'Maior definição para público próximo da tela.' },
+      { nome: 'P3.9mm', desc: 'Configuração para palcos e distâncias maiores de visualização.' },
+      { nome: 'Configurações personalizadas', desc: 'Telas em formatos e proporções fora do padrão.' },
+      { nome: 'Instalação', desc: 'Montagem, alinhamento dos módulos e testes antes do evento.' },
+      { nome: 'Estrutura', desc: 'Ground support e torres dimensionadas para a tela contratada.' },
+      { nome: 'Processadores', desc: 'Processamento de vídeo, escalonamento e entrada de sinal.' },
+      { nome: 'Suporte técnico', desc: 'Acompanhamento durante o evento e resposta a imprevistos.' },
+      { nome: 'Operador', desc: 'Técnico dedicado à operação da tela durante o evento.' },
+      { nome: 'Transmissão ao vivo', desc: 'Captação e exibição simultânea para plateia e retransmissão.' }
+    ],
+    filtros: [
+      { id: 'sub', rotulo: 'Configuração', opcoes: ['P1.9mm', 'P3.9mm', 'Configurações personalizadas', 'Estrutura', 'Processadores', 'Transmissão ao vivo'] },
+      { id: 'ambiente', rotulo: 'Ambiente', opcoes: ['Interno', 'Externo', 'Interno ou externo'] },
+      { id: 'distancia', rotulo: 'Distância do público', opcoes: ['Menos de 2 m', '2 a 4 m', 'Mais de 4 m'] },
+      { id: 'tipo', rotulo: 'Tipo de item', opcoes: ['Produto físico', 'Serviço técnico', 'Pacote'] }
+    ],
+    produtos: [
+      { id: 'p19', nome: 'Tela de LED P1.9mm', sub: 'P1.9MM', desc: 'Indicado para ambientes em que o público ficará mais próximo da tela e será necessária maior definição de imagem.', foto: 'uploads/LED SCREEN 5.jpg', fotoHover: 'uploads/LED SCRRENN 2.jpg', spec: 'PAINEL P1.9MM · MÓDULO 500×500MM', f: { sub: ['P1.9mm'], ambiente: ['Interno'], distancia: ['Menos de 2 m', '2 a 4 m'], tipo: ['Produto físico'] } },
+      { id: 'p39', nome: 'Tela de LED P3.9mm', sub: 'P3.9MM', desc: 'Indicado para palcos, shows, festivais, eventos corporativos e ambientes com maior distância de visualização.', foto: 'uploads/LED SCREEN 3-e4d7e4d4.jpg', fotoHover: 'uploads/LED SCREEN 4.jpg', spec: 'PAINEL P3.9MM · MÓDULO 500×1000MM', f: { sub: ['P3.9mm'], ambiente: ['Externo', 'Interno ou externo'], distancia: ['Mais de 4 m'], tipo: ['Produto físico'] } },
+      { id: 'sob-medida', nome: 'Tela em Formato Personalizado', sub: 'CONFIGURAÇÕES PERSONALIZADAS', desc: 'Composição de módulos em proporções fora do padrão: telas verticais, faixas largas e recortes de cenografia.', placeholder: 'FOTO · TELA VERTICAL EM ATIVAÇÃO · AMBIENTADA · 4:3', spec: 'COMPOSIÇÃO POR MÓDULO', f: { sub: ['Configurações personalizadas'], ambiente: ['Interno ou externo'], distancia: ['Menos de 2 m', '2 a 4 m', 'Mais de 4 m'], tipo: ['Produto físico'] } },
+      { id: 'ground', nome: 'Ground Support para Tela de LED', sub: 'ESTRUTURA', desc: 'Torre de sustentação dimensionada para a área e o peso da tela, com contrapeso e cabeamento organizado.', foto: 'uploads/LED SCRRENN 2.jpg', spec: 'DIMENSIONADO POR M² DE TELA', f: { sub: ['Estrutura'], ambiente: ['Interno ou externo'], distancia: ['2 a 4 m', 'Mais de 4 m'], tipo: ['Produto físico'] } },
+      { id: 'processador', nome: 'Processador de Vídeo e Entrada de Sinal', sub: 'PROCESSADORES', desc: 'Processamento, escalonamento e chaveamento de fontes: notebook, câmera, media server e transmissão.', placeholder: 'FOTO · PROCESSADOR DE VÍDEO · ISOLADA · 4:3', spec: 'HDMI / SDI · ESCALONAMENTO', f: { sub: ['Processadores'], ambiente: ['Interno ou externo'], distancia: ['Menos de 2 m', '2 a 4 m', 'Mais de 4 m'], tipo: ['Produto físico'] } },
+      { id: 'operador', nome: 'Operador Técnico de Tela de LED', sub: 'OPERADOR', servico: true, desc: 'Técnico dedicado à operação durante o evento, com preparo do conteúdo e testes antes da abertura das portas.', placeholder: 'FOTO · OPERADOR EM MESA DE VÍDEO · AMBIENTADA · 4:3', spec: 'SERVIÇO · POR DIÁRIA DE EVENTO', escopo: 'Informe a duração do evento e o número de diárias na etapa de dados. A equipe dimensiona a operação.', f: { sub: ['P1.9mm', 'P3.9mm', 'Configurações personalizadas'], ambiente: ['Interno ou externo'], distancia: ['Menos de 2 m', '2 a 4 m', 'Mais de 4 m'], tipo: ['Serviço técnico'] } },
+      { id: 'suporte', nome: 'Suporte Técnico Durante o Evento', sub: 'SUPORTE TÉCNICO', servico: true, desc: 'Acompanhamento presencial com peças de reposição em mão, para produções que não podem parar.', placeholder: 'FOTO · TÉCNICO EM BASTIDOR · AMBIENTADA · 4:3', spec: 'SERVIÇO · PRESENCIAL', escopo: 'Indique o horário de início e término do evento para dimensionar a permanência da equipe.', f: { sub: ['P1.9mm', 'P3.9mm', 'Estrutura'], ambiente: ['Interno ou externo'], distancia: ['Menos de 2 m', '2 a 4 m', 'Mais de 4 m'], tipo: ['Serviço técnico'] } },
+      { id: 'transmissao', nome: 'Transmissão ao Vivo com Exibição na Tela', sub: 'TRANSMISSÃO AO VIVO', desc: 'Captação de câmera exibida simultaneamente na tela e enviada para retransmissão online.', placeholder: 'FOTO · CÂMERA E SWITCHER · AMBIENTADA · 4:3', spec: 'PACOTE · CÂMERA + SWITCHER + TELA', f: { sub: ['Transmissão ao vivo'], ambiente: ['Interno ou externo'], distancia: ['2 a 4 m', 'Mais de 4 m'], tipo: ['Pacote'] } },
+      { id: 'instalacao', nome: 'Instalação e Alinhamento de Módulos', sub: 'INSTALAÇÃO', servico: true, desc: 'Montagem da tela, alinhamento entre módulos, calibração de cor e teste de conteúdo antes do evento.', placeholder: 'FOTO · MONTAGEM DE MÓDULOS · AMBIENTADA · 4:3', spec: 'SERVIÇO · POR PROJETO', escopo: 'Informe a janela liberada para montagem e as condições de acesso e energia no local.', f: { sub: ['P1.9mm', 'P3.9mm', 'Configurações personalizadas', 'Estrutura'], ambiente: ['Interno ou externo'], distancia: ['Menos de 2 m', '2 a 4 m', 'Mais de 4 m'], tipo: ['Serviço técnico'] } }
+    ],
+    aplicTitulo: 'Onde nossas telas de LED são usadas',
+    aplicSub: 'A configuração muda conforme a distância do público, a luz do ambiente e o tipo de conteúdo exibido.',
+    aplicacoes: [
+      { nome: 'Apresentações corporativas', desc: 'Slides com texto fino, plateia sentada e transmissão simultânea.' },
+      { nome: 'Shows', desc: 'Telão de palco, conteúdo de VJ e câmera ao vivo.' },
+      { nome: 'Festivais', desc: 'Telas laterais, exibição de patrocinadores e programação.' },
+      { nome: 'Casamentos', desc: 'Retrospectiva, cerimônia ao vivo e ambientação da festa.' },
+      { nome: 'Ativações de marca', desc: 'Formatos verticais, cenografia e conteúdo em loop.' },
+      { nome: 'Feiras', desc: 'Chamada de estande, demonstração de produto e sinalização.' }
+    ],
+    faqTitulo: 'Telas de LED: o que perguntam antes de contratar',
+    faq: [
+      { q: 'Qual tamanho de tela o meu evento pede?', a: 'Depende da distância do último espectador e da altura livre do local. Informe as medidas do espaço e a quantidade de público na solicitação — a equipe propõe a composição de módulos.' },
+      { q: 'A tela funciona sob sol direto?', a: 'Sim, com configuração de brilho adequada para área externa. Indique no formulário se o evento será durante o dia e se a tela ficará exposta ao sol.' },
+      { q: 'Preciso contratar operador junto?', a: 'Para conteúdo em loop, nem sempre. Para eventos com troca de fontes, câmera ao vivo ou apresentações, o operador é recomendado — adicione o serviço ao orçamento.' },
+      { q: 'Em que formato devo enviar o conteúdo?', a: 'Vídeo e apresentação são compatíveis. A resolução final depende da composição de módulos contratada; a equipe envia as medidas exatas depois de fechada a configuração.' },
+      { q: 'A estrutura de sustentação está incluída?', a: 'É um item separado, dimensionado conforme a área da tela. Adicione o ground support ao orçamento ou informe se o local já possui ponto de içamento.' },
+      { q: 'Qual a diferença prática entre P1.9 e P3.9?', a: 'A distância mínima de visualização. Com público a menos de 2 metros, o P1.9 mantém a imagem limpa. A partir de 4 metros, o P3.9 entrega o mesmo resultado visual com custo e área diferentes.' }
+    ],
+    ctaTitulo: 'Leve tela de LED para o seu evento',
+    ctaSub: 'Selecione a configuração, informe o local e a distância do público, e a equipe monta a proposta completa.'
+  },
+
+  'luz-e-som': {
+    slug: 'luz-e-som', rota: '/pt/luz-e-som/', nome: 'Luz & Som', mono: 'LUZ & SOM',
+    titulo: 'Luz e Som para Eventos',
+    descricao: 'Soluções de iluminação e sonorização para criar ambientes impactantes e garantir qualidade técnica ao evento.',
+    eyebrow: 'ILUMINAÇÃO · ÁUDIO · OPERAÇÃO',
+    hero: 'uploads/images (3).jpg',
+    heroAlt: 'Palco iluminado com moving heads e sistema de som',
+    subs: [
+      { nome: 'Iluminação de ambiente', desc: 'Luz cênica de salão, uplights e ambientação de área social.' },
+      { nome: 'Iluminação de palco', desc: 'Refletores, contraluz e luz frontal para apresentações.' },
+      { nome: 'Moving heads e efeitos', desc: 'Cabeças móveis, strobo, fumaça e efeitos de show.' },
+      { nome: 'Caixas de som', desc: 'Sistemas de PA dimensionados por público e área.' },
+      { nome: 'Subwoofers', desc: 'Reforço de graves para música ao vivo e DJ.' },
+      { nome: 'Microfones', desc: 'Com fio, sem fio, headset e lapela para palestras e cerimônias.' },
+      { nome: 'Mesas e equipamentos de áudio', desc: 'Consoles, processadores e cabeamento.' },
+      { nome: 'Operadores técnicos', desc: 'Técnicos de som e luz durante o evento.' }
+    ],
+    filtros: [
+      { id: 'sub', rotulo: 'Subcategoria', opcoes: ['Iluminação de ambiente', 'Iluminação de palco', 'Moving heads e efeitos', 'Caixas de som', 'Subwoofers', 'Microfones', 'Mesas e equipamentos de áudio', 'Operadores técnicos'] },
+      { id: 'ambiente', rotulo: 'Ambiente', opcoes: ['Interno', 'Externo', 'Interno ou externo'] },
+      { id: 'porte', rotulo: 'Porte do evento', opcoes: ['Até 200 pessoas', '200 a 1.000 pessoas', 'Acima de 1.000 pessoas'] },
+      { id: 'tipo', rotulo: 'Tipo de item', opcoes: ['Produto físico', 'Serviço técnico', 'Pacote'] }
+    ],
+    produtos: [],
+    aplicTitulo: 'Onde luz e som fazem diferença',
+    aplicSub: 'A configuração muda conforme a área, o pé-direito e o tipo de programação.',
+    aplicacoes: [],
+    faqTitulo: 'Luz e som: o que perguntam antes de contratar',
+    faq: [],
+    ctaTitulo: 'Defina a luz e o som do seu evento',
+    ctaSub: 'Selecione os equipamentos, informe o local e a programação, e a equipe dimensiona o sistema.'
+  },
+
+  tendas: {
+    slug: 'tendas', rota: '/pt/tendas/', nome: 'Tendas', mono: 'TENDAS',
+    titulo: 'Tendas e Áreas Externas',
+    descricao: 'Tendas, guarda-sóis e soluções para piscinas, jardins, pátios, celebrações e eventos ao ar livre.',
+    eyebrow: 'TENDA · GUARDA-SOL · PISO',
+    hero: 'uploads/eventos-23.png',
+    heroAlt: 'Tenda branca montada em deck de madeira com cadeiras',
+    subs: [
+      { nome: 'Tendas', desc: 'Tendas em diferentes vãos e alturas para áreas abertas.' },
+      { nome: 'Guarda-sóis', desc: 'Sombra pontual para piscinas, pátios e mesas externas.' },
+      { nome: 'Laterais e fechamentos', desc: 'Fechamento de vãos contra vento, sol e chuva.' },
+      { nome: 'Pisos', desc: 'Piso elevado e nivelamento para grama e terreno irregular.' },
+      { nome: 'Iluminação para tendas', desc: 'Luz interna e ambientação sob a cobertura.' },
+      { nome: 'Soluções para áreas externas', desc: 'Conjuntos para jardim, deck e área de piscina.' }
+    ],
+    filtros: [
+      { id: 'sub', rotulo: 'Subcategoria', opcoes: ['Tendas', 'Guarda-sóis', 'Laterais e fechamentos', 'Pisos', 'Iluminação para tendas', 'Soluções para áreas externas'] },
+      { id: 'ambiente', rotulo: 'Ambiente', opcoes: ['Externo', 'Interno ou externo'] },
+      { id: 'cobertura', rotulo: 'Área de cobertura', opcoes: ['Até 30 m²', '30 a 100 m²', 'Acima de 100 m²'] },
+      { id: 'cor', rotulo: 'Cor', opcoes: ['Bege', 'Preto', 'Branco'] }
+    ],
+    produtos: [],
+    aplicTitulo: 'Onde as tendas são usadas',
+    aplicSub: 'A cobertura muda conforme a área, o terreno e a previsão de tempo.',
+    aplicacoes: [],
+    faqTitulo: 'Tendas: o que perguntam antes de contratar',
+    faq: [],
+    ctaTitulo: 'Cubra a área externa do seu evento',
+    ctaSub: 'Selecione a cobertura, informe as medidas do espaço, e a equipe dimensiona a montagem.'
+  },
+
+  moveis: {
+    slug: 'moveis', rota: '/pt/moveis/', nome: 'Móveis', mono: 'MÓVEIS',
+    titulo: 'Móveis para Eventos',
+    descricao: 'Mesas, capas, cadeiras, lounges, bares e mobiliário para eventos corporativos, casamentos, feiras e festas.',
+    eyebrow: 'MESAS · CAPAS · LOUNGE',
+    hero: 'uploads/HIGH TABLE ALUMINIUM 6-12bcd805.jpg',
+    heroAlt: 'Mesas altas de alumínio em evento',
+    subs: [
+      { nome: 'Mesas de coquetel', desc: 'Mesas altas para recepções e áreas de circulação.' },
+      { nome: 'Mesas retangulares', desc: 'Mesas de 6 e 8 pés para buffet, credenciamento e trabalho.' },
+      { nome: 'Capas de mesa', desc: 'Capas ajustadas em diferentes cores e formatos.' },
+      { nome: 'Cadeiras', desc: 'Cadeiras para plateia, jantar e área externa.' },
+      { nome: 'Mobiliário lounge', desc: 'Conjuntos de estar para áreas de convivência.' },
+      { nome: 'Sofás e poltronas', desc: 'Assentos estofados para camarim e espaço de patrocinador.' },
+      { nome: 'Bares', desc: 'Balcões de bar e apoio para serviço de bebidas.' },
+      { nome: 'Acessórios', desc: 'Itens de apoio, suportes e complementos de mobiliário.' }
+    ],
+    filtros: [
+      { id: 'sub', rotulo: 'Subcategoria', opcoes: ['Mesas de coquetel', 'Mesas retangulares', 'Capas de mesa', 'Cadeiras', 'Mobiliário lounge', 'Sofás e poltronas', 'Bares', 'Acessórios'] },
+      { id: 'ambiente', rotulo: 'Ambiente', opcoes: ['Interno', 'Externo', 'Interno ou externo'] },
+      { id: 'cor', rotulo: 'Cor', opcoes: ['Bege', 'Preto', 'Branco'] },
+      { id: 'tipo', rotulo: 'Tipo de item', opcoes: ['Produto físico', 'Produto com variação', 'Pacote'] }
+    ],
+    produtos: [],
+    aplicTitulo: 'Onde o mobiliário é usado',
+    aplicSub: 'A seleção muda conforme o formato do evento e o tempo de permanência do público.',
+    aplicacoes: [],
+    faqTitulo: 'Móveis: o que perguntam antes de contratar',
+    faq: [],
+    ctaTitulo: 'Mobilie o seu evento',
+    ctaSub: 'Selecione os itens, informe as quantidades e o local, e a equipe monta a proposta.'
+  }
+};
+
+const ORDEM_CATS = ['estruturas', 'telas-de-led', 'luz-e-som', 'tendas', 'moveis'];
+const PRONTAS = ['estruturas', 'telas-de-led'];
+
+const COMPARATIVO = [
+  { r: 'Distância mínima confortável', a: 'A partir de 1,9 m', b: 'A partir de 3,9 m' },
+  { r: 'Público típico', a: 'Plateia próxima, em pé ou sentada perto', b: 'Plateia ampla, palco afastado' },
+  { r: 'Conteúdo que se sai melhor', a: 'Slides com texto fino, planilha, logotipo pequeno', a2: true, b: 'Vídeo, imagem em movimento, câmera ao vivo' },
+  { r: 'Ambiente', a: 'Interno, luz controlada', b: 'Interno ou externo, inclusive sol' },
+  { r: 'Uso mais comum', a: 'Apresentação corporativa, backdrop de fotos, estande', b: 'Palco de show, festival, telão lateral' },
+  { r: 'Módulo', a: '500 × 500 mm', b: '500 × 1000 mm' },
+  { r: 'Área de tela pelo mesmo investimento', a: 'Menor', b: 'Maior' }
+];
+
+class Component extends DCLogic {
+  state = {
+    cat: 'telas-de-led', count: 0, qty: {}, hover: null, toast: null,
+    menu: false, mobile: false, vw: 1440, filtros: {}, ordem: 'Produtos em destaque', faqAberta: 0
+  };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const m = window.innerWidth < 1080;
+      this.setState({ vw: window.innerWidth });
+      if (m !== this.state.mobile) this.setState({ mobile: m, menu: false });
+    };
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._t) clearTimeout(this._t);
+  }
+
+  cat() {
+    return CATS[this.props.categoria ?? this.state.cat] || CATS['telas-de-led'];
+  }
+
+  trocaCat(slug) {
+    this.setState({ cat: slug, filtros: {}, faqAberta: 0, hover: null });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  trocador() {
+    const atual = this.cat().slug;
+    return ORDEM_CATS.map(s => {
+      const c = CATS[s];
+      const on = s === atual;
+      const pronta = PRONTAS.indexOf(s) >= 0;
+      return React.createElement('button', {
+        key: s, type: 'button', onClick: () => this.trocaCat(s),
+        style: {
+          display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: '34px', padding: '0 12px',
+          border: '1px solid ' + (on ? '#2FB6B9' : '#3A3E40'),
+          background: on ? '#2FB6B9' : 'transparent',
+          color: on ? '#0B0C0D' : '#C7CACB', borderRadius: '2px', cursor: 'pointer',
+          font: "500 13px/1 'Public Sans',sans-serif"
+        }
+      },
+        c.nome,
+        React.createElement('span', { style: { font: "400 11px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: on ? 'rgba(11,12,13,0.6)' : '#6B7072' } }, pronta ? c.rota : 'MODELO')
+      );
+    });
+  }
+
+  navPrincipal() {
+    const atual = this.cat().slug;
+    return ORDEM_CATS.map(s => React.createElement('a', {
+      key: s, href: '#' + s,
+      onClick: e => { e.preventDefault(); this.trocaCat(s); },
+      style: {
+        color: s === atual ? '#F1F2F2' : '#C7CACB', padding: '4px 0',
+        borderBottom: '2px solid ' + (s === atual ? '#2FB6B9' : 'transparent'),
+        font: "500 15px/1.2 'Public Sans',sans-serif", textDecoration: 'none', cursor: 'pointer'
+      }
+    }, CATS[s].nome));
+  }
+
+  navMobile() {
+    const atual = this.cat().slug;
+    const itens = [React.createElement('a', { key: 'home', href: '#inicio', style: { color: '#F1F2F2', padding: '12px 0', borderBottom: '1px solid #3A3E40', textDecoration: 'none' } }, 'Início')]
+      .concat(ORDEM_CATS.map(s => React.createElement('a', {
+        key: s, href: '#' + s, onClick: e => { e.preventDefault(); this.trocaCat(s); this.setState({ menu: false }); },
+        style: { color: s === atual ? '#2FB6B9' : '#F1F2F2', padding: '12px 0', borderBottom: '1px solid #3A3E40', textDecoration: 'none', cursor: 'pointer' }
+      }, CATS[s].nome)))
+      .concat([
+        React.createElement('a', { key: 'sobre', href: '#sobre', style: { color: '#F1F2F2', padding: '12px 0', borderBottom: '1px solid #3A3E40', textDecoration: 'none' } }, 'Sobre Nós'),
+        React.createElement('a', { key: 'ct', href: '#contato', style: { color: '#F1F2F2', padding: '12px 0', borderBottom: '1px solid #3A3E40', textDecoration: 'none' } }, 'Contato')
+      ]);
+    return React.createElement('nav', { style: { display: 'grid', gap: '2px', font: "500 17px/1.2 'Public Sans',sans-serif" } }, itens);
+  }
+
+  subcategorias() {
+    const c = this.cat();
+    return c.subs.map((s, i) => React.createElement('a', {
+      key: s.nome, href: '#produtos',
+      onClick: e => { e.preventDefault(); this.setFiltro('sub', s.nome); },
+      style: {
+        display: 'flex', flexDirection: 'column', gap: '8px', background: '#F1F2F2',
+        padding: '20px', textDecoration: 'none', color: '#0B0C0D', cursor: 'pointer', minHeight: '132px'
+      }
+    },
+      React.createElement('span', { style: { font: "500 12px/1 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#6B7072' } }, String(i + 1).padStart(2, '0')),
+      React.createElement('span', { style: { font: "500 17px/1.3 'Public Sans',sans-serif" } }, s.nome),
+      React.createElement('span', { style: { font: "400 15px/1.45 'Public Sans',sans-serif", color: '#4A4E50', flex: 1 } }, s.desc),
+      React.createElement('span', { style: { font: "800 13px/1 Archivo,sans-serif", fontVariationSettings: "'wdth' 75", color: '#1A7F82' } }, 'VER ITENS →')
+    ));
+  }
+
+  setFiltro(grupo, valor) {
+    this.setState(s => {
+      const cur = s.filtros[grupo] || [];
+      const next = cur.indexOf(valor) >= 0 ? cur.filter(v => v !== valor) : cur.concat([valor]);
+      return { filtros: Object.assign({}, s.filtros, { [grupo]: next }) };
+    });
+  }
+
+  filtrosUI() {
+    const c = this.cat();
+    return c.filtros.map(g => {
+      const sel = this.state.filtros[g.id] || [];
+      return React.createElement('div', { key: g.id, style: { minWidth: '180px' } },
+        React.createElement('p', { style: { margin: '0 0 10px', font: "500 12px/1 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#6B7072' } }, g.rotulo.toUpperCase()),
+        React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '6px' } },
+          g.opcoes.map(o => {
+            const on = sel.indexOf(o) >= 0;
+            return React.createElement('button', {
+              key: o, type: 'button', onClick: () => this.setFiltro(g.id, o), 'aria-pressed': on ? 'true' : 'false',
+              style: {
+                minHeight: '36px', padding: '0 12px', borderRadius: '2px', cursor: 'pointer',
+                border: '1px solid ' + (on ? '#0B0C0D' : '#C9CBCC'),
+                background: on ? '#0B0C0D' : '#FFFFFF', color: on ? '#F1F2F2' : '#4A4E50',
+                font: "400 15px/1 'Public Sans',sans-serif"
+              }
+            }, o);
+          })
+        )
+      );
+    });
+  }
+
+  ativos() {
+    const f = this.state.filtros, out = [];
+    this.cat().filtros.forEach(g => (f[g.id] || []).forEach(v => out.push({ grupo: g.id, rotulo: g.rotulo, valor: v })));
+    return out;
+  }
+
+  chips() {
+    return this.ativos().map(a => React.createElement('button', {
+      key: a.grupo + a.valor, type: 'button', onClick: () => this.setFiltro(a.grupo, a.valor),
+      'aria-label': 'Remover filtro ' + a.rotulo + ': ' + a.valor,
+      style: {
+        display: 'inline-flex', alignItems: 'center', gap: '8px', minHeight: '32px', padding: '0 10px',
+        border: '1px solid #0B0C0D', background: '#FFFFFF', borderRadius: '2px', cursor: 'pointer',
+        font: "400 13px/1 'Public Sans',sans-serif", color: '#0B0C0D'
+      }
+    },
+      React.createElement('span', { style: { font: "500 11px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#6B7072' } }, a.rotulo.toUpperCase()),
+      a.valor,
+      React.createElement('span', { 'aria-hidden': 'true', style: { color: '#6B7072', fontSize: '15px' } }, '×')
+    ));
+  }
+
+  filtrados() {
+    const c = this.cat(), f = this.state.filtros;
+    let list = c.produtos.filter(p => {
+      for (const g of c.filtros) {
+        const sel = f[g.id] || [];
+        if (!sel.length) continue;
+        if (!sel.some(s => (p.f[g.id] || []).indexOf(s) >= 0)) return false;
+      }
+      return true;
+    });
+    const o = this.state.ordem;
+    if (o === 'Nome de A a Z') list = list.slice().sort((a, b) => a.nome.localeCompare(b.nome, 'pt'));
+    if (o === 'Nome de Z a A') list = list.slice().sort((a, b) => b.nome.localeCompare(a.nome, 'pt'));
+    if (o === 'Mais recentes') list = list.slice().reverse();
+    return list;
+  }
+
+  bump(id, d) {
+    this.setState(s => ({ qty: Object.assign({}, s.qty, { [id]: Math.max(1, (s.qty[id] ?? 1) + d) }) }));
+  }
+
+  add(p) {
+    const q = p.servico ? 1 : (this.state.qty[p.id] ?? 1);
+    this.setState(s => ({ count: s.count + q, toast: p.nome.toUpperCase() + (p.servico ? ' · SERVIÇO' : ' · QTD ' + q) }));
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+
+  cards(list) {
+    return list.map(p => {
+      const hovered = this.state.hover === p.id;
+      const foto = hovered && p.fotoHover ? p.fotoHover : p.foto;
+      return {
+        id: p.id, nome: p.nome, sub: p.sub, desc: p.desc, spec: p.spec,
+        placeholder: p.placeholder, escopo: p.escopo,
+        hasFoto: !!foto, semFoto: !p.foto,
+        fotoBg: foto ? "url('" + foto + "')" : 'none',
+        ehServico: !!p.servico, temQtd: !p.servico,
+        qty: this.state.qty[p.id] ?? 1, qtyId: 'qty-' + p.id,
+        specTransform: hovered ? 'translateY(0)' : 'translateY(101%)',
+        btnSecundario: p.servico ? 'ADICIONAR SERVIÇO' : 'ADICIONAR AO ORÇAMENTO',
+        onEnter: () => this.setState({ hover: p.id }),
+        onLeave: () => this.setState(s => (s.hover === p.id ? { hover: null } : null)),
+        onDec: () => this.bump(p.id, -1),
+        onInc: () => this.bump(p.id, 1),
+        onQty: e => {
+          const n = parseInt(String(e.target.value).replace(/\D/g, ''), 10);
+          this.setState(s => ({ qty: Object.assign({}, s.qty, { [p.id]: isNaN(n) || n < 1 ? 1 : n }) }));
+        },
+        onAdd: () => this.add(p)
+      };
+    });
+  }
+
+  aplicacoes() {
+    return this.cat().aplicacoes.map(a => React.createElement('div', {
+      key: a.nome, style: { background: '#F1F2F2', padding: '24px' }
+    },
+      React.createElement('h3', { style: { margin: '0 0 8px', font: "500 22px/1.3 'Public Sans',sans-serif" } }, a.nome),
+      React.createElement('p', { style: { margin: 0, font: "400 15px/1.5 'Public Sans',sans-serif", color: '#4A4E50' } }, a.desc)
+    ));
+  }
+
+  faq() {
+    const itens = this.cat().faq;
+    return itens.map((it, i) => {
+      const aberta = this.state.faqAberta === i;
+      return React.createElement('div', { key: i, style: { borderBottom: '1px solid #C9CBCC' } },
+        React.createElement('button', {
+          type: 'button',
+          onClick: () => this.setState(s => ({ faqAberta: s.faqAberta === i ? -1 : i })),
+          'aria-expanded': aberta ? 'true' : 'false',
+          style: {
+            width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between',
+            gap: '20px', minHeight: '64px', padding: '18px 0', border: 0, background: 'transparent',
+            cursor: 'pointer', textAlign: 'left', color: '#0B0C0D'
+          }
+        },
+          React.createElement('span', { style: { font: "500 17px/1.4 'Public Sans',sans-serif" } }, it.q),
+          React.createElement('span', { 'aria-hidden': 'true', style: { flex: 'none', font: "400 17px 'IBM Plex Mono',monospace", color: '#1A7F82' } }, aberta ? '–' : '+')
+        ),
+        aberta ? React.createElement('p', {
+          style: { margin: '0 0 22px', paddingRight: '40px', font: "400 15px/1.6 'Public Sans',sans-serif", color: '#4A4E50', maxWidth: '62ch' }
+        }, it.a) : null
+      );
+    });
+  }
+
+  tabela() {
+    const linhas = COMPARATIVO.map((l, i) => React.createElement('div', {
+      key: l.r,
+      style: {
+        display: 'grid',
+        gridTemplateColumns: this.state.vw < 760 ? '1fr' : 'minmax(180px,1fr) minmax(0,1.2fr) minmax(0,1.2fr)',
+        gap: this.state.vw < 760 ? '4px' : '16px',
+        padding: '16px 20px',
+        borderTop: i === 0 ? 'none' : '1px solid #2A2D2F',
+        background: i % 2 ? '#141618' : '#1C1E20'
+      }
+    },
+      React.createElement('p', { style: { margin: 0, font: "500 12px/1.4 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#6B7072', alignSelf: 'center' } }, l.r.toUpperCase()),
+      React.createElement('p', { style: { margin: 0, font: "400 15px/1.5 'Public Sans',sans-serif", color: '#F1F2F2' } },
+        this.state.vw < 760 ? React.createElement('span', { style: { font: "500 12px 'IBM Plex Mono',monospace", color: '#2FB6B9', marginRight: '8px' } }, 'P1.9') : null, l.a),
+      React.createElement('p', { style: { margin: 0, font: "400 15px/1.5 'Public Sans',sans-serif", color: '#C7CACB' } },
+        this.state.vw < 760 ? React.createElement('span', { style: { font: "500 12px 'IBM Plex Mono',monospace", color: '#9EA3A5', marginRight: '8px' } }, 'P3.9') : null, l.b)
+    ));
+    const head = this.state.vw < 760 ? null : React.createElement('div', {
+      style: { display: 'grid', gridTemplateColumns: 'minmax(180px,1fr) minmax(0,1.2fr) minmax(0,1.2fr)', gap: '16px', padding: '14px 20px', background: '#0B0C0D', borderBottom: '1px solid #3A3E40' }
+    },
+      React.createElement('p', { style: { margin: 0, font: "500 12px/1 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#6B7072' } }, 'CRITÉRIO'),
+      React.createElement('p', { style: { margin: 0, font: "800 17px/1 Archivo,sans-serif", fontVariationSettings: "'wdth' 75", color: '#2FB6B9' } }, 'P1.9MM'),
+      React.createElement('p', { style: { margin: 0, font: "800 17px/1 Archivo,sans-serif", fontVariationSettings: "'wdth' 75", color: '#F1F2F2' } }, 'P3.9MM')
+    );
+    return React.createElement('div', null, head, linhas);
+  }
+
+  renderVals() {
+    const c = this.cat();
+    const mobile = this.state.mobile;
+    const vw = this.state.vw;
+    const list = this.filtrados();
+    const ativos = this.ativos();
+    const n = this.state.count;
+    const cols = vw < 700 ? '1fr' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(3,1fr)';
+
+    return {
+      count: n,
+      topbarDisplay: mobile ? 'none' : 'block',
+      deskDisplay: mobile ? 'none' : 'flex',
+      mobDisplay: mobile ? 'flex' : 'none',
+      menuDisplay: mobile && this.state.menu ? 'block' : 'none',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      navPrincipal: this.navPrincipal(),
+      navMobile: this.navMobile(),
+      trocador: this.trocador(),
+
+      titulo: c.titulo, tituloMono: c.mono, descricao: c.descricao, eyebrow: c.eyebrow,
+      heroBg: "url('" + c.hero + "')", heroAlt: c.heroAlt,
+      ehLed: c.slug === 'telas-de-led',
+
+      subTitulo: c.slug === 'telas-de-led' ? 'O que compõe uma tela de LED' : 'Navegue por subcategoria',
+      subContagem: c.subs.length + ' SUBCATEGORIAS',
+      subcategorias: this.subcategorias(),
+      gridSub: vw < 700 ? '1fr' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(3,1fr)',
+
+      produtosTitulo: c.produtos.length ? 'Produtos em ' + c.nome : 'Catálogo em preparação',
+      temAplicacoes: c.aplicacoes.length > 0,
+      semAplicacoes: c.aplicacoes.length === 0,
+      temFaq: c.faq.length > 0,
+      semFaq: c.faq.length === 0,
+      emPreparacao: c.produtos.length === 0,
+      nomeCategoria: c.nome,
+      rotaCategoria: c.rota,
+      nSubs: c.subs.length,
+      filtros: this.filtrosUI(),
+      chips: this.chips(),
+      temFiltros: ativos.length > 0,
+      semFiltros: ativos.length === 0,
+      contagem: list.length === 1 ? '1 PRODUTO' : list.length + ' PRODUTOS',
+      limparTudo: () => this.setState({ filtros: {} }),
+      ordem: this.state.ordem,
+      onOrdenar: e => this.setState({ ordem: e.target.value }),
+      produtos: this.cards(list),
+      temResultado: list.length > 0,
+      semResultado: list.length === 0 && c.produtos.length > 0,
+      gridProdutos: cols,
+
+      aplicTitulo: c.aplicTitulo, aplicSub: c.aplicSub,
+      aplicacoes: this.aplicacoes(),
+      gridAplic: vw < 700 ? '1fr' : vw < 1100 ? 'repeat(2,1fr)' : 'repeat(3,1fr)',
+
+      faqTitulo: c.faqTitulo, faq: this.faq(),
+      faqApoio: c.faq.length ? 'Outras perguntas são respondidas junto com a proposta, depois que a equipe recebe os dados do evento.' : 'Esta categoria ainda não tem perguntas publicadas.',
+      gridFaq: vw < 900 ? '1fr' : 'minmax(0,0.8fr) minmax(0,1.4fr)',
+
+      ctaTitulo: c.ctaTitulo, ctaSub: c.ctaSub,
+      gridCta: vw < 900 ? '1fr' : 'minmax(0,1.2fr) auto',
+      gridDois: vw < 760 ? '1fr' : 'repeat(2,1fr)',
+      tabelaComparativa: this.tabela(),
+
+      barraTitulo: n === 0 ? 'Seu orçamento está vazio' : n === 1 ? '1 item no seu orçamento' : n + ' itens no seu orçamento',
+      barraSub: n === 0 ? 'Adicione produtos para solicitar uma proposta.' : 'Os produtos não ficam reservados. A disponibilidade será confirmada pela equipe.',
+
+      toastAberto: !!this.state.toast,
+      toastItem: this.state.toast,
+      fecharToast: () => this.setState({ toast: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

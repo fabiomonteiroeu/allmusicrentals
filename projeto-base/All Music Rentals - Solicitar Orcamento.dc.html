@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75,700;75,800&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#F1F2F2;color:#0B0C0D;font-family:'Public Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+a{color:#166D70;text-decoration:none}
+a:hover{color:#0B0C0D}
+input,select,button,textarea{font-family:inherit}
+@keyframes amrToast{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes amrErro{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes amrFade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes amrProg{to{background-position:24px 0}}
+@keyframes amrSpin{to{transform:rotate(360deg)}}
+</style>
+</helmet>
+
+<div style="width:100%;overflow-x:hidden;padding-bottom:{{ padBase }}">
+
+<header style="position:sticky;top:0;z-index:40;background:#0B0C0D;border-bottom:1px solid #1C1E20">
+  <div style="max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:20px;justify-content:space-between">
+    <a href="#inicio" aria-label="All Music Rentals — início" style="display:flex;align-items:center;flex:none" style-focus="outline:2px solid #2FB6B9;outline-offset:4px">
+      <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:34px;width:auto">
+    </a>
+    <div style="display:flex;align-items:center;gap:16px">
+      <p style="margin:0;display:{{ deskDisplay }};font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#8A8F91">{{ salvoTexto }}</p>
+      <a href="#orcamento" style="display:flex;align-items:center;gap:8px;color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:0.06em;border:1px solid #3A3E40;padding:8px 10px;border-radius:2px" style-hover="border-color:#2FB6B9;color:#2FB6B9" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">
+        ORÇAMENTO
+        <span style="min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;background:#2FB6B9;color:#0B0C0D;font-weight:500;padding:0 5px">{{ nItens }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section style="background:#0B0C0D;color:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(32px,4vw,64px) 20px clamp(28px,3vw,40px)">
+    <nav aria-label="Trilha de navegação" style="margin-bottom:20px;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#8A8F91">
+      <a href="#orcamento" style="color:#9EA3A5" style-hover="color:#2FB6B9">MEU ORÇAMENTO</a>
+      <span style="padding:0 8px">/</span>
+      <span style="color:#F1F2F2">SOLICITAR ORÇAMENTO</span>
+    </nav>
+    <div style="display:grid;grid-template-columns:{{ colsHero }};gap:clamp(24px,3vw,48px);align-items:end">
+      <div>
+        <h1 style="margin:0 0 16px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;letter-spacing:-0.01em;font-size:clamp(40px,5vw,72px);line-height:0.92">Finalize sua Solicitação</h1>
+        <p style="margin:0;font:400 clamp(16px,1.2vw,17px)/1.55 'Public Sans',sans-serif;color:#DDE0E0;max-width:56ch">Preencha as informações do evento para que nossa equipe possa analisar disponibilidade, logística, montagem e valores.</p>
+      </div>
+      <div style="display:flex;gap:14px;align-items:flex-start;border:1px solid #3A3E40;background:#1C1E20;padding:20px;border-radius:2px">
+        <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#2FB6B9;padding-top:4px">AVISO</span>
+        <p style="margin:0;font:400 15px/1.55 'Public Sans',sans-serif;color:#DDE0E0">O envio da solicitação não confirma reserva ou disponibilidade.</p>
+      </div>
+    </div>
+  </div>
+  <div style="height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+</section>
+
+<div style="max-width:1280px;margin:0 auto;padding:clamp(24px,3vw,40px) 20px clamp(48px,6vw,96px)">
+  <div style="display:grid;grid-template-columns:{{ colsLayout }};gap:clamp(24px,3vw,40px);align-items:start">
+
+    <aside style="display:{{ asideDisplay }};position:sticky;top:88px">
+      <p style="margin:0 0 14px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">ETAPA {{ etapaAtualNum }} DE 5</p>
+      <div style="height:6px;display:flex;gap:2px;margin-bottom:20px">{{ barraEtapas }}</div>
+      <nav style="display:grid;gap:2px;border-top:1px solid #C9CBCC">{{ navEtapas }}</nav>
+      <div style="margin-top:20px;border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:16px">
+        <p style="margin:0 0 6px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">RASCUNHO</p>
+        <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#4A4E50">Suas respostas ficam salvas neste navegador. Você pode fechar a página e voltar depois.</p>
+        <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">{{ salvoTexto }}</p>
+      </div>
+    </aside>
+
+    <main>
+      <div style="display:{{ progMobDisplay }};margin-bottom:20px">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:10px">
+          <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">ETAPA {{ etapaAtualNum }} DE 5</p>
+          <p style="margin:0;font:400 13px/1 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">{{ salvoTexto }}</p>
+        </div>
+        <div style="height:6px;display:flex;gap:2px">{{ barraEtapas }}</div>
+        <p style="margin:12px 0 0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">{{ etapaAtualTitulo }}</p>
+      </div>
+
+      <sc-if value="{{ erroResumo }}" hint-placeholder-val="{{ false }}">
+        <div role="alert" style="border:1px solid #8C2A2A;background:#FBF0F0;border-radius:2px;padding:18px 20px;margin-bottom:24px;animation:amrErro .24s ease-out">
+          <p style="margin:0 0 6px;font:500 15px/1.4 'Public Sans',sans-serif;color:#8C2A2A">{{ erroTitulo }}</p>
+          <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#5A2020">Os campos com problema estão destacados abaixo. O restante do que você já preencheu foi mantido.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ etapa1 }}" hint-placeholder-val="{{ true }}">
+        <section style="animation:amrFade .2s ease-out both">
+          <div style="display:{{ tituloDeskDisplay }};align-items:baseline;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:30px;line-height:1;color:#C9CBCC">01</span>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Dados de contato</h2>
+          </div>
+          <p style="margin:0 0 28px;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Precisamos de um nome e de uma forma de resposta. O resto ajuda a equipe a falar a sua língua.</p>
+
+          <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px;margin-bottom:20px">
+            <label style="display:grid;gap:8px">
+              <span style="font:500 15px/1.3 'Public Sans',sans-serif">Nome <span style="color:#8C2A2A">*</span></span>
+              <input type="text" autocomplete="given-name" value="{{ f_nome }}" onInput="{{ on_nome }}" style="min-height:52px;border:1px solid {{ b_nome }};border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+              <sc-if value="{{ e_nome }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Informe seu nome.</span></sc-if>
+            </label>
+            <label style="display:grid;gap:8px">
+              <span style="font:500 15px/1.3 'Public Sans',sans-serif">Sobrenome <span style="color:#8C2A2A">*</span></span>
+              <input type="text" autocomplete="family-name" value="{{ f_sobrenome }}" onInput="{{ on_sobrenome }}" style="min-height:52px;border:1px solid {{ b_sobrenome }};border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+              <sc-if value="{{ e_sobrenome }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Informe seu sobrenome.</span></sc-if>
+            </label>
+          </div>
+
+          <label style="display:grid;gap:8px;margin-bottom:20px;max-width:520px">
+            <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Empresa <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+            <input type="text" autocomplete="organization" value="{{ f_empresa }}" onInput="{{ on_empresa }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+          </label>
+
+          <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px;margin-bottom:20px">
+            <label style="display:grid;gap:8px">
+              <span style="font:500 15px/1.3 'Public Sans',sans-serif">E-mail <span style="color:#8C2A2A">*</span></span>
+              <input type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" value="{{ f_email }}" onInput="{{ on_email }}" placeholder="nome@empresa.com" style="min-height:52px;border:1px solid {{ b_email }};border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+              <sc-if value="{{ e_email }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>{{ msg_email }}</span></sc-if>
+              <span style="font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">A proposta é enviada para este endereço.</span>
+            </label>
+            <label style="display:grid;gap:8px">
+              <span style="font:500 15px/1.3 'Public Sans',sans-serif">Telefone <span style="color:#8C2A2A">*</span></span>
+              <input type="tel" inputmode="tel" autocomplete="tel" value="{{ f_telefone }}" onInput="{{ on_telefone }}" placeholder="(000) 000-0000" style="min-height:52px;border:1px solid {{ b_telefone }};border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+              <sc-if value="{{ e_telefone }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>{{ msg_telefone }}</span></sc-if>
+              <span style="font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Usamos apenas para tratar desta solicitação.</span>
+            </label>
+          </div>
+
+          <fieldset style="margin:0 0 24px;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 12px;font:500 15px/1.3 'Public Sans',sans-serif">Idioma para atendimento</legend>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesIdioma }}</div>
+          </fieldset>
+
+          <fieldset style="margin:0 0 24px;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 6px;font:500 15px/1.3 'Public Sans',sans-serif">Forma preferida de contato</legend>
+            <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Enviamos a proposta por e-mail de qualquer forma. Isto define como fazemos as perguntas de acompanhamento.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesContato }}</div>
+          </fieldset>
+
+          <fieldset style="margin:0;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 6px;font:500 15px/1.3 'Public Sans',sans-serif">Tipo de cliente <span style="color:#8C2A2A">*</span></legend>
+            <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Muda o nível de detalhe técnico da proposta.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesCliente }}</div>
+            <sc-if value="{{ e_cliente }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:12px 0 0;display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Escolha o tipo de cliente.</p></sc-if>
+          </fieldset>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ etapa2 }}" hint-placeholder-val="{{ false }}">
+        <section style="animation:amrFade .2s ease-out both">
+          <div style="display:{{ tituloDeskDisplay }};align-items:baseline;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:30px;line-height:1;color:#C9CBCC">02</span>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Dados do evento</h2>
+          </div>
+          <p style="margin:0 0 28px;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Só a data do evento é obrigatória. Os horários podem ficar em branco — a equipe confirma com você depois.</p>
+
+          <fieldset style="margin:0 0 28px;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 12px;font:500 15px/1.3 'Public Sans',sans-serif">Tipo de evento <span style="color:#8C2A2A">*</span></legend>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesEvento }}</div>
+            <sc-if value="{{ e_evento }}" hint-placeholder-val="{{ false }}"><p role="alert" style="margin:12px 0 0;display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Escolha o tipo de evento.</p></sc-if>
+          </fieldset>
+
+          <div style="border:1px solid #0B0C0D;background:#FFFFFF;border-radius:2px;overflow:hidden;margin-bottom:20px">
+            <div style="padding:16px 20px;background:#0B0C0D;color:#F1F2F2;display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between">
+              <p style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:17px;letter-spacing:-0.01em">Cronograma do evento</p>
+              <p style="margin:0;font:400 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#8A8F91">{{ cronoResumo }}</p>
+            </div>
+
+            <div style="padding:20px 20px 8px;border-bottom:1px solid #C9CBCC">
+              <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px">
+                <label style="display:grid;gap:8px">
+                  <span style="font:500 15px/1.3 'Public Sans',sans-serif">Data do evento <span style="color:#8C2A2A">*</span></span>
+                  <input type="date" value="{{ f_dataEvento }}" onInput="{{ on_dataEvento }}" style="min-height:52px;border:1px solid {{ b_dataEvento }};border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  <sc-if value="{{ e_dataEvento }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>{{ msg_dataEvento }}</span></sc-if>
+                </label>
+                <label style="display:grid;gap:8px">
+                  <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Número de convidados <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">aproximado</span></span>
+                  <input type="text" inputmode="numeric" value="{{ f_convidados }}" onInput="{{ on_convidados }}" placeholder="0" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  <span style="font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Um número redondo já basta.</span>
+                </label>
+              </div>
+              <div style="padding:16px 0 12px">
+                <label style="display:inline-flex;align-items:center;gap:12px;min-height:44px;cursor:pointer;font:400 15px/1.4 'Public Sans',sans-serif;color:#2A2D2F">
+                  <input type="checkbox" checked="{{ f_montagemMesmoDia }}" onChange="{{ on_montagemMesmoDia }}" style="width:20px;height:20px;accent-color:#166D70;cursor:pointer">
+                  A montagem acontece no mesmo dia do evento
+                </label>
+              </div>
+              <sc-if value="{{ montagemOutroDia }}" hint-placeholder-val="{{ false }}">
+                <label style="display:grid;gap:8px;padding-bottom:16px;max-width:280px">
+                  <span style="font:500 15px/1.3 'Public Sans',sans-serif">Data da montagem</span>
+                  <input type="date" value="{{ f_dataMontagem }}" onInput="{{ on_dataMontagem }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                </label>
+              </sc-if>
+            </div>
+
+            <div style="padding:20px">
+              <p style="margin:0 0 4px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">LINHA DO DIA</p>
+              <p style="margin:0 0 20px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Preencha o que já está definido. Os campos vazios ficam como "a definir" na solicitação.</p>
+              {{ cronograma }}
+            </div>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ etapa3 }}" hint-placeholder-val="{{ false }}">
+        <section style="animation:amrFade .2s ease-out both">
+          <div style="display:{{ tituloDeskDisplay }};align-items:baseline;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:30px;line-height:1;color:#C9CBCC">03</span>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Local e logística</h2>
+          </div>
+          <p style="margin:0 0 28px;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">É aqui que a equipe descobre se o caminhão entra, onde a estrutura se apoia e o que fazer se chover. Cidade e estado bastam para começar.</p>
+
+          <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px;margin-bottom:20px">
+            <label style="display:grid;gap:8px">
+              <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Nome do local <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+              <input type="text" value="{{ f_local }}" onInput="{{ on_local }}" placeholder="Hotel, salão, residência, parque..." style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+            </label>
+            <label style="display:grid;gap:8px">
+              <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Contato do local <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+              <input type="text" value="{{ f_contatoLocal }}" onInput="{{ on_contatoLocal }}" placeholder="Nome e telefone do responsável" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+              <span style="font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Ajuda a resolver acesso e horários sem passar por você.</span>
+            </label>
+          </div>
+
+          <label style="display:grid;gap:8px;margin-bottom:20px">
+            <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Endereço completo <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+            <input type="text" autocomplete="street-address" value="{{ f_endereco }}" onInput="{{ on_endereco }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+          </label>
+
+          <div style="display:grid;grid-template-columns:{{ gridTres }};gap:20px;margin-bottom:28px">
+            <label style="display:grid;gap:8px">
+              <span style="font:500 15px/1.3 'Public Sans',sans-serif">Cidade <span style="color:#8C2A2A">*</span></span>
+              <input type="text" autocomplete="address-level2" value="{{ f_cidade }}" onInput="{{ on_cidade }}" style="min-height:52px;border:1px solid {{ b_cidade }};border-radius:2px;padding:0 14px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+              <sc-if value="{{ e_cidade }}" hint-placeholder-val="{{ false }}"><span role="alert" style="display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Informe a cidade do evento.</span></sc-if>
+            </label>
+            <label style="display:grid;gap:8px">
+              <span style="font:500 15px/1.3 'Public Sans',sans-serif">Estado</span>
+              <select value="{{ f_estado }}" onChange="{{ on_estado }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 12px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                <option value="FL">Flórida</option>
+                <option value="GA">Geórgia</option>
+                <option value="AL">Alabama</option>
+                <option value="SC">Carolina do Sul</option>
+                <option value="outro">Outro estado</option>
+              </select>
+            </label>
+            <label style="display:grid;gap:8px">
+              <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">CEP <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">ZIP</span></span>
+              <input type="text" inputmode="numeric" autocomplete="postal-code" value="{{ f_cep }}" onInput="{{ on_cep }}" placeholder="00000" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 14px;font:500 16px 'IBM Plex Mono',monospace;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+            </label>
+          </div>
+
+          <fieldset style="margin:0 0 24px;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 12px;font:500 15px/1.3 'Public Sans',sans-serif">O evento é interno ou externo?</legend>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesAmbiente }}</div>
+          </fieldset>
+
+          <fieldset style="margin:0 0 28px;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 6px;font:500 15px/1.3 'Public Sans',sans-serif">Tipo de superfície</legend>
+            <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Define a fixação e o nivelamento da estrutura.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesSuperficie }}</div>
+          </fieldset>
+
+          <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;padding:20px;margin-bottom:28px">
+            <p style="margin:0 0 6px;font:500 15px/1.3 'Public Sans',sans-serif">Acesso ao local</p>
+            <p style="margin:0 0 16px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Marque o que existe. O que não for marcado tratamos como inexistente.</p>
+            <div style="display:grid;grid-template-columns:{{ gridDois }};gap:4px 20px;margin-bottom:20px">{{ opcoesAcesso }}</div>
+            <label style="display:grid;gap:8px">
+              <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Informações de acesso <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+              <textarea rows="2" value="{{ f_acessoObs }}" onInput="{{ on_acessoObs }}" placeholder="Altura livre da doca, distância do estacionamento até o salão, portão de serviço..." style="border:1px solid #C9CBCC;border-radius:2px;padding:12px 14px;font:400 16px/1.5 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #166D70;outline-offset:-2px"></textarea>
+            </label>
+          </div>
+
+          <h3 style="margin:0 0 8px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Logística</h3>
+          <p style="margin:0 0 20px;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Se não souber, deixe em "Não sei". A equipe pergunta.</p>
+
+          <div style="display:grid;gap:24px;margin-bottom:28px">
+            <fieldset style="margin:0;padding:0;border:0">
+              <legend style="padding:0;margin:0 0 12px;font:500 15px/1.3 'Public Sans',sans-serif">Energia elétrica disponível no local</legend>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesEnergia }}</div>
+            </fieldset>
+            <fieldset style="margin:0;padding:0;border:0">
+              <legend style="padding:0;margin:0 0 12px;font:500 15px/1.3 'Public Sans',sans-serif">Necessidade de gerador</legend>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesGerador }}</div>
+            </fieldset>
+            <fieldset style="margin:0;padding:0;border:0">
+              <legend style="padding:0;margin:0 0 6px;font:500 15px/1.3 'Public Sans',sans-serif">Plano de chuva</legend>
+              <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Para evento externo na Flórida, isto muda a proposta.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesChuva }}</div>
+            </fieldset>
+            <div style="display:grid;grid-template-columns:{{ gridDois }};gap:20px">
+              <label style="display:grid;gap:8px">
+                <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Tempo disponível para montagem <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+                <select value="{{ f_tempoMontagem }}" onChange="{{ on_tempoMontagem }}" style="min-height:52px;border:1px solid #C9CBCC;border-radius:2px;padding:0 12px;font:400 16px 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                  <option value="">Selecionar</option>
+                  <option value="Menos de 2 horas">Menos de 2 horas</option>
+                  <option value="2 a 4 horas">2 a 4 horas</option>
+                  <option value="4 a 8 horas">4 a 8 horas</option>
+                  <option value="Um dia inteiro">Um dia inteiro</option>
+                  <option value="Mais de um dia">Mais de um dia</option>
+                  <option value="Ainda não sei">Ainda não sei</option>
+                </select>
+              </label>
+              <fieldset style="margin:0;padding:0;border:0">
+                <legend style="padding:0;margin:0 0 12px;font:500 15px/1.3 'Public Sans',sans-serif">Precisa de desmontagem?</legend>
+                <div style="display:flex;flex-wrap:wrap;gap:8px">{{ opcoesDesmontagem }}</div>
+              </fieldset>
+            </div>
+            <label style="display:grid;gap:8px">
+              <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Restrições de montagem <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+              <textarea rows="2" value="{{ f_restricoes }}" onInput="{{ on_restricoes }}" placeholder="Horário de silêncio, sindicato do local, proibição de furar piso, taxa de uso do elevador..." style="border:1px solid #C9CBCC;border-radius:2px;padding:12px 14px;font:400 16px/1.5 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #166D70;outline-offset:-2px"></textarea>
+            </label>
+            <label style="display:grid;gap:8px">
+              <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Instruções especiais <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+              <textarea rows="2" value="{{ f_instrucoes }}" onInput="{{ on_instrucoes }}" placeholder="Qualquer coisa que a equipe precisa saber antes de chegar" style="border:1px solid #C9CBCC;border-radius:2px;padding:12px 14px;font:400 16px/1.5 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #166D70;outline-offset:-2px"></textarea>
+            </label>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ etapa4 }}" hint-placeholder-val="{{ false }}">
+        <section style="animation:amrFade .2s ease-out both">
+          <div style="display:{{ tituloDeskDisplay }};align-items:baseline;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:30px;line-height:1;color:#C9CBCC">04</span>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Produtos e arquivos</h2>
+          </div>
+          <p style="margin:0 0 28px;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Estes são os itens do seu orçamento. Ajuste aqui mesmo, sem voltar ao catálogo.</p>
+
+          <div style="border-top:2px solid #0B0C0D;margin-bottom:28px">
+            <sc-for list="{{ itens }}" as="i" hint-placeholder-count="4">
+              <article style="border-bottom:1px solid #C9CBCC;padding:20px 0;display:grid;grid-template-columns:{{ colsItem }};gap:16px;align-items:start">
+                <div style="position:relative;aspect-ratio:4/3;border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;overflow:hidden">
+                  <sc-if value="{{ i.temFoto }}" hint-placeholder-val="{{ false }}">
+                    <span role="img" aria-label="{{ i.nome }}" style="position:absolute;inset:0;background-image:{{ i.bg }};background-size:cover;background-position:center"></span>
+                  </sc-if>
+                  <sc-if value="{{ i.semFoto }}" hint-placeholder-val="{{ true }}">
+                    <span style="position:absolute;inset:0;background-image:repeating-linear-gradient(135deg,#DADCDC 0 6px,#E4E6E6 6px 12px);display:flex;align-items:flex-end;padding:8px;font:400 11px/1.4 'IBM Plex Mono',monospace;color:#5A5F61">{{ i.placeholder }}</span>
+                  </sc-if>
+                </div>
+                <div style="min-width:0;display:grid;gap:12px">
+                  <div>
+                    <p style="margin:0 0 4px;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">{{ i.categoria }}</p>
+                    <p style="margin:0 0 6px;font:500 17px/1.3 'Public Sans',sans-serif">{{ i.nome }}</p>
+                    <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">{{ i.codigo }}{{ i.variacao }}</p>
+                  </div>
+                  <div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+                    <sc-if value="{{ i.temQtd }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex;border:1px solid #C9CBCC;border-radius:2px;overflow:hidden;background:#FFFFFF">
+                        <button type="button" onClick="{{ i.onDec }}" aria-label="Diminuir quantidade" style="width:40px;min-height:44px;border:0;border-right:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #166D70;outline-offset:-2px">−</button>
+                        <input type="text" inputmode="numeric" value="{{ i.qty }}" onChange="{{ i.onQty }}" aria-label="Quantidade" style="width:56px;border:0;text-align:center;font:500 15px 'IBM Plex Mono',monospace;background:#FFFFFF" style-focus="outline:2px solid #166D70;outline-offset:-2px">
+                        <button type="button" onClick="{{ i.onInc }}" aria-label="Aumentar quantidade" style="width:40px;min-height:44px;border:0;border-left:1px solid #C9CBCC;background:#F1F2F2;cursor:pointer;font-size:18px;color:#0B0C0D" style-hover="background:#E4E6E6" style-focus="outline:2px solid #166D70;outline-offset:-2px">+</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ i.semQtd }}" hint-placeholder-val="{{ false }}">
+                      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.04em;color:#5A5F61">QUANTIDADE NA ANÁLISE TÉCNICA</p>
+                    </sc-if>
+                    <button type="button" onClick="{{ i.onRemove }}" style="min-height:44px;border:0;background:transparent;padding:0 4px;cursor:pointer;font:500 15px 'Public Sans',sans-serif;color:#8C2A2A;margin-left:auto" style-hover="color:#0B0C0D" style-focus="outline:2px solid #8C2A2A;outline-offset:3px">Remover</button>
+                  </div>
+                  <label style="display:grid;gap:6px">
+                    <span style="font:500 13px/1.3 'Public Sans',sans-serif;color:#4A4E50">Observação</span>
+                    <textarea rows="2" value="{{ i.obs }}" onInput="{{ i.onObs }}" placeholder="{{ i.obsPlaceholder }}" style="border:1px solid {{ i.obsBorda }};border-radius:2px;padding:10px 12px;font:400 15px/1.5 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #166D70;outline-offset:-2px"></textarea>
+                  </label>
+                </div>
+              </article>
+            </sc-for>
+            <sc-if value="{{ semItens }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:32px 0;display:grid;gap:16px">
+                <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:48ch">Nenhum produto no orçamento. Você pode enviar a solicitação assim mesmo e descrever o que precisa no campo de informações adicionais.</p>
+                <a href="#catalogo" style="justify-self:start;min-height:48px;display:inline-flex;align-items:center;border:1px solid #0B0C0D;color:#0B0C0D;padding:0 20px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #166D70;outline-offset:3px">IR PARA O CATÁLOGO</a>
+              </div>
+            </sc-if>
+          </div>
+
+          <h3 style="margin:0 0 8px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:22px;letter-spacing:-0.01em">Arquivos</h3>
+          <p style="margin:0 0 20px;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Envie fotos do local, plantas, referências ou documentos técnicos.</p>
+
+          <div onDragOver="{{ onDragOver }}" onDragLeave="{{ onDragLeave }}" onDrop="{{ onDrop }}" style="border:2px dashed {{ dropBorda }};background:{{ dropFundo }};border-radius:2px;padding:clamp(24px,4vw,40px);text-align:center;display:grid;gap:14px;justify-items:center;margin-bottom:16px;transition:background .12s">
+            <p style="margin:0;font:500 17px/1.4 'Public Sans',sans-serif;color:#0B0C0D">{{ dropTitulo }}</p>
+            <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#4A4E50;max-width:44ch">Arraste os arquivos até aqui ou escolha do dispositivo.</p>
+            <button type="button" onClick="{{ escolherArquivos }}" style="min-height:48px;border:1px solid #0B0C0D;background:#FFFFFF;color:#0B0C0D;padding:0 20px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:14px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #166D70;outline-offset:3px">ESCOLHER ARQUIVOS</button>
+            <p style="margin:0;font:400 12px/1.4 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">PDF · JPG · JPEG · PNG · ATÉ 25 MB CADA</p>
+          </div>
+
+          <sc-if value="{{ erroArquivo }}" hint-placeholder-val="{{ false }}">
+            <div role="alert" style="border:1px solid #8C2A2A;background:#FBF0F0;border-radius:2px;padding:14px 16px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start;animation:amrErro .24s ease-out">
+              <span style="flex:none;width:14px;height:14px;background:#8C2A2A;margin-top:4px"></span>
+              <div>
+                <p style="margin:0 0 2px;font:500 15px/1.4 'Public Sans',sans-serif;color:#8C2A2A">{{ erroArquivoTitulo }}</p>
+                <p style="margin:0;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A2020">Aceitamos apenas PDF, JPG, JPEG e PNG, com até 25 MB por arquivo.</p>
+              </div>
+              <button type="button" onClick="{{ limparErroArquivo }}" aria-label="Fechar" style="margin-left:auto;flex:none;width:32px;height:32px;border:1px solid #E0C4C4;background:transparent;color:#8C2A2A;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #8C2A2A;outline-offset:2px">×</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ temArquivos }}" hint-placeholder-val="{{ false }}">
+            <div style="border:1px solid #C9CBCC;background:#FFFFFF;border-radius:2px;overflow:hidden">
+              <p style="margin:0;padding:12px 16px;border-bottom:1px solid #C9CBCC;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#5A5F61">{{ arquivosResumo }}</p>
+              <sc-for list="{{ arquivos }}" as="a" hint-placeholder-count="3">
+                <div style="padding:14px 16px;border-bottom:1px solid #E4E6E6;display:grid;gap:8px">
+                  <div style="display:flex;gap:12px;align-items:center">
+                    <span style="flex:none;min-width:44px;height:28px;display:flex;align-items:center;justify-content:center;background:#0B0C0D;color:#2FB6B9;border-radius:2px;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em">{{ a.ext }}</span>
+                    <span style="flex:1;min-width:0;font:400 15px/1.4 'Public Sans',sans-serif;color:#0B0C0D;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ a.nome }}</span>
+                    <span style="flex:none;font:400 13px/1 'IBM Plex Mono',monospace;color:#5A5F61">{{ a.tamanho }}</span>
+                    <button type="button" onClick="{{ a.onRemove }}" aria-label="Remover arquivo" style="flex:none;width:36px;height:36px;border:1px solid #C9CBCC;background:transparent;color:#4A4E50;border-radius:2px;cursor:pointer" style-hover="border-color:#8C2A2A;color:#8C2A2A" style-focus="outline:2px solid #166D70;outline-offset:2px">×</button>
+                  </div>
+                  <sc-if value="{{ a.enviando }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;gap:12px;align-items:center">
+                      <span style="flex:1;height:6px;background:#E4E6E6;border-radius:1px;overflow:hidden"><span style="display:block;height:100%;width:{{ a.pct }}%;background:#2FB6B9;background-image:linear-gradient(90deg,rgba(255,255,255,0.35) 25%,transparent 25%,transparent 50%,rgba(255,255,255,0.35) 50%,rgba(255,255,255,0.35) 75%,transparent 75%);background-size:12px 12px;animation:amrProg .6s linear infinite;transition:width .3s"></span></span>
+                      <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;color:#166D70">{{ a.pct }}%</span>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ a.pronto }}" hint-placeholder-val="{{ false }}">
+                    <p style="margin:0;display:flex;gap:8px;align-items:center;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70"><span style="width:8px;height:8px;background:#166D70"></span>ANEXADO</p>
+                  </sc-if>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ etapa5 }}" hint-placeholder-val="{{ false }}">
+        <section style="animation:amrFade .2s ease-out both">
+          <div style="display:{{ tituloDeskDisplay }};align-items:baseline;gap:12px;margin-bottom:8px">
+            <span style="font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:30px;line-height:1;color:#C9CBCC">05</span>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(24px,2.8vw,30px);line-height:1;letter-spacing:-0.01em">Finalizar</h2>
+          </div>
+          <p style="margin:0 0 28px;font:400 17px/1.55 'Public Sans',sans-serif;color:#4A4E50;max-width:56ch">Última etapa. Depois disto a solicitação chega à equipe.</p>
+
+          <label style="display:grid;gap:8px;margin-bottom:28px">
+            <span style="display:flex;gap:8px;align-items:baseline;font:500 15px/1.3 'Public Sans',sans-serif">Conte-nos mais sobre o evento ou sobre alguma necessidade especial <span style="font:400 13px 'Public Sans',sans-serif;color:#5A5F61">opcional</span></span>
+            <textarea rows="5" value="{{ f_adicionais }}" onInput="{{ on_adicionais }}" placeholder="Contexto do evento, expectativa de resultado, acessibilidade, restrições da marca..." style="border:1px solid #C9CBCC;border-radius:2px;padding:12px 14px;font:400 16px/1.6 'Public Sans',sans-serif;background:#FFFFFF;color:#0B0C0D;resize:vertical" style-focus="outline:2px solid #166D70;outline-offset:-2px"></textarea>
+          </label>
+
+          <fieldset style="margin:0 0 28px;padding:0;border:0">
+            <legend style="padding:0;margin:0 0 6px;font:500 15px/1.3 'Public Sans',sans-serif">Faixa de investimento</legend>
+            <p style="margin:0 0 12px;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61">Nenhum valor é exibido no site. Isto orienta a equipe a propor a configuração adequada, não a definir o preço.</p>
+            <div style="display:grid;grid-template-columns:{{ gridDois }};gap:8px">{{ opcoesInvestimento }}</div>
+          </fieldset>
+
+          <div style="border:1px solid {{ consentBorda }};background:#FFFFFF;border-radius:2px;padding:20px;margin-bottom:8px">
+            <p style="margin:0 0 16px;font:500 15px/1.3 'Public Sans',sans-serif">Consentimentos</p>
+            <div style="display:grid;gap:2px">{{ consentimentos }}</div>
+            <sc-if value="{{ e_consent }}" hint-placeholder-val="{{ false }}">
+              <p role="alert" style="margin:16px 0 0;display:flex;gap:8px;align-items:center;font:500 13px/1.4 'Public Sans',sans-serif;color:#8C2A2A;animation:amrErro .24s ease-out"><span style="flex:none;width:12px;height:12px;background:#8C2A2A"></span>Marque os dois itens obrigatórios para enviar a solicitação.</p>
+            </sc-if>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ enviado }}" hint-placeholder-val="{{ false }}">
+        <section style="animation:amrFade .24s ease-out both;border:1px solid #0B0C0D;background:#FFFFFF;border-radius:2px;overflow:hidden">
+          <div style="padding:clamp(28px,4vw,48px);display:grid;gap:20px">
+            <p style="margin:0;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70">SOLICITAÇÃO {{ protocolo }}</p>
+            <h2 style="margin:0;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;text-transform:uppercase;font-size:clamp(28px,3.4vw,44px);line-height:0.98;letter-spacing:-0.01em">Recebemos sua solicitação</h2>
+            <p style="margin:0;font:400 17px/1.55 'Public Sans',sans-serif;color:#2A2D2F;max-width:54ch">Enviamos uma cópia para {{ emailConfirmacao }}. A equipe analisa disponibilidade, logística e montagem antes de responder com a proposta.</p>
+            <div style="display:flex;gap:14px;align-items:flex-start;background:#E4E6E6;border-left:2px solid #166D70;padding:16px 18px;border-radius:2px;max-width:640px">
+              <span style="flex:none;font:500 12px/1 'IBM Plex Mono',monospace;letter-spacing:0.06em;color:#166D70;padding-top:3px">AVISO</span>
+              <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#2A2D2F">O envio da solicitação não confirma reserva ou disponibilidade.</p>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;padding-top:4px">
+              <a href="#catalogo" style="min-height:52px;display:inline-flex;align-items:center;background:#2FB6B9;color:#0B0C0D;padding:0 24px;border-radius:2px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#166D70;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">CONTINUAR NAVEGANDO</a>
+              <button type="button" onClick="{{ novaSolicitacao }}" style="min-height:52px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;padding:0 24px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #166D70;outline-offset:3px">FAZER OUTRA SOLICITAÇÃO</button>
+            </div>
+          </div>
+        </section>
+      </sc-if>
+
+      <div style="display:{{ navRodapeDisplay }};flex-wrap:wrap;gap:12px;align-items:center;padding-top:32px;margin-top:32px;border-top:1px solid #C9CBCC">
+        <button type="button" onClick="{{ voltar }}" disabled="{{ noInicio }}" style="min-height:56px;border:1px solid #0B0C0D;background:transparent;color:#0B0C0D;padding:0 24px;border-radius:2px;cursor:pointer;opacity:{{ voltarOpacidade }};font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-hover="background:#0B0C0D;color:#F1F2F2" style-focus="outline:2px solid #166D70;outline-offset:3px">VOLTAR</button>
+        <sc-if value="{{ naoUltima }}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{ avancar }}" style="min-height:56px;border:0;background:#2FB6B9;color:#0B0C0D;padding:0 28px;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#166D70;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">{{ rotuloAvancar }}</button>
+        </sc-if>
+        <sc-if value="{{ ultima }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ enviar }}" disabled="{{ enviando }}" style="min-height:56px;border:0;background:#2FB6B9;color:#0B0C0D;padding:0 28px;border-radius:2px;cursor:{{ enviarCursor }};display:flex;align-items:center;gap:12px;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:16px" style-hover="background:#166D70;color:#F1F2F2" style-focus="outline:2px solid #0B0C0D;outline-offset:3px">
+            {{ rotuloEnviar }}
+            <sc-if value="{{ enviando }}" hint-placeholder-val="{{ false }}"><span style="display:block;width:14px;height:14px;border:2px solid rgba(11,12,13,0.3);border-top-color:#0B0C0D;border-radius:50%;animation:amrSpin .7s linear infinite"></span></sc-if>
+          </button>
+        </sc-if>
+        <p style="margin:0;font:400 13px/1.5 'Public Sans',sans-serif;color:#5A5F61;max-width:36ch">{{ rodapeAjuda }}</p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer style="background:#0B0C0D;color:#F1F2F2">
+  <div style="max-width:1280px;margin:0 auto;padding:clamp(32px,4vw,48px) 20px 28px">
+    <div style="display:flex;flex-wrap:wrap;gap:20px 40px;justify-content:space-between;align-items:flex-start">
+      <div style="display:grid;gap:12px">
+        <img src="uploads/logo-amr.png" alt="All Music Rentals" style="display:block;height:30px;width:auto">
+        <div style="display:flex;flex-wrap:wrap;gap:8px 20px;font:400 15px/1.4 'Public Sans',sans-serif">
+          <a href="tel:+16892421871" style="color:#F1F2F2;font-family:'IBM Plex Mono',monospace;font-size:15px" style-hover="color:#2FB6B9">(689) 242-1871</a>
+          <a href="mailto:contato@allmusicbr.com" style="color:#F1F2F2" style-hover="color:#2FB6B9">contato@allmusicbr.com</a>
+        </div>
+      </div>
+      <nav style="display:flex;flex-wrap:wrap;gap:8px 20px;font:400 15px/1.4 'Public Sans',sans-serif">
+        <a href="#privacidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Política de Privacidade</a>
+        <a href="#termos" style="color:#DDE0E0" style-hover="color:#2FB6B9">Termos de Uso</a>
+        <a href="#politicas" style="color:#DDE0E0" style-hover="color:#2FB6B9">Políticas de Locação</a>
+        <a href="#acessibilidade" style="color:#DDE0E0" style-hover="color:#2FB6B9">Acessibilidade</a>
+      </nav>
+    </div>
+    <div style="margin-top:28px;height:2px;background:repeating-linear-gradient(90deg,#2A2D2F 0 22px,transparent 22px 24px)"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;padding-top:20px">
+      <p style="margin:0;font:400 15px/1.5 'Public Sans',sans-serif;color:#9EA3A5;max-width:60ch">Os produtos estão sujeitos à disponibilidade. O envio de uma solicitação não cria uma reserva.</p>
+      <p style="margin:0;font:400 13px/1.4 'IBM Plex Mono',monospace;color:#8A8F91">© 2026 All Music Rentals. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</footer>
+
+<div style="display:{{ barraMobDisplay }};position:fixed;left:0;right:0;bottom:0;z-index:50;background:#0B0C0D;border-top:1px solid #2FB6B9;padding:10px 20px 12px">
+  <div style="display:flex;gap:10px;align-items:center">
+    <button type="button" onClick="{{ voltar }}" disabled="{{ noInicio }}" aria-label="Voltar" style="flex:none;width:56px;min-height:52px;border:1px solid #3A3E40;background:transparent;color:#F1F2F2;border-radius:2px;cursor:pointer;opacity:{{ voltarOpacidade }};font-size:18px" style-focus="outline:2px solid #2FB6B9;outline-offset:3px">←</button>
+    <sc-if value="{{ naoUltima }}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{ avancar }}" style="flex:1;min-height:52px;border:0;background:#2FB6B9;color:#0B0C0D;border-radius:2px;cursor:pointer;font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">{{ rotuloAvancar }}</button>
+    </sc-if>
+    <sc-if value="{{ ultima }}" hint-placeholder-val="{{ false }}">
+      <button type="button" onClick="{{ enviar }}" disabled="{{ enviando }}" style="flex:1;min-height:52px;border:0;background:#2FB6B9;color:#0B0C0D;border-radius:2px;cursor:{{ enviarCursor }};font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 75;font-weight:800;font-size:15px" style-focus="outline:2px solid #F1F2F2;outline-offset:3px">{{ rotuloEnviar }}</button>
+    </sc-if>
+  </div>
+</div>
+
+<sc-if value="{{ toastAberto }}" hint-placeholder-val="{{ false }}">
+  <div role="status" style="position:fixed;left:20px;right:20px;bottom:{{ toastBottom }};z-index:60;display:flex;justify-content:center;pointer-events:none">
+    <div style="pointer-events:auto;max-width:480px;width:100%;background:#0B0C0D;color:#F1F2F2;border:1px solid #2FB6B9;border-radius:2px;box-shadow:6px 6px 0 rgba(11,12,13,0.35);padding:16px 18px;animation:amrToast .18s ease-out both;display:flex;gap:12px;align-items:center">
+      <span style="flex:none;width:10px;height:10px;background:#2FB6B9"></span>
+      <p style="margin:0;flex:1;font:400 15px/1.4 'Public Sans',sans-serif;color:#DDE0E0">{{ toastItem }}</p>
+      <button type="button" onClick="{{ fecharToast }}" aria-label="Fechar" style="flex:none;width:32px;height:32px;border:1px solid #3A3E40;background:transparent;color:#F1F2F2;border-radius:2px;cursor:pointer" style-focus="outline:2px solid #2FB6B9;outline-offset:2px">×</button>
+    </div>
+  </div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+const ETAPAS = [
+  { n: 1, titulo: 'Dados de contato', sub: 'Nome, e-mail, telefone e perfil', campos: 8 },
+  { n: 2, titulo: 'Dados do evento', sub: 'Tipo, data e cronograma', campos: 8 },
+  { n: 3, titulo: 'Local e logística', sub: 'Endereço, acesso, energia e chuva', campos: 15 },
+  { n: 4, titulo: 'Produtos e arquivos', sub: 'Itens do orçamento e anexos', campos: 2 },
+  { n: 5, titulo: 'Finalizar', sub: 'Contexto, faixa e consentimentos', campos: 5 }
+];
+
+const CRONO = [
+  { id: 'horaMontagem', rotulo: 'Montagem', ajuda: 'Quando a equipe pode entrar no local.' },
+  { id: 'horaInicio', rotulo: 'Início do evento', ajuda: 'Portas abertas para os convidados.' },
+  { id: 'horaTermino', rotulo: 'Término do evento', ajuda: 'Fim da programação.' },
+  { id: 'horaDesmontagem', rotulo: 'Desmontagem', ajuda: 'Quando podemos começar a retirar.' }
+];
+
+const ITENS_INICIAIS = [
+  { id: 'mesa-alta', nome: 'Mesa Alta Redonda de Alumínio de 23,25 Polegadas', codigo: 'AMR-MOV-MA-2325', categoria: 'MÓVEIS', foto: 'uploads/HIGH TABLE ALUMINIUM 2.webp', qty: 12, obs: 'Chegada liberada a partir das 14h pela doca de serviço.' },
+  { id: 'capa-spandex', nome: 'Capa de Spandex para Mesa de Coquetel', codigo: 'AMR-MOV-CS-COQ', categoria: 'MÓVEIS', foto: 'uploads/COVERS HIGH TABLE.jpg', qty: 12, variacao: ' · PRETO · MESA ALTA', obs: '' },
+  { id: 'led', nome: 'Locação de Painel de LED na Flórida', codigo: 'AMR-LED-LOC-FL', categoria: 'TELAS DE LED', foto: 'uploads/LED SCREEN 5.jpg', semQtd: true, qty: 1, variacao: ' · TAMANHO A DEFINIR', obs: 'Palco de 8 × 6 m, público a cerca de 6 m da tela.' },
+  { id: 'praticavel', nome: 'Praticável 2 × 1 m com Altura Regulável', codigo: 'AMR-EST-PR-21', categoria: 'ESTRUTURAS', placeholder: 'FOTO · PRATICÁVEL · 4:3', qty: 4, obs: '' }
+];
+
+const ARQ_INICIAIS = [
+  { id: 'a1', nome: 'planta-salao-principal.pdf', ext: 'PDF', bytes: 2411724, pct: 100 },
+  { id: 'a2', nome: 'foto-area-externa.jpg', ext: 'JPG', bytes: 3884032, pct: 100 },
+  { id: 'a3', nome: 'referencia-palco-led.png', ext: 'PNG', bytes: 5347328, pct: 100 }
+];
+
+const GRUPOS_OPCOES = {
+  idioma: ['Português', 'Inglês', 'Espanhol'],
+  contato: ['E-mail', 'Telefone', 'WhatsApp', 'Mensagem de texto'],
+  cliente: ['Cliente privado', 'Event planner', 'Wedding planner', 'Produtor', 'Empresa', 'Hotel', 'Local de eventos', 'Agência', 'Outro'],
+  evento: ['Evento corporativo', 'Casamento', 'Aniversário', 'Festa privada', 'Show', 'Festival', 'Feira', 'Ativação de marca', 'Formatura', 'Outro'],
+  ambiente: ['Interno', 'Externo', 'Interno e externo'],
+  superficie: ['Piso interno', 'Concreto', 'Grama', 'Asfalto', 'Areia', 'Outro'],
+  energia: ['Sim, tomadas suficientes', 'Sim, mas limitada', 'Não há energia', 'Não sei'],
+  gerador: ['Preciso de gerador', 'Não preciso', 'Não sei'],
+  chuva: ['O local tem cobertura', 'Preciso de plano de chuva', 'Evento é interno', 'Não sei'],
+  desmontagem: ['Sim, no mesmo dia', 'Sim, no dia seguinte', 'Não preciso', 'Não sei'],
+  investimento: ['Abaixo de US$ 2.500', 'De US$ 2.500 a US$ 5.000', 'De US$ 5.000 a US$ 10.000', 'De US$ 10.000 a US$ 25.000', 'De US$ 25.000 a US$ 50.000', 'Acima de US$ 50.000', 'Ainda não sei']
+};
+
+const ACESSO = [
+  { id: 'doca', rotulo: 'Doca de carga e descarga' },
+  { id: 'elevador', rotulo: 'Elevador de serviço' },
+  { id: 'escadas', rotulo: 'Há escadas no caminho' },
+  { id: 'estacionamento', rotulo: 'Estacionamento para o caminhão' }
+];
+
+const CONSENTS = [
+  { id: 'c1', obrigatorio: true, texto: 'Entendo que o envio desta solicitação não reserva produtos nem confirma disponibilidade.' },
+  { id: 'c2', obrigatorio: true, texto: 'Concordo com a Política de Privacidade e autorizo o contato sobre esta solicitação.' },
+  { id: 'c3', obrigatorio: false, texto: 'Concordo em receber mensagens de texto relacionadas ao meu orçamento.' }
+];
+
+const CHAVE = 'amr-solicitacao-rascunho-v1';
+
+class Component extends DCLogic {
+  state = {
+    etapa: 1, enviado: false, enviando: false, protocolo: '',
+    erros: {}, erroResumo: false, tocado: {},
+    itens: ITENS_INICIAIS.map(i => Object.assign({}, i)),
+    arquivos: ARQ_INICIAIS.map(a => Object.assign({}, a)),
+    erroArquivo: null, arrastando: false,
+    salvo: null, toast: null, vw: 1440,
+    f: {
+      nome: '', sobrenome: '', empresa: '', email: '', telefone: '',
+      idioma: 'Português', contato: 'E-mail', cliente: null,
+      evento: null, dataEvento: '', dataMontagem: '', montagemMesmoDia: true,
+      horaMontagem: '', horaInicio: '', horaTermino: '', horaDesmontagem: '', convidados: '',
+      local: '', endereco: '', cidade: '', estado: 'FL', cep: '', contatoLocal: '',
+      ambiente: null, superficie: null, acesso: {}, acessoObs: '',
+      energia: null, gerador: null, chuva: null, tempoMontagem: '', desmontagem: null,
+      restricoes: '', instrucoes: '', adicionais: '', investimento: null,
+      consent: {}
+    }
+  };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+    try {
+      const cru = window.localStorage.getItem(CHAVE);
+      if (cru) {
+        const d = JSON.parse(cru);
+        if (d && d.f) this.setState({ f: Object.assign({}, this.state.f, d.f), etapa: d.etapa || 1, salvo: d.quando || null });
+      }
+    } catch (e) {}
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    if (this._t) clearTimeout(this._t);
+    if (this._salvarT) clearTimeout(this._salvarT);
+    if (this._up) clearInterval(this._up);
+  }
+
+  salvar() {
+    if (this._salvarT) clearTimeout(this._salvarT);
+    this._salvarT = setTimeout(() => {
+      const quando = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      try { window.localStorage.setItem(CHAVE, JSON.stringify({ f: this.state.f, etapa: this.state.etapa, quando: quando })); } catch (e) {}
+      this.setState({ salvo: quando });
+    }, 700);
+  }
+
+  set(campo, valor) {
+    this.setState(s => {
+      const erros = Object.assign({}, s.erros);
+      delete erros[campo];
+      return { f: Object.assign({}, s.f, { [campo]: valor }), erros: erros };
+    }, () => this.salvar());
+  }
+
+  aviso(texto) {
+    this.setState({ toast: texto });
+    if (this._t) clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ toast: null }), 6000);
+  }
+
+  validar(etapa) {
+    const f = this.state.f, e = {};
+    if (etapa === 1) {
+      if (!f.nome.trim()) e.nome = 1;
+      if (!f.sobrenome.trim()) e.sobrenome = 1;
+      if (!f.email.trim()) e.email = 'vazio';
+      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(f.email.trim())) e.email = 'formato';
+      const digitos = f.telefone.replace(/\D/g, '');
+      if (!digitos) e.telefone = 'vazio';
+      else if (digitos.length < 10) e.telefone = 'curto';
+      if (!f.cliente) e.cliente = 1;
+    }
+    if (etapa === 2) {
+      if (!f.evento) e.evento = 1;
+      if (!f.dataEvento) e.dataEvento = 'vazio';
+      else {
+        const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+        const d = new Date(f.dataEvento + 'T00:00:00');
+        if (d < hoje) e.dataEvento = 'passado';
+      }
+    }
+    if (etapa === 3) {
+      if (!f.cidade.trim()) e.cidade = 1;
+    }
+    if (etapa === 5) {
+      if (!f.consent.c1 || !f.consent.c2) e.consent = 1;
+    }
+    return e;
+  }
+
+  irPara(n) {
+    if (n > this.state.etapa) {
+      const e = this.validar(this.state.etapa);
+      if (Object.keys(e).length) { this.setState({ erros: e, erroResumo: true }); return; }
+    }
+    this.setState({ etapa: n, erros: {}, erroResumo: false }, () => {
+      this.salvar();
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+    });
+  }
+
+  enviar() {
+    const e = this.validar(5);
+    if (Object.keys(e).length) { this.setState({ erros: e, erroResumo: true }); return; }
+    const pendente = this.state.arquivos.filter(a => a.pct < 100)[0];
+    if (pendente) {
+      this.aviso('“' + pendente.nome + '” ainda está sendo enviado. Levamos você até a etapa de arquivos.');
+      this.setState({ etapa: 4, erros: {}, erroResumo: false });
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+      return;
+    }
+    this.setState({ enviando: true });
+    setTimeout(() => {
+      const p = 'AMR-' + String(Math.floor(Math.random() * 9000) + 1000);
+      this.setState({ enviando: false, enviado: true, protocolo: p, erroResumo: false });
+      try { window.localStorage.removeItem(CHAVE); } catch (err) {}
+      if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+    }, 1400);
+  }
+
+  progressoEtapa(n) {
+    const f = this.state.f;
+    if (n === 1) {
+      const ok = [f.nome, f.sobrenome, f.email, f.telefone].filter(v => v && v.trim()).length + (f.cliente ? 1 : 0);
+      return ok / 5;
+    }
+    if (n === 2) {
+      const ok = (f.evento ? 1 : 0) + (f.dataEvento ? 1 : 0);
+      return ok / 2;
+    }
+    if (n === 3) return (f.cidade.trim() ? 1 : 0);
+    if (n === 4) return this.state.itens.length ? 1 : 0;
+    if (n === 5) return (f.consent.c1 && f.consent.c2) ? 1 : 0;
+    return 0;
+  }
+
+  barraEtapas() {
+    return ETAPAS.map(et => {
+      const atual = et.n === this.state.etapa;
+      const passada = et.n < this.state.etapa;
+      return React.createElement('span', {
+        key: et.n,
+        style: {
+          flex: 1, borderRadius: '1px',
+          background: passada ? '#166D70' : atual ? '#2FB6B9' : '#C9CBCC'
+        }
+      });
+    });
+  }
+
+  navEtapas() {
+    return ETAPAS.map(et => {
+      const atual = et.n === this.state.etapa;
+      const p = this.progressoEtapa(et.n);
+      const completa = p >= 1 && et.n < this.state.etapa;
+      return React.createElement('button', {
+        key: et.n, type: 'button', onClick: () => this.irPara(et.n),
+        style: {
+          display: 'grid', gridTemplateColumns: 'auto 1fr auto', gap: '12px',
+          alignItems: 'center', width: '100%', minHeight: '64px', padding: '12px 14px',
+          border: 0, borderLeft: '2px solid ' + (atual ? '#2FB6B9' : 'transparent'),
+          borderBottom: '1px solid #C9CBCC',
+          background: atual ? '#FFFFFF' : 'transparent', cursor: 'pointer', textAlign: 'left'
+        }
+      },
+        React.createElement('span', {
+          style: {
+            width: '26px', height: '26px', display: 'flex', alignItems: 'center', justifyContent: 'center',
+            borderRadius: '2px', font: "500 12px 'IBM Plex Mono',monospace",
+            background: completa ? '#166D70' : atual ? '#0B0C0D' : '#E4E6E6',
+            color: completa || atual ? '#F1F2F2' : '#4A4E50'
+          }
+        }, completa ? '✓' : String(et.n).padStart(2, '0')),
+        React.createElement('span', { style: { minWidth: 0 } },
+          React.createElement('span', { style: { display: 'block', font: "500 15px/1.3 'Public Sans',sans-serif", color: '#0B0C0D' } }, et.titulo),
+          React.createElement('span', { style: { display: 'block', font: "400 13px/1.35 'Public Sans',sans-serif", color: '#5A5F61' } }, et.sub)
+        ),
+        React.createElement('span', { style: { font: "400 11px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#5A5F61' } }, et.campos)
+      );
+    });
+  }
+
+  botoes(grupo, campo, colunas) {
+    const val = this.state.f[campo];
+    return GRUPOS_OPCOES[grupo].map(o => {
+      const on = val === o;
+      const incerto = o.indexOf('Não sei') >= 0 || o.indexOf('Ainda não sei') >= 0 || o === 'Outro';
+      return React.createElement('button', {
+        key: o, type: 'button', onClick: () => this.set(campo, on ? null : o), 'aria-pressed': on ? 'true' : 'false',
+        style: {
+          minHeight: '48px', padding: '0 16px', borderRadius: '2px', cursor: 'pointer',
+          border: '1px solid ' + (on ? '#0B0C0D' : (this.state.erros[campo] ? '#8C2A2A' : '#C9CBCC')),
+          background: on ? '#0B0C0D' : '#FFFFFF',
+          color: on ? '#F1F2F2' : (incerto ? '#2A2D2F' : '#4A4E50'),
+          font: (incerto ? '500' : '400') + " 15px/1.3 'Public Sans',sans-serif",
+          textAlign: colunas ? 'left' : 'center'
+        }
+      }, o);
+    });
+  }
+
+  cronograma() {
+    const f = this.state.f;
+    const linhas = CRONO.map((c, i) => {
+      const preenchido = !!f[c.id];
+      return React.createElement('div', {
+        key: c.id,
+        style: { display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '16px', alignItems: 'stretch' }
+      },
+        React.createElement('div', { style: { display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', paddingTop: '6px' } },
+          React.createElement('span', {
+            style: {
+              flex: 'none', width: '28px', height: '28px', borderRadius: '2px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              font: "500 11px/1 'IBM Plex Mono',monospace", letterSpacing: '0.02em',
+              background: preenchido ? '#166D70' : '#F1F2F2',
+              color: preenchido ? '#F1F2F2' : '#5A5F61',
+              border: '2px solid ' + (preenchido ? '#166D70' : '#C9CBCC')
+            }
+          }, String(i + 1).padStart(2, '0')),
+          i < CRONO.length - 1 ? React.createElement('span', { style: { width: '2px', flex: 1, alignSelf: 'center', minHeight: '24px', background: preenchido ? '#166D70' : '#C9CBCC' } }) : null
+        ),
+        React.createElement('div', { style: { display: 'grid', gap: '8px', paddingBottom: i < CRONO.length - 1 ? '20px' : 0 } },
+          React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' } },
+            React.createElement('label', { style: { display: 'grid', gap: '6px' } },
+              React.createElement('span', { style: { font: "500 15px/1.3 'Public Sans',sans-serif" } }, c.rotulo),
+              React.createElement('input', {
+                type: 'time', value: f[c.id], onChange: e => this.set(c.id, e.target.value),
+                style: {
+                  minHeight: '48px', width: '148px', border: '1px solid ' + (preenchido ? '#0B0C0D' : '#C9CBCC'),
+                  borderRadius: '2px', padding: '0 12px', font: "500 16px 'IBM Plex Mono',monospace",
+                  background: '#FFFFFF', color: '#0B0C0D'
+                }
+              })
+            ),
+            !preenchido ? React.createElement('span', {
+              style: { alignSelf: 'flex-end', paddingBottom: '14px', font: "500 12px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: '#5A5F61' }
+            }, 'A DEFINIR') : null
+          ),
+          React.createElement('p', { style: { margin: 0, font: "400 13px/1.5 'Public Sans',sans-serif", color: '#5A5F61' } }, c.ajuda)
+        )
+      );
+    });
+    return React.createElement('div', { style: { display: 'grid' } }, linhas);
+  }
+
+  acessoUI() {
+    const f = this.state.f;
+    return ACESSO.map(a => {
+      const on = !!f.acesso[a.id];
+      return React.createElement('label', {
+        key: a.id,
+        style: { display: 'flex', alignItems: 'center', gap: '12px', minHeight: '48px', cursor: 'pointer', font: "400 15px/1.4 'Public Sans',sans-serif", color: on ? '#0B0C0D' : '#4A4E50' }
+      },
+        React.createElement('input', {
+          type: 'checkbox', checked: on,
+          onChange: () => this.set('acesso', Object.assign({}, f.acesso, { [a.id]: !on })),
+          style: { width: '20px', height: '20px', accentColor: '#166D70', flex: 'none', cursor: 'pointer' }
+        }),
+        a.rotulo
+      );
+    });
+  }
+
+  consentUI() {
+    const f = this.state.f;
+    const erro = !!this.state.erros.consent;
+    return CONSENTS.map(c => {
+      const on = !!f.consent[c.id];
+      const falta = erro && c.obrigatorio && !on;
+      return React.createElement('label', {
+        key: c.id,
+        style: {
+          display: 'flex', alignItems: 'flex-start', gap: '14px', padding: '14px 0',
+          borderBottom: '1px solid #E4E6E6', cursor: 'pointer',
+          font: "400 15px/1.55 'Public Sans',sans-serif", color: falta ? '#8C2A2A' : '#2A2D2F'
+        }
+      },
+        React.createElement('input', {
+          type: 'checkbox', checked: on,
+          onChange: () => this.set('consent', Object.assign({}, f.consent, { [c.id]: !on })),
+          style: { width: '22px', height: '22px', marginTop: '2px', accentColor: '#166D70', flex: 'none', cursor: 'pointer' }
+        }),
+        React.createElement('span', null,
+          c.texto,
+          ' ',
+          React.createElement('span', {
+            style: { font: "500 11px 'IBM Plex Mono',monospace", letterSpacing: '0.06em', color: c.obrigatorio ? '#8C2A2A' : '#5A5F61', whiteSpace: 'nowrap' }
+          }, c.obrigatorio ? 'OBRIGATÓRIO' : 'OPCIONAL')
+        )
+      );
+    });
+  }
+
+  tamanho(b) {
+    if (b < 1024 * 1024) return Math.round(b / 1024) + ' KB';
+    return (b / (1024 * 1024)).toFixed(1).replace('.', ',') + ' MB';
+  }
+
+  addArquivos(lista) {
+    const permitido = ['pdf', 'jpg', 'jpeg', 'png'];
+    const bons = [], ruins = [];
+    lista.forEach(nome => {
+      const ext = String(nome).split('.').pop().toLowerCase();
+      if (permitido.indexOf(ext) < 0) ruins.push(nome);
+      else bons.push({ id: 'f' + Date.now() + Math.random().toString(36).slice(2, 6), nome: nome, ext: ext.toUpperCase(), bytes: 1200000 + Math.floor(Math.random() * 6000000), pct: 0 });
+    });
+    if (ruins.length) this.setState({ erroArquivo: ruins.length === 1 ? '“' + ruins[0] + '” não é um formato aceito.' : ruins.length + ' arquivos foram recusados por formato.' });
+    if (!bons.length) return;
+    this.setState(s => ({ arquivos: s.arquivos.concat(bons), arrastando: false }));
+    if (this._up) clearInterval(this._up);
+    this._up = setInterval(() => {
+      let restam = false;
+      this.setState(s => ({
+        arquivos: s.arquivos.map(a => {
+          if (a.pct >= 100) return a;
+          restam = true;
+          return Object.assign({}, a, { pct: Math.min(100, a.pct + 12 + Math.floor(Math.random() * 14)) });
+        })
+      }), () => { if (!restam && this._up) { clearInterval(this._up); this._up = null; } });
+    }, 320);
+  }
+
+  renderVals() {
+    const f = this.state.f;
+    const vw = this.state.vw;
+    const mobile = vw < 1080;
+    const et = this.state.etapa;
+    const enviado = this.state.enviado;
+    const itens = this.state.itens;
+    const arqs = this.state.arquivos;
+    const atual = ETAPAS[et - 1];
+
+    const v = {
+      nItens: itens.length,
+      vw: vw,
+      deskDisplay: mobile ? 'none' : 'block',
+      asideDisplay: mobile || enviado ? 'none' : 'block',
+      progMobDisplay: mobile && !enviado ? 'block' : 'none',
+      tituloDeskDisplay: mobile ? 'none' : 'flex',
+      colsHero: vw < 900 ? '1fr' : 'minmax(0,1.4fr) minmax(260px,0.9fr)',
+      colsLayout: mobile || enviado ? '1fr' : '300px minmax(0,1fr)',
+      gridDois: vw < 640 ? '1fr' : 'repeat(2,1fr)',
+      gridTres: vw < 640 ? '1fr' : vw < 900 ? 'repeat(2,1fr)' : 'minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr)',
+      colsItem: vw < 560 ? '1fr' : 'minmax(96px,140px) minmax(0,1fr)',
+      barraMobDisplay: mobile && !enviado ? 'block' : 'none',
+      padBase: mobile && !enviado ? '84px' : '0px',
+      toastBottom: mobile && !enviado ? '96px' : '20px',
+      navRodapeDisplay: enviado ? 'none' : (mobile ? 'none' : 'flex'),
+
+      etapaAtualNum: et,
+      etapaAtualTitulo: atual.titulo,
+      barraEtapas: this.barraEtapas(),
+      navEtapas: this.navEtapas(),
+      salvoTexto: this.state.salvo ? 'RASCUNHO SALVO ' + this.state.salvo : 'RASCUNHO AUTOMÁTICO ATIVO',
+
+      etapa1: et === 1 && !enviado,
+      etapa2: et === 2 && !enviado,
+      etapa3: et === 3 && !enviado,
+      etapa4: et === 4 && !enviado,
+      etapa5: et === 5 && !enviado,
+      enviado: enviado,
+      protocolo: this.state.protocolo,
+      emailConfirmacao: f.email.trim() || 'seu e-mail',
+      novaSolicitacao: () => this.setState({ enviado: false, etapa: 1, protocolo: '' }),
+
+      erroResumo: this.state.erroResumo,
+      erroTitulo: Object.keys(this.state.erros).length === 1 ? 'Falta um campo obrigatório nesta etapa.' : 'Faltam campos obrigatórios nesta etapa.',
+
+      noInicio: et === 1,
+      voltarOpacidade: et === 1 ? 0.35 : 1,
+      naoUltima: et < 5,
+      ultima: et === 5,
+      rotuloAvancar: et === 4 ? 'IR PARA A ÚLTIMA ETAPA' : 'CONTINUAR',
+      rotuloEnviar: this.state.enviando ? 'ENVIANDO' : 'ENVIAR SOLICITAÇÃO',
+      enviando: this.state.enviando,
+      enviarCursor: this.state.enviando ? 'progress' : 'pointer',
+      rodapeAjuda: et === 5 ? 'Você pode revisar qualquer etapa antes de enviar.' : 'Suas respostas ficam salvas neste navegador.',
+      voltar: () => this.irPara(Math.max(1, et - 1)),
+      avancar: () => this.irPara(Math.min(5, et + 1)),
+      enviar: () => this.enviar(),
+
+      opcoesIdioma: this.botoes('idioma', 'idioma'),
+      opcoesContato: this.botoes('contato', 'contato'),
+      opcoesCliente: this.botoes('cliente', 'cliente'),
+      opcoesEvento: this.botoes('evento', 'evento'),
+      opcoesAmbiente: this.botoes('ambiente', 'ambiente'),
+      opcoesSuperficie: this.botoes('superficie', 'superficie'),
+      opcoesEnergia: this.botoes('energia', 'energia'),
+      opcoesGerador: this.botoes('gerador', 'gerador'),
+      opcoesChuva: this.botoes('chuva', 'chuva'),
+      opcoesDesmontagem: this.botoes('desmontagem', 'desmontagem'),
+      opcoesInvestimento: this.botoes('investimento', 'investimento', true),
+      opcoesAcesso: this.acessoUI(),
+      consentimentos: this.consentUI(),
+      consentBorda: this.state.erros.consent ? '#8C2A2A' : '#C9CBCC',
+      e_consent: !!this.state.erros.consent,
+
+      cronograma: this.cronograma(),
+      cronoResumo: (f.horaInicio && f.horaTermino) ? f.horaInicio + ' – ' + f.horaTermino : 'HORÁRIOS A DEFINIR',
+      montagemOutroDia: !f.montagemMesmoDia,
+
+      itens: itens.map(i => ({
+        nome: i.nome, codigo: i.codigo, categoria: i.categoria,
+        variacao: i.variacao || '',
+        temFoto: !!i.foto, semFoto: !i.foto,
+        bg: i.foto ? "url('" + i.foto + "')" : 'none',
+        placeholder: i.placeholder || '',
+        temQtd: !i.semQtd, semQtd: !!i.semQtd, qty: i.qty,
+        obs: i.obs,
+        obsPlaceholder: i.semQtd ? 'Distância do público, tipo de conteúdo, montagem...' : 'Cor preferida, horário de entrega, onde vai ficar montado...',
+        obsBorda: i.obs && i.obs.trim() ? '#C9CBCC' : '#166D70',
+        onObs: e => { const v2 = e.target.value; this.setState(s => ({ itens: s.itens.map(x => x.id === i.id ? Object.assign({}, x, { obs: v2 }) : x) })); },
+        onDec: () => this.setState(s => ({ itens: s.itens.map(x => x.id === i.id ? Object.assign({}, x, { qty: Math.max(1, x.qty - 1) }) : x) })),
+        onInc: () => this.setState(s => ({ itens: s.itens.map(x => x.id === i.id ? Object.assign({}, x, { qty: x.qty + 1 }) : x) })),
+        onQty: e => { const n = parseInt(String(e.target.value).replace(/\D/g, ''), 10); this.setState(s => ({ itens: s.itens.map(x => x.id === i.id ? Object.assign({}, x, { qty: isNaN(n) || n < 1 ? 1 : n }) : x) })); },
+        onRemove: () => { this.setState(s => ({ itens: s.itens.filter(x => x.id !== i.id) })); this.aviso('“' + i.nome + '” foi removido da solicitação.'); }
+      })),
+      semItens: itens.length === 0,
+
+      temArquivos: arqs.length > 0,
+      arquivosResumo: arqs.length === 1 ? '1 ARQUIVO' : arqs.length + ' ARQUIVOS',
+      arquivos: arqs.map(a => ({
+        nome: a.nome, ext: a.ext, tamanho: this.tamanho(a.bytes), pct: a.pct,
+        enviando: a.pct < 100, pronto: a.pct >= 100,
+        onRemove: () => this.setState(s => ({ arquivos: s.arquivos.filter(x => x.id !== a.id) }))
+      })),
+      dropBorda: this.state.arrastando ? '#166D70' : '#C9CBCC',
+      dropFundo: this.state.arrastando ? '#E7EFEF' : '#FFFFFF',
+      dropTitulo: this.state.arrastando ? 'Solte para anexar' : 'Arraste e solte seus arquivos',
+      onDragOver: e => { e.preventDefault(); if (!this.state.arrastando) this.setState({ arrastando: true }); },
+      onDragLeave: e => { e.preventDefault(); this.setState({ arrastando: false }); },
+      onDrop: e => {
+        e.preventDefault();
+        const nomes = e.dataTransfer && e.dataTransfer.files ? Array.prototype.map.call(e.dataTransfer.files, x => x.name) : [];
+        this.setState({ arrastando: false });
+        if (nomes.length) this.addArquivos(nomes);
+      },
+      escolherArquivos: () => {
+        const inp = document.createElement('input');
+        inp.type = 'file';
+        inp.multiple = true;
+        inp.accept = '.pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png';
+        inp.onchange = () => {
+          const nomes = Array.prototype.map.call(inp.files || [], x => x.name);
+          if (nomes.length) this.addArquivos(nomes);
+        };
+        inp.click();
+      },
+      erroArquivo: !!this.state.erroArquivo,
+      erroArquivoTitulo: this.state.erroArquivo || '',
+      limparErroArquivo: () => this.setState({ erroArquivo: null }),
+
+      toastAberto: !!this.state.toast,
+      toastItem: this.state.toast,
+      fecharToast: () => this.setState({ toast: null })
+    };
+
+    const campos = ['nome', 'sobrenome', 'empresa', 'email', 'telefone', 'dataEvento', 'dataMontagem', 'convidados', 'local', 'endereco', 'cidade', 'estado', 'cep', 'contatoLocal', 'acessoObs', 'tempoMontagem', 'restricoes', 'instrucoes', 'adicionais'];
+    campos.forEach(c => {
+      v['f_' + c] = f[c];
+      v['on_' + c] = e => this.set(c, e.target.value);
+      v['e_' + c] = !!this.state.erros[c];
+      v['b_' + c] = this.state.erros[c] ? '#8C2A2A' : '#C9CBCC';
+    });
+    v.msg_email = this.state.erros.email === 'formato' ? 'Confira o endereço: falta o @ ou o domínio.' : 'Informe um e-mail para receber a proposta.';
+    v.msg_telefone = this.state.erros.telefone === 'curto' ? 'O telefone parece incompleto. Inclua o código de área.' : 'Informe um telefone de contato.';
+    v.msg_dataEvento = this.state.erros.dataEvento === 'passado' ? 'A data escolhida já passou. Confira o dia do evento.' : 'Informe a data do evento.';
+    v.e_cliente = !!this.state.erros.cliente;
+    v.e_evento = !!this.state.erros.evento;
+    v.f_montagemMesmoDia = f.montagemMesmoDia;
+    v.on_montagemMesmoDia = () => this.set('montagemMesmoDia', !f.montagemMesmoDia);
+
+    return v;
+  }
+}
+</script>
+</body>
+</html>
