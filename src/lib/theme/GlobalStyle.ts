@@ -38,6 +38,34 @@ export const GlobalStyle = createGlobalStyle`
     outline-offset: 2px;
   }
 
+  /* Keyframes do layout (bloco <style> dos exports /projeto-base). */
+  @keyframes amrFade {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes amrToast {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes amrSpin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes amrPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+  @keyframes amrDrawer {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes amrErro {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;

@@ -17,10 +17,16 @@ export const theme = {
     borda: '#C9CBCC',
     superficie200: '#DDE0E0',
     superficie150: '#E4E6E6',
+    superficie125: '#EDEEEE',
+    hachuraClaro: '#DADCDC',
     textoMid: '#5A5F61',
     textoMuted: '#6B7072',
     textoHint: '#8A8F91',
     textoMutedClaro: '#9EA3A5',
+    // Nav inativo sobre fundo escuro (unificado de #C7CACB → #C9CBCC).
+    navInativo: '#C9CBCC',
+    // Texto de link do rodapé sobre fundo escuro.
+    rodapeLink: '#DDE0E0',
     // Marca (teal)
     teal: '#2FB6B9',
     tealLink: '#1A7F82',
@@ -40,6 +46,45 @@ export const theme = {
     medio: 500,
     semibold: 600,
     display: 800,
+  },
+  // Escala tipográfica fixa (px) — corpos e UI. Derivada de tokens.json.
+  tamanho: {
+    12: '12px',
+    13: '13px',
+    14: '14px',
+    15: '15px',
+    16: '16px',
+    17: '17px',
+    18: '18px',
+    20: '20px',
+    22: '22px',
+    26: '26px',
+    28: '28px',
+    30: '30px',
+    34: '34px',
+    44: '44px',
+    52: '52px',
+  },
+  // Tamanhos fluidos (clamp) para títulos — sem @media, escala por viewport.
+  fluido: {
+    corpoGrande: 'clamp(16px, 1.2vw, 17px)',
+    h4: 'clamp(20px, 3vw, 28px)',
+    h3: 'clamp(24px, 2.8vw, 30px)',
+    h2: 'clamp(28px, 4vw, 48px)',
+    h1: 'clamp(40px, 5vw, 64px)',
+    display: 'clamp(48px, 6vw, 96px)',
+    displayHero: 'clamp(56px, 8vw, 144px)',
+  },
+  tracking: {
+    apertado: '-0.01em', // display grande
+    rotulo: '0.04em',
+    rotuloForte: '0.06em', // caixa-alta mono
+  },
+  leading: {
+    display: '0.98',
+    displayApertado: '0.92',
+    unidade: '1',
+    corpo: '1.5',
   },
   // Escala de espaçamento (px) — base 2, ritmo em múltiplos de 4.
   espaco: {
