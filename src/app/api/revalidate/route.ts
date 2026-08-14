@@ -16,7 +16,7 @@ const MODELO_TAG: Record<string, string> = {
   product: 'cms:products',
   category: 'cms:categories',
   'faq-item': 'cms:faq',
-  avaliacoes: 'cms:avaliacoes',
+  avaliacao: 'cms:avaliacoes',
 };
 
 export async function POST(request: NextRequest) {
