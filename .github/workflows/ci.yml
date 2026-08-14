@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  qualidade:
+    name: Typecheck · Lint · Testes · Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Formatação (Prettier)
+        run: npm run format:check
+
+      - name: Testes unitários
+        run: npm test -- --ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Orçamento de performance (tamanho do JS por rota)
+        run: node scripts/check-bundle-budget.mjs
+
+  e2e:
+    name: Playwright (smoke)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Instalar navegadores Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Rodar e2e
+        run: npm run e2e
