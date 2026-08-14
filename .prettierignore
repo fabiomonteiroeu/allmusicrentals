@@ -1,0 +1,14 @@
+.next
+node_modules
+coverage
+playwright-report
+test-results
+cms
+projeto-base
+pnpm-lock.yaml
+package-lock.json
+*.md
+
+# gerenciados por ferramentas (Next reescreve no build)
+tsconfig.json
+next-env.d.ts
