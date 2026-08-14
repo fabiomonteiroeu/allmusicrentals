@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_blocos_comparativo_led",
+  "info": { "displayName": "Bloco: Comparativo LED (P1.9 x P3.9)", "icon": "chartBubble" },
+  "options": {},
+  "attributes": {
+    "eyebrow": { "type": "string" },
+    "titulo": { "type": "string" },
+    "introducao": { "type": "richtext" },
+    "regraPratica": { "type": "text" },
+    "tabela": { "type": "json" },
+    "ctaRotulo": { "type": "string" },
+    "ctaUrl": { "type": "string" }
+  }
+}

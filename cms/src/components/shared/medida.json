@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_medidas",
+  "info": {
+    "displayName": "Medida",
+    "icon": "expand",
+    "description": "Par rótulo/valor de medida de produto (sem preço)."
+  },
+  "options": {},
+  "attributes": {
+    "rotulo": {
+      "type": "string",
+      "required": true
+    },
+    "valor": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

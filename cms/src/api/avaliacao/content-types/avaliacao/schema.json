@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "avaliacoes",
+  "info": {
+    "singularName": "avaliacao",
+    "pluralName": "avaliacoes",
+    "displayName": "Avaliação",
+    "description": "Avaliação REAL de cliente. Nenhum seed fictício em ambiente algum."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "empresa": {
+      "type": "string"
+    },
+    "cidade": {
+      "type": "string"
+    },
+    "tipoDeEvento": {
+      "type": "string"
+    },
+    "nota": {
+      "type": "decimal",
+      "min": 0,
+      "max": 5
+    },
+    "texto": {
+      "type": "text",
+      "required": true
+    },
+    "verificada": {
+      "type": "boolean",
+      "default": false
+    },
+    "publicada": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

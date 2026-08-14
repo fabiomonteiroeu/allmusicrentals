@@ -1,0 +1,9 @@
+{
+  "collectionName": "components_blocos_diferenciais",
+  "info": { "displayName": "Bloco: Diferenciais", "icon": "shield" },
+  "options": {},
+  "attributes": {
+    "titulo": { "type": "string" },
+    "itens": { "type": "json" }
+  }
+}

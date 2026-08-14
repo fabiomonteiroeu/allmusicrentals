@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_variacoes",
+  "info": {
+    "displayName": "Variação",
+    "icon": "layer",
+    "description": "Variação de produto (ex.: cor). valorExibido é rótulo, nunca preço."
+  },
+  "options": {},
+  "attributes": {
+    "tipo": {
+      "type": "string",
+      "required": true
+    },
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "valorExibido": {
+      "type": "string"
+    }
+  }
+}

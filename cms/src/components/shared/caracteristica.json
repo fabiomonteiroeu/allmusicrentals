@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_caracteristicas",
+  "info": {
+    "displayName": "Característica",
+    "icon": "check",
+    "description": "Característica/informação técnica de produto."
+  },
+  "options": {},
+  "attributes": {
+    "texto": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

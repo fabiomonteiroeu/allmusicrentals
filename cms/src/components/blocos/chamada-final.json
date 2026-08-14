@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_blocos_chamada_final",
+  "info": { "displayName": "Bloco: Chamada Final", "icon": "cursor" },
+  "options": {},
+  "attributes": {
+    "titulo": { "type": "string" },
+    "subtitulo": { "type": "text" },
+    "ctaPrimarioRotulo": { "type": "string" },
+    "ctaPrimarioUrl": { "type": "string" },
+    "ctaSecundarioRotulo": { "type": "string" },
+    "ctaSecundarioUrl": { "type": "string" }
+  }
+}

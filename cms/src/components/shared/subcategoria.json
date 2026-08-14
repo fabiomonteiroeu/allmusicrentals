@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_shared_subcategorias",
+  "info": {
+    "displayName": "Subcategoria",
+    "icon": "bulletList",
+    "description": "Subcategoria dentro de uma categoria."
+  },
+  "options": {},
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true
+    },
+    "descricao": {
+      "type": "text"
+    }
+  }
+}

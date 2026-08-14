@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rodape_colunas",
+  "info": {
+    "singularName": "rodape-coluna",
+    "pluralName": "rodape-colunas",
+    "displayName": "Rodapé Coluna",
+    "description": "Coluna do rodapé com título e itens de menu."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "ordem": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "itens": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::menu-item.menu-item"
+    }
+  }
+}

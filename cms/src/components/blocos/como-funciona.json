@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_blocos_como_funciona",
+  "info": { "displayName": "Bloco: Como Funciona", "icon": "bulletList" },
+  "options": {},
+  "attributes": {
+    "titulo": { "type": "string" },
+    "passos": { "type": "json" },
+    "aviso": { "type": "text" }
+  }
+}

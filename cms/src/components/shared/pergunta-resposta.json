@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_pergunta_respostas",
+  "info": {
+    "displayName": "Pergunta e Resposta",
+    "icon": "question",
+    "description": "Item de FAQ inline (produto/categoria)."
+  },
+  "options": {},
+  "attributes": {
+    "pergunta": {
+      "type": "string",
+      "required": true
+    },
+    "resposta": {
+      "type": "richtext",
+      "required": true
+    }
+  }
+}

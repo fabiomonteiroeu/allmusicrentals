@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_blocos_heros",
+  "info": { "displayName": "Bloco: Hero", "icon": "picture" },
+  "options": {},
+  "attributes": {
+    "eyebrow": { "type": "string" },
+    "titulo": { "type": "string", "required": true },
+    "subtitulo": { "type": "text" },
+    "citacao": { "type": "text" },
+    "imagem": { "type": "media", "multiple": false, "allowedTypes": ["images", "videos"] },
+    "ctaPrimarioRotulo": { "type": "string" },
+    "ctaPrimarioUrl": { "type": "string" },
+    "ctaSecundarioRotulo": { "type": "string" },
+    "ctaSecundarioUrl": { "type": "string" }
+  }
+}

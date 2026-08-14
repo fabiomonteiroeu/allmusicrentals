@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_blocos_destaque_led",
+  "info": { "displayName": "Bloco: Destaque LED", "icon": "monitor" },
+  "options": {},
+  "attributes": {
+    "eyebrow": { "type": "string" },
+    "titulo": { "type": "string" },
+    "textos": { "type": "json" },
+    "instalamos": { "type": "json" },
+    "exibimos": { "type": "json" },
+    "ctaRotulo": { "type": "string" },
+    "ctaUrl": { "type": "string" },
+    "imagens": { "type": "media", "multiple": true, "allowedTypes": ["images"] }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "collectionName": "components_blocos_faq",
+  "info": { "displayName": "Bloco: FAQ", "icon": "question" },
+  "options": {},
+  "attributes": {
+    "eyebrow": { "type": "string" },
+    "titulo": { "type": "string" },
+    "apoio": { "type": "text" },
+    "itens": { "type": "component", "repeatable": true, "component": "shared.pergunta-resposta" }
+  }
+}

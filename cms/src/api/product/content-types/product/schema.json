@@ -1,0 +1,120 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Produto",
+    "description": "Produto do catálogo. SEM PREÇO em nenhum campo — regra inviolável."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "codigo": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nome",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "categoria": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "produtos"
+    },
+    "descricaoCurta": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "descricaoCompleta": {
+      "type": "richtext",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "caracteristicas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.caracteristica",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "medidas": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.medida",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "material": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "aplicacoes": {
+      "type": "json",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "variacoes": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.variacao",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "tipoDeItem": {
+      "type": "enumeration",
+      "enum": ["fisico", "com-variacao", "servico-tecnico", "pacote"],
+      "default": "fisico",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "ambiente": {
+      "type": "enumeration",
+      "enum": ["interno", "externo", "interno-ou-externo"],
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "imagens": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images"],
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "destaque": {
+      "type": "boolean",
+      "default": false,
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "relacionados": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product"
+    },
+    "alugadoComFrequencia": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product"
+    },
+    "faq": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.pergunta-resposta",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo",
+      "pluginOptions": { "i18n": { "localized": true } }
+    }
+  }
+}

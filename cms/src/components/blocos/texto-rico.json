@@ -1,0 +1,9 @@
+{
+  "collectionName": "components_blocos_texto_rico",
+  "info": { "displayName": "Bloco: Texto Rico", "icon": "align-left" },
+  "options": {},
+  "attributes": {
+    "titulo": { "type": "string" },
+    "conteudo": { "type": "richtext", "required": true }
+  }
+}

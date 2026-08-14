@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_blocos_formulario_contato",
+  "info": { "displayName": "Bloco: Formulário de Contato", "icon": "envelop" },
+  "options": {},
+  "attributes": {
+    "titulo": { "type": "string" },
+    "subtitulo": { "type": "text" },
+    "microcopy": { "type": "text" }
+  }
+}

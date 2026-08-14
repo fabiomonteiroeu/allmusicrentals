@@ -1,0 +1,10 @@
+{
+  "collectionName": "components_blocos_buscas",
+  "info": { "displayName": "Bloco: Busca", "icon": "search" },
+  "options": {},
+  "attributes": {
+    "titulo": { "type": "string" },
+    "subtitulo": { "type": "text" },
+    "placeholder": { "type": "string" }
+  }
+}

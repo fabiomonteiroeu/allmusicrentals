@@ -1,0 +1,67 @@
+{
+  "kind": "singleType",
+  "collectionName": "settings_globais",
+  "info": {
+    "singularName": "settings-globais",
+    "pluralName": "settings-globais-all",
+    "displayName": "Settings Globais",
+    "description": "Configurações globais do site (contato, IDs de medição, OG padrão)."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "nomeSite": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "tagline": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "telefone": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "telefoneHref": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "email": {
+      "type": "email",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "endereco": {
+      "type": "text",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "redesSociais": {
+      "type": "json",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "textosLegais": {
+      "type": "json",
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "gtmId": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "pixelId": {
+      "type": "string",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "imagemOG": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["images"],
+      "pluginOptions": { "i18n": { "localized": false } }
+    }
+  }
+}

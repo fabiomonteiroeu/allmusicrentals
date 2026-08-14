@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "solicitacoes",
+  "info": {
+    "singularName": "solicitacao",
+    "pluralName": "solicitacoes",
+    "displayName": "Solicitação",
+    "description": "Solicitação de orçamento recebida do formulário. SEM preço/pagamento."
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "protocolo": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "dadosEtapas": {
+      "type": "json"
+    },
+    "itens": {
+      "type": "json"
+    },
+    "anexos": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": ["images", "files"]
+    },
+    "consentimentos": {
+      "type": "json"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["recebida", "em-analise", "respondida", "arquivada"],
+      "default": "recebida",
+      "required": true
+    }
+  }
+}
