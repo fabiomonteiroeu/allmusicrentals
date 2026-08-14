@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "siteName": "All Music Rentals",
+    "tagline": "Locação Premium e Soluções em Painéis de LED para Eventos na Flórida"
+  },
+  "common": {
+    "requestQuote": "Solicitar Orçamento",
+    "viewCatalog": "Ver Catálogo",
+    "myQuote": "Meu Orçamento"
+  }
+}

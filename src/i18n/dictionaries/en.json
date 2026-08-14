@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "siteName": "All Music Rentals",
+    "tagline": "Premium Rentals and LED Screen Solutions for Events in Florida"
+  },
+  "common": {
+    "requestQuote": "Request a Quote",
+    "viewCatalog": "View Catalog",
+    "myQuote": "My Quote"
+  }
+}

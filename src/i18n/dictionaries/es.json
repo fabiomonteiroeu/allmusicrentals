@@ -1,0 +1,11 @@
+{
+  "meta": {
+    "siteName": "All Music Rentals",
+    "tagline": "Alquiler Premium y Soluciones en Pantallas LED para Eventos en Florida"
+  },
+  "common": {
+    "requestQuote": "Solicitar Presupuesto",
+    "viewCatalog": "Ver Catálogo",
+    "myQuote": "Mi Presupuesto"
+  }
+}
