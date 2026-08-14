@@ -43,7 +43,11 @@ services:
     build:
       context: ./cms
       dockerfile: Dockerfile
+    # Segredos do Strapi (APP_KEYS, JWT etc.) vêm de cms/.env em dev — nunca commitados.
+    env_file:
+      - ./cms/.env
     environment:
+      # Overrides para o ambiente docker (têm precedência sobre o env_file).
       DATABASE_CLIENT: postgres
       DATABASE_HOST: postgres
       DATABASE_PORT: 5432
