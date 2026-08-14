@@ -1,0 +1,61 @@
+# Ambiente de desenvolvimento containerizado.
+# Fase 01: sobe a aplicação Next e o Postgres (usado pelo Strapi na Fase 03).
+# Fase 03: o serviço `cms` (Strapi) passa a ter o diretório ./cms e sobe com o profile `cms`.
+# Deploy de produção (VPS Hostinger) é tratado na Fase 17 (docker-compose.prod.yml + reverse proxy).
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      # Em produção/deploy, as URLs e tokens vêm de secrets — nunca commitados.
+      STRAPI_API_URL: ${STRAPI_API_URL:-http://cms:1337}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-strapi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-strapi}
+      POSTGRES_DB: ${POSTGRES_DB:-strapi}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-strapi}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # Habilitado na Fase 03 (requer ./cms com o projeto Strapi):
+  #   docker compose --profile cms up
+  cms:
+    profiles: ['cms']
+    build:
+      context: ./cms
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: ${POSTGRES_DB:-strapi}
+      DATABASE_USERNAME: ${POSTGRES_USER:-strapi}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD:-strapi}
+    ports:
+      - '1337:1337'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
