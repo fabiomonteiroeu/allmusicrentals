@@ -1,0 +1,31 @@
+{
+  "source_path": "/Users/fabiomonteiro/projects/AllMusicBr/rentals/docs/tokens/tokens.md",
+  "type": "SPEC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Design Tokens — All Music Rentals",
+  "summary": "Especificacao dos design tokens (cores, tipografia, espacamento, raio, sombra, gradientes, movimento) extraidos do layout-fonte e insumo do tema styled-components.",
+  "scope": [
+    "design tokens",
+    "paleta de cores semantica (tinta, cinza, teal, erro, acentos, alpha)",
+    "tipografia (Archivo, Public Sans, IBM Plex Mono)",
+    "escala tipografica fluida (clamp)",
+    "escala de espacamento e containers",
+    "raio, bordas e sombras duras",
+    "gradientes e scrim de hero",
+    "keyframes, duracoes e easings de movimento",
+    "tema styled-components / ThemeProvider (Fase 02)",
+    "responsividade fluida sem media queries",
+    "divergencias de tokens resolvidas"
+  ],
+  "cross_refs": [
+    "./tokens.json",
+    "tokens.json",
+    "docs/00-divergencias.md",
+    "/projeto-base/*.dc.html",
+    "support.js"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": "Ambiguidade SPEC vs DOC resolvida a favor de SPEC: o documento define contratos concretos de implementacao (valores hex exatos, escalas, familias/pesos de fonte, formato do objeto theme) que o tema da Fase 02 deve honrar, alem de apontar para um artefato legivel por maquina (tokens.json). Nao ha frontmatter nem convencao de nome/caminho de spec, por isso confianca media. Sinais secundarios de ADR (divergencias 'RESOLVIDAS' e 'aprovadas', candidatos a ADR sobre breakpoints do support.js) sao registros de decisao, mas o documento nao segue estrutura Context/Decision/Consequences nem declara Status, entao nao foi classificado como ADR e nao esta locked."
+}

@@ -1,0 +1,34 @@
+{
+  "source_path": "/Users/fabiomonteiro/projects/AllMusicBr/rentals/docs/00-inventario.md",
+  "type": "SPEC",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Inventário — Fase 00 · All Music Rentals",
+  "summary": "Inventário técnico do layout-fonte: rotas, tokens, componentes compartilhados, campos de formulário, estados condicionais, imagens e mapeamento para o CMS Strapi.",
+  "scope": [
+    "rotas i18n /[locale] (home, catalogo, categoria, produto, meu-orcamento, solicitar-orcamento, solicitacao-recebida, contato, sobre, faq)",
+    "design tokens (cor, tipografia, espaçamento, motion)",
+    "componentes compartilhados (topbar, header sticky, drawer mobile, rodapé, card de produto, barra fixa de orçamento, chips, painel de filtros, toast, breadcrumb, accordion FAQ, stepper, skeletons)",
+    "formulário Solicitar Orçamento (5 etapas, validação, rascunho localStorage, protocolo AMR-XXXX, upload 25MB)",
+    "formulário de Contato",
+    "busca e filtros (catálogo e categoria)",
+    "controles de produto / configurador LED",
+    "estados condicionais (vazio, carregando, erro, sucesso, aberto/fechado)",
+    "comparativo LED P1.9 × P3.9",
+    "inventário de imagens em uploads/",
+    "modelo de conteúdo Strapi (products, taxonomias, enums de tipo de item)",
+    "slugs de categoria: estruturas, telas-de-led, luz-e-som, tendas, moveis",
+    "microcopy legal global e política de não exibir preço"
+  ],
+  "cross_refs": [
+    "docs/tokens/tokens.json",
+    "docs/tokens/tokens.md",
+    "docs/tokens/",
+    "docs/00-divergencias.md",
+    "docs/PLANO.md",
+    "/projeto-base/*.dc.html"
+  ],
+  "locked": false,
+  "precedence": null,
+  "notes": "Ambiguidade DOC vs SPEC vs PRD resolvida a favor de SPEC pela regra de maior precedência. Sem frontmatter e sem convenção de nome forte; o nome '00-inventario' e o tom descritivo sugerem DOC, e a seção 10 ('Checklist de aceite da Fase 00') traz critérios de aceite típicos de PRD. Porém o corpo é dominado por contratos de implementação: tabela de rotas pretendidas, listas exaustivas de campos com obrigatoriedade e regras de validação por etapa, chave de localStorage 'amr-solicitacao-rascunho-v1', formato de protocolo AMR-XXXX, limites de upload (PDF/JPG/JPEG/PNG, 25MB), breakpoints (1080px, 760px), enums/taxonomias do CMS e catálogo de estados. Duas decisões permanecem ABERTAS e não devem ser tratadas como travadas: (1) formulário com 5 etapas no HTML vs 9 no briefing; (2) campo 'Faixa de investimento' em US$ — único ponto com moeda no site, dado o requisito de catálogo sem preço. Ambas aguardam aprovação do usuário conforme itens 14 e 15 de docs/00-divergencias.md; há também 11 divergências referenciadas por número (5 a 11) cujo detalhe vive naquele arquivo."
+}

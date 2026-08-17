@@ -1,0 +1,32 @@
+{
+  "source_path": "/Users/fabiomonteiro/projects/AllMusicBr/rentals/docs/00-divergencias.md",
+  "type": "ADR",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Divergências — Fase 00",
+  "summary": "Registro de divergências entre briefing e layout-fonte do All Music Rentals, com decisões aprovadas e itens ainda em aberto.",
+  "scope": [
+    "tokens de cor",
+    "cinza.300 #C9CBCC",
+    "erro.escuro #5A2020",
+    "teal.link #1A7F82",
+    "breakpoints responsivos",
+    "support.js",
+    "Header / nav",
+    "Rodapé",
+    "CardProduto",
+    "Painel de filtros",
+    "Toast",
+    "Barra fixa de orçamento",
+    "modelagem de produtos no CMS",
+    "settings-globais",
+    "formulário de orçamento (5 etapas)",
+    "faixa de investimento US$",
+    "teste anti-preço",
+    "tipos de item (físico/variação/serviço/pacote)"
+  ],
+  "cross_refs": ["PLANO", "support.js"],
+  "locked": false,
+  "precedence": null,
+  "notes": "Formato não canônico: é um log multi-decisão (17 itens), não um ADR de decisão única, e não há frontmatter nem campo Status no nível do documento. Competia com DOC; resolvido para ADR pela regra de ambiguidade (maior precedência) porque o conteúdo é decisório e vinculante ('Aprovado 2026-08-13'). locked=false porque o status é misto: itens 1, 2, 8, 14, 15, 16 estão RESOLVIDOS/aprovados (equivalente a Accepted, tratar como travados na síntese) enquanto 5, 6, 7, 9, 11, 12 seguem em aberto (equivalente a Proposed) e os itens 3, 10, 13, 17 são INTENCIONAL/sem ação. O item 4 (breakpoints em support.js) é explicitamente marcado no texto como 'Candidato a ADR' futuro."
+}

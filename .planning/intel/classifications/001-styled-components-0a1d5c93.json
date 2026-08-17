@@ -1,0 +1,22 @@
+{
+  "source_path": "/Users/fabiomonteiro/projects/AllMusicBr/rentals/docs/adr/001-styled-components.md",
+  "type": "ADR",
+  "confidence": "high",
+  "manifest_override": true,
+  "title": "ADR 001 — styled-components no App Router",
+  "summary": "Adota styled-components no Next.js App Router com registry SSR, busca de dados em Server Components e componentes estilizados restritos as folhas.",
+  "scope": [
+    "styled-components",
+    "Next.js App Router",
+    "StyledRegistry (src/lib/theme/StyledRegistry.tsx)",
+    "useServerInsertedHTML",
+    "next.config compiler.styledComponents",
+    "Server Components / \"use client\"",
+    "Core Web Vitals (LCP mobile p75)",
+    "tema e design tokens"
+  ],
+  "cross_refs": ["src/lib/theme/StyledRegistry.tsx", "next.config"],
+  "locked": true,
+  "precedence": null,
+  "notes": ""
+}

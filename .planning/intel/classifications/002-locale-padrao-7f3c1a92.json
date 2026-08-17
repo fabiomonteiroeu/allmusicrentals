@@ -1,0 +1,23 @@
+{
+  "source_path": "/Users/fabiomonteiro/projects/AllMusicBr/rentals/docs/adr/002-locale-padrao.md",
+  "type": "ADR",
+  "confidence": "high",
+  "manifest_override": true,
+  "title": "ADR 002 — pt-BR como locale padrão",
+  "summary": "Decide pt-BR como locale padrão, com en e es adicionais, roteamento por prefixo e mitigação de SEO em inglês.",
+  "scope": [
+    "i18n",
+    "defaultLocale pt-BR",
+    "locales en e es",
+    "roteamento por prefixo de caminho",
+    "middleware de negociação Accept-Language",
+    "SEO",
+    "hreflang e x-default",
+    "canônica por locale",
+    "sitemap por locale"
+  ],
+  "cross_refs": [],
+  "locked": true,
+  "precedence": null,
+  "notes": ""
+}

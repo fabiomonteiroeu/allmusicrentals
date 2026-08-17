@@ -1,0 +1,23 @@
+{
+  "source_path": "/Users/fabiomonteiro/projects/AllMusicBr/rentals/docs/divergencias.md",
+  "type": "ADR",
+  "confidence": "medium",
+  "manifest_override": false,
+  "title": "Divergências técnicas de implementação",
+  "summary": "Registro cumulativo de divergências técnicas em relação ao HTML/layout original, cada uma com contexto, decisão, motivo técnico, escopo e reversibilidade.",
+  "scope": [
+    "chrome do site (header, topbar, menu)",
+    "troca desktop/mobile",
+    "media query CSS vs window.innerWidth",
+    "styled-components",
+    "breakpoint 1080px (theme.breakpoint.header)",
+    "hidratação SSR",
+    "Core Web Vitals (LCP/CLS)",
+    "componente Header",
+    "escala fluida (clamp) e grids auto-fit"
+  ],
+  "cross_refs": ["docs/00-divergencias.md"],
+  "locked": false,
+  "precedence": null,
+  "notes": "Ambiguidade ADR vs DOC resolvida a favor de ADR: o arquivo é um log de decisões técnicas com estrutura Contexto/Divergência/Motivo/Escopo/Reversível por entrada (D1), registradas antes da implementação — semanticamente decisões arquiteturais. Difere do formato ADR canônico em dois pontos: (a) é multi-decisão em um único arquivo, não uma decisão por documento; (b) não há campo Status nem frontmatter, portanto locked=false apesar de as entradas serem tratadas como vigentes. Sem sinais de nome/caminho (não está em **/adr/**, sem numeração no filename). Documento em pt-BR; D1 é a única entrada até agora (Fase 02, 2026-08-14). Sinal de sobreposição: existe um arquivo irmão docs/00-divergencias.md para divergências de conteúdo/design da Fase 00 — o sintetizador deve verificar se ambos foram ingeridos e se a classificação é consistente entre eles."
+}
