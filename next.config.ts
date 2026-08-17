@@ -27,6 +27,17 @@ const nextConfig: NextConfig = {
   },
   // Saída standalone: imagem Docker enxuta (Fase 01/17).
   output: 'standalone',
+  // Sanitização de rich text (Fase 03): `marked` e a cadeia do `htmlparser2`
+  // (usada pelo sanitize-html) publicam só ESM — transpilar mantém build e Jest iguais.
+  transpilePackages: [
+    'marked',
+    'htmlparser2',
+    'domhandler',
+    'domutils',
+    'dom-serializer',
+    'entities',
+    'domelementtype',
+  ],
   // styled-components: transforma no compilador SWC (SSR + displayName).
   compiler: {
     styledComponents: true,
