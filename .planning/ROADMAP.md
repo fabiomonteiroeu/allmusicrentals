@@ -100,19 +100,20 @@ Plans:
 **Depends on**: Phase 2
 **Requirements**: CMS-01, CMS-02, CMS-03, CMS-04, CMS-05, CMS-06, CMS-07, PRECO-02, DOC-01, DOC-02, DOC-03
 **Success Criteria** (o que deve ser VERDADE):
-  1. O editor consegue subir o Strapi por Docker, ver os 8 content-types e os 13 blocos da Dynamic Zone nos 3 idiomas, e publicar por locale
+  1. O editor consegue subir o Strapi por Docker, ver os 9 content-types (1 single type + 8 coleções) e os 13 blocos da Dynamic Zone nos 3 idiomas, e publicar por locale
   2. Toda resposta do Strapi é validada por Zod antes de virar props, e um bloco desconhecido degrada para `null` sem quebrar a página
   3. Nenhum rich text chega à tela sem passar pela sanitização com allowlist, e nenhum token do Strapi existe no bundle cliente
   4. Não existe nenhum campo de preço, valor ou pagamento em nenhum schema do CMS — a guarda automatizada varre `cms/src` e confirma
   5. As divergências 5, 6, 7, 9, 11 e 12 estão fechadas contra o código real, e `docs/PLANO.md` deixou de conter informação obsoleta (5 etapas, estado das fases, decisão de deploy)
-**Plans**: 5 plans — **IMPLEMENTADA, AGUARDANDO VERIFICAÇÃO** (branch `fase-03-strapi`, não publicada)
+**Plans**: 6 plans — **IMPLEMENTADA, AGUARDANDO VERIFICAÇÃO** (branch `fase-03-strapi`, não publicada)
 
 Plans:
 - [x] 03-01: Modelo Strapi completo — content-types, componentes, Dynamic Zone, i18n, permissões e seed de estrutura (`70630a3`)
 - [x] 03-02: Cliente server-only, schemas Zod, adaptadores e sanitização de rich text (`5fe84a4`, `4b28864`)
 - [x] 03-03: Webhook de revalidação, Dockerfile do Strapi e serviço `cms` no compose (`0cd7b19`, `bd98e75`, `7e88a4e`)
-- [ ] 03-04: Verificação/UAT da fase — subir Strapi + Postgres em Docker, criar entradas de estrutura nos 3 locales, publicar e confirmar que o webhook revalida; rodar typecheck, lint, testes, build e a guarda anti-preço; publicar a branch `fase-03-strapi` no GitHub
-- [ ] 03-05: Fechamento de pendências documentais — conferir divergências 5, 6, 7 e 9 contra os componentes reais da Fase 2 e 11 e 12 contra o modelo da Fase 3, atualizando `docs/00-divergencias.md` (ou registrando desvio em `docs/divergencias.md`); corrigir `docs/PLANO.md:92` para 5 etapas, atualizar o estado das fases no cabeçalho, remover a nota "Decisão aberta" da Fase 17; criar `docs/adr/003-rota-canonica-produto.md` e `docs/adr/004-deploy-ghcr-caddy.md`
+- [ ] 03-04: Provas automatizadas da ponte CMS — teste de contrato do webhook (401/400/200 e mapa modelo→tag), teste de degradação da Dynamic Zone (bloco desconhecido → `null`) e do contrato dos 13 blocos, varredura de segredo-sentinela em `.next/static`, `npm run check` e `npm run build` verdes
+- [ ] 03-05: Fechamento de pendências documentais — conferir divergências 5, 6, 7 e 9 contra os componentes reais da Fase 2 e 11 e 12 contra o modelo da Fase 3, atualizando `docs/00-divergencias.md` (ou registrando desvio em `docs/divergencias.md`); corrigir `docs/PLANO.md:92` para 5 etapas, atualizar o estado das fases no cabeçalho, remover a nota "Decisão aberta" da Fase 17; sincronizar `docs/00-inventario.md`; criar `docs/adr/003-rota-canonica-produto.md` e `docs/adr/004-deploy-ghcr-caddy.md`
+- [ ] 03-06: Verificação/UAT da fase — subir Strapi + Postgres pelo profile `cms`, provar API pública e webhook por curl, roteiro no painel (9 content-types, 13 blocos, 6 componentes compartilhados, entrada em pt-BR propagada para en/es e publicada), registrar `03-UAT.md` com evidência por requisito e publicar a branch `fase-03-strapi` no GitHub
 
 ### Phase 4: Home
 **Goal**: A Home renderiza todos os seus blocos a partir do CMS, com fidelidade ao layout e sem preço
