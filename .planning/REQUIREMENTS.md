@@ -67,7 +67,7 @@ próprio, atribuído à fase que o implementa.
 
 - [ ] **HOME-01**: `/[locale]` renderiza os blocos da Home vindos do CMS: hero, busca grande, grade de categorias e CTA final
 - [ ] **HOME-02**: Bloco de produtos em destaque (slider) e seção de painéis de LED (P1.9/P3.9 + listas + galeria de 3 imagens)
-- [ ] **HOME-03**: Blocos "como funciona" (4 etapas), "diferenciais" (5 blocos) e avaliações com estados vazio e carregando, sem conteúdo fictício
+- [ ] **HOME-03**: Blocos "como funciona" (4 etapas), "diferenciais" (5 blocos) e avaliações sem conteúdo fictício, com **estado vazio garantido em produção** e **estado carregando entregue como componente testável** (visível na showcase e coberto por teste) — não como garantia de produção, porque com Server Component e sem `cacheComponents` o `<Suspense>` resolve no prerender e o visitante nunca vê o fallback (decidido 2026-08-18, ver `04-RESEARCH.md` Pitfall 1)
 - [ ] **HOME-04**: Fidelidade conferida lado a lado com `Home.dc.html` em desktop e 375px
 - [ ] **HOME-05**: Evento `view_item_list` emitido nos blocos de listagem da Home
 

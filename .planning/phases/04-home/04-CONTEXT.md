@@ -100,6 +100,31 @@ componente do CMS **não** carrega — o bloco traz só o cabeçalho da seção;
   media query permitida é a do chrome em 1080px, já decidida em `docs/divergencias.md` D1.
 - 375px sem scroll horizontal.
 
+### Decisões do usuário tomadas após a pesquisa (2026-08-18, TRAVADAS)
+
+1. **Estado "carregando" das avaliações é componente testável, não garantia de produção.**
+   `04-RESEARCH.md` (Pitfall 1) provou que, com Server Component e sem `cacheComponents` habilitado,
+   `<Suspense>` resolve no próprio prerender — o visitante nunca vê o fallback numa rota sem
+   Request-Time API. Decisão: o skeleton existe, aparece na showcase do design system e é coberto por
+   teste; o aceite de HOME-03 **não** promete que o visitante o veja. `REQUIREMENTS.md` já ajustado.
+   Não habilitar `cacheComponents` nesta fase — é decisão de arquitetura que afeta as Fases 5–17 e
+   deve ser avaliada na Fase 14, junto com o gatilho de reversão do ADR 001.
+2. **CTAs e busca apontam para as rotas finais, mesmo antes de existirem.**
+   A busca navega para `/[locale]/catalogo?q=...` e os CTAs "explorar catálogo" / "ver todos os
+   produtos" para `/[locale]/catalogo`. Dá 404 até a Fase 5 — aceito. Nenhum link precisa ser
+   reescrito depois, e o e2e da Fase 16 já encontra o destino certo. **Não** criar stub de catálogo
+   nesta fase, e **não** desabilitar os CTAs (divergiria do layout-fonte).
+
+### Pré-requisito de infraestrutura de imagem (dívida da Fase 3, fechar aqui)
+
+`src/lib/cms/adapters.ts` lê `NEXT_PUBLIC_STRAPI_MEDIA_URL`, mas:
+- a variável **não está** em `.env.example`;
+- `next.config.ts` **não tem** `images.remotePatterns`.
+
+Sem os dois, `next/image` aceita a prop no build e responde **400 em runtime** para toda imagem vinda
+do Strapi — hero, cards de categoria e galeria de LED, ou seja, a Home inteira. Isto precisa entrar
+como tarefa desta fase, antes de qualquer bloco com imagem.
+
 ### Claude's Discretion
 - Estrutura de arquivos dos blocos (`src/components/blocos/` ou `src/app/[locale]/(home)/blocos/`).
 - Implementação do slider (CSS scroll-snap é preferível a biblioteca, pelo orçamento de JS).
