@@ -11,7 +11,7 @@ import styled, { css } from 'styled-components';
 type NivelDisplay = 'displayHero' | 'display' | 'h1' | 'h2' | 'h3' | 'h4';
 
 /** Título em Archivo condensada (wdth 75), caixa-alta, tracking negativo. */
-export const Heading = styled.h2<{ $nivel?: NivelDisplay }>`
+export const Heading = styled.h2<{ $nivel?: NivelDisplay; $sobreEscuro?: boolean }>`
   margin: 0;
   font-family: ${({ theme }) => theme.fonte.display};
   font-weight: ${({ theme }) => theme.peso.display};
@@ -21,7 +21,10 @@ export const Heading = styled.h2<{ $nivel?: NivelDisplay }>`
   /* E2: só o H1 (hero) usa o leading apertado (0.92); os demais níveis mantêm 0.98. */
   line-height: ${({ theme, $nivel = 'h2' }) =>
     $nivel === 'h1' ? theme.leading.displayApertado : theme.leading.display};
-  color: ${({ theme }) => theme.cor.tinta900};
+  /* E7: mesmo padrão de prop que Eyebrow (E1) e Button já usam com $sobreEscuro — sem isso,
+     todo Heading em seção de fundo escuro (tinta900) herdava a cor tinta900 fixa e ficava
+     literalmente invisível (contraste 1.00) contra o próprio fundo. */
+  color: ${({ theme, $sobreEscuro }) => ($sobreEscuro ? theme.cor.fundo : theme.cor.tinta900)};
   font-size: ${({ theme, $nivel = 'h2' }) => theme.fluido[$nivel]};
 `;
 

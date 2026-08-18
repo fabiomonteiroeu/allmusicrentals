@@ -203,7 +203,7 @@ export function DestaqueLedBloco({ bloco, locale }: DestaqueLedBlocoProps) {
         <Grid>
           <ColunaTexto>
             <EyebrowEl $sobreEscuro>{bloco.eyebrow ?? 'Painéis de LED'}</EyebrowEl>
-            <TituloEl as="h2" $nivel="h2">
+            <TituloEl as="h2" $nivel="h2" $sobreEscuro>
               {bloco.titulo ?? 'Painéis de LED para transformar seu evento'}
             </TituloEl>
 

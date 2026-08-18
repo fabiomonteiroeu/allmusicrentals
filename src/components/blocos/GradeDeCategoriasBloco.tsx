@@ -219,7 +219,7 @@ export function GradeDeCategoriasBloco({ bloco, locale, categorias }: GradeDeCat
               {/* Nota de fidelidade (04-UI-SPEC.md): o layout-fonte usa clamp(28px,3vw,40px)
                   para este título; usamos o token h3 do tema (clamp(24px,2.8vw,30px)) em vez
                   de inventar um clamp novo — decisão já registrada na spec. */}
-              <Heading as="h3" $nivel="h3">
+              <Heading as="h3" $nivel="h3" $sobreEscuro>
                 {bandeira.nome}
               </Heading>
               {bandeira.descricao && <DescricaoBandeira>{bandeira.descricao}</DescricaoBandeira>}

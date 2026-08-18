@@ -174,7 +174,7 @@ export function HeroBloco({ bloco, locale }: HeroBlocoProps) {
       <ConteudoWrapper>
         <ColunaConteudo>
           {bloco.eyebrow && <EyebrowEl $sobreEscuro>{bloco.eyebrow}</EyebrowEl>}
-          <TituloEl as="h1" $nivel="h1">
+          <TituloEl as="h1" $nivel="h1" $sobreEscuro>
             {bloco.titulo}
           </TituloEl>
           {bloco.subtitulo && <Subtitulo>{bloco.subtitulo}</Subtitulo>}

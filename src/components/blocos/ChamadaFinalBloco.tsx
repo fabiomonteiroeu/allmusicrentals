@@ -75,7 +75,7 @@ export function ChamadaFinalBloco({ bloco, locale }: ChamadaFinalBlocoProps) {
       <ConteudoWrapper>
         <Grid>
           <div>
-            <TituloEl as="h2" $nivel="h2">
+            <TituloEl as="h2" $nivel="h2" $sobreEscuro>
               {bloco.titulo ?? TITULO_PADRAO}
             </TituloEl>
             <Subtitulo>{bloco.subtitulo ?? SUBTITULO_PADRAO}</Subtitulo>

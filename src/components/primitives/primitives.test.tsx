@@ -50,6 +50,20 @@ describe('Heading (E2 — leading por nível)', () => {
   });
 });
 
+describe('Heading (E7 — $sobreEscuro)', () => {
+  it('sem a prop, sai em tinta900 (#0B0C0D) — pensado para fundo claro', () => {
+    renderComProviders(<Heading>Título</Heading>);
+    const no = screen.getByText('Título');
+    expect(getComputedStyle(no).color).toBe('rgb(11, 12, 13)');
+  });
+
+  it('com $sobreEscuro, sai em fundo (#F1F2F2) — legível sobre seção escura (tinta900)', () => {
+    renderComProviders(<Heading $sobreEscuro>Título</Heading>);
+    const no = screen.getByText('Título');
+    expect(getComputedStyle(no).color).toBe('rgb(241, 242, 242)');
+  });
+});
+
 describe('Button (E3 — $variante="pretoSolido")', () => {
   it('renderiza e responde a clique', async () => {
     const onClick = jest.fn();
