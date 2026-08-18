@@ -20,7 +20,7 @@ Detalhe e proposta em `docs/00-divergencias.md` (itens 14 e 15).
 | 1 | Home | `All Music Rentals - Home.dc.html` | `/[locale]` |
 | 2 | Catálogo | `All Music Rentals - Catalogo.dc.html` | `/[locale]/catalogo` |
 | 3 | Categoria (modelo p/ 5) | `All Music Rentals - Categoria.dc.html` | `/[locale]/categoria/[slug]` |
-| 4 | Produto | `All Music Rentals - Produto.dc.html` | `/[locale]/produto/[slug]` (ou `/[categoria]/[slug]`) |
+| 4 | Produto | `All Music Rentals - Produto.dc.html` | `/[locale]/[categoria]/[slug]` |
 | 5 | Meu Orçamento (carrinho) | `All Music Rentals - Meu Orcamento.dc.html` | `/[locale]/meu-orcamento` |
 | 6 | Solicitar Orçamento (form) | `All Music Rentals - Solicitar Orcamento.dc.html` | `/[locale]/solicitar-orcamento` |
 | 7 | Solicitação Recebida | `All Music Rentals - Solicitacao Recebida.dc.html` | `/[locale]/solicitacao-recebida` |
@@ -77,7 +77,7 @@ Hero + card "SOBRE OS VALORES" + busca → Layout 2 col (aside filtros + main) �
 ### Categoria (`/categoria/[slug]`)
 Barra "MODELO APLICADO A" (trocador) → Hero por categoria → Subcategorias (numeradas) → **Comparativo P1.9×P3.9** (só LED — ver §7) → Produtos da categoria / **estado "em preparação"** / **sem resultado** → Aplicações (ou "em preparação") → FAQ da categoria (ou vazio) → CTA → Rodapé → Barra fixa → Toast.
 
-### Produto (`/produto/[slug]`)
+### Produto (`/[categoria]/[slug]`)
 Barra "MODELO APLICADO A" → Breadcrumb → Bloco principal 2 col (galeria com zoom-hover + coluna de compra c/ variação/config) → Descrição + aside (ficha técnica + "PRECISA DE AJUDA") → "Frequentemente alugado com" → "Produtos relacionados" → **FAQ do produto** → CTA final → Rodapé → Barra fixa → Toast.
 
 ### Meu Orçamento (`/meu-orcamento`)
@@ -198,5 +198,5 @@ Todas em `uploads/`. Proporções observadas: cards/galeria **4:3**, heros **cov
 - [x] Comparativo LED documentado.
 - [x] Inventário de imagens.
 - [x] Divergências registradas (`docs/00-divergencias.md`), incluindo 5-vs-9 etapas e US$.
-- [ ] **Aprovação das 2 decisões abertas** (etapas do form; faixa de investimento US$).
-- [ ] **Aprovação do `docs/PLANO.md`.**
+- [x] **Aprovação das 2 decisões abertas** (etapas do form; faixa de investimento US$) — aprovado 2026-08-13
+- [x] **Aprovação do `docs/PLANO.md`.** — aprovado 2026-08-17

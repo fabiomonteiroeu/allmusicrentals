@@ -1,6 +1,7 @@
 # PLANO DE FASES — All Music Rentals
 
-> **Estado:** Fase 00 em andamento. Nenhuma fase de aplicação começa antes da aprovação deste plano.
+> **Estado (2026-08-17):** Fases 00, 01 e 02 concluídas · Fase 03 (Strapi) implementada e em
+> verificação · Fases 04–17 não iniciadas.
 > **Fonte da verdade visual:** `/projeto-base/*.dc.html`. **Tokens:** `docs/tokens/tokens.json`.
 > **Regra inviolável:** fluxo de **ORÇAMENTO SEM PREÇO / SEM PAGAMENTO** em toda a base (UI, modelo de dados, dataLayer, schema.org, nomes de variáveis). Vocabulário: "orçamento"/"solicitação". Nunca "comprar/checkout/carrinho de compras".
 
@@ -59,15 +60,16 @@ Next.js (App Router) · TypeScript strict · i18n pt-BR(padrão)/en/es · Redux 
 - **Entregas:** modelo único para as 5 categorias, incluindo o **comparativo LED (P1.9 × P3.9)**. **Aceite:** `ItemList`, breadcrumb, fidelidade.
 
 ## FASE 07 — Produto
+- **Rota canônica:** `/[locale]/[categoria]/[slug]` — ver `docs/adr/003-rota-canonica-produto.md`.
 - **Entregas:** modelos físico / com-variação / serviço-técnico configurável / pacote · galeria · specs/medidas · FAQ do produto · relacionados · **variação obrigatória bloqueia adicionar sem escolher**. **Aceite:** `view_item`, `select_item`, `add_to_quote`; erro de variação; sem preço.
 
 ## FASE 08 — Carrinho de orçamento
 - **Entregas:** slice Redux · **persistência localStorage com versionamento + migração** · estados (vazio/com itens) · quantidade/remover/limpar. **Aceite:** recarregar mantém carrinho; `add_to_quote`/`remove_from_quote`/`view_quote`; sem preço em lugar nenhum.
 
 ## FASE 09 — Formulário multi-etapa
-> ⚠️ **O layout tem 5 etapas, não 9** (ver `docs/00-divergencias.md` #14). Plano assume **5 etapas** (recomendação A): (1) Contato · (2) Evento · (3) Local/logística · (4) Produtos+arquivos · (5) Finalizar/consentimentos. *Confirmar antes de executar.*
+> ⚠️ **O layout tem 5 etapas, não 9** (ver `docs/00-divergencias.md` #14). Plano assume **5 etapas** (recomendação A): (1) Contato · (2) Evento · (3) Local/logística · (4) Produtos+arquivos · (5) Finalizar/consentimentos.
 - **Entregas:** stepper 5 etapas · **Zod por etapa** (regras reais: email regex, telefone ≥10 díg., data não-passada, cidade, 2 consentimentos obrigatórios) · **rascunho persistente** (localStorage `amr-solicitacao-rascunho-v1`, debounce 700ms, versionado + migração) · upload drag-and-drop (allowlist PDF/JPG/JPEG/PNG por **magic number**, ≤25 MB, nome sanitizado, fora da raiz pública, barra de progresso) · **Route Handler de envio** (nunca cliente→Strapi direto) · geração de protocolo `AMR-XXXX` · e-mail interno + automático · consentimentos com timestamp/IP · honeypot + verificação de origem + rate limiting.
-- **Campo "Faixa de investimento" (US$)** na etapa 5 (#15): manter como faixa de budget com ressalva; **allowlist no teste anti-preço** para `US$`/faixa (é budget do cliente, não preço de produto). *Confirmar.*
+- **Campo "Faixa de investimento" (US$)** na etapa 5 (#15): manter como faixa de budget com ressalva; **allowlist no teste anti-preço** para `US$`/faixa (é budget do cliente, não preço de produto).
 - **Aceite:** `begin_quote_request`, **`quote_step_completed` (nº+nome da etapa)**, `quote_request_submitted/error` · validação cliente (UX) e servidor (verdade) · recarregar mantém rascunho · bloqueia envio se anexo não concluiu.
 
 ## FASE 10 — Confirmação
@@ -89,7 +91,7 @@ Next.js (App Router) · TypeScript strict · i18n pt-BR(padrão)/en/es · Redux 
 - **Entregas:** **CSP com nonce** funcionando (styled-components + GTM sem `unsafe-inline` global) · HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, frame-ancestors · rate limiting · hardening de upload · revisão de segredos (nenhum em `NEXT_PUBLIC_`) · `npm audit` limpo + Dependabot. **Aceite:** testes de segredo/preço passando; upload valida magic number.
 
 ## FASE 16 — QA final
-- **Entregas:** e2e Playwright completo nos 3 locales × mobile/desktop (catálogo→filtro→produto→adicionar→carrinho→form 9 etapas→envio→confirmação) · variação obrigatória · persistência · estados vazio/carregando/sem resultados/erro · navegação por teclado · troca de locale preserva rota · **verificação "nenhuma tela exibe preço"** · snapshot do dataLayer · axe · 375px sem scroll horizontal · revisão de conteúdo · `docs/HANDOFF.md`.
+- **Entregas:** e2e Playwright completo nos 3 locales × mobile/desktop (catálogo→filtro→produto→adicionar→carrinho→form 5 etapas→envio→confirmação) · variação obrigatória · persistência · estados vazio/carregando/sem resultados/erro · navegação por teclado · troca de locale preserva rota · **verificação "nenhuma tela exibe preço"** · snapshot do dataLayer · axe · 375px sem scroll horizontal · revisão de conteúdo · `docs/HANDOFF.md`.
 - **Aceite:** cobertura ≥80% em lógica de negócio; suíte e2e verde.
 
 ## FASE 17 — Deploy: Docker produção + GitHub + VPS Hostinger *(nova — requisito do cliente)*
@@ -97,7 +99,7 @@ Next.js (App Router) · TypeScript strict · i18n pt-BR(padrão)/en/es · Redux 
 - **Entradas:** Dockerfiles/compose da Fase 01, CI da Fase 01, credenciais da VPS Hostinger.
 - **Entregas:**
   - `Dockerfile` de produção (Next standalone, imagem enxuta) + imagem do Strapi.
-  - `docker-compose.prod.yml` (app + Strapi + Postgres + **reverse proxy** com TLS — Caddy/Traefik/Nginx) na VPS.
+  - `docker-compose.prod.yml` (app + Strapi + Postgres + **reverse proxy Caddy** com TLS automático) na VPS.
   - **GitHub Actions**: build das imagens no push da branch de release, push para registry (GHCR), e **deploy sync na VPS** (SSH `docker compose pull && up -d`, ou webhook).
   - Volumes persistentes (Postgres, uploads do Strapi), backup e variáveis de ambiente por secret (nunca no repo).
   - `docs/DEPLOY.md`: como publicar, rollback, e onde ficam os secrets.
@@ -106,8 +108,8 @@ Next.js (App Router) · TypeScript strict · i18n pt-BR(padrão)/en/es · Redux 
   - [ ] Segredos apenas em GitHub Secrets / `.env` na VPS (fora do git).
   - [ ] Headers de segurança/HSTS/CSP servidos em produção pelo proxy.
   - [ ] TLS válido; domínio apontado.
-- **Riscos:** recursos da VPS Hostinger (RAM para Next+Strapi+Postgres) — dimensionar; escolha do reverse proxy; estratégia de migração/seed do Strapi em produção.
-- **Decisão aberta:** registry (GHCR vs. build direto na VPS) e proxy (Caddy é o mais simples para TLS automático). *A confirmar antes da fase.*
+- **Riscos:** recursos da VPS Hostinger (RAM para Next+Strapi+Postgres) — dimensionar; estratégia de migração/seed do Strapi em produção.
+- **Decisão travada:** registry **GHCR** + proxy **Caddy** — ver `docs/adr/004-deploy-ghcr-caddy.md`.
 
 ---
 
