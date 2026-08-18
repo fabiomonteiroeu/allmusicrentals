@@ -1,7 +1,13 @@
 'use client';
 
 import styled from 'styled-components';
-import { colunasRodape, contato, textosLegais, type ColunaRodape } from '@/lib/site/navigation';
+import {
+  colunasRodape,
+  contato,
+  textosLegais,
+  type ColunaRodape,
+  type DadosContato,
+} from '@/lib/site/navigation';
 import { SectionDivider } from '@/components/feedback/SectionDivider';
 
 const Rodape = styled.footer`
@@ -114,11 +120,13 @@ const Copyright = styled.p`
 export interface FooterProps {
   logoSrc?: string;
   colunas?: ColunaRodape[];
+  contato?: DadosContato;
 }
 
 export function Footer({
   logoSrc = '/uploads/logo-amr.png',
   colunas = colunasRodape,
+  contato: dadosContato = contato,
 }: FooterProps) {
   return (
     <Rodape id="contato-rodape">
@@ -145,8 +153,10 @@ export function Footer({
           <div>
             <Titulo>CONTATO</Titulo>
             <ContatoCol>
-              <ContatoTel href={contato.telefoneHref}>{contato.telefone}</ContatoTel>
-              <ContatoEmail href={`mailto:${contato.email}`}>{contato.email}</ContatoEmail>
+              <ContatoTel href={dadosContato.telefoneHref}>{dadosContato.telefone}</ContatoTel>
+              <ContatoEmail href={`mailto:${dadosContato.email}`}>
+                {dadosContato.email}
+              </ContatoEmail>
             </ContatoCol>
           </div>
         </Grid>

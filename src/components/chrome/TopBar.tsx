@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 import { media } from '@/lib/theme/media';
-import { contato, textosLegais } from '@/lib/site/navigation';
+import { contato, textosLegais, type DadosContato } from '@/lib/site/navigation';
 
 const Barra = styled.div`
   background: ${({ theme }) => theme.cor.tinta900};
@@ -90,15 +90,25 @@ const IDIOMAS = [
   { code: 'es', rotulo: 'ES' },
 ] as const;
 
-export function TopBar({ localeAtual = 'pt-BR' }: { localeAtual?: string }) {
+export interface TopBarProps {
+  localeAtual?: string;
+  tagline?: string;
+  contato?: DadosContato;
+}
+
+export function TopBar({
+  localeAtual = 'pt-BR',
+  tagline = textosLegais.tagline,
+  contato: dadosContato = contato,
+}: TopBarProps) {
   return (
     <Barra>
       <Inner>
-        <Tagline>{textosLegais.tagline}</Tagline>
+        <Tagline>{tagline}</Tagline>
         <Contatos>
-          <Tel href={contato.telefoneHref}>{contato.telefone}</Tel>
+          <Tel href={dadosContato.telefoneHref}>{dadosContato.telefone}</Tel>
           <Sep>·</Sep>
-          <Email href={`mailto:${contato.email}`}>{contato.email}</Email>
+          <Email href={`mailto:${dadosContato.email}`}>{dadosContato.email}</Email>
           <Sep>·</Sep>
           <Idiomas>
             {IDIOMAS.map((idioma, i) => (
