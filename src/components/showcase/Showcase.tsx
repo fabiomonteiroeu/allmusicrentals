@@ -22,6 +22,7 @@ import { Toast } from '@/components/feedback/Toast';
 import { SectionDivider } from '@/components/feedback/SectionDivider';
 import { ProductCardSkeleton } from '@/components/feedback/Skeleton';
 import { EmptyState } from '@/components/feedback/EmptyState';
+import { Spinner } from '@/components/feedback/Spinner';
 import { ImagePlaceholder } from '@/components/media/ImagePlaceholder';
 import { ProductCard, type ProdutoResumo } from '@/components/product/ProductCard';
 
@@ -236,6 +237,24 @@ export function Showcase() {
               Solicitar Orçamento
             </Button>
           </EmptyState>
+        </Secao>
+
+        <Secao>
+          <Eyebrow>Extensões E1–E4 (Fase 04)</Eyebrow>
+          <Linha>
+            <Eyebrow>Eyebrow sobre fundo claro</Eyebrow>
+          </Linha>
+          <Painel $escuro>
+            <Eyebrow $sobreEscuro>Eyebrow sobre fundo escuro</Eyebrow>
+          </Painel>
+          <Linha>
+            <Heading $nivel="h1">Título H1 (leading 0.92)</Heading>
+            <Heading $nivel="h2">Título H2 (leading 0.98)</Heading>
+          </Linha>
+          <Linha>
+            <Button $variante="pretoSolido">Buscar</Button>
+            <Spinner />
+          </Linha>
         </Secao>
 
         <Secao>

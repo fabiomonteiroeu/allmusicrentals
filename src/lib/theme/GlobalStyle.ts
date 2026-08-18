@@ -65,11 +65,20 @@ export const GlobalStyle = createGlobalStyle`
     60% { transform: translateX(-3px); }
     80% { transform: translateX(3px); }
   }
+  @keyframes amrMod {
+    from { opacity: 0; transform: scale(1.06); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
+      /* O mosaico do Hero e o stagger dos skeletons agendam animation-delay por célula/índice;
+         zerar só a duração deixaria a célula parada no estado "from" (opacidade 0) durante o
+         delay sob preferência de movimento reduzido. Com esta linha, o mosaico do Hero pode ser
+         100% CSS renderizado no servidor, sem window.matchMedia e sem 'use client'. */
+      animation-delay: 0s !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }

@@ -10,7 +10,7 @@ import styled, { css } from 'styled-components';
  *  - outlineClaro: contorno claro sobre fundo escuro.
  *  - ghost: link mono sublinhado (ex.: "LIMPAR").
  */
-export type VarianteBotao = 'primario' | 'outlinePreto' | 'outlineClaro' | 'ghost';
+export type VarianteBotao = 'primario' | 'outlinePreto' | 'outlineClaro' | 'ghost' | 'pretoSolido';
 export type TamanhoBotao = 'sm' | 'md' | 'lg';
 
 const paddingPorTamanho = {
@@ -126,6 +126,22 @@ export const Button = styled.button<{
           }
           &:focus-visible {
             outline: 2px solid ${theme.cor.teal};
+            outline-offset: 3px;
+          }
+        `;
+      case 'pretoSolido':
+        // E3: botão "BUSCAR" colado ao input da busca grande — sólido preto, sem borda.
+        // Reusável no Catálogo (Fase 5), que tem a mesma busca. O recorte do lado esquerdo é
+        // responsabilidade do composto SearchBarGrande (plano 04-04), não deste primitivo.
+        return css`
+          background: ${theme.cor.tinta900};
+          border: none;
+          color: ${theme.cor.fundo};
+          &:hover {
+            background: ${theme.cor.tealLink};
+          }
+          &:focus-visible {
+            outline: 2px solid ${theme.cor.tealLink};
             outline-offset: 3px;
           }
         `;
