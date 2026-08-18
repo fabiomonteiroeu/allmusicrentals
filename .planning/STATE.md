@@ -5,8 +5,8 @@ progress:
   total_phases: 18
   completed_phases: 3
   total_plans: 70
-  completed_plans: 16
-  percent: 23
+  completed_plans: 17
+  percent: 24
 ---
 
 # Estado do Projeto
@@ -16,24 +16,24 @@ progress:
 Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 **Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum.
-**Current focus:** Phase 3 — Strapi (CMS): verificação/UAT e fechamento das pendências documentais
+**Current focus:** Phase 3 — Strapi (CMS): verificação/UAT (03-04, 03-06) — fechamento documental (03-05) concluído
 
 ## Current Position
 
 Phase: 3 de 18 (Strapi (CMS))
-Plan: 3 de 5 na fase corrente (03-01, 03-02 e 03-03 entregues; faltam 03-04 e 03-05)
-Status: Implementada, aguardando verificação
-Last activity: 2026-08-17 — projeto GSD inicializado a partir da ingestão de `docs/`; roadmap de 18 fases (0–17) criado preservando a numeração de `docs/PLANO.md`
+Plan: 4 de 6 na fase corrente (03-01, 03-02, 03-03 e 03-05 entregues; faltam 03-04 e 03-06)
+Status: Documentação da fase fechada (03-05); aguardando 03-04 (testes de webhook/schema) e 03-06 (UAT com Strapi + Postgres)
+Last activity: 2026-08-17 — plano 03-05 executado: seis divergências fechadas contra o código real, docs/PLANO.md e docs/00-inventario.md sincronizados, ADRs 003 e 004 criados
 
-Progress: [██░░░░░░░░] 23%
+Progress: [██░░░░░░░░] 24%
 
 Branch corrente: `fase-03-strapi` (24 commits, **ainda não publicada no GitHub**)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total de planos concluídos: 16
-- Duração média: não instrumentada (fases 0–3 executadas antes do GSD)
+- Total de planos concluídos: 17
+- Duração média: não instrumentada (fases 0–3 executadas antes do GSD); plano 03-05 ~25min
 - Tempo total de execução: não instrumentado
 
 **By Phase:**
@@ -43,11 +43,11 @@ Branch corrente: `fase-03-strapi` (24 commits, **ainda não publicada no GitHub*
 | 0. Inventário e plano | 3/3 | - | - |
 | 1. Fundação | 5/5 | - | - |
 | 2. Design system | 5/5 | - | - |
-| 3. Strapi (CMS) | 3/5 | - | - |
+| 3. Strapi (CMS) | 4/6 | - | ~25min (03-05) |
 
 **Recent Trend:**
-- Últimos 5 planos: sem medição
-- Tendência: linha de base começa no plano 03-04
+- Últimos 5 planos: 03-05 (~25min, exclusivamente documental)
+- Tendência: linha de base começa no plano 03-05
 
 *Atualizado a cada conclusão de plano*
 
@@ -70,10 +70,8 @@ Nenhum `.planning/todos/` criado ainda.
 
 ### Blockers/Concerns
 
-- **[Fase 3] Branch não publicada.** `fase-03-strapi` existe só localmente; `origin` tem apenas `main`, `fase-01-fundacao` e `fase-02-design-system`. Publicar antes de abrir a Fase 4.
-- **[Fase 3] Fase implementada sem verificação.** 65 testes passam e typecheck/lint estão verdes, mas não houve UAT com o Strapi rodando: criar entradas nos 3 locales, publicar e confirmar a revalidação por webhook.
-- **[Fase 3] Documentação obsoleta induz retrabalho.** `docs/PLANO.md` abre com "Fase 00 em andamento", a linha 92 diz "form 9 etapas" (o correto é 5) e a Fase 17 ainda traz "Decisão aberta". `docs/00-inventario.md` §10 tem aprovações desmarcadas. Corrigir no plano 03-05.
-- **[Fase 3] Seis divergências abertas.** Itens 5, 6, 7, 9, 11 e 12 de `docs/00-divergencias.md` seguem ⏳ AGUARDA DECISÃO, mas 5/6/7/9 já foram implementados na Fase 2 e 11/12 na Fase 3. Fechar contra o código real; onde divergir da proposta, registrar em `docs/divergencias.md`.
+- **[Fase 3] Branch não publicada.** `fase-03-strapi` existe só localmente; `origin` tem apenas `main`, `fase-01-fundacao` e `fase-02-design-system`. Publicar antes de abrir a Fase 4 (plano 03-06).
+- **[Fase 3] Fase implementada sem verificação.** 65 testes passam e typecheck/lint estão verdes, mas não houve UAT com o Strapi rodando: criar entradas nos 3 locales, publicar e confirmar a revalidação por webhook (planos 03-04 e 03-06).
 - **[Fase 7] Colisão de slug.** Com a rota `/[locale]/[categoria]/[slug]`, um produto com slug igual ao de uma categoria quebra o roteamento. A guarda precisa rodar no CI, não só em runtime.
 - **[Fase 17] RAM da VPS Hostinger.** Next + Strapi + Postgres + Caddy no mesmo host precisa ser dimensionado antes de executar a fase.
 - **[Fase 15] CSP com nonce.** Conviver com styled-components e GTM sem `unsafe-inline` global é o risco técnico mais provável de gerar divergência.
@@ -90,6 +88,6 @@ Nenhum `.planning/todos/` criado ainda.
 ## Session Continuity
 
 Última sessão: 2026-08-17
-Parou em: criação de `PROJECT.md`, `REQUIREMENTS.md`, `ROADMAP.md` e `STATE.md` a partir de `.planning/intel/`
+Parou em: execução completa do plano 03-05 (fechamento documental da Fase 3) — 3 tarefas, 3 commits, SUMMARY criado
 Arquivo de retomada: nenhum
-Próximo passo: `/gsd-plan-phase 3` para detalhar os planos 03-04 (verificação/UAT + push da branch) e 03-05 (fechamento de divergências e correção de `docs/PLANO.md`)
+Próximo passo: executar os planos 03-04 (testes de webhook/schema anti-preço) e 03-06 (UAT com Strapi + Postgres em Docker, publicação da branch `fase-03-strapi`)

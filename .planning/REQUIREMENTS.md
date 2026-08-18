@@ -59,9 +59,9 @@ próprio, atribuído à fase que o implementa.
 
 ### Documentação e fechamento de divergências (DOC)
 
-- [ ] **DOC-01**: Divergências 5 (Header/nav), 6 (Rodapé), 7 (Card de produto) e 9 (Toast) de `docs/00-divergencias.md` fechadas conferindo o componente real da Fase 2; onde o código divergir da proposta, registrar em `docs/divergencias.md`
-- [ ] **DOC-02**: Divergências 11 (produto como fonte única de metadados) e 12 (microcopy legal em `settings-globais`) fechadas conferindo o modelo real da Fase 3
-- [ ] **DOC-03**: `docs/PLANO.md` corrigido — linha 92 passa de "form 9 etapas" para 5 etapas, estado das fases atualizado, nota "Decisão aberta" da Fase 17 removida; ADRs novos criados para a rota canônica de produto e para GHCR + Caddy
+- [x] **DOC-01**: Divergências 5 (Header/nav), 6 (Rodapé), 7 (Card de produto) e 9 (Toast) de `docs/00-divergencias.md` fechadas conferindo o componente real da Fase 2; onde o código divergir da proposta, registrar em `docs/divergencias.md`
+- [x] **DOC-02**: Divergências 11 (produto como fonte única de metadados) e 12 (microcopy legal em `settings-globais`) fechadas conferindo o modelo real da Fase 3
+- [x] **DOC-03**: `docs/PLANO.md` corrigido — linha 92 passa de "form 9 etapas" para 5 etapas, estado das fases atualizado, nota "Decisão aberta" da Fase 17 removida; ADRs novos criados para a rota canônica de produto e para GHCR + Caddy
 
 ### Home (HOME)
 
@@ -233,9 +233,9 @@ Reconhecidos, fora do roadmap atual.
 | CMS-06 | Phase 3 | Em verificação |
 | CMS-07 | Phase 3 | Pending |
 | PRECO-02 | Phase 3 | Em verificação |
-| DOC-01 | Phase 3 | Pending |
-| DOC-02 | Phase 3 | Pending |
-| DOC-03 | Phase 3 | Pending |
+| DOC-01 | Phase 3 | Complete |
+| DOC-02 | Phase 3 | Complete |
+| DOC-03 | Phase 3 | Complete |
 | HOME-01 | Phase 4 | Pending |
 | HOME-02 | Phase 4 | Pending |
 | HOME-03 | Phase 4 | Pending |
