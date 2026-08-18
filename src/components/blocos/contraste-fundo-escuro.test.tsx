@@ -32,6 +32,7 @@ describe('Contraste dos headings sobre seção de fundo escuro', () => {
       __component: 'blocos.hero',
       id: 1,
       titulo: 'O palco é seu. Nós levamos a estrutura.',
+      imagem: null,
     };
     const { container } = renderComProviders(<HeroBloco bloco={bloco} locale="pt-BR" />);
 
@@ -52,6 +53,7 @@ describe('Contraste dos headings sobre seção de fundo escuro', () => {
       __component: 'blocos.destaque-led',
       id: 1,
       titulo: 'Painéis de LED para transformar seu evento',
+      imagens: [],
     };
     const { container } = renderComProviders(<DestaqueLedBloco bloco={bloco} locale="pt-BR" />);
 

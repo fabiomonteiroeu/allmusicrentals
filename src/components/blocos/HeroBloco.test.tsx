@@ -9,11 +9,14 @@ const blocoCompleto: HeroBlocoProps['bloco'] = {
   titulo: 'O palco é seu. Nós levamos a estrutura.',
   subtitulo: 'Estruturas, telas de LED, luz e som para o seu evento.',
   citacao: 'Do planejamento à montagem, cuidamos de cada detalhe.',
+  // Formato já adaptado (`Imagem`, pós `adaptarImagem`): `alt`, não `alternativeText`;
+  // `largura`/`altura`, não `width`/`height`. `HeroBloco` recebe o bloco depois do adaptador —
+  // nunca a mídia crua do Strapi.
   imagem: {
     url: 'http://localhost:1337/uploads/x.jpg',
-    alternativeText: 'Palco montado com painel de LED',
-    width: 1600,
-    height: 900,
+    alt: 'Palco montado com painel de LED',
+    largura: 1600,
+    altura: 900,
   },
   ctaPrimarioRotulo: null,
   ctaPrimarioUrl: null,

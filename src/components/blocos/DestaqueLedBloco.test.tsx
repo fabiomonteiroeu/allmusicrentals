@@ -28,10 +28,13 @@ function criarBloco(
     ],
     ctaRotulo: null,
     ctaUrl: null,
+    // Formato já adaptado (`Imagem`, pós `adaptarImagens`): `alt`, não `alternativeText`;
+    // `largura`/`altura`, não `width`/`height`. `DestaqueLedBloco` recebe o bloco depois do
+    // adaptador — nunca a mídia crua do Strapi.
     imagens: [
-      { url: '/uploads/led-1.jpg', alternativeText: 'Painel LED 1', width: 1600, height: 1000 },
-      { url: '/uploads/led-2.jpg', alternativeText: 'Painel LED 2', width: 800, height: 800 },
-      { url: '/uploads/led-3.jpg', alternativeText: 'Painel LED 3', width: 800, height: 800 },
+      { url: '/uploads/led-1.jpg', alt: 'Painel LED 1', largura: 1600, altura: 1000 },
+      { url: '/uploads/led-2.jpg', alt: 'Painel LED 2', largura: 800, altura: 800 },
+      { url: '/uploads/led-3.jpg', alt: 'Painel LED 3', largura: 800, altura: 800 },
     ],
     ...overrides,
   };

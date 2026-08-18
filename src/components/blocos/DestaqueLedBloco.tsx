@@ -254,7 +254,7 @@ export function DestaqueLedBloco({ bloco, locale }: DestaqueLedBlocoProps) {
               {imagemLarga?.url ? (
                 <Image
                   src={imagemLarga.url}
-                  alt={imagemLarga.alternativeText ?? 'Painel de LED'}
+                  alt={imagemLarga.alt}
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 760px) 100vw, 50vw"
@@ -267,7 +267,7 @@ export function DestaqueLedBloco({ bloco, locale }: DestaqueLedBlocoProps) {
               {imagemQuadrada1?.url ? (
                 <Image
                   src={imagemQuadrada1.url}
-                  alt={imagemQuadrada1.alternativeText ?? 'Painel de LED'}
+                  alt={imagemQuadrada1.alt}
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 760px) 100vw, 50vw"
@@ -280,7 +280,7 @@ export function DestaqueLedBloco({ bloco, locale }: DestaqueLedBlocoProps) {
               {imagemQuadrada2?.url ? (
                 <Image
                   src={imagemQuadrada2.url}
-                  alt={imagemQuadrada2.alternativeText ?? 'Painel de LED'}
+                  alt={imagemQuadrada2.alt}
                   fill
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 760px) 100vw, 50vw"

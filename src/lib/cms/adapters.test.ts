@@ -143,6 +143,62 @@ describe('Dynamic Zone', () => {
     ]);
     expect(blocos[0]).toMatchObject({ __component: 'blocos.hero', titulo: 'Bem-vindo' });
   });
+
+  // Achado no checkpoint HOME-04 (04-07): `adaptarBloco` tratava rich text mas nunca passava a
+  // mídia de bloco (`blocos.hero.imagem`, `blocos.destaque-led.imagens`) por `adaptarImagem` —
+  // a url relativa do Strapi chegava crua ao componente, e `next/image` resolvia contra a
+  // origem do próprio front (404), em vez da origem do Strapi. `MEDIA_BASE` é lido de
+  // `NEXT_PUBLIC_STRAPI_MEDIA_URL` na carga do módulo; o teste usa o valor real do ambiente
+  // (vazio se a variável não estiver definida) para não depender de um `.env.local` específico.
+  const mediaBase = process.env.NEXT_PUBLIC_STRAPI_MEDIA_URL ?? '';
+
+  it('blocos.hero: imagem com url relativa recebe o prefixo de NEXT_PUBLIC_STRAPI_MEDIA_URL', () => {
+    const blocos = adaptarBlocos([
+      {
+        __component: 'blocos.hero',
+        id: 5,
+        titulo: 'O palco é seu.',
+        imagem: { url: '/uploads/hero.jpg', alternativeText: null, width: 1600, height: 900 },
+      },
+    ]);
+    const hero = blocos[0] as { imagem: { url: string; alt: string } | null };
+    expect(hero.imagem?.url).toBe(`${mediaBase}/uploads/hero.jpg`);
+    // Sem alternativeText no CMS, o alt cai para o título do bloco (altPadrao), não fica vazio.
+    expect(hero.imagem?.alt).toBe('O palco é seu.');
+  });
+
+  it('blocos.hero: imagem com url já absoluta (https://) permanece inalterada', () => {
+    const blocos = adaptarBlocos([
+      {
+        __component: 'blocos.hero',
+        id: 6,
+        titulo: 'O palco é seu.',
+        imagem: {
+          url: 'https://cdn.exemplo.com/hero.jpg',
+          alternativeText: 'Palco montado com painel de LED',
+          width: 1600,
+          height: 900,
+        },
+      },
+    ]);
+    const hero = blocos[0] as { imagem: { url: string; alt: string } | null };
+    expect(hero.imagem?.url).toBe('https://cdn.exemplo.com/hero.jpg');
+    expect(hero.imagem?.alt).toBe('Palco montado com painel de LED');
+  });
+
+  it('blocos.destaque-led: imagens[] passam pelo mesmo prefixo de MEDIA_BASE', () => {
+    const blocos = adaptarBlocos([
+      {
+        __component: 'blocos.destaque-led',
+        id: 7,
+        titulo: 'Painéis de LED',
+        imagens: [{ url: '/uploads/led-1.jpg', alternativeText: null, width: 1600, height: 1000 }],
+      },
+    ]);
+    const led = blocos[0] as { imagens: { url: string; alt: string }[] };
+    expect(led.imagens[0]?.url).toBe(`${mediaBase}/uploads/led-1.jpg`);
+    expect(led.imagens[0]?.alt).toBe('Painéis de LED');
+  });
 });
 
 describe('validação Zod do contrato do CMS', () => {

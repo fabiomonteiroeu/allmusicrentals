@@ -433,9 +433,21 @@ type BlocoComRichText = Extract<
   { __component: 'blocos.texto-rico' | 'blocos.faq' | 'blocos.comparativo-led' }
 >;
 
-/** Blocos prontos para render: rich text já virou `HtmlSeguro`. */
+/**
+ * Blocos com campo de mídia crua do Strapi (`url` relativa, sem passar por `adaptarImagem`).
+ * Achado no checkpoint HOME-04 (04-07): `blocos.hero`/`blocos.destaque-led` são os primeiros
+ * consumidores de mídia de bloco da Dynamic Zone — produtos/categorias já resolviam `MEDIA_BASE`
+ * há tempos, mas nenhum bloco da Home precisava de imagem própria até esta fase.
+ */
+type BlocoComMidia = Extract<BlocoCms, { __component: 'blocos.hero' | 'blocos.destaque-led' }>;
+
+/** Blocos prontos para render: rich text já virou `HtmlSeguro`, mídia já virou `Imagem`. */
 export type Bloco =
-  | Exclude<BlocoCms, BlocoComRichText>
+  | Exclude<BlocoCms, BlocoComRichText | BlocoComMidia>
+  | (Omit<Extract<BlocoCms, { __component: 'blocos.hero' }>, 'imagem'> & { imagem: Imagem | null })
+  | (Omit<Extract<BlocoCms, { __component: 'blocos.destaque-led' }>, 'imagens'> & {
+      imagens: Imagem[];
+    })
   | (Extract<BlocoCms, { __component: 'blocos.texto-rico' }> & { conteudoHtml: HtmlSeguro })
   | (Omit<Extract<BlocoCms, { __component: 'blocos.faq' }>, 'itens'> & {
       itens: PerguntaResposta[];
@@ -454,6 +466,10 @@ export function adaptarBlocos(blocos: PaginaCms['blocos']): Bloco[] {
 
 function adaptarBloco(b: BlocoCms): Bloco {
   switch (b.__component) {
+    case 'blocos.hero':
+      return { ...b, imagem: adaptarImagem(b.imagem, b.titulo) };
+    case 'blocos.destaque-led':
+      return { ...b, imagens: adaptarImagens(b.imagens, b.titulo ?? '') };
     case 'blocos.texto-rico':
       return { ...b, conteudoHtml: sanitizarRichText(b.conteudo) };
     case 'blocos.faq':

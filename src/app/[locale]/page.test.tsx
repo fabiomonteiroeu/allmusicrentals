@@ -33,7 +33,7 @@ describe('HomePage', () => {
   it('getPagina com 2 blocos: os 2 blocos renderizam e categorias/produtos/avaliações foram buscados', async () => {
     mockGetPagina.mockResolvedValue(
       construirPagina([
-        { __component: 'blocos.hero', titulo: 'HERO-TXT' },
+        { __component: 'blocos.hero', titulo: 'HERO-TXT', imagem: null },
         { __component: 'blocos.chamada-final', titulo: 'CTA-TXT' },
       ]),
     );

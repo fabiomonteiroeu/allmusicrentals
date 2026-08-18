@@ -16,11 +16,13 @@ const avaliacoes: Avaliacao[] = [];
 
 /** Um exemplar mínimo válido de cada um dos 9 `__component` da Home, na ordem do layout. */
 const nove: Bloco[] = [
-  { __component: 'blocos.hero', titulo: 'HERO-TXT' },
+  // hero/destaque-led já adaptados (pós adaptarBloco): imagem/imagens sempre presentes, nunca
+  // omitidos — a forma crua do Strapi nunca chega ao renderizador.
+  { __component: 'blocos.hero', titulo: 'HERO-TXT', imagem: null },
   { __component: 'blocos.busca', titulo: 'BUSCA-TXT' },
   { __component: 'blocos.grade-de-categorias', titulo: 'GRADE-TXT' },
   { __component: 'blocos.produtos-em-destaque', titulo: 'DESTAQUE-TXT' },
-  { __component: 'blocos.destaque-led', titulo: 'LED-TXT' },
+  { __component: 'blocos.destaque-led', titulo: 'LED-TXT', imagens: [] },
   { __component: 'blocos.como-funciona', titulo: 'COMOFUNCIONA-TXT' },
   { __component: 'blocos.diferenciais', titulo: 'DIFERENCIAIS-TXT' },
   { __component: 'blocos.avaliacoes', titulo: 'AVALIACOES-TXT' },
