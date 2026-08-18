@@ -1,6 +1,6 @@
 import { axe } from 'jest-axe';
 import { renderComProviders, screen } from '@/test-utils';
-import { AvaliacoesBloco } from './AvaliacoesBloco';
+import { AvaliacoesBloco, AvaliacaoSkeleton } from './AvaliacoesBloco';
 import type { Bloco, Avaliacao } from '@/lib/cms/adapters';
 
 type BlocoAvaliacoes = Extract<Bloco, { __component: 'blocos.avaliacoes' }>;
@@ -112,5 +112,38 @@ describe('AvaliacoesBloco', () => {
       />,
     );
     expect(await axe(containerCheio)).toHaveNoViolations();
+  });
+});
+
+describe('AvaliacaoSkeleton', () => {
+  it('renderiza exatamente 3 cards-esqueleto com 12 barras no total', () => {
+    const { container } = renderComProviders(<AvaliacaoSkeleton />);
+
+    const grade = container.querySelector('[aria-hidden="true"]');
+    expect(grade?.children).toHaveLength(3);
+    expect(container.querySelectorAll('span').length).toBe(12);
+  });
+
+  it('o primeiro card tem barras com as larguras 40%, 60%, 100%, 85%', () => {
+    const { container } = renderComProviders(<AvaliacaoSkeleton />);
+
+    const grade = container.querySelector('[aria-hidden="true"]');
+    const primeiroCard = grade?.children[0];
+    const larguras = Array.from(primeiroCard?.children ?? []).map(
+      (barra) => getComputedStyle(barra as HTMLElement).width,
+    );
+    expect(larguras).toEqual(['40%', '60%', '100%', '85%']);
+  });
+
+  it('AvaliacoesBloco com avaliações=[] não renderiza o esqueleto — o estado vazio é o real em produção', () => {
+    const { container } = renderComProviders(
+      <AvaliacoesBloco bloco={blocoBase} locale="pt-BR" avaliacoes={[]} />,
+    );
+    expect(container.querySelectorAll('span').length).toBe(0);
+  });
+
+  it('sem violações de acessibilidade', async () => {
+    const { container } = renderComProviders(<AvaliacaoSkeleton />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

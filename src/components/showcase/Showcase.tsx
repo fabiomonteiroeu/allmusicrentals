@@ -25,6 +25,7 @@ import { EmptyState } from '@/components/feedback/EmptyState';
 import { Spinner } from '@/components/feedback/Spinner';
 import { ImagePlaceholder } from '@/components/media/ImagePlaceholder';
 import { ProductCard, type ProdutoResumo } from '@/components/product/ProductCard';
+import { AvaliacaoSkeleton } from '@/components/blocos/AvaliacoesBloco';
 
 const Secao = styled.section`
   padding: ${({ theme }) => `${theme.espaco[40]} 0`};
@@ -221,6 +222,15 @@ export function Showcase() {
               <ProductCardSkeleton key={i} indice={i} />
             ))}
           </GridCards>
+        </Secao>
+
+        <Secao>
+          <Eyebrow>Avaliações — estado carregando</Eyebrow>
+          <Body $mid>
+            Componente testável (HOME-03), não garantia de produção: sem `cacheComponents`
+            habilitado, o visitante de uma rota estática nunca vê este estado na Home publicada.
+          </Body>
+          <AvaliacaoSkeleton />
         </Secao>
 
         <Secao>

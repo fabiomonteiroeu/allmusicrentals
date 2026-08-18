@@ -3,6 +3,7 @@ import { Container } from '@/components/primitives/Container';
 import { Heading, Eyebrow } from '@/components/primitives/Typography';
 import { Button } from '@/components/primitives/Button';
 import { SectionDivider } from '@/components/feedback/SectionDivider';
+import { SkeletonBar } from '@/components/feedback/Skeleton';
 import type { Bloco, Avaliacao } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
@@ -303,5 +304,60 @@ export function AvaliacoesBloco({ bloco, locale, avaliacoes }: AvaliacoesBlocoPr
         <SectionDivider $claro />
       </Miolo>
     </Secao>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Estado "carregando" (skeleton) — componente testável, não garantia de produção.
+//
+// Sem cacheComponents habilitado e com busca em Server Component, um limite de streaming ao
+// redor de um bloco assíncrono é resolvido no próprio prerender — o visitante de uma rota
+// estática nunca vê o estado de carregamento. Habilitar cacheComponents é decisão de
+// arquitetura da Fase 14 (afeta as Fases 5–17) e está explicitamente fora do escopo desta fase.
+// Por isso o componente é exportado (a showcase precisa importá-lo) mas nunca é renderizado
+// dentro de AvaliacoesBloco na Home, nem envolvido em qualquer mecanismo de streaming aqui.
+// ---------------------------------------------------------------------------
+
+const GradeEsqueleto = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: ${({ theme }) => theme.espaco[24]};
+`;
+
+const CardEsqueleto = styled.div<{ $indice: number }>`
+  border: 1px solid ${({ theme }) => theme.cor.borda};
+  background: ${({ theme }) => theme.cor.branco};
+  padding: ${({ theme }) => theme.espaco[24]};
+  border-radius: ${({ theme }) => theme.raio.base};
+  display: grid;
+  gap: ${({ theme }) => theme.espaco[12]};
+  animation: amrPulse 1.3s ease-in-out infinite;
+  animation-delay: ${({ $indice }) => `${$indice * 0.09}s`};
+`;
+
+const ALTURAS_BARRA = ['14px', '12px', '12px', '12px'] as const;
+
+// Larguras exatas do layout-fonte por card. 3 cards, não 4 — é a contagem do HTML-fonte, mesmo
+// o estado cheio mostrando 4 por linha. Não completar para 4 "para bater" com o outro estado.
+// Card 1: alturas 14/12/12/12px, larguras 40%/60%/100%/85%.
+// Card 2: alturas 14/12/12/12px, larguras 35%/55%/100%/70%.
+// Card 3: alturas 14/12/12/12px, larguras 45%/50%/95%/80%.
+const ESQUELETOS = [
+  { larguras: ['40%', '60%', '100%', '85%'] },
+  { larguras: ['35%', '55%', '100%', '70%'] },
+  { larguras: ['45%', '50%', '95%', '80%'] },
+] as const;
+
+export function AvaliacaoSkeleton() {
+  return (
+    <GradeEsqueleto aria-hidden="true">
+      {ESQUELETOS.map((esqueleto, indice) => (
+        <CardEsqueleto key={indice} $indice={indice}>
+          {esqueleto.larguras.map((largura, i) => (
+            <SkeletonBar key={i} $altura={ALTURAS_BARRA[i]} $largura={largura} />
+          ))}
+        </CardEsqueleto>
+      ))}
+    </GradeEsqueleto>
   );
 }
