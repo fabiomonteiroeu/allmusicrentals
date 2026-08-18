@@ -55,3 +55,65 @@ layout.
 
 **Reversível:** trocar as props booleanas por uma prop única `tipoDeItem` é local ao componente
 `ProductCard` e ao adaptador que o alimenta.
+
+## D3 — Grid de 4 colunas por JS substituído por `auto-fit`
+
+**Fase:** 04 · **Data:** 2026-08-18
+
+**No layout:** o layout-fonte calcula `grid-template-columns` em JS a partir de
+`window.innerWidth` (1 coluna `<760px`, 2 `<1180px`, 4 `≥1180px`) nos 4 cards de categoria
+(Bloco 3 da Home) e na grade de avaliações do estado cheio (Bloco 8).
+
+**Divergência:** substituído por `grid-template-columns: repeat(auto-fit, minmax(260px, 1fr))`.
+
+**Motivo (técnico):**
+1. D1 (acima) já rejeitou layout dirigido por `window.innerWidth` no cliente — mismatch de
+   hidratação e CLS na primeira pintura.
+2. A Fase 4 proíbe `@media` nova; `auto-fit`/`minmax` resolve a fluidez inteiramente em CSS,
+   sem JS de viewport e sem media query.
+3. O próprio layout-fonte já usa `auto-fit` no card-bandeira do Bloco 3 e no estado
+   "carregando" do Bloco 8 — o padrão substituto já existe no HTML-fonte, não é inventado.
+
+**Escopo:** grade de 4 cards de categoria (Bloco 3) e grade de avaliações no estado cheio
+(Bloco 8).
+
+**Consequência aceita:** em larguras intermediárias o número de colunas pode diferir em ±1 do
+original (os degraus 760px/1180px não são mais idênticos).
+
+**Status:** ✅ RESOLVIDO POR DECISÃO.
+
+**Reversível:** trocar `auto-fit`/`minmax` por um valor de `grid-template-columns` calculado em
+JS é local a `GradeDeCategoriasBloco.tsx` e `AvaliacoesBloco.tsx`.
+
+## D4 — Cópia do estado "CMS indisponível" não vem do layout-fonte
+
+**Fase:** 04 · **Data:** 2026-08-18
+
+**No layout:** `Home.dc.html` não tem estado de falha de CMS — o layout-fonte é HTML estático,
+sem cenário de "o backend não respondeu".
+
+**Divergência:** quando `getPagina(locale, 'home')` devolve `null` (Strapi indisponível, ou a
+página `home` ainda não existe), `/[locale]/page.tsx` renderiza um único `Notice` com rótulo
+"CONTEÚDO INDISPONÍVEL" e o texto "Não foi possível carregar o conteúdo da página no momento.
+Tente novamente em alguns minutos." — cópia proposta na pesquisa da Fase 4 e travada no
+planejamento (04-UI-SPEC.md, "Comportamento sem CMS").
+
+**Motivo (técnico):** o chrome (`Header`/`Footer`/`TopBar`) sobrevive porque vive em
+`[locale]/layout.tsx`; sem esse fallback a página ficaria em branco ou o build falharia — não é
+opção aceitável para uma falha de rede transitória.
+
+**Status:** ℹ️ INTENCIONAL — confirmar com o time na revisão de conteúdo (Fase 11/12) se a cópia
+final muda.
+
+**Reversível:** o texto vive só em `src/app/[locale]/page.tsx` (duas constantes de módulo);
+trocar a cópia não afeta nenhum outro arquivo.
+
+## Item 6 (docs/00-divergencias.md) — hrefs de âncora `#led`/`#luzsom` no lugar dos slugs reais
+
+**Fase:** 04 · **Data:** 2026-08-18
+
+**Status:** ✅ RESOLVIDO. O plano 04-02 ligou a navegação do chrome ao CMS
+(`getNavPrincipal`/`getColunasRodape`), substituindo o placeholder estático de
+`src/lib/site/navigation.ts`; o plano 04-04 ligou os cards de categoria da Home aos slugs reais
+das 5 categorias (`/[locale]/categoria/{slug}`) em vez de âncoras internas. Não há mais href de
+âncora `#led`/`#luzsom` em nenhum ponto coberto por esta fase.

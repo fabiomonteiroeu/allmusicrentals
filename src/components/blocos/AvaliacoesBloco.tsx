@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { Heading, Eyebrow } from '@/components/primitives/Typography';
@@ -9,11 +11,14 @@ import type { Locale } from '@/i18n/config';
 
 /**
  * Bloco 8 da Home — Avaliações, com os estados "cheio" e "vazio".
- * Server Component: só recebe props e renderiza, sem estado local.
+ * Só recebe props e renderiza, sem estado local.
  *
  * Regra inviolável: nunca semear nem renderizar depoimento fictício. Com o CMS recém-instalado
  * e sem avaliação publicada, o estado vazio é o que o visitante vê de fato — por isso recebe a
  * mesma especificação detalhada do estado cheio, não um tratamento secundário.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 
 type BlocoAvaliacoes = Extract<Bloco, { __component: 'blocos.avaliacoes' }>;

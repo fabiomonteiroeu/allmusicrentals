@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { SectionDivider } from '@/components/feedback/SectionDivider';
@@ -7,11 +9,18 @@ import type { Bloco } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
 /**
- * Bloco 1 da Home — Hero. Server Component puro (sem diretiva de cliente, sem estado local).
- * O mosaico decorativo é 100% CSS: a contagem de células é fixa (12×6, não depende de
- * viewport) e o `prefers-reduced-motion` global (GlobalStyle.ts) já zera a duração e o atraso
- * de qualquer animação — por isso não há checagem de preferência de movimento agendando nada
- * em tempo de execução aqui.
+ * Bloco 1 da Home — Hero. Sem estado local (nenhum `useState`/efeito próprio): o mosaico
+ * decorativo é 100% CSS, a contagem de células é fixa (12×6, não depende de viewport) e o
+ * `prefers-reduced-motion` global (GlobalStyle.ts) já zera a duração e o atraso de qualquer
+ * animação — por isso não há checagem de preferência de movimento agendando nada em tempo de
+ * execução aqui.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): styled-components resolve `theme` via
+ * React Context, e Context só existe na árvore de Client Components — em Server Component puro,
+ * `useContext` do ThemeContext devolve `undefined` (confirmado em runtime: `theme.cor` lançava
+ * "Cannot read properties of undefined"). Nenhum dos 9 blocos que definem `styled.*` diretamente
+ * pode ficar sem esta diretiva enquanto usar styled-components — ver docs/adr/001-styled-components.md
+ * regra 3 ("componentes estilizados ficam nas folhas", ou seja, em Client Components).
  */
 
 const COLUNAS = 12;

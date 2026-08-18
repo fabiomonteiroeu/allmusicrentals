@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { Eyebrow, Heading } from '@/components/primitives/Typography';
@@ -6,13 +8,15 @@ import type { Bloco, Produto } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
 /**
- * Bloco 4 da Home — Produtos em destaque. Server Component puro (sem diretiva de cliente):
- * só recebe props e monta o cabeçalho da seção; toda a interação do slider (setas, contador,
- * scroll) vive em `SliderDeProdutos`, que é o único filho com estado local.
+ * Bloco 4 da Home — Produtos em destaque. Só recebe props e monta o cabeçalho da seção; toda a
+ * interação do slider (setas, contador, scroll) vive em `SliderDeProdutos`.
  *
  * A lista de produtos vem por prop (`produtos`), não do CMS: `blocoProdutosEmDestaque` só
  * carrega `cabecalhoDeSecao` (eyebrow/titulo/subtitulo) — quem busca os 5 produtos de destaque
  * é a página, via `getProdutos(locale, { destaque: true })`.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 
 export interface ProdutosEmDestaqueBlocoProps {

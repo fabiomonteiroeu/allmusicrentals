@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { SectionDivider } from '@/components/feedback/SectionDivider';
@@ -6,7 +8,11 @@ import { SearchBarGrande } from './SearchBarGrande';
 import type { Bloco } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
-/** Bloco 2 da Home — Busca grande. Server Component: só compõe cabeçalho + SearchBarGrande. */
+/**
+ * Bloco 2 da Home — Busca grande. Só compõe cabeçalho + SearchBarGrande, sem estado próprio.
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
+ */
 export interface BuscaBlocoProps {
   bloco: Extract<Bloco, { __component: 'blocos.busca' }>;
   locale: Locale;

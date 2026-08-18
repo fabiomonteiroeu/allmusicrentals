@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { Heading } from '@/components/primitives/Typography';
@@ -6,7 +8,10 @@ import type { Bloco } from '@/lib/cms/adapters';
 
 /**
  * Bloco 7 da Home — "Estrutura e suporte para seu evento", grade de 5 diferenciais.
- * Server Component: só recebe props e renderiza, sem estado local.
+ * Só recebe props e renderiza, sem estado local.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 
 type BlocoDiferenciais = Extract<Bloco, { __component: 'blocos.diferenciais' }>;

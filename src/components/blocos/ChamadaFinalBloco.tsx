@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { SectionDivider } from '@/components/feedback/SectionDivider';
@@ -7,11 +9,14 @@ import type { Bloco } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
 /**
- * Bloco 9 da Home — Chamada final. Server Component puro, mesma família visual do
- * HeroBloco (seção escura, mesmo contrato de props `{ bloco, locale }`).
+ * Bloco 9 da Home — Chamada final. Mesma família visual do HeroBloco (seção escura, mesmo
+ * contrato de props `{ bloco, locale }`).
  *
  * Este bloco NÃO fecha com divisor de rodapé: o `Footer` que vem logo em seguida já abre
  * com a própria borda superior (chrome da Fase 2) — não duplicar o divisor aqui.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 
 export interface ChamadaFinalBlocoProps {

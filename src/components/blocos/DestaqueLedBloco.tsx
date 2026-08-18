@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
@@ -9,9 +11,11 @@ import type { Bloco } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
 /**
- * Bloco 5 da Home — Painéis de LED. Server Component puro (sem diretiva de cliente, sem estado
- * local): só recebe props e monta a seção. Mesma família visual do Hero (04-03) — seção escura
- * com `Eyebrow $sobreEscuro`.
+ * Bloco 5 da Home — Painéis de LED. Sem estado local próprio: só recebe props e monta a seção.
+ * Mesma família visual do Hero (04-03) — seção escura com `Eyebrow $sobreEscuro`.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 
 export interface DestaqueLedBlocoProps {

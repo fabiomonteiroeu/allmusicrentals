@@ -1,3 +1,5 @@
+'use client';
+
 import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { Heading } from '@/components/primitives/Typography';
@@ -7,7 +9,10 @@ import type { Bloco } from '@/lib/cms/adapters';
 
 /**
  * Bloco 6 da Home — "Monte seu orçamento em quatro etapas" + aviso de não-reserva.
- * Server Component: só recebe props e renderiza, sem estado local.
+ * Só recebe props e renderiza, sem estado local.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 
 type BlocoComoFunciona = Extract<Bloco, { __component: 'blocos.como-funciona' }>;

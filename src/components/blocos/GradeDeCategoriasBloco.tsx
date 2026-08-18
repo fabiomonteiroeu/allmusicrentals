@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
@@ -9,10 +11,12 @@ import type { Bloco, Categoria } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
 /**
- * Bloco 3 da Home — Grade de categorias. Server Component puro (sem diretiva de cliente, sem
- * estado local): o CMS só entrega o cabeçalho da seção (`blocoGradeDeCategorias` usa
- * `cabecalhoDeSecao`); as categorias vêm por prop, buscadas por `page.tsx` via
- * `getCategorias(locale)`.
+ * Bloco 3 da Home — Grade de categorias. Sem estado local próprio: o CMS só entrega o
+ * cabeçalho da seção (`blocoGradeDeCategorias` usa `cabecalhoDeSecao`); as categorias vêm por
+ * prop, buscadas por `page.tsx` via `getCategorias(locale)`.
+ *
+ * `'use client'` (correção ao plano de execução, 04-07): rationale completo em HeroBloco.tsx —
+ * `theme` de styled-components só resolve via Context dentro da árvore de Client Components.
  */
 export interface GradeDeCategoriasBlocoProps {
   bloco: Extract<Bloco, { __component: 'blocos.grade-de-categorias' }>;
