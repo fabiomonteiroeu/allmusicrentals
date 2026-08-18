@@ -228,11 +228,11 @@ Reconhecidos, fora do roadmap atual.
 | CMS-01 | Phase 3 | Em verificação |
 | CMS-02 | Phase 3 | Em verificação |
 | CMS-03 | Phase 3 | Em verificação |
-| CMS-04 | Phase 3 | Em verificação |
-| CMS-05 | Phase 3 | Em verificação |
-| CMS-06 | Phase 3 | Em verificação |
+| CMS-04 | Phase 3 | Verificado por teste automatizado (03-04) |
+| CMS-05 | Phase 3 | Verificado por teste automatizado (03-02, reverificado em 03-04) |
+| CMS-06 | Phase 3 | Verificado por teste automatizado (03-04) |
 | CMS-07 | Phase 3 | Pending |
-| PRECO-02 | Phase 3 | Em verificação |
+| PRECO-02 | Phase 3 | Verificado por teste automatizado (03-01/03-03, reverificado em 03-04) |
 | DOC-01 | Phase 3 | Complete |
 | DOC-02 | Phase 3 | Complete |
 | DOC-03 | Phase 3 | Complete |

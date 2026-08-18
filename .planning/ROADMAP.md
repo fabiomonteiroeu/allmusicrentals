@@ -13,8 +13,9 @@ a espinha dorsal aprovada pelo cliente. Os rótulos estruturais (`Phase`, `Goal`
 `Requirements`, `Success Criteria`, `Plans`) ficam em inglês porque são lidos pelas ferramentas GSD;
 todo o conteúdo é pt-BR.
 
-**Estado real (2026-08-17):** Fases 0, 1 e 2 concluídas. Fase 3 implementada e aguardando verificação.
-Fases 4–17 não iniciadas. Branch corrente `fase-03-strapi`, ainda não publicada no GitHub.
+**Estado real (2026-08-17):** Fases 0, 1 e 2 concluídas. Fase 3 com 5/6 planos entregues — falta só
+03-06 (UAT com Strapi + Postgres e publicação da branch). Fases 4–17 não iniciadas. Branch corrente
+`fase-03-strapi`, ainda não publicada no GitHub.
 
 ## Phases
 
@@ -111,7 +112,7 @@ Plans:
 - [x] 03-01: Modelo Strapi completo — content-types, componentes, Dynamic Zone, i18n, permissões e seed de estrutura (`70630a3`)
 - [x] 03-02: Cliente server-only, schemas Zod, adaptadores e sanitização de rich text (`5fe84a4`, `4b28864`)
 - [x] 03-03: Webhook de revalidação, Dockerfile do Strapi e serviço `cms` no compose (`0cd7b19`, `bd98e75`, `7e88a4e`)
-- [ ] 03-04: Provas automatizadas da ponte CMS — teste de contrato do webhook (401/400/200 e mapa modelo→tag), teste de degradação da Dynamic Zone (bloco desconhecido → `null`) e do contrato dos 13 blocos, varredura de segredo-sentinela em `.next/static`, `npm run check` e `npm run build` verdes
+- [x] 03-04: Provas automatizadas da ponte CMS — teste de contrato do webhook (401/400/200 e mapa modelo→tag), teste de degradação da Dynamic Zone (bloco desconhecido → `null`) e do contrato dos 13 blocos, varredura de segredo-sentinela em `.next/static`, `npm run check` e `npm run build` verdes (`d2dff3f`, `0b4cccd`, `4a0284f`)
 - [x] 03-05: Fechamento de pendências documentais — conferir divergências 5, 6, 7 e 9 contra os componentes reais da Fase 2 e 11 e 12 contra o modelo da Fase 3, atualizando `docs/00-divergencias.md` (ou registrando desvio em `docs/divergencias.md`); corrigir `docs/PLANO.md:92` para 5 etapas, atualizar o estado das fases no cabeçalho, remover a nota "Decisão aberta" da Fase 17; sincronizar `docs/00-inventario.md`; criar `docs/adr/003-rota-canonica-produto.md` e `docs/adr/004-deploy-ghcr-caddy.md`
 - [ ] 03-06: Verificação/UAT da fase — subir Strapi + Postgres pelo profile `cms`, provar API pública e webhook por curl, roteiro no painel (9 content-types, 13 blocos, 6 componentes compartilhados, entrada em pt-BR propagada para en/es e publicada), registrar `03-UAT.md` com evidência por requisito e publicar a branch `fase-03-strapi` no GitHub
 
@@ -374,7 +375,7 @@ Plans:
 | 0. Inventário e plano | 3/3 | Complete | 2026-08-14 |
 | 1. Fundação | 5/5 | Complete | 2026-08-14 |
 | 2. Design system | 5/5 | Complete | 2026-08-14 |
-| 3. Strapi (CMS) | 4/6 | In Progress | - |
+| 3. Strapi (CMS) | 5/6 | In Progress | - |
 | 4. Home | 0/4 | Not started | - |
 | 5. Catálogo | 0/4 | Not started | - |
 | 6. Categoria | 0/3 | Not started | - |
@@ -390,7 +391,7 @@ Plans:
 | 16. QA final | 0/4 | Not started | - |
 | 17. Deploy — GHCR + Caddy | 0/5 | Not started | - |
 
-**Total:** 16 de 70 planos concluídos (23%) · 3 de 18 fases concluídas
+**Total:** 18 de 70 planos concluídos (26%) · 3 de 18 fases concluídas
 
 ---
 *Roadmap criado em 2026-08-17 a partir de `.planning/intel/` e de `docs/PLANO.md`.*
