@@ -44,6 +44,13 @@ const nextConfig: NextConfig = {
   },
   images: {
     formats: ['image/avif', 'image/webp'],
+    // Produção: acrescentar o domínio real do Strapi quando a Fase 17 definir.
+    // NUNCA desligar a flag de otimização de imagem como atalho — isso desliga a
+    // proteção contra SSRF do endpoint de otimização junto com a otimização.
+    remotePatterns: [
+      { protocol: 'http', hostname: 'localhost', port: '1337', pathname: '/uploads/**' },
+      { protocol: 'http', hostname: 'cms', port: '1337', pathname: '/uploads/**' },
+    ],
   },
   async headers() {
     return [
