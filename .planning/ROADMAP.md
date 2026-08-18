@@ -380,7 +380,7 @@ Plans:
 | 1. Fundação | 5/5 | Complete | 2026-08-14 |
 | 2. Design system | 5/5 | Complete | 2026-08-14 |
 | 3. Strapi (CMS) | 6/6 | Complete | 2026-08-17 |
-| 4. Home | 0/4 | Not started | - |
+| 4. Home | 0/7 | Planned | - |
 | 5. Catálogo | 0/4 | Not started | - |
 | 6. Categoria | 0/3 | Not started | - |
 | 7. Produto | 0/5 | Not started | - |
@@ -395,7 +395,8 @@ Plans:
 | 16. QA final | 0/4 | Not started | - |
 | 17. Deploy — GHCR + Caddy | 0/5 | Not started | - |
 
-**Total:** 19 de 70 planos concluídos (27%) · 4 de 18 fases concluídas
+**Total:** 19 de 73 planos concluídos (26%) · 4 de 18 fases concluídas
+*(o total subiu de 70 para 73: a Fase 4 foi planejada em 7 planos, não 4 — ver `04-PLAN-OUTLINE.md`)*
 
 ---
 *Roadmap criado em 2026-08-17 a partir de `.planning/intel/` e de `docs/PLANO.md`.*
