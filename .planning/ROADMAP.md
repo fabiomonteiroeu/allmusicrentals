@@ -26,7 +26,7 @@ todo o conteúdo é pt-BR.
 - [x] **Phase 0: Inventário e plano** - Tokens, inventário do layout-fonte e plano de fases
 - [x] **Phase 1: Fundação** - Next 16 App Router, i18n, Redux, Docker de dev, CI e guardas
 - [x] **Phase 2: Design system** - Tema dos tokens, primitivos, chrome, feedback e card de produto
-- [ ] **Phase 3: Strapi (CMS)** - Modelo, cliente server-only com Zod e revalidação — falta verificar
+- [x] **Phase 3: Strapi (CMS)** - Modelo, cliente server-only com Zod, sanitização e revalidação — verificada por UAT
 - [ ] **Phase 4: Home** - `/[locale]` com os blocos da Home ligados ao CMS
 - [ ] **Phase 5: Catálogo** - Busca, filtros em acordeão, drawer mobile, chips, grade e estados
 - [ ] **Phase 6: Categoria** - Modelo único das 5 categorias e comparativo LED P1.9 × P3.9
@@ -106,7 +106,7 @@ Plans:
   3. Nenhum rich text chega à tela sem passar pela sanitização com allowlist, e nenhum token do Strapi existe no bundle cliente
   4. Não existe nenhum campo de preço, valor ou pagamento em nenhum schema do CMS — a guarda automatizada varre `cms/src` e confirma
   5. As divergências 5, 6, 7, 9, 11 e 12 estão fechadas contra o código real, e `docs/PLANO.md` deixou de conter informação obsoleta (5 etapas, estado das fases, decisão de deploy)
-**Plans**: 6 plans — **IMPLEMENTADA, AGUARDANDO VERIFICAÇÃO** (branch `fase-03-strapi`, não publicada)
+**Plans**: 6 plans — **VERIFICADA** (branch `fase-03-strapi` publicada em `origin`, 2026-08-17)
 
 Plans:
 - [x] 03-01: Modelo Strapi completo — content-types, componentes, Dynamic Zone, i18n, permissões e seed de estrutura (`70630a3`)
@@ -114,7 +114,7 @@ Plans:
 - [x] 03-03: Webhook de revalidação, Dockerfile do Strapi e serviço `cms` no compose (`0cd7b19`, `bd98e75`, `7e88a4e`)
 - [x] 03-04: Provas automatizadas da ponte CMS — teste de contrato do webhook (401/400/200 e mapa modelo→tag), teste de degradação da Dynamic Zone (bloco desconhecido → `null`) e do contrato dos 13 blocos, varredura de segredo-sentinela em `.next/static`, `npm run check` e `npm run build` verdes (`d2dff3f`, `0b4cccd`, `4a0284f`)
 - [x] 03-05: Fechamento de pendências documentais — conferir divergências 5, 6, 7 e 9 contra os componentes reais da Fase 2 e 11 e 12 contra o modelo da Fase 3, atualizando `docs/00-divergencias.md` (ou registrando desvio em `docs/divergencias.md`); corrigir `docs/PLANO.md:92` para 5 etapas, atualizar o estado das fases no cabeçalho, remover a nota "Decisão aberta" da Fase 17; sincronizar `docs/00-inventario.md`; criar `docs/adr/003-rota-canonica-produto.md` e `docs/adr/004-deploy-ghcr-caddy.md`
-- [ ] 03-06: Verificação/UAT da fase — subir Strapi + Postgres pelo profile `cms`, provar API pública e webhook por curl, roteiro no painel (9 content-types, 13 blocos, 6 componentes compartilhados, entrada em pt-BR propagada para en/es e publicada), registrar `03-UAT.md` com evidência por requisito e publicar a branch `fase-03-strapi` no GitHub
+- [x] 03-06: Verificação/UAT da fase — Strapi + Postgres no profile `cms`, API pública e webhook provados por curl, modelo conferido pela API administrativa (9 content-types, 13 blocos, 6 componentes compartilhados), página criada em pt-BR e propagada para en/es, evidência por requisito em `03-UAT.md`, branch publicada (`3d152a0`)
 
 ### Phase 4: Home
 **Goal**: A Home renderiza todos os seus blocos a partir do CMS, com fidelidade ao layout e sem preço
@@ -375,7 +375,7 @@ Plans:
 | 0. Inventário e plano | 3/3 | Complete | 2026-08-14 |
 | 1. Fundação | 5/5 | Complete | 2026-08-14 |
 | 2. Design system | 5/5 | Complete | 2026-08-14 |
-| 3. Strapi (CMS) | 5/6 | In Progress | - |
+| 3. Strapi (CMS) | 6/6 | Complete | 2026-08-17 |
 | 4. Home | 0/4 | Not started | - |
 | 5. Catálogo | 0/4 | Not started | - |
 | 6. Categoria | 0/3 | Not started | - |
@@ -391,7 +391,7 @@ Plans:
 | 16. QA final | 0/4 | Not started | - |
 | 17. Deploy — GHCR + Caddy | 0/5 | Not started | - |
 
-**Total:** 18 de 70 planos concluídos (26%) · 3 de 18 fases concluídas
+**Total:** 19 de 70 planos concluídos (27%) · 4 de 18 fases concluídas
 
 ---
 *Roadmap criado em 2026-08-17 a partir de `.planning/intel/` e de `docs/PLANO.md`.*

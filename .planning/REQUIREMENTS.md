@@ -55,7 +55,7 @@ próprio, atribuído à fase que o implementa.
 - [x] **CMS-04**: Cliente Next server-only com **toda resposta do Strapi validada por Zod**, incluindo Dynamic Zone como união discriminada (bloco desconhecido vira `null`, não quebra a página)
 - [x] **CMS-05**: Adaptadores CMS→props com tags de cache, e sanitização de rich text com allowlist estrita (tipo marcado `HtmlSeguro`) — nenhuma Dynamic Zone renderiza HTML cru
 - [x] **CMS-06**: Webhook de revalidação por tipo de conteúdo, com tokens do Strapi apenas no servidor
-- [ ] **CMS-07**: Fase 3 verificada (UAT com o Strapi rodando em Docker) e branch `fase-03-strapi` publicada no GitHub
+- [x] **CMS-07**: Fase 3 verificada (UAT com o Strapi rodando em Docker) e branch `fase-03-strapi` publicada no GitHub
 
 ### Documentação e fechamento de divergências (DOC)
 
@@ -225,13 +225,13 @@ Reconhecidos, fora do roadmap atual.
 | DS-05 | Phase 2 | Complete |
 | DS-06 | Phase 2 | Complete |
 | DS-07 | Phase 2 | Complete |
-| CMS-01 | Phase 3 | Em verificação |
-| CMS-02 | Phase 3 | Em verificação |
-| CMS-03 | Phase 3 | Em verificação |
+| CMS-01 | Phase 3 | Verificado por UAT (03-06) |
+| CMS-02 | Phase 3 | Verificado por UAT (03-06) |
+| CMS-03 | Phase 3 | Verificado por UAT (03-06) |
 | CMS-04 | Phase 3 | Verificado por teste automatizado (03-04) |
 | CMS-05 | Phase 3 | Verificado por teste automatizado (03-02, reverificado em 03-04) |
 | CMS-06 | Phase 3 | Verificado por teste automatizado (03-04) |
-| CMS-07 | Phase 3 | Pending |
+| CMS-07 | Phase 3 | Verificado |
 | PRECO-02 | Phase 3 | Verificado por teste automatizado (03-01/03-03, reverificado em 03-04) |
 | DOC-01 | Phase 3 | Complete |
 | DOC-02 | Phase 3 | Complete |
