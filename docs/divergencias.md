@@ -25,3 +25,33 @@ styled-components, em vez de estado JS de viewport.
 `auto-fit` seguem exatamente como no layout. O breakpoint fica em `theme.breakpoint.header` (1080px).
 
 **Reversível:** trocar a media query por container query ou por estado é local ao componente `Header`.
+
+## D2 — Card de produto: variantes por props booleanas, não por `tipoDeItem`
+
+**Fase:** 02 · **Data:** 2026-08-17
+
+**No layout:** o card de produto tinha três variações de controle conforme a página — seletor de cor
+via `<select>` na Home, cor via swatches + badge "SERVIÇO TÉCNICO" + bloco "ESCOPO" no Catálogo, e
+badge/escopo sem seletor de cor na Categoria (`docs/00-divergencias.md` item 7).
+
+**Divergência:** `src/components/product/ProductCard.tsx` implementa um único componente
+`ProductCard` (`ProdutoResumo`) cujas variantes de controle vêm das props `ehServico`, `escopo` e
+`cores` — não existe uma prop `tipoDeItem` no componente, e o seletor de cor é sempre `ColorSwatches`
+(o `<select>` da Home não foi reconstituído).
+
+**Motivo (técnico):**
+1. A variação de controle foi unificada em swatches + `ehServico`/`escopo`, que já cobrem as três
+   apresentações do layout com um único componente de apresentação.
+2. O `tipoDeItem` do CMS (`fisico`, `com-variacao`, `servico-tecnico`, `pacote`, em
+   `cms/src/api/product/content-types/product/schema.json`) é traduzido para essas props no
+   adaptador (`src/lib/cms/adapters.ts`), e não dentro do componente — para manter o card sem
+   conhecimento do modelo do CMS.
+3. Essa tradução acontece nas fases 5 e 7, quando as páginas de catálogo e produto forem ligadas ao
+   CMS de verdade.
+
+**Escopo:** apenas a origem do dado de controle do `ProductCard` (props booleanas/escalares em vez de
+uma prop `tipoDeItem`). A anatomia visual do card (badge, escopo, swatches, stepper) segue fiel ao
+layout.
+
+**Reversível:** trocar as props booleanas por uma prop única `tipoDeItem` é local ao componente
+`ProductCard` e ao adaptador que o alimenta.

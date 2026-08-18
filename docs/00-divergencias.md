@@ -15,19 +15,15 @@
 
 ## Componentes que divergem entre páginas
 
-5. ⏳ **Header / nav.** Estrutura idêntica, mas: (a) o **item ativo** muda por página; (b) na **Home/Catálogo a nav é estática**, enquanto na **Categoria a nav é dinâmica** (`navPrincipal`/`navMobile` geram as 5 categorias). **Proposta:** um só componente `Header` recebendo `itens[]` e `ativo` por props do CMS (menu-item). *Recomendado unificar.*
+5. ✅ **RESOLVIDA** — **Header / nav.** O componente real (`src/components/chrome/Header.tsx`) recebe `itens` e `ativoHref` por props (`HeaderProps.itens`, `HeaderProps.ativoHref`), com default vindo de `navPrincipal`, e repassa os dois para `MobileMenu` — exatamente a proposta "um só componente Header recebendo itens[] e ativo por props". Hoje a origem dos itens é o módulo estático `src/lib/site/navigation.ts`; na Fase 4 passa a ser o content-type `menu-item`, pelo adaptador que já existe em `src/lib/cms/adapters.ts` (`getNavPrincipal`). *Fechado 2026-08-17 contra o código da Fase 02.*
 
-6. ⏳ **Rodapé.** "Byte-a-byte idêntico" nas 4 institucionais; nas demais varia só o `href` dos links de produto (`#led` vs `#telas-de-led`, `#luzsom` vs `#luz-e-som`) e a Home tem um `border-top` extra. **Proposta:** rodapé único vindo do CMS (`rodape-coluna` + `menu-item`); hrefs viram slugs reais de categoria. *Recomendado unificar.*
+6. ✅ **RESOLVIDA** — **Rodapé.** O componente real (`src/components/chrome/Footer.tsx`) recebe `colunas` por props (`FooterProps.colunas`), com default vindo de `colunasRodape` em `src/lib/site/navigation.ts` — a mesma unificação estrutural proposta ("rodapé único vindo do CMS"). Nota: hoje `colunasRodape` ainda usa âncoras de placeholder da Fase 02 (`#estruturas`, `#led`, `#luzsom`, `#tendas`, `#moveis`), não os slugs reais de categoria — o próprio arquivo se declara "Placeholder da Fase 02 — a Fase 03 substitui isto pelos content-types do Strapi via adaptador CMS→props"; os slugs reais (`estruturas`, `telas-de-led`, `luz-e-som`, `tendas`, `moveis`, ver `cms/src/index.ts`) chegam pelo campo `menu-item.url` na Fase 4, quando as páginas de categoria existirem. Sobre o `border-top` extra da Home: `Footer.tsx` não tem prop nem variante para isso — a diferença fica a cargo da seção que antecede o rodapé, a construir na Fase 4. *Fechado 2026-08-17 contra o código da Fase 02.*
 
-7. ⏳ **Card de produto.** Mesma anatomia, três variações de controle:
-   - Home: seletor de cor via `<select>`.
-   - Catálogo: cor via **swatches** + badge "SERVIÇO TÉCNICO" + bloco "ESCOPO".
-   - Categoria: badge/escopo mas **sem seletor de cor**.
-   **Proposta:** um `CardProduto` com variantes controladas por `tipoDeItem` e presença de `variações`/`cor`. *Recomendado unificar como um componente com variantes.*
+7. ✅ **RESOLVIDA COM DESVIO** — **Card de produto.** `ProductCard.tsx` (`ProdutoResumo`) não tem `tipoDeItem`; as variantes de controle hoje são as props booleanas/escalares `ehServico`, `escopo` e `cores`. O seletor de cor é sempre `ColorSwatches` (nunca o `<select>` do layout da Home). Ver detalhamento do desvio na entrada `## D2` de `docs/divergencias.md`. *Fechado 2026-08-17 contra o código da Fase 02.*
 
 8. ✅ **RESOLVIDA** — **Painel de filtros: manter os dois modos.** Catálogo = acordeão vertical checkbox/swatch + drawer mobile; Categoria = botões toggle horizontais. Dois componentes distintos, fiéis ao layout. *Aprovado 2026-08-13.*
 
-9. ⏳ **Toast.** Mesma marcação; só a posição muda (`bottom:20px` na Home; `bottom:96px` onde há barra fixa de orçamento). Trivial — resolver com offset condicional. *Recomendado unificar.*
+9. ✅ **RESOLVIDA** — **Toast.** `src/components/feedback/Toast.tsx` (`ToastProps.offsetBarra`) alterna `bottom` entre `96px` (quando `$offsetBarra`) e `theme.espaco[20]` — a proposta literal, resolvida com offset condicional. *Fechado 2026-08-17 contra o código da Fase 02.*
 
 10. ⏳ **Barra fixa de orçamento.** Presente em Catálogo/Categoria, ausente na Home e nas institucionais. Não é conflito — é presença condicional. *Sem ação além de documentar.*
 
@@ -51,14 +47,18 @@
 
 ---
 
-### Resumo das decisões (todas resolvidas — 2026-08-13)
+### Resumo das decisões
 | # | Tema | Decisão |
 |---|---|---|
 | 1 | `#C7CACB` → `#C9CBCC` | ✅ Unificado |
 | 2 | `#5A1F24` → `#5A2020` | ✅ Unificado |
+| 5 | Header/nav por props | ✅ `Header.tsx` recebe `itens`/`ativoHref` — fechado contra a Fase 02 |
+| 6 | Rodapé por props | ✅ `Footer.tsx` recebe `colunas` — fechado contra a Fase 02 |
+| 7 | Card de produto: variantes | ✅ COM DESVIO — props booleanas (`ehServico`/`escopo`/`cores`), não `tipoDeItem` — ver D2 |
 | 8 | Mecânica de filtros | ✅ Manter os dois modos |
+| 9 | Toast: offset condicional | ✅ `Toast.tsx` (`offsetBarra`) — fechado contra a Fase 02 |
 | 14 | Form 5 vs 9 etapas | ✅ 5 etapas (seguir layout) |
 | 15 | Faixa de investimento US$ | ✅ Manter + allowlist no teste anti-preço |
 | 16 | Teal de link | ✅ `#1A7F82` link / `#166D70` hover |
 
-**Ainda em aberto (não bloqueiam):** 5, 6, 7, 9, 11, 12 — todos com recomendação de "unificar via CMS/componente", a aplicar nas fases 02–03.
+**Ainda em aberto (não bloqueiam): 11, 12.**
