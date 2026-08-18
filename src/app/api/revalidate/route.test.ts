@@ -36,16 +36,16 @@ describe('POST /api/revalidate', () => {
   // literal em busca de leitura de segredo fora de arquivo server-only/route handler — este é um
   // arquivo de teste (nunca entra no bundle do cliente) só ajustando o env para o próprio teste.
   beforeEach(() => {
-    secretOriginal = process.env['REVALIDATE_SECRET'];
-    process.env['REVALIDATE_SECRET'] = 'segredo-de-teste';
+    secretOriginal = process.env.REVALIDATE_SECRET;
+    process.env.REVALIDATE_SECRET = 'segredo-de-teste';
     jest.clearAllMocks();
   });
 
   afterEach(() => {
     if (secretOriginal === undefined) {
-      delete process.env['REVALIDATE_SECRET'];
+      delete process.env.REVALIDATE_SECRET;
     } else {
-      process.env['REVALIDATE_SECRET'] = secretOriginal;
+      process.env.REVALIDATE_SECRET = secretOriginal;
     }
   });
 
@@ -62,7 +62,7 @@ describe('POST /api/revalidate', () => {
   });
 
   it('recusa quando REVALIDATE_SECRET está ausente do ambiente, mesmo com header presente', async () => {
-    delete process.env['REVALIDATE_SECRET'];
+    delete process.env.REVALIDATE_SECRET;
     const resposta = await chamar({ model: 'product', event: 'entry.publish' }, 'segredo-de-teste');
     expect(resposta.status).toBe(401);
     expect(revalidateTag).not.toHaveBeenCalled();

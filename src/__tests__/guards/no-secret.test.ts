@@ -17,7 +17,10 @@ const EXCLUDE_FILE_SUFFIXES = ['no-secret.test.ts'];
 const SECRET_NAME = /(TOKEN|SECRET|KEY|PASSWORD|PRIVATE|APIKEY)/i;
 const PUBLIC_ENV = /process\.env\.NEXT_PUBLIC_([A-Z0-9_]+)/g;
 // Sem flag `/g`: usada só com .test() num loop — evita estado de lastIndex entre arquivos.
-const SERVER_SECRET_ENV = /process\.env\.[A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE_KEY)[A-Z0-9_]*/;
+// Casa as DUAS notações: `process.env.NOME` e `process.env['NOME']`/`process.env["NOME"]`.
+// Só a notação de ponto deixava um desvio trivial: trocar para colchetes escapava da guarda.
+const SERVER_SECRET_ENV =
+  /process\.env(?:\.|\[\s*['"])[A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE_KEY)[A-Z0-9_]*/;
 
 function walk(dir: string): string[] {
   const out: string[] = [];
@@ -60,9 +63,12 @@ describe('guarda de segredos', () => {
 
       const isServerOnly = /['"]server-only['"]/.test(content);
       const isRouteHandler = /[/\\]route\.(ts|js)$/.test(file);
+      // Arquivo de teste não entra em bundle algum — ler segredo do ambiente ali é legítimo
+      // (ex.: definir REVALIDATE_SECRET para exercitar o contrato do webhook).
+      const isTestFile = /\.(test|spec)\.(ts|tsx|js|jsx)$/.test(file);
       const hasUseClient = /^\s*['"]use client['"]/m.test(content);
 
-      if (hasUseClient || (!isServerOnly && !isRouteHandler)) {
+      if (hasUseClient || (!isServerOnly && !isRouteHandler && !isTestFile)) {
         offenders.push(relative(process.cwd(), file));
       }
     }
