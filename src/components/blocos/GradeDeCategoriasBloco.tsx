@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Container } from '@/components/primitives/Container';
 import { Eyebrow, Heading } from '@/components/primitives/Typography';
 import { ImagePlaceholder } from '@/components/media/ImagePlaceholder';
+import { EmissorViewItemList } from '@/components/analytics/EmissorViewItemList';
 import type { Bloco, Categoria } from '@/lib/cms/adapters';
 import type { Locale } from '@/i18n/config';
 
@@ -91,12 +92,99 @@ const LinkVerBandeira = styled.span`
   gap: 10px;
 `;
 
+// --- 4 cards padrão ----------------------------------------------------------------------
+
+/**
+ * Decisão Q1 (04-PLAN-OUTLINE.md) aplicada aqui: o layout-fonte calcula `grid-template-columns`
+ * em JS a partir da largura da janela (1 coluna <760px, 2 <1180px, 4 ≥1180px) — o mesmo
+ * padrão que D1 de docs/divergencias.md rejeitou (mismatch de hidratação + CLS), e a fase
+ * proíbe media query nova. Substituído por auto-fit/minmax(260px, 1fr), o mesmo padrão já
+ * usado no card-bandeira desta seção. Custo aceito: em larguras intermediárias o número de
+ * colunas pode diferir em ±1 dos degraus originais — registrado como divergência D3 no
+ * plano 04-07.
+ */
+const GradePadrao = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+`;
+
+const CardPadrao = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  background: ${({ theme }) => theme.cor.branco};
+  border: 1px solid ${({ theme }) => theme.cor.borda};
+  border-radius: ${({ theme }) => theme.raio.base};
+  overflow: hidden;
+  text-decoration: none;
+  &:hover {
+    border-color: ${({ theme }) => theme.cor.tinta900};
+  }
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.cor.tealLink};
+    outline-offset: 3px;
+  }
+`;
+
+const FiguraPadrao = styled.div`
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-bottom: 1px solid ${({ theme }) => theme.cor.borda};
+`;
+
+const CorpoPadrao = styled.div`
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+`;
+
+/* Public Sans 500, 22px/1.3 — o mesmo padrão do `Nome` do ProductCard, não o primitivo
+   `Heading` (que é display/uppercase). */
+const NomePadrao = styled.h3`
+  margin: 0;
+  font-family: ${({ theme }) => theme.fonte.corpo};
+  font-weight: ${({ theme }) => theme.peso.medio};
+  font-size: ${({ theme }) => theme.tamanho[22]};
+  line-height: 1.3;
+  color: ${({ theme }) => theme.cor.tinta900};
+`;
+
+const DescricaoPadrao = styled.p`
+  margin: 0;
+  font-size: ${({ theme }) => theme.tamanho[15]};
+  line-height: 1.5;
+  color: ${({ theme }) => theme.cor.tinta600};
+  flex: 1;
+`;
+
+const LinkVerPadrao = styled.span`
+  font-family: ${({ theme }) => theme.fonte.display};
+  font-weight: ${({ theme }) => theme.peso.display};
+  font-size: ${({ theme }) => theme.tamanho[14]};
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.cor.tealLink};
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+`;
+
 export function GradeDeCategoriasBloco({ bloco, locale, categorias }: GradeDeCategoriasBlocoProps) {
   // Identificação por slug: não existe campo `destaque` no schema de categoria
   // (src/lib/cms/schemas.ts). A categoria telas-de-led recebe o tratamento de card-bandeira;
   // se ela não estiver publicada, o bloco renderiza só a grade padrão, sem buraco nem erro.
   const bandeira = categorias.find((c) => c.slug === 'telas-de-led');
   const padrao = categorias.filter((c) => !(c.slug === 'telas-de-led'));
+
+  // HOME-05: view_item_list na ordem renderizada (bandeira primeiro, se existir, depois os
+  // padrão). Lista de categorias, então item_category fica de fora por redundância — só
+  // item_id/item_name/index, nunca campo monetário (o tipo ItemDeListaGA4 já omite isso).
+  const itensDoEvento = [...(bandeira ? [bandeira] : []), ...padrao].map((c, i) => ({
+    item_id: c.slug,
+    item_name: c.nome,
+    index: i,
+  }));
 
   return (
     <Secao>
@@ -138,7 +226,41 @@ export function GradeDeCategoriasBloco({ bloco, locale, categorias }: GradeDeCat
             </ConteudoBandeira>
           </CardBandeira>
         )}
+
+        <GradePadrao>
+          {padrao.map((cat) => (
+            <CardPadrao key={cat.slug} href={`/${locale}/categoria/${cat.slug}`}>
+              <FiguraPadrao>
+                {cat.hero ? (
+                  <Image
+                    src={cat.hero.url}
+                    alt={cat.hero.alt}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 760px) 100vw, 25vw"
+                  />
+                ) : (
+                  <ImagePlaceholder legenda={`FOTO · ${cat.nome}`} ratio="16 / 9" />
+                )}
+              </FiguraPadrao>
+              <CorpoPadrao>
+                <NomePadrao>{cat.nome}</NomePadrao>
+                {cat.descricao && <DescricaoPadrao>{cat.descricao}</DescricaoPadrao>}
+                <LinkVerPadrao>
+                  VER {cat.nome.toUpperCase()}
+                  <span aria-hidden="true">→</span>
+                </LinkVerPadrao>
+              </CorpoPadrao>
+            </CardPadrao>
+          ))}
+        </GradePadrao>
       </ConteudoWrapper>
+
+      <EmissorViewItemList
+        listaId="home_categorias"
+        listaNome="Categorias — Home"
+        itens={itensDoEvento}
+      />
     </Secao>
   );
 }
