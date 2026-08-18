@@ -58,6 +58,20 @@ describe('adaptadores CMS → props', () => {
     expect(p.imagens).toEqual([]);
     expect(p.faq).toEqual([]);
     expect(p.seo).toBeNull();
+    expect(p.categoria).toBeNull();
+  });
+
+  it('adapta a categoria populada do produto', () => {
+    const p = adaptarProduto({
+      ...produtoCru,
+      categoria: { nome: 'Móveis', slug: 'moveis' },
+    });
+    expect(p.categoria).toEqual({ nome: 'Móveis', slug: 'moveis' });
+  });
+
+  it('produto sem a relação categoria populada resulta em categoria null', () => {
+    const p = adaptarProduto(produtoCru);
+    expect(p.categoria).toBeNull();
   });
 
   it('adapta categoria com produtos aninhados', () => {

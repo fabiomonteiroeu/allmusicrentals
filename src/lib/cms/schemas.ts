@@ -125,6 +125,9 @@ export const produtoSchema = z.object({
   faq: z.array(perguntaRespostaSchema).nullable().optional(),
   seo: seoSchema.nullable().optional(),
   locale: z.string().nullable().optional(),
+  // Aditivo e opcional: relação `categoria` (manyToOne → api::category.category) já existe no
+  // content-type do Strapi. Nenhuma resposta atual do Strapi quebra sem ela populada.
+  categoria: z.object({ nome: z.string(), slug: z.string() }).nullable().optional(),
 });
 
 /** Categoria. `produtos` só vem quando o populate pede. */

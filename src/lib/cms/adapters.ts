@@ -206,6 +206,12 @@ export interface Produto {
   destaque: boolean;
   faq: PerguntaResposta[];
   seo: Seo | null;
+  /**
+   * `ProdutoResumo.categoria` do `ProductCard` é obrigatório e a rota canônica de produto é
+   * `/[locale]/[categoria]/[slug]` (decisão travada 2026-08-17) — sem a relação populada, nem
+   * o rótulo do card nem o href do produto podem ser montados.
+   */
+  categoria: { nome: string; slug: string } | null;
 }
 
 export function adaptarProduto(p: ProdutoCms): Produto {
@@ -231,6 +237,7 @@ export function adaptarProduto(p: ProdutoCms): Produto {
     destaque: p.destaque ?? false,
     faq: (p.faq ?? []).map(adaptarPerguntaResposta),
     seo: adaptarSeo(p.seo),
+    categoria: p.categoria ? { nome: p.categoria.nome, slug: p.categoria.slug } : null,
   };
 }
 
@@ -238,8 +245,9 @@ function adaptarPerguntaResposta(item: { pergunta: string; resposta: string }): 
   return { pergunta: item.pergunta, respostaHtml: sanitizarRichText(item.resposta) };
 }
 
-const POPULATE_PRODUTO_LISTA = 'imagens,variacoes';
-const POPULATE_PRODUTO_DETALHE = 'imagens,variacoes,caracteristicas,medidas,faq,seo,seo.imagemOG';
+const POPULATE_PRODUTO_LISTA = 'imagens,variacoes,categoria';
+const POPULATE_PRODUTO_DETALHE =
+  'imagens,variacoes,caracteristicas,medidas,faq,seo,seo.imagemOG,categoria';
 
 export interface FiltroProdutos {
   categoria?: string;
