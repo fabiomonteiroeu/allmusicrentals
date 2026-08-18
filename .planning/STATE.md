@@ -16,18 +16,18 @@ progress:
 Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 **Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum.
-**Current focus:** Phase 3 — Strapi (CMS): falta só 03-06 (UAT com Strapi + Postgres, publicação da branch)
+**Current focus:** Phase 4 — Home: planejada (7 planos em 3 waves), pronta para executar
 
 ## Current Position
 
-Phase: 3 de 18 (Strapi (CMS))
-Plan: 5 de 6 na fase corrente (03-01, 03-02, 03-03, 03-04 e 03-05 entregues; falta só 03-06)
-Status: Testes de contrato do webhook, degradação da Dynamic Zone e varredura de segredo no bundle entregues (03-04); aguardando 03-06 (UAT com Strapi + Postgres, publicação da branch)
-Last activity: 2026-08-17 — plano 03-04 executado: testes de contrato do webhook (`route.test.ts`), degradação de `blocoTolerante` e contrato blocos↔schemas (`schemas.test.ts`), varredura de segredo no bundle (`verifica-segredo-no-bundle.mjs`); `npm run check` verde com 85 testes
+Phase: 4 de 18 (Home) — planejada, não iniciada
+Plan: 0 de 7 na fase corrente
+Status: Fase 3 VERIFICADA e fechada (`03-VERIFICATION.md`, `status: passed`) — 6/6 planos, 11/11 requisitos, branch publicada em `origin`. Fase 4 com CONTEXT, RESEARCH, UI-SPEC (6/6 dimensões) e PATTERNS prontos, e 7 planos escritos (commit `9779691`); aguardando verificação do plan-checker.
+Last activity: 2026-08-18 — Fase 4 planejada: 7 planos em 3 waves. O ROADMAP previa 4; o pré-requisito de imagem remota (`images.remotePatterns` + `NEXT_PUBLIC_STRAPI_MEDIA_URL`) e a montagem do chrome no `[locale]/layout.tsx` não estavam contemplados e são herdados pelas Fases 5–11.
 
-Progress: [██░░░░░░░░] 26%
+Progress: [███░░░░░░░] 27%
 
-Branch corrente: `fase-03-strapi` (**ainda não publicada no GitHub**)
+Branch corrente: `fase-03-strapi` (publicada em `origin`, SHA idêntico ao HEAD local)
 
 ## Performance Metrics
 
@@ -43,7 +43,8 @@ Branch corrente: `fase-03-strapi` (**ainda não publicada no GitHub**)
 | 0. Inventário e plano | 3/3 | - | - |
 | 1. Fundação | 5/5 | - | - |
 | 2. Design system | 5/5 | - | - |
-| 3. Strapi (CMS) | 5/6 | - | ~25min (03-04, 03-05) |
+| 3. Strapi (CMS) | 6/6 | - | ~25min (03-04, 03-05) |
+| 4. Home | 0/7 | - | planejada em 2026-08-18 |
 
 **Recent Trend:**
 - Últimos 5 planos: 03-05 (~25min, exclusivamente documental), 03-04 (~25min, testes + script de varredura)
@@ -70,8 +71,10 @@ Nenhum `.planning/todos/` criado ainda.
 
 ### Blockers/Concerns
 
-- **[Fase 3] Branch não publicada.** `fase-03-strapi` existe só localmente; `origin` tem apenas `main`, `fase-01-fundacao` e `fase-02-design-system`. Publicar antes de abrir a Fase 4 (plano 03-06).
-- **[Fase 3] UAT manual já executado (03-UAT.md), mas falta publicar a branch e fechar o passo 7 (webhook do Strapi recusa URL não pública em produção) no plano 03-06.** 85 testes passam, incluindo agora contrato do webhook e degradação da Dynamic Zone (plano 03-04); typecheck/lint/build verdes.
+- **[Fase 3 — RESOLVIDO 2026-08-17]** Branch publicada em `origin` (SHA idêntico ao HEAD local) e fase fechada com `03-VERIFICATION.md` (`status: passed`).
+- **[Dev] Webhook do Strapi recusa URL não-pública quando `NODE_ENV=production`.** Validação SSRF do Strapi 5: `host.docker.internal` e IP de LAN são recusados no painel e na API (`node_modules/@strapi/admin/.../controllers/webhooks.js` pula a checagem só fora de produção). Contorno usado no UAT: inserir a linha em `strapi_webhooks` via `psql` e reiniciar o `cms`. Em produção (Fase 17) não ocorre — a URL será pública. Falta documentar o procedimento de dev.
+- **[Fase 15] `verifica:bundle-segredo` não está no CI.** Roda sob demanda; entrar no pipeline é entrega da Fase 15.
+- **[GSD] Ferramentas de estado não leem este `.planning/`.** `state.advance-plan` corrompeu o frontmatter do `STATE.md` numa execução e `roadmap.update-plan-progress` escreveu progresso errado em duas. O `.planning/` veio de ingest em pt-BR. Atualizar STATE e ROADMAP à mão — e atualizar **os dois**, além da tabela de progresso: em 2026-08-17 o cabeçalho do ROADMAP e o STATE ficaram desatualizados após o fechamento da Fase 3, e o planner da Fase 4 leu o estado velho e reportou a fase como aberta.
 - **[Fase 7] Colisão de slug.** Com a rota `/[locale]/[categoria]/[slug]`, um produto com slug igual ao de uma categoria quebra o roteamento. A guarda precisa rodar no CI, não só em runtime.
 - **[Fase 17] RAM da VPS Hostinger.** Next + Strapi + Postgres + Caddy no mesmo host precisa ser dimensionado antes de executar a fase.
 - **[Fase 15] CSP com nonce.** Conviver com styled-components e GTM sem `unsafe-inline` global é o risco técnico mais provável de gerar divergência.
@@ -90,4 +93,4 @@ Nenhum `.planning/todos/` criado ainda.
 Última sessão: 2026-08-17
 Parou em: execução completa do plano 03-04 (testes de contrato do webhook, degradação da Dynamic Zone e varredura de segredo no bundle) — 3 tarefas, 3 commits, SUMMARY criado
 Arquivo de retomada: nenhum
-Próximo passo: executar o plano 03-06 (UAT com Strapi + Postgres em Docker, publicação da branch `fase-03-strapi`)
+Próximo passo: verificar os 7 planos da Fase 4 com o plan-checker e depois executar (`/gsd-execute-phase 04`)

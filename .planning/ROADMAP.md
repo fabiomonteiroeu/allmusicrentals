@@ -13,9 +13,10 @@ a espinha dorsal aprovada pelo cliente. Os rótulos estruturais (`Phase`, `Goal`
 `Requirements`, `Success Criteria`, `Plans`) ficam em inglês porque são lidos pelas ferramentas GSD;
 todo o conteúdo é pt-BR.
 
-**Estado real (2026-08-17):** Fases 0, 1 e 2 concluídas. Fase 3 com 5/6 planos entregues — falta só
-03-06 (UAT com Strapi + Postgres e publicação da branch). Fases 4–17 não iniciadas. Branch corrente
-`fase-03-strapi`, ainda não publicada no GitHub.
+**Estado real (2026-08-18):** Fases 0, 1, 2 e 3 concluídas — a Fase 3 fechou verificada
+(`.planning/phases/03-strapi-cms/03-VERIFICATION.md`, `status: passed`), com 6/6 planos e 11/11
+requisitos. Fase 4 (Home) planejada em 7 planos, aguardando execução. Fases 5–17 não iniciadas.
+Branch corrente `fase-03-strapi`, publicada em `origin`.
 
 ## Phases
 
