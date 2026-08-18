@@ -641,7 +641,27 @@ aberto ("Como a Home degrada..."). Ver Open Question 2 para a decisão final de 
 **Nenhuma dessas afeta a stack, versões ou APIs — são decisões de escopo/comportamento que o
 `/gsd-discuss-phase` ou o planejador deveriam confirmar explicitamente antes de detalhar as tarefas.**
 
-## Open Questions
+## Open Questions (RESOLVED)
+
+> **Todas as 4 questões desta seção foram decididas** — as duas primeiras pelo usuário em 2026-08-18
+> (registradas em `04-CONTEXT.md` § "Decisões do usuário tomadas após a pesquisa"), e as demais no
+> planejamento (`04-PLAN-OUTLINE.md` § "As 4 questões em aberto — decididas", com a justificativa de
+> cada uma e o plano que a implementa). O texto original de cada questão fica preservado abaixo como
+> registro do que era incerto no momento da pesquisa.
+>
+> - **Q1 — estado "carregando" das avaliações:** RESOLVED → componente testável (showcase + teste), não
+>   garantia de produção. `cacheComponents` **não** é habilitado nesta fase. `REQUIREMENTS.md` HOME-03
+>   reescrito. Implementa: `04-06`.
+> - **Q2 — granularidade do `error.tsx`:** RESOLVED → um único boundary em `[locale]/error.tsx` com a
+>   prop `retry`. `getPagina` é chamada única, falha tudo-ou-nada, sem modo de falha por bloco a isolar.
+>   Implementa: `04-02`.
+> - **Q3 — botão "adicionar ao orçamento" no slider:** RESOLVED → presente e inerte (`onAdicionar`
+>   omitido), sem toast "em breve" (cópia inexistente na fonte). Implementa: `04-05`.
+> - **Q4 — destino dos CTAs e da busca:** RESOLVED → rotas finais (`/[locale]/catalogo?q=...`), 404
+>   aceito até a Fase 5, sem stub e sem desabilitar. Implementa: `04-04`.
+>
+> Fora desta seção, o planejamento também decidiu o grid dos Blocos 3 e 8 (`repeat(auto-fit,
+> minmax(260px, 1fr))`, registrado como divergência D3 em `04-07`) e a distribuição das extensões E1–E6.
 
 1. **O estado "carregando" de avaliações deve ser visível em produção, mesmo que estruturalmente raro?**
    - O que sabemos: sem `cacheComponents`, a Home é pré-renderizada inteira; o fallback de qualquer
