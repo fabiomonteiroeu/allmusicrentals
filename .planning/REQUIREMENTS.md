@@ -69,11 +69,11 @@ próprio, atribuído à fase que o implementa.
 - [ ] **HOME-02**: Bloco de produtos em destaque (slider) e seção de painéis de LED (P1.9/P3.9 + listas + galeria de 3 imagens)
 - [ ] **HOME-03**: Blocos "como funciona" (4 etapas), "diferenciais" (5 blocos) e avaliações sem conteúdo fictício, com **estado vazio garantido em produção** e **estado carregando entregue como componente testável** (visível na showcase e coberto por teste) — não como garantia de produção, porque com Server Component e sem `cacheComponents` o `<Suspense>` resolve no prerender e o visitante nunca vê o fallback (decidido 2026-08-18, ver `04-RESEARCH.md` Pitfall 1)
 - [ ] **HOME-04**: Fidelidade conferida lado a lado com `Home.dc.html` em desktop e 375px
-- [ ] **HOME-05**: Evento `view_item_list` emitido nos blocos de listagem da Home
+- [x] **HOME-05**: Evento `view_item_list` emitido nos blocos de listagem da Home
 
 ### Medição (MED)
 
-- [ ] **MED-01**: Módulo `dataLayer` tipado é a única porta de saída de eventos — `window.dataLayer.push` solto é proibido e barrado por lint/teste
+- [x] **MED-01**: Módulo `dataLayer` tipado é a única porta de saída de eventos — `window.dataLayer.push` solto é proibido e barrado por lint/teste
 - [ ] **MED-02**: GTM carregado com GA4 e Pixel configurados via GTM, com IDs vindos de `settings-globais`
 - [ ] **MED-03**: Consent Mode v2 com estado padrão negado e banner sem nenhum aceite pré-marcado; Pixel só dispara após consentimento
 - [ ] **MED-04**: Snapshot da sequência de eventos do fluxo completo, versionado como teste
@@ -240,8 +240,8 @@ Reconhecidos, fora do roadmap atual.
 | HOME-02 | Phase 4 | Pending |
 | HOME-03 | Phase 4 | Pending |
 | HOME-04 | Phase 4 | Pending |
-| HOME-05 | Phase 4 | Pending |
-| MED-01 | Phase 4 | Pending |
+| HOME-05 | Phase 4 | Complete |
+| MED-01 | Phase 4 | Complete |
 | CATA-01 | Phase 5 | Pending |
 | CATA-02 | Phase 5 | Pending |
 | CATA-03 | Phase 5 | Pending |
