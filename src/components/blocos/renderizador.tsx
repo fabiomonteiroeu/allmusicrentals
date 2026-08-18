@@ -25,6 +25,13 @@ import type { Locale } from '@/i18n/config';
  * `default` e nunca quebra a Home. `adaptarBlocos` já descarta blocos verdadeiramente
  * desconhecidos no nível de dados — este `default` é a segunda barreira, para qualquer
  * `__component` que chegue aqui sem ser um dos 9 da Home.
+ *
+ * Chave de cada elemento: `${i}-${bloco.__component}`, NUNCA só `bloco.id`. Achado no
+ * checkpoint HOME-04 (04-07): os ids de componente do Strapi são sequenciais por *tabela* de
+ * componente, então colidem entre tipos diferentes na mesma Dynamic Zone (ex.: 8 dos 9 blocos
+ * da página `home` real têm `id: 7`). `bloco.id` isolado não é único dentro da zona — React
+ * duplicava/descartava filhos. O índice (estável dentro de um render) já bastaria; o
+ * `__component` é acrescentado só para ficar legível no DevTools.
  */
 export interface RenderizadorDeBlocosProps {
   blocos: Bloco[];
@@ -46,13 +53,13 @@ export function RenderizadorDeBlocos({
       {blocos.map((bloco, i) => {
         switch (bloco.__component) {
           case 'blocos.hero':
-            return <HeroBloco key={bloco.id ?? i} bloco={bloco} locale={locale} />;
+            return <HeroBloco key={`${i}-${bloco.__component}`} bloco={bloco} locale={locale} />;
           case 'blocos.busca':
-            return <BuscaBloco key={bloco.id ?? i} bloco={bloco} locale={locale} />;
+            return <BuscaBloco key={`${i}-${bloco.__component}`} bloco={bloco} locale={locale} />;
           case 'blocos.grade-de-categorias':
             return (
               <GradeDeCategoriasBloco
-                key={bloco.id ?? i}
+                key={`${i}-${bloco.__component}`}
                 bloco={bloco}
                 locale={locale}
                 categorias={categorias}
@@ -61,29 +68,33 @@ export function RenderizadorDeBlocos({
           case 'blocos.produtos-em-destaque':
             return (
               <ProdutosEmDestaqueBloco
-                key={bloco.id ?? i}
+                key={`${i}-${bloco.__component}`}
                 bloco={bloco}
                 locale={locale}
                 produtos={produtosDestaque}
               />
             );
           case 'blocos.destaque-led':
-            return <DestaqueLedBloco key={bloco.id ?? i} bloco={bloco} locale={locale} />;
+            return (
+              <DestaqueLedBloco key={`${i}-${bloco.__component}`} bloco={bloco} locale={locale} />
+            );
           case 'blocos.como-funciona':
-            return <ComoFuncionaBloco key={bloco.id ?? i} bloco={bloco} />;
+            return <ComoFuncionaBloco key={`${i}-${bloco.__component}`} bloco={bloco} />;
           case 'blocos.diferenciais':
-            return <DiferenciaisBloco key={bloco.id ?? i} bloco={bloco} />;
+            return <DiferenciaisBloco key={`${i}-${bloco.__component}`} bloco={bloco} />;
           case 'blocos.avaliacoes':
             return (
               <AvaliacoesBloco
-                key={bloco.id ?? i}
+                key={`${i}-${bloco.__component}`}
                 bloco={bloco}
                 locale={locale}
                 avaliacoes={avaliacoes}
               />
             );
           case 'blocos.chamada-final':
-            return <ChamadaFinalBloco key={bloco.id ?? i} bloco={bloco} locale={locale} />;
+            return (
+              <ChamadaFinalBloco key={`${i}-${bloco.__component}`} bloco={bloco} locale={locale} />
+            );
           default:
             // Bloco de outra página (texto-rico/faq/formulario-contato/comparativo-led) ou
             // tipo desconhecido: nunca quebra a Home.

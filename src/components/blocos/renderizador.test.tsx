@@ -89,6 +89,29 @@ describe('RenderizadorDeBlocos', () => {
     expect(container.querySelectorAll('section')).toHaveLength(0);
   });
 
+  it('dois blocos de tipos diferentes com o mesmo bloco.id (cenário real do Strapi) não geram chave duplicada', () => {
+    // Achado no checkpoint HOME-04: os ids de componente do Strapi são sequenciais por tabela
+    // de componente, então colidem entre tipos diferentes na mesma Dynamic Zone (8 dos 9 blocos
+    // da página `home` real têm id: 7). A chave não pode depender só de `bloco.id`.
+    const idColidido: Bloco[] = [
+      { __component: 'blocos.busca', id: 7, titulo: 'BUSCA-TXT' },
+      { __component: 'blocos.diferenciais', id: 7, titulo: 'DIFERENCIAIS-TXT' },
+    ];
+
+    const erro = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const { container } = renderizar(idColidido);
+
+    expect(container.querySelectorAll('section')).toHaveLength(2);
+    expect(screen.getByText('BUSCA-TXT')).toBeInTheDocument();
+    expect(screen.getByText('DIFERENCIAIS-TXT')).toBeInTheDocument();
+    expect(erro).not.toHaveBeenCalledWith(
+      expect.stringContaining('Encountered two children with the same key'),
+      expect.anything(),
+    );
+
+    erro.mockRestore();
+  });
+
   it('ordem invertida no array é a ordem visual — a ordem vem do CMS, não do código', () => {
     const invertidos = [...nove].reverse();
     const { container } = renderizar(invertidos);

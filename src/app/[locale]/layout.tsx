@@ -61,7 +61,14 @@ export default async function LocaleLayout({
               confirmado em 2026-08-18), repassando itens/ativoHref/ctaHref/ctaLabel. Montar de
               novo produziria dois id="menu-mobile" no DOM e landmark duplicado.
             */}
-            {children}
+            {/*
+              Landmark <main> único do layout — dono é aqui, não cada page.tsx: toda página do
+              site (Home e as Fases 5-11 depois dela) herda automaticamente o mesmo destino de
+              "pular para o conteúdo" sem precisar repetir a tag em cada rota. Achado no
+              checkpoint HOME-04 (04-07): sem isto, leitores de tela não tinham atalho para o
+              conteúdo principal.
+            */}
+            <main>{children}</main>
             <Footer
               colunas={colunas.length > 0 ? colunas : undefined}
               contato={settings?.contato}
