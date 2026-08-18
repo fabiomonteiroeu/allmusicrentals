@@ -140,6 +140,13 @@ comparação lado a lado.
 
 ## Regras estruturais herdadas (não renegociáveis nesta fase)
 
+- **Âncora visual primário da página: o Hero** (mosaico + H1 "O palco é seu. Nós levamos a
+  estrutura."). É o único bloco em fundo escuro e carrega o maior tipo da página
+  (`clamp(40px,5.6vw,72px)`, `line-height: 0.92`). Nenhum bloco posterior deve competir com ele em
+  peso visual — em caso de dúvida sobre proeminência entre dois blocos, o Hero vence. O segundo nível
+  de ênfase é o **card-bandeira LED** do Bloco 3, que tem tratamento próprio documentado ali.
+  *(Registrado a pedido do `gsd-ui-checker`, Dimensão 2: sem isto o executor teria de inferir a
+  hierarquia pela ordem do documento.)*
 - **Sem `@media` nova.** Toda fluidez é `clamp()` + grid `auto-fit/minmax`, como no HTML-fonte. A
   única media query do projeto é a troca de chrome em 1080px (`theme.breakpoint.header`, D1) — já
   implementada na Fase 2 no `Header`/`MobileMenu`, não tocada aqui.
