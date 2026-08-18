@@ -126,14 +126,17 @@ Plans:
   3. Quando não há avaliações reais cadastradas, a seção mostra o estado vazio do design — nunca depoimento inventado
   4. A Home é idêntica ao `Home.dc.html` na comparação lado a lado em desktop e em 375px
   5. `view_item_list` sai pelo módulo `dataLayer` tipado; nenhuma chamada solta a `window.dataLayer.push` passa no lint
-**Plans**: 4 plans
+**Plans**: 7 plans
 **UI hint**: yes
 
 Plans:
-- [ ] 04-01: Módulo `dataLayer` tipado como única porta de saída de eventos, com regra de lint/teste que barra `window.dataLayer.push` solto
-- [ ] 04-02: Renderizador da Dynamic Zone e blocos de abertura — hero, busca grande, grade de categorias (card-bandeira LED + 4), CTA final
-- [ ] 04-03: Blocos de vitrine — produtos em destaque (slider) e seção Painéis de LED (P1.9/P3.9, listas "O QUE INSTALAMOS"/"O QUE EXIBIMOS", galeria de 3 imagens)
-- [ ] 04-04: Blocos de prova e processo — como funciona (4 etapas), diferenciais (5 blocos), avaliações com estados vazio/carregando; conferência lado a lado desktop + 375px e `view_item_list`
+- [ ] 04-01-PLAN.md — Porta única de eventos: `dataLayer` tipado, regra de lint e guarda de varredura; emissor client de `view_item_list`; `images.remotePatterns` + `NEXT_PUBLIC_STRAPI_MEDIA_URL`
+- [ ] 04-02-PLAN.md — Chrome alimentado pelo CMS em `[locale]/layout.tsx` (fecha divergência item 6), extensões E1–E4 do design system + keyframe `amrMod`, `error.tsx` com `retry`
+- [ ] 04-03-PLAN.md — Blocos escuros: Hero (mosaico 12×6 em CSS) e Chamada final
+- [ ] 04-04-PLAN.md — Busca grande (composto E5) e grade de categorias (card-bandeira LED + 4) com `view_item_list`
+- [ ] 04-05-PLAN.md — Vitrine: `Produto.categoria`, `mapearParaProductCard`, slider `scroll-snap` com `view_item_list`, seção Painéis de LED
+- [ ] 04-06-PLAN.md — Prova e processo: como funciona, diferenciais, avaliações (cheio/vazio/carregando) + esqueleto na showcase
+- [ ] 04-07-PLAN.md — Renderizador da Dynamic Zone, `page.tsx` da Home com degradação, divergências D3/D4 e conferência de fidelidade desktop + 375px
 
 ### Phase 5: Catálogo
 **Goal**: O visitante encontra produtos por busca e filtros combinados, com todos os estados cobertos
