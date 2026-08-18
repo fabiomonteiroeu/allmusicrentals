@@ -24,7 +24,15 @@ Ou seja: numa página com blocos, o editor **preenche os blocos três vezes** (u
 > editorial no cronograma (páginas com muitos blocos levam ~3× o tempo de uma página monolíngue).
 
 ## Content-types e onde editar
-- **Configurações Globais** (single type): telefone, e-mail, tagline, IDs de GTM/Pixel, imagem OG padrão.
+- **Configurações Globais** (single type): telefone, e-mail, tagline, IDs de GTM/Pixel, imagem OG
+  padrão, e o campo `textosLegais` (JSON localizado) com o microcopy legal repetido pelas páginas.
+  Contrato de chaves de `textosLegais`:
+  - `disclaimer` — aviso de disponibilidade, exibido no **rodapé**.
+  - `copyright` — linha de direitos autorais, exibida no **rodapé**.
+  - `descricaoMarca` — descrição curta da marca, exibida no **rodapé**.
+  - `avisoCarrinho` — aviso de que os produtos não ficam reservados ao serem adicionados, exibido no
+    **carrinho de orçamento (Fase 8)** e reforçado no **formulário de solicitação (Fase 9)**. Ainda não
+    preenchido pelo seed de estrutura — cadastre esta chave no painel antes de ligar essas páginas.
 - **Menu Item / Rodapé Coluna**: montam o cabeçalho e o rodapé. Ordenação e inclusão pelo painel, sem deploy.
 - **Categorias**: 5 categorias (estruturas, telas-de-led, luz-e-som, tendas, moveis).
 - **Produtos**: catálogo. Cada produto tem SEO próprio, imagens com **alt obrigatório**, tipo de item
