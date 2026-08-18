@@ -123,10 +123,21 @@ export interface SettingsGlobais {
 
 /** Configurações globais (contato, tagline) no formato dos componentes. */
 export async function getSettingsGlobais(locale: Locale): Promise<SettingsGlobais | null> {
-  const res = await fetchStrapi('settings-globais', settingsGlobaisUnico, {
-    params: { locale, populate: 'imagemOG' },
-    tags: [TAG.settings],
-  });
+  let res;
+  try {
+    res = await fetchStrapi('settings-globais', settingsGlobaisUnico, {
+      params: { locale, populate: 'imagemOG' },
+      tags: [TAG.settings],
+    });
+  } catch (erro) {
+    // Strapi devolve 404 (não 200 com data:null) para um single-type sem localização
+    // publicada naquele locale — é o mesmo "CMS vazio" que data:null representa, não uma
+    // falha real. Qualquer outro erro (validação Zod, 5xx) continua propagando.
+    if (erro instanceof Error && /Strapi 404 em settings-globais/.test(erro.message)) {
+      return null;
+    }
+    throw erro;
+  }
   const s = res.data;
   if (!s) return null;
   const telefone = s.telefone ?? '';
