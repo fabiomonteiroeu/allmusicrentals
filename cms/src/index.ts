@@ -329,6 +329,49 @@ async function migrarAplicacoesParaTiposDeEvento(strapi: Core.Strapi) {
   }
 }
 
+/**
+ * Backfill idempotente de `contagemSolicitacoes` para os produtos cadastrados antes deste campo
+ * existir. O `"default": 0` do schema.json só se aplica na CRIAÇÃO de um registro novo — não faz
+ * backfill de registros existentes quando a coluna é adicionada no boot, e o Postgres devolveria
+ * `NULL`. Em `ORDER BY contagemSolicitacoes DESC` (Fase 9), `NULL` rankeia acima de qualquer valor
+ * real (`DESC NULLS FIRST`), então deixar `NULL` no banco planta um bug latente.
+ *
+ * O campo é `localized: false`: escrever no locale padrão já reflete nos demais locales do mesmo
+ * documento, mas a prova de Task 3 confere isso explicitamente via `GET` em `en`/`es`.
+ *
+ * Idempotente: pula produtos que já têm o valor definido (não-nulo/não-indefinido), então a
+ * segunda execução em diante loga `0 produto(s) inicializado(s)`.
+ */
+async function garantirContagemSolicitacoes(strapi: Core.Strapi) {
+  try {
+    const produtos = await strapi.documents('api::product.product').findMany({
+      locale: DEFAULT_LOCALE,
+      status: 'draft',
+      pagination: { pageSize: 100 },
+    });
+
+    let corrigidos = 0;
+    for (const p of produtos) {
+      if (p.contagemSolicitacoes !== null && p.contagemSolicitacoes !== undefined) continue;
+
+      await strapi.documents('api::product.product').update({
+        documentId: p.documentId,
+        locale: DEFAULT_LOCALE,
+        data: { contagemSolicitacoes: 0 },
+      });
+      await strapi
+        .documents('api::product.product')
+        .publish({ documentId: p.documentId, locale: DEFAULT_LOCALE });
+      corrigidos += 1;
+    }
+    strapi.log.info(`[seed] contagemSolicitacoes: ${corrigidos} produto(s) inicializado(s)`);
+  } catch (e) {
+    strapi.log.error(
+      `[seed] backfill contagemSolicitacoes falhou: ${(e as Error).stack ?? (e as Error).message}`
+    );
+  }
+}
+
 export default {
   register(/* { strapi }: { strapi: Core.Strapi } */) {},
 
@@ -338,6 +381,7 @@ export default {
       await garantirPermissoesPublicas(strapi);
       await seedEstrutura(strapi);
       await migrarAplicacoesParaTiposDeEvento(strapi);
+      await garantirContagemSolicitacoes(strapi);
     } catch (e) {
       strapi.log.error(`[seed] falha no bootstrap: ${(e as Error).stack ?? (e as Error).message}`);
     }
