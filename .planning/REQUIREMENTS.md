@@ -65,10 +65,10 @@ próprio, atribuído à fase que o implementa.
 
 ### Home (HOME)
 
-- [ ] **HOME-01**: `/[locale]` renderiza os blocos da Home vindos do CMS: hero, busca grande, grade de categorias e CTA final
-- [ ] **HOME-02**: Bloco de produtos em destaque (slider) e seção de painéis de LED (P1.9/P3.9 + listas + galeria de 3 imagens)
-- [ ] **HOME-03**: Blocos "como funciona" (4 etapas), "diferenciais" (5 blocos) e avaliações sem conteúdo fictício, com **estado vazio garantido em produção** e **estado carregando entregue como componente testável** (visível na showcase e coberto por teste) — não como garantia de produção, porque com Server Component e sem `cacheComponents` o `<Suspense>` resolve no prerender e o visitante nunca vê o fallback (decidido 2026-08-18, ver `04-RESEARCH.md` Pitfall 1)
-- [ ] **HOME-04**: Fidelidade conferida lado a lado com `Home.dc.html` em desktop e 375px
+- [x] **HOME-01**: `/[locale]` renderiza os blocos da Home vindos do CMS: hero, busca grande, grade de categorias e CTA final
+- [x] **HOME-02**: Bloco de produtos em destaque (slider) e seção de painéis de LED (P1.9/P3.9 + listas + galeria de 3 imagens)
+- [x] **HOME-03**: Blocos "como funciona" (4 etapas), "diferenciais" (5 blocos) e avaliações sem conteúdo fictício, com **estado vazio garantido em produção** e **estado carregando entregue como componente testável** (visível na showcase e coberto por teste) — não como garantia de produção, porque com Server Component e sem `cacheComponents` o `<Suspense>` resolve no prerender e o visitante nunca vê o fallback (decidido 2026-08-18, ver `04-RESEARCH.md` Pitfall 1)
+- [x] **HOME-04**: Fidelidade conferida lado a lado com `Home.dc.html` em desktop e 375px
 - [x] **HOME-05**: Evento `view_item_list` emitido nos blocos de listagem da Home
 
 ### Medição (MED)
@@ -236,10 +236,10 @@ Reconhecidos, fora do roadmap atual.
 | DOC-01 | Phase 3 | Complete |
 | DOC-02 | Phase 3 | Complete |
 | DOC-03 | Phase 3 | Complete |
-| HOME-01 | Phase 4 | Pending |
-| HOME-02 | Phase 4 | Pending |
-| HOME-03 | Phase 4 | Pending |
-| HOME-04 | Phase 4 | Pending |
+| HOME-01 | Phase 4 | Verificado |
+| HOME-02 | Phase 4 | Verificado |
+| HOME-03 | Phase 4 | Verificado |
+| HOME-04 | Phase 4 | Verificado |
 | HOME-05 | Phase 4 | Complete |
 | MED-01 | Phase 4 | Complete |
 | CATA-01 | Phase 5 | Pending |

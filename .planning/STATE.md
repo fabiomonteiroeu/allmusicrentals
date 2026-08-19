@@ -3,10 +3,10 @@ gsd_state_version: '1.0'
 status: in_progress
 progress:
   total_phases: 18
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 73
-  completed_plans: 19
-  percent: 26
+  completed_plans: 26
+  percent: 36
 ---
 
 # Estado do Projeto
@@ -16,18 +16,18 @@ progress:
 Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 **Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum.
-**Current focus:** Phase 4 — Home: planejada (7 planos em 3 waves), pronta para executar
+**Current focus:** Phase 5 — Catálogo: não iniciada. Fase 4 (Home) fechada e verificada.
 
 ## Current Position
 
-Phase: 4 de 18 (Home) — planejada, não iniciada
-Plan: 0 de 7 na fase corrente
-Status: Fase 3 VERIFICADA e fechada (`03-VERIFICATION.md`, `status: passed`) — 6/6 planos, 11/11 requisitos, branch publicada em `origin`. Fase 4 com CONTEXT, RESEARCH, UI-SPEC (6/6 dimensões) e PATTERNS prontos, e 7 planos escritos (commit `9779691`); aguardando verificação do plan-checker.
-Last activity: 2026-08-18 — Fase 4 planejada: 7 planos em 3 waves. O ROADMAP previa 4; o pré-requisito de imagem remota (`images.remotePatterns` + `NEXT_PUBLIC_STRAPI_MEDIA_URL`) e a montagem do chrome no `[locale]/layout.tsx` não estavam contemplados e são herdados pelas Fases 5–11.
+Phase: 4 de 18 (Home) — CONCLUÍDA e verificada
+Plan: 7 de 7
+Status: Fase 4 fechada (`04-VERIFICATION.md`, `status: passed`) — 5/5 critérios de sucesso, 6/6 requisitos, 32 suítes e 173 testes verdes. Os 3 padrões herdados pelas Fases 5–11 (renderizador de Dynamic Zone, fronteira Server/Client, porta tipada do dataLayer) estão estabelecidos e cobertos por teste.
+Last activity: 2026-08-18 — checkpoint de fidelidade aprovado após 3 rodadas de correção: 4 títulos com contraste 1.00, chave React duplicada em 8 blocos e mídia de bloco com URL relativa. Nenhum dos 3 foi pego pelos 163 testes que já passavam.
 
-Progress: [███░░░░░░░] 27%
+Progress: [████░░░░░░] 36%
 
-Branch corrente: `fase-03-strapi` (publicada em `origin`, SHA idêntico ao HEAD local)
+Branch corrente: `fase-04-home` (pronta para merge em `main`)
 
 ## Performance Metrics
 
@@ -44,7 +44,7 @@ Branch corrente: `fase-03-strapi` (publicada em `origin`, SHA idêntico ao HEAD 
 | 1. Fundação | 5/5 | - | - |
 | 2. Design system | 5/5 | - | - |
 | 3. Strapi (CMS) | 6/6 | - | ~25min (03-04, 03-05) |
-| 4. Home | 0/7 | - | planejada em 2026-08-18 |
+| 4. Home | 7/7 | ~5h | 7 planos em 3 waves |
 
 **Recent Trend:**
 - Últimos 5 planos: 03-05 (~25min, exclusivamente documental), 03-04 (~25min, testes + script de varredura)

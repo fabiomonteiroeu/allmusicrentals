@@ -13,10 +13,9 @@ a espinha dorsal aprovada pelo cliente. Os rótulos estruturais (`Phase`, `Goal`
 `Requirements`, `Success Criteria`, `Plans`) ficam em inglês porque são lidos pelas ferramentas GSD;
 todo o conteúdo é pt-BR.
 
-**Estado real (2026-08-18):** Fases 0, 1, 2 e 3 concluídas — a Fase 3 fechou verificada
-(`.planning/phases/03-strapi-cms/03-VERIFICATION.md`, `status: passed`), com 6/6 planos e 11/11
-requisitos. Fase 4 (Home) planejada em 7 planos, aguardando execução. Fases 5–17 não iniciadas.
-Branch corrente `fase-03-strapi`, publicada em `origin`.
+**Estado real (2026-08-18):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
+(`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
+Fases 5–17 não iniciadas. Branch corrente `fase-04-home`.
 
 ## Phases
 
@@ -28,7 +27,7 @@ Branch corrente `fase-03-strapi`, publicada em `origin`.
 - [x] **Phase 1: Fundação** - Next 16 App Router, i18n, Redux, Docker de dev, CI e guardas
 - [x] **Phase 2: Design system** - Tema dos tokens, primitivos, chrome, feedback e card de produto
 - [x] **Phase 3: Strapi (CMS)** - Modelo, cliente server-only com Zod, sanitização e revalidação — verificada por UAT
-- [ ] **Phase 4: Home** - `/[locale]` com os blocos da Home ligados ao CMS
+- [x] **Phase 4: Home** - `/[locale]` com os blocos da Home ligados ao CMS — verificada
 - [ ] **Phase 5: Catálogo** - Busca, filtros em acordeão, drawer mobile, chips, grade e estados
 - [ ] **Phase 6: Categoria** - Modelo único das 5 categorias e comparativo LED P1.9 × P3.9
 - [ ] **Phase 7: Produto** - PDP em `/[locale]/[categoria]/[slug]` com os 4 arquétipos
@@ -380,7 +379,7 @@ Plans:
 | 1. Fundação | 5/5 | Complete | 2026-08-14 |
 | 2. Design system | 5/5 | Complete | 2026-08-14 |
 | 3. Strapi (CMS) | 6/6 | Complete | 2026-08-17 |
-| 4. Home | 0/7 | Planned | - |
+| 4. Home | 7/7 | Complete | 2026-08-18 |
 | 5. Catálogo | 0/4 | Not started | - |
 | 6. Categoria | 0/3 | Not started | - |
 | 7. Produto | 0/5 | Not started | - |
@@ -395,7 +394,7 @@ Plans:
 | 16. QA final | 0/4 | Not started | - |
 | 17. Deploy — GHCR + Caddy | 0/5 | Not started | - |
 
-**Total:** 19 de 73 planos concluídos (26%) · 4 de 18 fases concluídas
+**Total:** 26 de 73 planos concluídos (36%) · 5 de 18 fases concluídas
 *(o total subiu de 70 para 73: a Fase 4 foi planejada em 7 planos, não 4 — ver `04-PLAN-OUTLINE.md`)*
 
 ---
