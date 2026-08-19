@@ -8,8 +8,28 @@ import {
   adaptarFaqItem,
   adaptarBlocos,
   adaptarSeo,
+  getTiposDeEvento,
+  getCoresDisponiveis,
+  getProdutos,
+  ORDENACOES,
 } from './adapters';
 import type { ProdutoCms, CategoriaCms, FaqItemCms } from './schemas';
+
+function respostaOk(json: unknown) {
+  return Promise.resolve({
+    ok: true,
+    status: 200,
+    statusText: 'OK',
+    json: () => Promise.resolve(json),
+  } as Response);
+}
+
+/** Devolve os `searchParams` da URL chamada, para inspecionar chaves com colchetes sem
+ * lidar com encoding manualmente. */
+function paramsChamados(fetchMock: jest.Mock): URLSearchParams {
+  const [url] = fetchMock.mock.calls[0] as [string, RequestInit];
+  return new URL(url).searchParams;
+}
 
 const produtoCru: ProdutoCms = {
   id: 1,
@@ -59,6 +79,27 @@ describe('adaptadores CMS → props', () => {
     expect(p.faq).toEqual([]);
     expect(p.seo).toBeNull();
     expect(p.categoria).toBeNull();
+  });
+
+  it('produto sem `tiposDeEvento` e sem `contagemSolicitacoes` devolve [] e 0 (nunca undefined)', () => {
+    const p = adaptarProduto({
+      id: 2,
+      nome: 'Serviço técnico',
+      slug: 'servico-tecnico',
+      tipoDeItem: 'servico-tecnico',
+    });
+    expect(p.tiposDeEvento).toEqual([]);
+    expect(p.contagemSolicitacoes).toBe(0);
+  });
+
+  it('adapta tiposDeEvento e contagemSolicitacoes quando populados', () => {
+    const p = adaptarProduto({
+      ...produtoCru,
+      tiposDeEvento: [{ nome: 'Casamento', slug: 'casamento' }],
+      contagemSolicitacoes: 5,
+    });
+    expect(p.tiposDeEvento).toEqual([{ nome: 'Casamento', slug: 'casamento' }]);
+    expect(p.contagemSolicitacoes).toBe(5);
   });
 
   it('adapta a categoria populada do produto', () => {
@@ -198,6 +239,178 @@ describe('Dynamic Zone', () => {
     const led = blocos[0] as { imagens: { url: string; alt: string }[] };
     expect(led.imagens[0]?.url).toBe(`${mediaBase}/uploads/led-1.jpg`);
     expect(led.imagens[0]?.alt).toBe('Painéis de LED');
+  });
+});
+
+describe('getTiposDeEvento — taxonomia `tipo-de-evento` (05-02)', () => {
+  const fetchMock = jest.fn();
+
+  beforeEach(() => {
+    fetchMock.mockReset();
+    global.fetch = fetchMock as unknown as typeof fetch;
+  });
+
+  it('consulta o endpoint tipo-de-eventos com locale e ordem', async () => {
+    fetchMock.mockReturnValue(
+      respostaOk({
+        data: [{ id: 1, nome: 'Casamento', slug: 'casamento', ordem: 1 }],
+      }),
+    );
+    const tipos = await getTiposDeEvento('pt-BR');
+    const [url] = fetchMock.mock.calls[0] as [string, RequestInit];
+    expect(url).toContain('/api/tipo-de-eventos');
+    expect(url).toContain('locale=pt-BR');
+    expect(url).toContain('sort%5B0%5D=ordem%3Aasc');
+    expect(tipos[0]).toMatchObject({ nome: 'Casamento', slug: 'casamento' });
+  });
+
+  it('default exibirNoFiltroDoCatalogo para true quando ausente', async () => {
+    fetchMock.mockReturnValue(
+      respostaOk({ data: [{ id: 1, nome: 'Casamento', slug: 'casamento' }] }),
+    );
+    const tipos = await getTiposDeEvento('pt-BR');
+    expect(tipos[0]?.exibirNoFiltroDoCatalogo).toBe(true);
+  });
+
+  it('honra exibirNoFiltroDoCatalogo: false vindo do CMS (caso `outro`)', async () => {
+    fetchMock.mockReturnValue(
+      respostaOk({
+        data: [{ id: 11, nome: 'Outro', slug: 'outro', exibirNoFiltroDoCatalogo: false }],
+      }),
+    );
+    const tipos = await getTiposDeEvento('pt-BR');
+    expect(tipos[0]?.exibirNoFiltroDoCatalogo).toBe(false);
+  });
+});
+
+describe('getCoresDisponiveis — origem única das cores do painel de filtros (05-02)', () => {
+  const fetchMock = jest.fn();
+
+  beforeEach(() => {
+    fetchMock.mockReset();
+    global.fetch = fetchMock as unknown as typeof fetch;
+  });
+
+  it('devolve as cores cadastradas, deduplicadas, na ordem de coresProduto', async () => {
+    fetchMock.mockReturnValue(
+      respostaOk({
+        data: [
+          { nome: 'Guarda-sol', variacoes: [{ nome: 'Bege' }] },
+          { nome: 'Capa spandex', variacoes: [{ nome: 'Preto' }, { nome: 'Bege' }] },
+        ],
+      }),
+    );
+    const cores = await getCoresDisponiveis('pt-BR');
+    expect(cores).toEqual(['Bege', 'Preto']);
+  });
+
+  it('ignora nome de variação fora da paleta conhecida (ex.: tamanho "M" ou cor "Verde")', async () => {
+    fetchMock.mockReturnValue(
+      respostaOk({
+        data: [
+          { nome: 'Capa spandex', variacoes: [{ nome: 'Verde' }, { nome: 'M' }, { nome: 'Preto' }] },
+        ],
+      }),
+    );
+    const cores = await getCoresDisponiveis('pt-BR');
+    expect(cores).toEqual(['Preto']);
+    expect(cores).not.toContain('Verde');
+    expect(cores).not.toContain('M');
+  });
+
+  it('catálogo sem nenhuma variação devolve []', async () => {
+    fetchMock.mockReturnValue(
+      respostaOk({ data: [{ nome: 'Serviço técnico', variacoes: [] }] }),
+    );
+    const cores = await getCoresDisponiveis('pt-BR');
+    expect(cores).toEqual([]);
+  });
+});
+
+describe('getProdutos — 5 grupos de filtro (AND entre grupos, OR dentro do grupo) e ordenação (05-02)', () => {
+  const fetchMock = jest.fn();
+
+  beforeEach(() => {
+    fetchMock.mockReset();
+    fetchMock.mockReturnValue(respostaOk({ data: [] }));
+    global.fetch = fetchMock as unknown as typeof fetch;
+  });
+
+  it('grupo categorias isolado: um valor entra em $and[0][$or][0]', async () => {
+    await getProdutos('pt-BR', { categorias: ['moveis'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][$or][0][categoria][slug][$eq]')).toBe('moveis');
+  });
+
+  it('grupo tiposDeItem isolado: dois valores compartilham o mesmo índice de $and', async () => {
+    await getProdutos('pt-BR', { tiposDeItem: ['pacote', 'servico-tecnico'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][$or][0][tipoDeItem][$eq]')).toBe('pacote');
+    expect(sp.get('filters[$and][0][$or][1][tipoDeItem][$eq]')).toBe('servico-tecnico');
+  });
+
+  it('grupo cores isolado: usa $in sobre o componente repetível variacoes', async () => {
+    await getProdutos('pt-BR', { cores: ['Bege'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][variacoes][nome][$in][0]')).toBe('Bege');
+  });
+
+  it('grupo tiposDeEvento isolado: usa $in sobre a relação por slug', async () => {
+    await getProdutos('pt-BR', { tiposDeEvento: ['casamento'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][tiposDeEvento][slug][$in][0]')).toBe('casamento');
+  });
+
+  it('grupo ambientes isolado: $or por valor do enum', async () => {
+    await getProdutos('pt-BR', { ambientes: ['interno', 'externo'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][$or][0][ambiente][$eq]')).toBe('interno');
+    expect(sp.get('filters[$and][0][$or][1][ambiente][$eq]')).toBe('externo');
+  });
+
+  it('busca isolada: $containsi sobre nome', async () => {
+    await getProdutos('pt-BR', { busca: 'mesa' });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][nome][$containsi]')).toBe('mesa');
+  });
+
+  it('combinação categorias + cores (RESEARCH §1): categoria no índice 0, cores no índice 1', async () => {
+    await getProdutos('pt-BR', { categorias: ['moveis'], cores: ['Bege', 'Preto'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][$or][0][categoria][slug][$eq]')).toBe('moveis');
+    expect(sp.get('filters[$and][1][variacoes][nome][$in][0]')).toBe('Bege');
+    expect(sp.get('filters[$and][1][variacoes][nome][$in][1]')).toBe('Preto');
+  });
+
+  it('dois grupos distintos ocupam índices DIFERENTES de $and', async () => {
+    await getProdutos('pt-BR', { tiposDeItem: ['pacote'], ambientes: ['interno'] });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][$or][0][tipoDeItem][$eq]')).toBe('pacote');
+    expect(sp.get('filters[$and][1][$or][0][ambiente][$eq]')).toBe('interno');
+  });
+
+  it('filtro legado `categoria` (Fase 6) continua funcionando isoladamente', async () => {
+    await getProdutos('pt-BR', { categoria: 'estruturas' });
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('filters[$and][0][categoria][slug][$eq]')).toBe('estruturas');
+  });
+
+  it.each(Object.keys(ORDENACOES) as (keyof typeof ORDENACOES)[])(
+    'ordenação "%s" aplica os campos de sort do contrato',
+    async (chave) => {
+      await getProdutos('pt-BR', { ordenar: chave });
+      const sp = paramsChamados(fetchMock);
+      ORDENACOES[chave].forEach((campo, idx) => {
+        expect(sp.get(`sort[${idx}]`)).toBe(campo);
+      });
+    },
+  );
+
+  it('sem `ordenar`, o padrão é "destaque" (destaque:desc, nome:asc)', async () => {
+    await getProdutos('pt-BR', {});
+    const sp = paramsChamados(fetchMock);
+    expect(sp.get('sort[0]')).toBe('destaque:desc');
+    expect(sp.get('sort[1]')).toBe('nome:asc');
   });
 });
 

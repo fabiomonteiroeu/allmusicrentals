@@ -28,15 +28,27 @@ export interface ItemDeListaGA4 {
 }
 
 /**
- * União discriminada por `event`. Nesta fase só `view_item_list` existe — os demais
- * eventos entram nas fases que os usam (Fase 5+).
+ * União discriminada por `event`. `search` e `filter_applied` entram na Fase 5 (catálogo):
+ * nenhum dos dois membros declara campo monetário — é assim que o TypeScript barra em
+ * compilação (`error TS2353` para campo extra não declarado, provado na Fase 4), mitigação
+ * de PRECO-04 registrada no modelo de ameaças.
  */
-export type EventoDataLayer = {
-  event: 'view_item_list';
-  item_list_id: string;
-  item_list_name: string;
-  items: ItemDeListaGA4[];
-};
+export type EventoDataLayer =
+  | {
+      event: 'view_item_list';
+      item_list_id: string;
+      item_list_name: string;
+      items: ItemDeListaGA4[];
+    }
+  | {
+      event: 'search';
+      search_term: string;
+    }
+  | {
+      event: 'filter_applied';
+      filter_type: string;
+      filter_value: string;
+    };
 
 declare global {
   interface Window {

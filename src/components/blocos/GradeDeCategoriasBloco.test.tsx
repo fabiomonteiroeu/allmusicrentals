@@ -1,12 +1,19 @@
 import { axe } from 'jest-axe';
 import { renderComProviders, screen } from '@/test-utils';
-import { emitirEvento } from '@/lib/analytics/dataLayer';
+import { emitirEvento, type EventoDataLayer } from '@/lib/analytics/dataLayer';
 import { GradeDeCategoriasBloco } from './GradeDeCategoriasBloco';
 import type { Bloco, Categoria } from '@/lib/cms/adapters';
 
 jest.mock('@/lib/analytics/dataLayer');
 
 const emitir = jest.mocked(emitirEvento);
+
+/** Estreita o evento mockado para o membro `view_item_list` da união (Fase 5 acrescentou
+ * `search`/`filter_applied`; este teste só emite `view_item_list`). */
+function comoViewItemList(evento: EventoDataLayer | undefined) {
+  if (evento?.event !== 'view_item_list') throw new Error('evento inesperado no mock');
+  return evento;
+}
 
 type BlocoGrade = Extract<Bloco, { __component: 'blocos.grade-de-categorias' }>;
 
@@ -99,12 +106,12 @@ describe('GradeDeCategoriasBloco', () => {
     );
 
     expect(emitir).toHaveBeenCalledTimes(1);
-    const evento = emitir.mock.calls[0]?.[0];
-    expect(evento?.event).toBe('view_item_list');
-    expect(evento?.item_list_id).toBe('home_categorias');
-    expect(evento?.items).toHaveLength(5);
-    expect(evento?.items[0]).toMatchObject({ item_id: 'telas-de-led', index: 0 });
-    expect(Object.keys(evento?.items[0] ?? {})).not.toEqual(
+    const evento = comoViewItemList(emitir.mock.calls[0]?.[0]);
+    expect(evento.event).toBe('view_item_list');
+    expect(evento.item_list_id).toBe('home_categorias');
+    expect(evento.items).toHaveLength(5);
+    expect(evento.items[0]).toMatchObject({ item_id: 'telas-de-led', index: 0 });
+    expect(Object.keys(evento.items[0] ?? {})).not.toEqual(
       expect.arrayContaining(['price', 'value', 'currency', 'quantity']),
     );
   });

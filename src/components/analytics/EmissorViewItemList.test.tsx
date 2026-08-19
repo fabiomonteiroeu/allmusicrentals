@@ -1,6 +1,13 @@
 import { renderComProviders } from '@/test-utils';
-import { emitirEvento } from '@/lib/analytics/dataLayer';
+import { emitirEvento, type EventoDataLayer } from '@/lib/analytics/dataLayer';
 import { EmissorViewItemList } from './EmissorViewItemList';
+
+/** Estreita o evento mockado para o membro `view_item_list` da união (Fase 5 acrescentou
+ * `search`/`filter_applied`; este teste só emite `view_item_list`). */
+function comoViewItemList(evento: EventoDataLayer | undefined) {
+  if (evento?.event !== 'view_item_list') throw new Error('evento inesperado no mock');
+  return evento;
+}
 
 jest.mock('@/lib/analytics/dataLayer');
 
@@ -28,7 +35,7 @@ describe('EmissorViewItemList', () => {
       item_list_name: 'Produtos em destaque',
       items: itens,
     });
-    expect(emitir.mock.calls[0]?.[0]?.items).toHaveLength(2);
+    expect(comoViewItemList(emitir.mock.calls[0]?.[0]).items).toHaveLength(2);
   });
 
   it('não reemite o evento em re-renders (trava do useRef)', () => {

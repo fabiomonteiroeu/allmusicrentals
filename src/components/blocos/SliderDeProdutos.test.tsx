@@ -1,7 +1,7 @@
 import { axe } from 'jest-axe';
 import userEvent from '@testing-library/user-event';
 import { renderComProviders, screen } from '@/test-utils';
-import { emitirEvento } from '@/lib/analytics/dataLayer';
+import { emitirEvento, type EventoDataLayer } from '@/lib/analytics/dataLayer';
 import { SliderDeProdutos } from './SliderDeProdutos';
 import type { Produto } from '@/lib/cms/adapters';
 import type { HtmlSeguro } from '@/lib/cms/sanitize';
@@ -11,6 +11,13 @@ jest.mock('@/lib/analytics/dataLayer');
 
 const emitir = jest.mocked(emitirEvento);
 const locale: Locale = 'pt-BR';
+
+/** Estreita o evento mockado para o membro `view_item_list` da união (Fase 5 acrescentou
+ * `search`/`filter_applied`; este teste só emite `view_item_list`). */
+function comoViewItemList(evento: EventoDataLayer | undefined) {
+  if (evento?.event !== 'view_item_list') throw new Error('evento inesperado no mock');
+  return evento;
+}
 
 /** Classe stub — jsdom não implementa `IntersectionObserver`. */
 class IntersectionObserverStub {
@@ -39,6 +46,8 @@ function criarProduto(indice: number, overrides: Partial<Produto> = {}): Produto
     faq: [],
     seo: null,
     categoria: { nome: 'Móveis', slug: 'moveis' },
+    tiposDeEvento: [],
+    contagemSolicitacoes: 0,
     ...overrides,
   };
 }
@@ -70,10 +79,10 @@ describe('SliderDeProdutos', () => {
     renderComProviders(<SliderDeProdutos produtos={produtos} locale={locale} />);
 
     expect(emitir).toHaveBeenCalledTimes(1);
-    const evento = emitir.mock.calls[0]?.[0];
+    const evento = comoViewItemList(emitir.mock.calls[0]?.[0]);
     expect(evento).toMatchObject({ event: 'view_item_list', item_list_id: 'home_destaques' });
-    expect(evento?.items).toHaveLength(5);
-    expect(evento?.items[0]).toMatchObject({ item_id: 'produto-1', index: 0 });
+    expect(evento.items).toHaveLength(5);
+    expect(evento.items[0]).toMatchObject({ item_id: 'produto-1', index: 0 });
   });
 
   it('a seta "Produtos anteriores" começa desabilitada (scrollLeft 0 em jsdom)', () => {

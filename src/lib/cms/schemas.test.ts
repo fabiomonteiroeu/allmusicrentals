@@ -3,7 +3,61 @@
  */
 import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
-import { blocoSchema, blocoTolerante, paginaSchema } from './schemas';
+import { blocoSchema, blocoTolerante, paginaSchema, tipoDeEventoSchema, produtoSchema } from './schemas';
+
+describe('tipoDeEventoSchema — taxonomia `tipo-de-evento` (05-01/05-02)', () => {
+  it('valida um tipo de evento completo', () => {
+    const resultado = tipoDeEventoSchema.safeParse({
+      id: 1,
+      documentId: 'abc123',
+      nome: 'Casamento',
+      slug: 'casamento',
+      ordem: 2,
+      exibirNoFiltroDoCatalogo: true,
+      locale: 'pt-BR',
+    });
+    expect(resultado.success).toBe(true);
+  });
+
+  it('aceita o valor `outro` com exibirNoFiltroDoCatalogo: false', () => {
+    const resultado = tipoDeEventoSchema.safeParse({
+      id: 11,
+      nome: 'Outro',
+      slug: 'outro',
+      exibirNoFiltroDoCatalogo: false,
+    });
+    expect(resultado.success).toBe(true);
+  });
+
+  it('rejeita tipo de evento sem slug (contrato quebrado)', () => {
+    const resultado = tipoDeEventoSchema.safeParse({ id: 1, nome: 'Casamento' });
+    expect(resultado.success).toBe(false);
+  });
+});
+
+describe('produtoSchema — extensão aditiva `tiposDeEvento`/`contagemSolicitacoes` (05-02)', () => {
+  it('produto sem `tiposDeEvento` e sem `contagemSolicitacoes` continua validando (aditividade)', () => {
+    const resultado = produtoSchema.safeParse({
+      id: 1,
+      nome: 'Treliça Q30',
+      slug: 'trelica-q30',
+      tipoDeItem: 'fisico',
+    });
+    expect(resultado.success).toBe(true);
+  });
+
+  it('valida produto com tiposDeEvento e contagemSolicitacoes populados', () => {
+    const resultado = produtoSchema.safeParse({
+      id: 1,
+      nome: 'Treliça Q30',
+      slug: 'trelica-q30',
+      tipoDeItem: 'fisico',
+      tiposDeEvento: [{ nome: 'Casamento', slug: 'casamento' }],
+      contagemSolicitacoes: 7,
+    });
+    expect(resultado.success).toBe(true);
+  });
+});
 
 describe('blocoTolerante — degradação da Dynamic Zone', () => {
   it('bloco com __component desconhecido vira null', () => {
