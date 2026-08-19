@@ -1,12 +1,16 @@
 ---
-gsd_state_version: '1.0'
-status: in_progress
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: executing
+last_updated: "2026-08-19T21:52:44.609Z"
+last_activity: 2026-08-19 -- Phase 05 planning complete
 progress:
   total_phases: 18
-  completed_phases: 5
-  total_plans: 73
-  completed_plans: 26
-  percent: 36
+  completed_phases: 1
+  total_plans: 18
+  completed_plans: 9
+  percent: 6
 ---
 
 # Estado do Projeto
@@ -22,8 +26,8 @@ Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 Phase: 4 de 18 (Home) — CONCLUÍDA e verificada
 Plan: 7 de 7
-Status: Fase 4 fechada (`04-VERIFICATION.md`, `status: passed`) — 5/5 critérios de sucesso, 6/6 requisitos, 32 suítes e 173 testes verdes. Os 3 padrões herdados pelas Fases 5–11 (renderizador de Dynamic Zone, fronteira Server/Client, porta tipada do dataLayer) estão estabelecidos e cobertos por teste.
-Last activity: 2026-08-18 — checkpoint de fidelidade aprovado após 3 rodadas de correção: 4 títulos com contraste 1.00, chave React duplicada em 8 blocos e mídia de bloco com URL relativa. Nenhum dos 3 foi pego pelos 163 testes que já passavam.
+Status: Ready to execute
+Last activity: 2026-08-19 -- Phase 05 planning complete
 
 Progress: [████░░░░░░] 36%
 
@@ -32,6 +36,7 @@ Branch corrente: `fase-04-home` (pronta para merge em `main`)
 ## Performance Metrics
 
 **Velocity:**
+
 - Total de planos concluídos: 18
 - Duração média: não instrumentada (fases 0–3 executadas antes do GSD); plano 03-05 ~25min, plano 03-04 ~25min
 - Tempo total de execução: não instrumentado
@@ -47,6 +52,7 @@ Branch corrente: `fase-04-home` (pronta para merge em `main`)
 | 4. Home | 7/7 | ~5h | 7 planos em 3 waves |
 
 **Recent Trend:**
+
 - Últimos 5 planos: 03-05 (~25min, exclusivamente documental), 03-04 (~25min, testes + script de varredura)
 - Tendência: linha de base começa no plano 03-05
 
