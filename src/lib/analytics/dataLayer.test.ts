@@ -54,4 +54,27 @@ describe('dataLayer — porta única de eventos (emitirEvento)', () => {
       expect.arrayContaining(['price', 'value', 'currency', 'revenue', 'quantity', 'discount']),
     );
   });
+
+  it('enfileira o evento `search` (Fase 5 — catálogo)', () => {
+    const evento: EventoDataLayer = { event: 'search', search_term: 'painel de led' };
+
+    emitirEvento(evento);
+
+    expect(window.dataLayer?.[0]).toEqual(evento);
+  });
+
+  it('enfileira o evento `filter_applied` (Fase 5 — catálogo)', () => {
+    const evento: EventoDataLayer = {
+      event: 'filter_applied',
+      filter_type: 'cor',
+      filter_value: 'Bege',
+    };
+
+    emitirEvento(evento);
+
+    expect(window.dataLayer?.[0]).toEqual(evento);
+    expect(Object.keys(evento)).not.toEqual(
+      expect.arrayContaining(['price', 'value', 'currency', 'revenue']),
+    );
+  });
 });
