@@ -72,7 +72,8 @@ Resumido aqui; completo em `docs/tokens/`. Cores unificadas (aprovado): `#C7CACB
 Hero (`O palco é seu. Nós levamos a estrutura.`) → Busca grande → Grade de categorias (card-bandeira LED + 4: Estruturas, Luz & Som, Tendas, Móveis) → Produtos em destaque (slider, 5 itens) → Seção Painéis de LED (P1.9/P3.9 + listas "O QUE INSTALAMOS"/"O QUE EXIBIMOS" + galeria 3 imgs) → Como funciona (4 etapas) → Diferenciais (5 blocos) → Avaliações (4 depoimentos + estados vazio/carregando) → CTA final → Rodapé → Toast.
 
 ### Catálogo (`/catalogo`)
-Hero + card "SOBRE OS VALORES" + busca → Layout 2 col (aside filtros + main) → Toolbar (Filtros mobile, contagem, Ordenar por) → Chips ativos → Grade (11 produtos) / skeletons / **estado vazio** ("Amplie a busca ou fale com a equipe") → Rodapé → Barra fixa → Drawer filtros mobile → Toast.
+Hero + card "SOBRE OS VALORES" + busca → Layout 2 col (aside filtros + main) → Toolbar (Filtros mobile, contagem, Ordenar por) → Chips ativos → Grade (10 produtos) / skeletons / **estado vazio** ("Amplie a busca ou fale com a equipe") → Rodapé → Barra fixa → Drawer filtros mobile → Toast.
+> Nota: o array `CATALOGO` do layout-fonte tem 10 itens; os 10 já estão cadastrados no CMS (ver D-03).
 
 ### Categoria (`/categoria/[slug]`)
 Barra "MODELO APLICADO A" (trocador) → Hero por categoria → Subcategorias (numeradas) → **Comparativo P1.9×P3.9** (só LED — ver §7) → Produtos da categoria / **estado "em preparação"** / **sem resultado** → Aplicações (ou "em preparação") → FAQ da categoria (ou vazio) → CTA → Rodapé → Barra fixa → Toast.

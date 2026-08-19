@@ -293,7 +293,7 @@ Plans:
 - [ ] 09-02: Etapas 1–3 (Contato, Evento, Local/logística) com schemas Zod por etapa e resumo de erro
 - [ ] 09-03: Etapa 4 — lista editável de itens vinda do orçamento e upload drag-and-drop com magic number, limite de 25 MB, nome sanitizado, armazenamento fora da raiz pública e progresso
 - [ ] 09-04: Etapa 5 — contexto, "Faixa de investimento" com ressalva, 3 consentimentos; rascunho persistente com debounce de 700ms, versionamento e migração
-- [ ] 09-05: Route Handler de envio — validação no servidor, protocolo `AMR-XXXX`, gravação no Strapi, e-mails, honeypot, verificação de origem, rate limiting e eventos do fluxo
+- [ ] 09-05: Route Handler de envio — validação no servidor, protocolo `AMR-XXXX`, gravação no Strapi, e-mails, honeypot, verificação de origem, rate limiting e eventos do fluxo; incrementa `contagemSolicitacoes` do produto solicitado (pendência herdada da Fase 5 — ver D6 em docs/divergencias.md)
 
 ### Phase 10: Confirmação
 

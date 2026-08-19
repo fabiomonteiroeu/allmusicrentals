@@ -108,6 +108,105 @@ final muda.
 **Reversível:** o texto vive só em `src/app/[locale]/page.tsx` (duas constantes de módulo);
 trocar a cópia não afeta nenhum outro arquivo.
 
+## D5 — Os três grids por JS do catálogo viram `auto-fit` / coluna fixa
+
+**Fase:** 05 · **Data:** 2026-08-19
+
+**No layout:** `heroCols`, `layoutCols` e `gridProdutos` são calculados em JavaScript a partir de
+`this.state.vw` (largura de viewport lida no cliente).
+
+**Divergência:** substituição por CSS puro, sem JS de viewport: `heroCols` →
+`repeat(auto-fit, minmax(280px, 1fr))`; `layoutCols` → `272px minmax(0, 1fr)` fixo, com o aside
+colapsando pelo drawer (ver D7); `gridProdutos` → `repeat(auto-fit, minmax(280px, 1fr))`.
+
+**Motivo (técnico):** idêntico ao já aceito em D1 e D3 — ler `window.innerWidth` (ou qualquer
+estado de viewport equivalente, aqui `this.state.vw`) causa mismatch de hidratação, flash e CLS
+na primeira pintura, violando as metas de Core Web Vitals do projeto.
+
+**Escopo:** os três grids calculados por JS do catálogo (hero, layout de 2 colunas, grade de
+produtos), alvo concreto dos planos 05-04/05-05/05-07.
+
+**Consequência aceita:** ±1 coluna em larguras intermediárias, o mesmo custo já aceito em D3.
+
+**Reversível:** trocar `auto-fit`/`minmax` por um cálculo de `grid-template-columns` em JS é local
+aos componentes de grid do catálogo.
+
+## D6 — "Mais solicitados" passa a ordenar por um campo real, `contagemSolicitacoes`
+
+**Fase:** 05 · **Data:** 2026-08-19
+
+**No layout:** a quinta opção do `<select>` de ordenação do catálogo é `Mais solicitados`, e o
+modelo do Strapi não tem campo correspondente.
+
+**Divergência:** a opção **não é removida** (CATA-03 exige as 5 opções) e **não** vira apelido de
+`destaque`. Cria-se o atributo `contagemSolicitacoes` (`integer`, `default: 0`, não localizado) em
+`cms/src/api/product/content-types/product/schema.json`, com ordenação
+`sort[0]=contagemSolicitacoes:desc` e `sort[1]=nome:asc` como desempate determinístico.
+
+**Motivo (técnico):** o contador começa em 0 para todos os produtos, e enquanto isso a ordenação é
+honesta (campo real, valor real) e determinística pelo desempate por nome — nenhum dado fictício é
+semeado. **A Fase 9 é quem passa a incrementá-lo**, no Route Handler de envio da solicitação
+(plano `09-05`).
+
+**Escopo:** apenas a criação do campo `contagemSolicitacoes` e a troca do critério de ordenação da
+opção "Mais solicitados" do catálogo (Fase 5). A obrigação da Fase 9 de incrementar o contador foi
+cravada explicitamente na linha do plano `09-05` em `.planning/ROADMAP.md` — sem essa referência
+cruzada, o contador ficaria permanentemente em 0 e "Mais solicitados" seria idêntico à ordenação
+alfabética para sempre.
+
+**Reversível:** sim — remover o campo e o critério de ordenação restaura o estado anterior (a
+opção do `<select>` continuaria existindo, mas sem efeito real de ordenação).
+
+## D7 — A visibilidade do botão `FILTROS` e o colapso do aside usam a media query única de 1080px
+
+**Fase:** 05 · **Data:** 2026-08-19
+
+**No layout:** o botão `FILTROS` só aparece quando `this.state.mobile` é verdadeiro, estado
+derivado de leitura de viewport em JS.
+
+**Divergência:** a implementação usa `media.mobile` / `media.desktop` de
+`src/lib/theme/media.ts` (`theme.breakpoint.header`, 1080px), a única media query aprovada do
+projeto (D1) — nenhum breakpoint novo é criado, respeitando D-07.
+
+**Motivo (técnico):** idêntico a D1 — estado de viewport lido no cliente causa mismatch de
+hidratação e CLS; media query CSS resolve no mesmo ponto de troca sem JS.
+
+**Escopo:** visibilidade do botão `FILTROS` e do aside de filtros (272px) do catálogo. Consequência
+registrada: o aside fica visível a partir de 1080px e, abaixo disso, o mesmo painel é servido
+dentro do drawer. Resolve a Q1 do UI-SPEC pela saída (a).
+
+**Reversível:** trocar a media query por estado JS ou por container query é local ao componente do
+painel de filtros do catálogo.
+
+## D8 — A lista de cores do filtro é derivada do CMS, não a lista fixa de três valores do layout
+
+**Fase:** 05 · **Data:** 2026-08-19
+
+**No layout:** — e no **Bloco 3** do `05-UI-SPEC.md`, que o transcreve — o grupo `Cor` do painel de
+filtros tem três swatches fixos, embutidos no `const HEX` do arquivo-fonte: `Bege #D8C9A8`,
+`Preto #0B0C0D`, `Branco #FFFFFF`.
+
+**Divergência:** é de **fonte**, não de resultado. A implementação monta a lista chamando
+`getCoresDisponiveis(locale)` (`src/lib/cms/adapters.ts`, criado em 05-02), que coleta
+`variacoes[].nome` dos produtos cadastrados e mantém apenas os nomes que existem como chave em
+`coresProduto` de `src/lib/site/navigation.ts`. Com os 10 produtos semeados hoje o retorno é
+exatamente `Bege`, `Preto`, `Branco` — **não há nenhuma diferença observável na tela**, e é por
+isso que a divergência é de fonte e precisa ser registrada mesmo sem sintoma visível.
+
+**Motivo (técnico):** é o que torna verdadeira a microcopy **literal do próprio layout**, "Outras
+cores cadastradas aparecem aqui." Com lista fixa, cadastrar no CMS um produto com a variação
+`Bordô` não faria swatch algum aparecer, e a nota do layout seria uma promessa falsa impressa na
+tela.
+
+**Escopo:** os hex continuam saindo exclusivamente do `Record` `coresProduto` (nenhum hex é
+redigitado, e nome de variação fora da paleta conhecida nunca vira opção de filtro); a allowlist de
+parse de `parseFiltrosDaUrl` permanece sendo a paleta inteira (`Object.keys(coresProduto)`, 5
+nomes), deliberadamente um **superconjunto** do que é exibido, porque barreira de segurança não
+pode variar conforme o conteúdo editorial do CMS.
+
+**Reversível:** sim — trocar a chamada por um array literal de três nomes restaura exatamente o
+comportamento do layout, em uma linha.
+
 ## Item 6 (docs/00-divergencias.md) — hrefs de âncora `#led`/`#luzsom` no lugar dos slugs reais
 
 **Fase:** 04 · **Data:** 2026-08-18
