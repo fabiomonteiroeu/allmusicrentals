@@ -263,26 +263,109 @@ const POPULATE_PRODUTO_LISTA = 'imagens,variacoes,categoria,tiposDeEvento';
 const POPULATE_PRODUTO_DETALHE =
   'imagens,variacoes,caracteristicas,medidas,faq,seo,seo.imagemOG,categoria,tiposDeEvento';
 
+/** As 5 opções de ordenação do catálogo (UI-SPEC Bloco 4), na ordem literal do `<select>`. */
+export type ChaveDeOrdenacao = 'destaque' | 'solicitados' | 'recentes' | 'nome-asc' | 'nome-desc';
+
+/**
+ * Chave de URL → campos de sort do Strapi, na ordem em que entram como `sort[0]`, `sort[1]`...
+ * `solicitados` ordena por `contagemSolicitacoes` — a justificativa do campo está registrada
+ * como D6 em `docs/divergencias.md` (05-01); os valores abaixo são o contrato.
+ */
+export const ORDENACOES: Record<ChaveDeOrdenacao, string[]> = {
+  destaque: ['destaque:desc', 'nome:asc'],
+  solicitados: ['contagemSolicitacoes:desc', 'nome:asc'],
+  recentes: ['createdAt:desc'],
+  'nome-asc': ['nome:asc'],
+  'nome-desc': ['nome:desc'],
+};
+
 export interface FiltroProdutos {
+  /** Legado — a Fase 6 (página de categoria) já consome; mantido para não quebrá-la. */
   categoria?: string;
+  /** Grupo "Categoria" do painel de filtros do catálogo — slugs das 5 categorias reais (D-02). */
+  categorias?: string[];
+  /** Grupo "Tipo de item" — valores de `tipoDeItemEnum`. */
+  tiposDeItem?: string[];
+  /** Grupo "Cor" — nomes de variação (`variacoes[].nome`). */
+  cores?: string[];
+  /** Grupo "Tipo de evento" — slugs da taxonomia `tipo-de-evento`. */
+  tiposDeEvento?: string[];
+  /** Grupo "Ambiente" — valores de `ambienteEnum`. */
+  ambientes?: string[];
   destaque?: boolean;
   busca?: string;
   pagina?: number;
   porPagina?: number;
+  ordenar?: ChaveDeOrdenacao;
 }
 
-/** Lista de produtos para catálogo/categoria (populate enxuto). */
+/**
+ * Lista de produtos para catálogo/categoria (populate enxuto).
+ *
+ * Os 5 grupos de filtro do catálogo (`categorias`, `tiposDeItem`, `cores`, `tiposDeEvento`,
+ * `ambientes`) e o filtro legado `categoria` entram cada um como um índice independente de
+ * `filters[$and]` — **AND entre grupos** (D-09). Dentro de um grupo, os valores entram como
+ * `$or` (ou `$in` quando o campo vive num componente repetível, caso de `cores`) —
+ * **OR dentro do grupo**. Sintaxe testada de verdade contra o Strapi (`05-RESEARCH.md` §1).
+ *
+ * `porPagina` continua com default 24; a rota do catálogo (05-04) passa 100 para que a
+ * contagem da toolbar e a grade da UI venham do MESMO array de resposta — mitigação direta da
+ * armadilha 1 do RESEARCH §6 ("contagem divergente do que a grade mostra").
+ */
 export async function getProdutos(locale: Locale, filtro: FiltroProdutos = {}): Promise<Produto[]> {
   const params: Record<string, string | number | boolean> = {
     locale,
     populate: POPULATE_PRODUTO_LISTA,
-    'sort[0]': 'nome:asc',
     'pagination[page]': filtro.pagina ?? 1,
     'pagination[pageSize]': filtro.porPagina ?? 24,
   };
-  if (filtro.categoria) params['filters[categoria][slug][$eq]'] = filtro.categoria;
+
+  ORDENACOES[filtro.ordenar ?? 'destaque'].forEach((campo, idx) => {
+    params[`sort[${idx}]`] = campo;
+  });
+
+  let i = 0;
+
+  if (filtro.categoria) {
+    params[`filters[$and][${i}][categoria][slug][$eq]`] = filtro.categoria;
+    i += 1;
+  }
+  if (filtro.categorias?.length) {
+    filtro.categorias.forEach((slug, j) => {
+      params[`filters[$and][${i}][$or][${j}][categoria][slug][$eq]`] = slug;
+    });
+    i += 1;
+  }
+  if (filtro.tiposDeItem?.length) {
+    filtro.tiposDeItem.forEach((valor, j) => {
+      params[`filters[$and][${i}][$or][${j}][tipoDeItem][$eq]`] = valor;
+    });
+    i += 1;
+  }
+  if (filtro.cores?.length) {
+    filtro.cores.forEach((nome, j) => {
+      params[`filters[$and][${i}][variacoes][nome][$in][${j}]`] = nome;
+    });
+    i += 1;
+  }
+  if (filtro.tiposDeEvento?.length) {
+    filtro.tiposDeEvento.forEach((slug, j) => {
+      params[`filters[$and][${i}][tiposDeEvento][slug][$in][${j}]`] = slug;
+    });
+    i += 1;
+  }
+  if (filtro.ambientes?.length) {
+    filtro.ambientes.forEach((valor, j) => {
+      params[`filters[$and][${i}][$or][${j}][ambiente][$eq]`] = valor;
+    });
+    i += 1;
+  }
+  if (filtro.busca) {
+    params[`filters[$and][${i}][nome][$containsi]`] = filtro.busca;
+    i += 1;
+  }
+
   if (filtro.destaque !== undefined) params['filters[destaque][$eq]'] = filtro.destaque;
-  if (filtro.busca) params['filters[nome][$containsi]'] = filtro.busca;
 
   const res = await fetchStrapi('products', produtoColecao, { params, tags: [TAG.products] });
   return res.data.map(adaptarProduto);
