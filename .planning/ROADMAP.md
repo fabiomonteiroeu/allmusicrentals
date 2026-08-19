@@ -148,14 +148,18 @@ Plans:
   3. O visitante consegue operar busca, filtros, drawer e ordenação só pelo teclado, com foco sempre visível
   4. Busca vazia, carregando, sem resultados e erro têm cada um sua tela, com o texto do layout
   5. `search`, `filter_applied` e `view_item_list` são emitidos com os parâmetros corretos e sem nenhum campo de valor
-**Plans**: 4 plans
+**Plans**: 8 plans
 **UI hint**: yes
 
 Plans:
-- [ ] 05-01: Rota `/[locale]/catalogo`, hero, card "SOBRE OS VALORES", busca com validação e estado `busy`
-- [ ] 05-02: Painel de filtros em acordeão (5 grupos, swatches de cor) com a lógica AND/OR e a ordenação de 5 opções
-- [ ] 05-03: Drawer mobile de filtros, toolbar com contagem e chips de filtro ativo
-- [ ] 05-04: Grade, skeletons, estado vazio, sem resultados e erro; navegação por teclado, axe e eventos
+- [ ] 05-01-PLAN.md — Rótulos finais da taxonomia `tipo-de-evento` (checkpoint) e registro das divergências D5, D6 e D7
+- [ ] 05-02-PLAN.md — Camada de dados: schemas Zod, `getProdutos` com AND/OR e as 5 ordenações, allowlist de filtros por URL e a união de eventos
+- [ ] 05-03-PLAN.md — Taxonomia `tipo-de-evento` no Strapi, permissões públicas, migração de `aplicacoes` e sync do schema [BLOCKING]
+- [ ] 05-04-PLAN.md — Rota `/[locale]/catalogo`, hero, card "SOBRE OS VALORES", busca com validação e estado `busy`, mais `loading.tsx` e `error.tsx`
+- [ ] 05-05-PLAN.md — Painel de filtros em acordeão (5 grupos, swatches multi-seleção) e toolbar com contagem e ordenação de 5 opções
+- [ ] 05-06-PLAN.md — Drawer mobile com foco preso e chips de filtro ativo com remoção individual
+- [ ] 05-07-PLAN.md — Grade de produtos, estados vazio e sem correspondência, e os emissores de `search`, `filter_applied` e `view_item_list`
+- [ ] 05-08-PLAN.md — Suítes e2e Playwright (filtro, drawer, foco, chips, eventos), axe em navegador real e checkpoint de fidelidade
 
 ### Phase 6: Categoria
 **Goal**: Um único modelo de página serve as 5 categorias, incluindo o comparativo LED e o estado "em preparação"
