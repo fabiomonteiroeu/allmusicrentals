@@ -1,6 +1,8 @@
 import 'server-only';
+import { z } from 'zod';
 import { fetchStrapi } from './client';
 import {
+  colecao,
   menuItemColecao,
   rodapeColunaColecao,
   settingsGlobaisUnico,
@@ -9,6 +11,7 @@ import {
   faqItemColecao,
   avaliacaoColecao,
   paginaColecao,
+  tipoDeEventoColecao,
 } from './schemas';
 import type {
   ProdutoCms,
@@ -17,8 +20,10 @@ import type {
   PaginaCms,
   BlocoCms,
   SeoCms,
+  TipoDeEventoCms,
 } from './schemas';
 import { sanitizarRichText, type HtmlSeguro } from './sanitize';
+import { coresProduto } from '@/lib/site/navigation';
 import type { ItemNav, ColunaRodape, DadosContato } from '@/lib/site/navigation';
 import type { Locale } from '@/i18n/config';
 
@@ -40,6 +45,7 @@ const TAG = {
   categories: 'cms:categories',
   faq: 'cms:faq',
   avaliacoes: 'cms:avaliacoes',
+  tiposDeEvento: 'tipos-de-evento',
 } as const;
 
 /** Base pública dos uploads do Strapi (o front nunca usa a URL interna do container). */
@@ -212,6 +218,10 @@ export interface Produto {
    * o rótulo do card nem o href do produto podem ser montados.
    */
   categoria: { nome: string; slug: string } | null;
+  /** Relação manyToMany com a taxonomia `tipo-de-evento` (05-01/05-03). Nunca `undefined`. */
+  tiposDeEvento: { nome: string; slug: string }[];
+  /** Base do sort "Mais solicitados" (D6). Nunca `undefined`. */
+  contagemSolicitacoes: number;
 }
 
 export function adaptarProduto(p: ProdutoCms): Produto {
@@ -238,6 +248,8 @@ export function adaptarProduto(p: ProdutoCms): Produto {
     faq: (p.faq ?? []).map(adaptarPerguntaResposta),
     seo: adaptarSeo(p.seo),
     categoria: p.categoria ? { nome: p.categoria.nome, slug: p.categoria.slug } : null,
+    tiposDeEvento: p.tiposDeEvento ?? [],
+    contagemSolicitacoes: p.contagemSolicitacoes ?? 0,
   };
 }
 
@@ -245,9 +257,11 @@ function adaptarPerguntaResposta(item: { pergunta: string; resposta: string }): 
   return { pergunta: item.pergunta, respostaHtml: sanitizarRichText(item.resposta) };
 }
 
-const POPULATE_PRODUTO_LISTA = 'imagens,variacoes,categoria';
+// Populate constante e não condicional: o custo é desprezível e evita o modo de falha em que a
+// relação vem vazia porque o filtro de "Tipo de evento" não foi usado nesta consulta específica.
+const POPULATE_PRODUTO_LISTA = 'imagens,variacoes,categoria,tiposDeEvento';
 const POPULATE_PRODUTO_DETALHE =
-  'imagens,variacoes,caracteristicas,medidas,faq,seo,seo.imagemOG,categoria';
+  'imagens,variacoes,caracteristicas,medidas,faq,seo,seo.imagemOG,categoria,tiposDeEvento';
 
 export interface FiltroProdutos {
   categoria?: string;
@@ -287,6 +301,72 @@ export async function getProdutoPorSlug(locale: Locale, slug: string): Promise<P
   });
   const p = res.data[0];
   return p ? adaptarProduto(p) : null;
+}
+
+// ---------------------------------------------------------------------------
+// Tipo de evento (taxonomia) e cores disponíveis — origem dos grupos "Tipo de evento" e "Cor"
+// do painel de filtros do catálogo (Fase 5).
+// ---------------------------------------------------------------------------
+
+export interface TipoDeEvento {
+  id: number;
+  nome: string;
+  slug: string;
+  ordem: number;
+  exibirNoFiltroDoCatalogo: boolean;
+}
+
+function adaptarTipoDeEvento(t: TipoDeEventoCms): TipoDeEvento {
+  return {
+    id: t.id,
+    nome: t.nome,
+    slug: t.slug,
+    ordem: t.ordem ?? 0,
+    exibirNoFiltroDoCatalogo: t.exibirNoFiltroDoCatalogo ?? true,
+  };
+}
+
+/** Taxonomia `tipo-de-evento` ordenada — alimenta o grupo "Tipo de evento" do painel de filtros. */
+export async function getTiposDeEvento(locale: Locale): Promise<TipoDeEvento[]> {
+  const res = await fetchStrapi('tipo-de-eventos', tipoDeEventoColecao, {
+    params: { locale, 'sort[0]': 'ordem:asc', 'pagination[pageSize]': 100 },
+    tags: [TAG.tiposDeEvento],
+  });
+  return res.data.map(adaptarTipoDeEvento);
+}
+
+/** Schema mínimo para `getCoresDisponiveis` — a consulta pede só `nome` + `variacoes`, então o
+ * `produtoSchema` completo (que exige `slug`) rejeitaria a resposta. */
+const produtoCorSchema = z.object({
+  nome: z.string(),
+  variacoes: z.array(z.object({ nome: z.string() })).nullable().optional(),
+});
+const produtoCorColecao = colecao(produtoCorSchema);
+
+/**
+ * Origem única da lista de cores exibida no painel de filtros. Faz uma consulta PRÓPRIA ao
+ * Strapi — **não** reusa a chamada de `getProdutos` da página, porque aquela vem filtrada e
+ * derivar as cores dela faria a lista encolher a cada filtro aplicado (o filtro apagaria as
+ * próprias opções). Mantém apenas os nomes de `variacoes[].nome` que existem como chave em
+ * `coresProduto` (a paleta conhecida do projeto, `src/lib/site/navigation.ts`) — o resto de
+ * `variacoes` pode ser tamanho, acabamento etc., não é cor, e nome desconhecido não vira opção
+ * de filtro. Devolve na ordem de `Object.keys(coresProduto)`, para que a ordem da tela seja
+ * estável e não dependa da ordem de cadastro.
+ */
+export async function getCoresDisponiveis(locale: Locale): Promise<string[]> {
+  const res = await fetchStrapi('products', produtoCorColecao, {
+    params: {
+      locale,
+      'fields[0]': 'nome',
+      populate: 'variacoes',
+      'pagination[pageSize]': 100,
+    },
+    tags: [TAG.products],
+  });
+
+  const nomesCadastrados = new Set(res.data.flatMap((p) => (p.variacoes ?? []).map((v) => v.nome)));
+
+  return Object.keys(coresProduto).filter((nome) => nomesCadastrados.has(nome));
 }
 
 // ---------------------------------------------------------------------------

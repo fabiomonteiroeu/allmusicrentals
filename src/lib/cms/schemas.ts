@@ -104,6 +104,26 @@ export const perguntaRespostaSchema = z.object({
 export const tipoDeItemEnum = z.enum(['fisico', 'com-variacao', 'servico-tecnico', 'pacote']);
 export const ambienteEnum = z.enum(['interno', 'externo', 'interno-ou-externo']);
 
+/**
+ * Taxonomia `tipo-de-evento` — travada pelo plano 05-01 (11 valores: `evento-corporativo`,
+ * `casamento`, `aniversario`, `festa-privada`, `show`, `festival`, `feira`, `ativacao-de-marca`,
+ * `formatura`, `evento-ao-ar-livre`, `outro`). Alimenta o filtro "Tipo de evento" do catálogo
+ * (Fase 5) e o select do formulário de orçamento (Fase 9) a partir da mesma fonte no CMS.
+ * `exibirNoFiltroDoCatalogo` (default `true`) permite ocultar valores do painel de filtros
+ * (`outro`) sem excluí-los da taxonomia usada pelo formulário.
+ */
+export const tipoDeEventoSchema = z.object({
+  id: z.number(),
+  documentId: z.string().optional(),
+  nome: z.string(),
+  slug: z.string(),
+  ordem: z.number().nullable().optional(),
+  exibirNoFiltroDoCatalogo: z.boolean().nullable().optional(),
+  locale: z.string().nullable().optional(),
+});
+export const tipoDeEventoColecao = colecao(tipoDeEventoSchema);
+export type TipoDeEventoCms = z.infer<typeof tipoDeEventoSchema>;
+
 /** Produto — nenhum campo monetário existe no modelo (regra inviolável). */
 export const produtoSchema = z.object({
   id: z.number(),
@@ -128,6 +148,11 @@ export const produtoSchema = z.object({
   // Aditivo e opcional: relação `categoria` (manyToOne → api::category.category) já existe no
   // content-type do Strapi. Nenhuma resposta atual do Strapi quebra sem ela populada.
   categoria: z.object({ nome: z.string(), slug: z.string() }).nullable().optional(),
+  // Aditivo e opcional, mesmo padrão de `categoria`: relação manyToMany com a taxonomia
+  // `tipo-de-evento` (05-01/05-03). Nenhuma resposta atual do Strapi quebra sem ela populada.
+  tiposDeEvento: z.array(z.object({ nome: z.string(), slug: z.string() })).nullable().optional(),
+  // Aditivo e opcional: base do sort "Mais solicitados" (D6, `docs/divergencias.md`).
+  contagemSolicitacoes: z.number().nullable().optional(),
 });
 
 /** Categoria. `produtos` só vem quando o populate pede. */

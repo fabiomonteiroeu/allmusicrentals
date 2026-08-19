@@ -25,6 +25,8 @@ function criarProduto(overrides: Partial<Produto> = {}): Produto {
     faq: [],
     seo: null,
     categoria: { nome: 'Móveis', slug: 'moveis' },
+    tiposDeEvento: [],
+    contagemSolicitacoes: 0,
     ...overrides,
   };
 }
