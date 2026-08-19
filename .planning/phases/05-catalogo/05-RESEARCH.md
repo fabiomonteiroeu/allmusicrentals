@@ -212,10 +212,25 @@ grupos — extensão aditiva, no mesmo padrão.
 
 ---
 
-## Questões em aberto para o planejamento
+## Questões em aberto para o planejamento (RESOLVED)
 
-1. ~~Décima opção de "Tipo de evento"~~ — **RESOLVIDO**: taxonomia única unificada (ver seção 4). Falta só o usuário confirmar os 11 rótulos finais antes de semear.
-2. **Botão "Filtros" só no mobile sem breakpoint novo** — três saídas propostas no item 3.
-3. **`item_list_id` do `view_item_list`** quando há filtro aplicado — valor fixo (`catalogo`) ou
-   derivado dos filtros?
-4. **Paginação** — 10 produtos não justificam; decidir se entra agora ou fica registrado como adiado.
+> Todas as quatro questões foram fechadas durante o planejamento da fase. O marcador inline de cada
+> uma aponta o plano que a resolveu — a pesquisa em si não foi reescrita.
+
+1. ~~Décima opção de "Tipo de evento"~~ — **RESOLVIDO em 05-01 + 05-03**: taxonomia única unificada
+   (ver seção 4). Os rótulos finais são confirmados pelo checkpoint `Task 1` de **05-01** e transcritos
+   no SUMMARY, que é o que **05-03** semeia. O caso do valor `Outro` é resolvido pelo campo
+   `exibirNoFiltroDoCatalogo` do content-type (**05-01** decide, **05-03** implementa): ele fica na
+   taxonomia para o formulário da Fase 9 e fora do painel de filtros do catálogo.
+2. ~~**Botão "Filtros" só no mobile sem breakpoint novo**~~ — **RESOLVIDO em 05-01 (divergência D7)**:
+   escolhida a saída **(a)** das três propostas no item 3 — reusar `theme.breakpoint.header` (1080px)
+   via `media.mobile`/`media.desktop`. Nenhum breakpoint novo é criado. Consumido por **05-04**
+   (shell de duas colunas), **05-05** (visibilidade do botão) e **05-06** (drawer).
+3. ~~**`item_list_id` do `view_item_list`**~~ — **RESOLVIDO em 05-07**: valor **fixo**
+   (`catalogo_resultados`), e não derivado dos filtros, seguindo o precedente de id fixo já usado na
+   Home (`home_categorias`/`home_destaques`). Id derivado de filtro geraria cardinalidade
+   praticamente infinita no relatório do GA4.
+4. ~~**Paginação**~~ — **RESOLVIDO: adiada**, per `05-CONTEXT.md` `<deferred>` ("com 10 produtos não se
+   justifica; registrar como decisão adiada em vez de implementar por antecipação"). **05-04** consulta
+   com `porPagina: 100` e registra o adiamento em comentário no `page.tsx`; é o mesmo `porPagina` que
+   faz contagem e grade virem do mesmo array.
