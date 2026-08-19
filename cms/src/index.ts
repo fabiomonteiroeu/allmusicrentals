@@ -18,6 +18,7 @@ const PUBLIC_READ = [
   'category',
   'faq-item',
   'avaliacao',
+  'tipo-de-evento',
 ];
 
 async function garantirLocales(strapi: Core.Strapi) {
@@ -117,6 +118,37 @@ async function seedEstrutura(strapi: Core.Strapi) {
   }
   strapi.log.info('[seed] categorias garantidas');
 
+  // Taxonomia unificada de tipo de evento (decisão travada em 05-01, opção A, 11 rótulos).
+  // `Outro` entra com exibirNoFiltroDoCatalogo: false — oculto do painel de filtros do catálogo,
+  // mas disponível no select do formulário de orçamento (Fase 9).
+  const tiposDeEvento = [
+    { nome: 'Evento corporativo', slug: 'evento-corporativo', ordem: 1 },
+    { nome: 'Casamento', slug: 'casamento', ordem: 2 },
+    { nome: 'Aniversário', slug: 'aniversario', ordem: 3 },
+    { nome: 'Festa privada', slug: 'festa-privada', ordem: 4 },
+    { nome: 'Show', slug: 'show', ordem: 5 },
+    { nome: 'Festival', slug: 'festival', ordem: 6 },
+    { nome: 'Feira', slug: 'feira', ordem: 7 },
+    { nome: 'Ativação de marca', slug: 'ativacao-de-marca', ordem: 8 },
+    { nome: 'Formatura', slug: 'formatura', ordem: 9 },
+    { nome: 'Evento ao ar livre', slug: 'evento-ao-ar-livre', ordem: 10 },
+    { nome: 'Outro', slug: 'outro', ordem: 11, exibirNoFiltroDoCatalogo: false },
+  ];
+  for (const tipo of tiposDeEvento) {
+    const existe = await strapi
+      .documents('api::tipo-de-evento.tipo-de-evento')
+      .findFirst({ filters: { slug: tipo.slug }, locale: DEFAULT_LOCALE, status: 'draft' });
+    if (!existe) {
+      const doc = await strapi
+        .documents('api::tipo-de-evento.tipo-de-evento')
+        .create({ locale: DEFAULT_LOCALE, data: tipo });
+      await strapi
+        .documents('api::tipo-de-evento.tipo-de-evento')
+        .publish({ documentId: doc.documentId, locale: DEFAULT_LOCALE });
+    }
+  }
+  strapi.log.info('[seed] tipos de evento garantidos');
+
   // Menu do cabeçalho.
   const cabecalho = [
     { rotulo: 'Início', url: '/', ordem: 1 },
@@ -207,6 +239,96 @@ async function seedEstrutura(strapi: Core.Strapi) {
   strapi.log.info('[seed] menu e rodapé garantidos');
 }
 
+/** Normaliza para comparação tolerante a acento/maiúscula: minúsculas, sem diacríticos, sem espaços nas pontas. */
+function normalizarNomeTipoDeEvento(valor: string): string {
+  return valor
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+    .trim();
+}
+
+/**
+ * Mapeamento antigo→novo dos valores hoje presentes em `aplicacoes`, confirmado em 05-01-SUMMARY.md.
+ * Todos os outros valores mantêm o rótulo idêntico ao migrar.
+ */
+const MAPEAMENTO_APLICACOES_ANTIGO_PARA_NOVO: Record<string, string> = {
+  festa: 'Festa privada',
+};
+
+/**
+ * Migra o conteúdo de `aplicacoes` (json de texto livre) dos produtos existentes para a relação
+ * `tiposDeEvento` (D-01). Idempotente: pula produtos que já têm a relação preenchida. Não apaga nem
+ * altera `aplicacoes` — o campo permanece para texto livre editorial.
+ */
+async function migrarAplicacoesParaTiposDeEvento(strapi: Core.Strapi) {
+  try {
+    const tipos = await strapi
+      .documents('api::tipo-de-evento.tipo-de-evento')
+      .findMany({ locale: DEFAULT_LOCALE, status: 'draft', pagination: { pageSize: 100 } });
+    const indice = new Map<string, string>();
+    for (const tipo of tipos) {
+      indice.set(normalizarNomeTipoDeEvento(tipo.nome as string), tipo.documentId);
+    }
+
+    const produtos = await strapi.documents('api::product.product').findMany({
+      locale: DEFAULT_LOCALE,
+      status: 'draft',
+      populate: ['tiposDeEvento'],
+      pagination: { pageSize: 100 },
+    });
+
+    let migrados = 0;
+    const orfaos = new Set<string>();
+
+    for (const produto of produtos) {
+      const jaTemRelacao =
+        Array.isArray(produto.tiposDeEvento) && produto.tiposDeEvento.length > 0;
+      if (jaTemRelacao) continue;
+
+      const aplicacoes: unknown = produto.aplicacoes;
+      if (!Array.isArray(aplicacoes) || aplicacoes.length === 0) continue;
+
+      const documentIds: string[] = [];
+      for (const valorBruto of aplicacoes) {
+        if (typeof valorBruto !== 'string') continue;
+        const normalizado = normalizarNomeTipoDeEvento(valorBruto);
+        const remapeado = MAPEAMENTO_APLICACOES_ANTIGO_PARA_NOVO[normalizado];
+        const chave = remapeado ? normalizarNomeTipoDeEvento(remapeado) : normalizado;
+        const documentId = indice.get(chave);
+        if (documentId) {
+          documentIds.push(documentId);
+        } else {
+          orfaos.add(valorBruto);
+        }
+      }
+
+      if (documentIds.length === 0) continue;
+
+      await strapi.documents('api::product.product').update({
+        documentId: produto.documentId,
+        locale: DEFAULT_LOCALE,
+        data: { tiposDeEvento: documentIds },
+      });
+      await strapi
+        .documents('api::product.product')
+        .publish({ documentId: produto.documentId, locale: DEFAULT_LOCALE });
+      migrados += 1;
+    }
+
+    strapi.log.info(`[seed] migração aplicacoes→tiposDeEvento: ${migrados} produto(s) migrado(s)`);
+    if (orfaos.size > 0) {
+      strapi.log.warn(
+        `[seed] migração aplicacoes→tiposDeEvento: valores sem correspondência na taxonomia: ${Array.from(orfaos).join(', ')}`
+      );
+    }
+  } catch (e) {
+    strapi.log.error(
+      `[seed] falha na migração aplicacoes→tiposDeEvento: ${(e as Error).stack ?? (e as Error).message}`
+    );
+  }
+}
+
 export default {
   register(/* { strapi }: { strapi: Core.Strapi } */) {},
 
@@ -215,6 +337,7 @@ export default {
       await garantirLocales(strapi);
       await garantirPermissoesPublicas(strapi);
       await seedEstrutura(strapi);
+      await migrarAplicacoesParaTiposDeEvento(strapi);
     } catch (e) {
       strapi.log.error(`[seed] falha no bootstrap: ${(e as Error).stack ?? (e as Error).message}`);
     }
