@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tipos_de_evento",
+  "info": {
+    "singularName": "tipo-de-evento",
+    "pluralName": "tipo-de-eventos",
+    "displayName": "Tipo de Evento",
+    "description": "Taxonomia unificada de tipo de evento — alimenta o filtro do catálogo (Fase 5) e o select do formulário de orçamento (Fase 9)."
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "nome": {
+      "type": "string",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "nome",
+      "required": true,
+      "pluginOptions": { "i18n": { "localized": true } }
+    },
+    "ordem": {
+      "type": "integer",
+      "default": 0,
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "exibirNoFiltroDoCatalogo": {
+      "type": "boolean",
+      "default": true,
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
+    "produtos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "mappedBy": "tiposDeEvento"
+    }
+  }
+}

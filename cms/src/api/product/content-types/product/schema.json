@@ -104,6 +104,18 @@
       "relation": "manyToMany",
       "target": "api::product.product"
     },
+    "tiposDeEvento": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tipo-de-evento.tipo-de-evento",
+      "inversedBy": "produtos"
+    },
+    "contagemSolicitacoes": {
+      "type": "integer",
+      "default": 0,
+      "description": "Número de solicitações de orçamento que incluíram este produto. Incrementado pela Fase 9 no envio da solicitação. NÃO é preço nem valor monetário (ver D6 em docs/divergencias.md).",
+      "pluginOptions": { "i18n": { "localized": false } }
+    },
     "faq": {
       "type": "component",
       "repeatable": true,

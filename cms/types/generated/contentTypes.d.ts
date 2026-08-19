@@ -748,6 +748,13 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
           localized: false;
         };
       }>;
+    contagemSolicitacoes: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<0>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
     descricaoCompleta: Schema.Attribute.RichText &
@@ -827,6 +834,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         };
       }> &
       Schema.Attribute.DefaultTo<'fisico'>;
+    tiposDeEvento: Schema.Attribute.Relation<'manyToMany', 'api::tipo-de-evento.tipo-de-evento'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
     variacoes: Schema.Attribute.Component<'shared.variacao', true> &
@@ -1000,6 +1008,62 @@ export interface ApiSolicitacaoSolicitacao extends Struct.CollectionTypeSchema {
     status: Schema.Attribute.Enumeration<['recebida', 'em-analise', 'respondida', 'arquivada']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'recebida'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTipoDeEventoTipoDeEvento extends Struct.CollectionTypeSchema {
+  collectionName: 'tipos_de_evento';
+  info: {
+    description: 'Taxonomia unificada de tipo de evento \u2014 alimenta o filtro do cat\u00E1logo (Fase 5) e o select do formul\u00E1rio de or\u00E7amento (Fase 9).';
+    displayName: 'Tipo de Evento';
+    pluralName: 'tipo-de-eventos';
+    singularName: 'tipo-de-evento';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
+    exibirNoFiltroDoCatalogo: Schema.Attribute.Boolean &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tipo-de-evento.tipo-de-evento'>;
+    nome: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ordem: Schema.Attribute.Integer &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Schema.Attribute.DefaultTo<0>;
+    produtos: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.UID<'nome'> &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> & Schema.Attribute.Private;
   };
@@ -1443,6 +1507,7 @@ declare module '@strapi/strapi' {
       'api::rodape-coluna.rodape-coluna': ApiRodapeColunaRodapeColuna;
       'api::settings-globais.settings-globais': ApiSettingsGlobaisSettingsGlobais;
       'api::solicitacao.solicitacao': ApiSolicitacaoSolicitacao;
+      'api::tipo-de-evento.tipo-de-evento': ApiTipoDeEventoTipoDeEvento;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
