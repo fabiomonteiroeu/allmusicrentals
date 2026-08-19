@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 last_updated: "2026-08-19T21:52:44.609Z"
-last_activity: 2026-08-19 -- Phase 05 planning complete
+last_activity: 2026-08-19 -- Phase 05 wave 1 complete (05-01, 05-02)
 progress:
   total_phases: 18
   completed_phases: 1
@@ -20,18 +20,18 @@ progress:
 Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 **Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum.
-**Current focus:** Phase 5 — Catálogo: não iniciada. Fase 4 (Home) fechada e verificada.
+**Current focus:** Phase 5 — Catálogo: EM EXECUÇÃO (8 planos, 7 waves). Fase 4 (Home) fechada e verificada.
 
 ## Current Position
 
-Phase: 4 de 18 (Home) — CONCLUÍDA e verificada
-Plan: 7 de 7
-Status: Ready to execute
-Last activity: 2026-08-19 -- Phase 05 planning complete
+Phase: 5 de 18 (Catálogo) — EM EXECUÇÃO
+Plan: 2 de 8 (Wave 1 concluída e mergeada)
+Status: Executing
+Last activity: 2026-08-19 -- Phase 05 wave 1 complete (05-01, 05-02)
 
 Progress: [████░░░░░░] 36%
 
-Branch corrente: `fase-04-home` (pronta para merge em `main`)
+Branch corrente: `fase-05-catalogo`
 
 ## Performance Metrics
 
@@ -96,7 +96,9 @@ Nenhum `.planning/todos/` criado ainda.
 
 ## Session Continuity
 
-Última sessão: 2026-08-17
-Parou em: execução completa do plano 03-04 (testes de contrato do webhook, degradação da Dynamic Zone e varredura de segredo no bundle) — 3 tarefas, 3 commits, SUMMARY criado
+Última sessão: 2026-08-19
+Parou em: Fase 5 — Wave 1 concluída e mergeada em `fase-05-catalogo` (05-01 documental + 05-02 camada de lógica pura). Gate pós-merge verde: 231/231 testes, typecheck, lint e format.
 Arquivo de retomada: nenhum
-Próximo passo: verificar os 7 planos da Fase 4 com o plan-checker e depois executar (`/gsd-execute-phase 04`)
+Próximo passo: Wave 2 — plano 05-03 (taxonomia `tipo-de-evento` no Strapi, permissões públicas, migração de `aplicacoes`). Tem checkpoint.
+
+**Decisão travada no checkpoint de 05-01 (2026-08-19):** taxonomia `tipo-de-evento` com 11 rótulos (`opcao-a` do RESEARCH §4). Ordem de exibição e slugs: Evento corporativo/`evento-corporativo`, Casamento/`casamento`, Aniversário/`aniversario`, Festa privada/`festa-privada`, Show/`show`, Festival/`festival`, Feira/`feira`, Ativação de marca/`ativacao-de-marca`, Formatura/`formatura`, Evento ao ar livre/`evento-ao-ar-livre`, Outro/`outro`. `Outro` entra com `exibirNoFiltroDoCatalogo: false` (oculto do painel de filtros por campo booleano, não por hardcode). Migração de `aplicacoes`: `"Festa"` → `"Festa privada"`. Registro auditável completo em `05-01-SUMMARY.md`.

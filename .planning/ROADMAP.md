@@ -177,8 +177,8 @@ Plans:
 Plans:
 **Wave 1**
 
-- [ ] 05-01-PLAN.md — Rótulos finais da taxonomia `tipo-de-evento` (checkpoint) e registro das divergências D5, D6 e D7
-- [ ] 05-02-PLAN.md — Camada de dados: schemas Zod, `getProdutos` com AND/OR e as 5 ordenações, allowlist de filtros por URL e a união de eventos
+- [x] 05-01-PLAN.md — Rótulos finais da taxonomia `tipo-de-evento` (checkpoint) e registro das divergências D5, D6 e D7
+- [x] 05-02-PLAN.md — Camada de dados: schemas Zod, `getProdutos` com AND/OR e as 5 ordenações, allowlist de filtros por URL e a união de eventos
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
