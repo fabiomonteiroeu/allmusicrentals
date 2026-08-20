@@ -62,6 +62,8 @@ const Trigger = styled(Accordion.Trigger)`
   text-transform: uppercase;
   color: ${({ theme }) => theme.cor.tinta900};
 
+  /* prefers-reduced-motion não é duplicado aqui: a regra global (GlobalStyle.ts) já zera
+     transition-duration de qualquer elemento, mesmo padrão já usado por HeroBloco/loading. */
   .indicador {
     display: inline-block;
     transition: transform ${({ theme }) => theme.motion.padrao}
@@ -69,11 +71,6 @@ const Trigger = styled(Accordion.Trigger)`
   }
   &[data-state='open'] .indicador {
     transform: rotate(180deg);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .indicador {
-      transition: none;
-    }
   }
 
   &:focus-visible {

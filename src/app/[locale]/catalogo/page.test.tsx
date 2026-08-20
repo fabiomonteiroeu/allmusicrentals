@@ -1,4 +1,4 @@
-import { renderComProviders, screen } from '@/test-utils';
+import { renderComProviders, screen, within } from '@/test-utils';
 import { notFound } from 'next/navigation';
 import {
   getCategorias,
@@ -103,7 +103,7 @@ describe('CatalogoPage', () => {
     expect(mockGetCoresDisponiveis.mock.calls[0]).toHaveLength(1);
   });
 
-  it('os nomes devolvidos por getCoresDisponiveis aparecem no marcador do aside', async () => {
+  it('os nomes devolvidos por getCoresDisponiveis chegam ao PainelDeFiltros do aside como swatches', async () => {
     mockGetCoresDisponiveis.mockResolvedValue(['Bege', 'Preto']);
 
     await renderPagina();
@@ -116,10 +116,15 @@ describe('CatalogoPage', () => {
     // aria-label="Filtros">`, fora de qualquer `article`/`aside`/`nav`/`section` ancestral —
     // resolve para `complementary` corretamente (confirmado isoladamente). `hidden: true` só
     // pede à Testing Library para não excluir elementos escondidos por CSS, preservando a
-    // prova de que os nomes vindos de `getCoresDisponiveis` (D8) chegam ao marcador.
+    // prova de que os nomes vindos de `getCoresDisponiveis` (D8) chegam ao painel.
+    //
+    // O marcador de texto (`<li>{nome}</li>`) que 05-04 deixou neste `aside` foi substituído
+    // em 05-05 pelo `PainelDeFiltros` real: os nomes de cor agora chegam como swatches
+    // (`SwatchesDeCor`), sem texto visível próprio (`aria-label`/`title` só) — por isso a
+    // asserção passa a ser "existe um botão de swatch com este nome", não `toHaveTextContent`.
     const aside = screen.getByRole('complementary', { name: 'Filtros', hidden: true });
-    expect(aside).toHaveTextContent('Bege');
-    expect(aside).toHaveTextContent('Preto');
+    expect(within(aside).getByRole('button', { name: 'Bege', hidden: true })).toBeInTheDocument();
+    expect(within(aside).getByRole('button', { name: 'Preto', hidden: true })).toBeInTheDocument();
   });
 
   it('?cor=Bordô (na paleta, ausente do CMS) sobrevive ao parse e chega em getProdutos', async () => {

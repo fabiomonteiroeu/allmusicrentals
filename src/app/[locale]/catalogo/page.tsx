@@ -13,6 +13,8 @@ import { Container } from '@/components/primitives/Container';
 import { HeroCatalogo } from '@/components/catalogo/HeroCatalogo';
 import { BarraDeBuscaCatalogo } from '@/components/catalogo/BarraDeBuscaCatalogo';
 import { LayoutCatalogo } from '@/components/catalogo/LayoutCatalogo';
+import { PainelDeFiltros } from '@/components/catalogo/PainelDeFiltros';
+import { ToolbarDoCatalogo } from '@/components/catalogo/ToolbarDoCatalogo';
 
 /**
  * `/[locale]/catalogo` — a primeira rota dinâmica do projeto: `searchParams` é uma `Promise`
@@ -31,20 +33,9 @@ const ConteudoWrapper = styled(Container)`
   padding-block: clamp(32px, 4vw, 64px);
 `;
 
-const ContagemTexto = styled.p`
-  margin: 0 0 20px;
-  font-family: ${({ theme }) => theme.fonte.mono};
-  font-size: ${({ theme }) => theme.tamanho[13]};
-  letter-spacing: ${({ theme }) => theme.tracking.rotulo};
-  color: ${({ theme }) => theme.cor.textoMuted};
-`;
-
-const ListaDeCores = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: ${({ theme }) => theme.espaco[8]};
+const AsideFiltros = styled.aside`
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 `;
 
 export default async function CatalogoPage({
@@ -81,9 +72,14 @@ export default async function CatalogoPage({
   // vem de `getCoresDisponiveis`. Consequência aceita: um `?cor=Bordô` digitado à mão sobrevive
   // ao parse e simplesmente não casa com produto nenhum, caindo no estado "sem resultados"
   // (tela projetada por CATA-04), não em erro.
+  // `Outro` (exibirNoFiltroDoCatalogo: false) fica disponível para o formulário da Fase 9 e
+  // fora do painel de filtros do catálogo — mesma lista alimenta a allowlist de parse abaixo e
+  // o grupo "Tipo de evento" do `PainelDeFiltros`.
+  const tiposDeEventoVisiveis = tiposDeEvento.filter((t) => t.exibirNoFiltroDoCatalogo);
+
   const filtro = parseFiltrosDaUrl(sp, {
     categorias: categorias.map((c) => c.slug),
-    tiposDeEvento: tiposDeEvento.filter((t) => t.exibirNoFiltroDoCatalogo).map((t) => t.slug),
+    tiposDeEvento: tiposDeEventoVisiveis.map((t) => t.slug),
     cores: Object.keys(coresProduto),
   });
 
@@ -110,23 +106,19 @@ export default async function CatalogoPage({
       <ConteudoWrapper>
         <LayoutCatalogo
           aside={
-            // Marcador mínimo desta etapa: renderiza, como texto, os nomes que
-            // `getCoresDisponiveis` devolveu — mantém a chamada com consumidor real e torna a
-            // decisão de D8 observável já neste plano. Em 05-05 este marcador é substituído
-            // pelo `PainelDeFiltros`, que recebe a MESMA prop; nenhum plano posterior tem
-            // licença para montar a lista de cores a partir de constante de tela.
-            <aside aria-label="Filtros">
-              <ListaDeCores>
-                {coresDisponiveis.map((nome) => (
-                  <li key={nome}>{nome}</li>
-                ))}
-              </ListaDeCores>
-            </aside>
+            <AsideFiltros aria-label="Filtros">
+              <PainelDeFiltros
+                idPrefixo="aside"
+                grupos={{
+                  categoria: categorias.map((c) => ({ valor: c.slug, rotulo: c.nome })),
+                  evento: tiposDeEventoVisiveis.map((t) => ({ valor: t.slug, rotulo: t.nome })),
+                  cor: coresDisponiveis,
+                }}
+              />
+            </AsideFiltros>
           }
         >
-          <section>
-            <ContagemTexto>{produtos.length} produtos encontrados</ContagemTexto>
-          </section>
+          <ToolbarDoCatalogo total={produtos.length} filtro={filtro} />
         </LayoutCatalogo>
       </ConteudoWrapper>
     </>
