@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 last_updated: "2026-08-19T21:52:44.609Z"
-last_activity: 2026-08-19 -- Phase 05 wave 1 complete (05-01, 05-02)
+last_activity: 2026-08-19 -- Phase 05 wave 2 complete (05-03, taxonomia no CMS)
 progress:
   total_phases: 18
   completed_phases: 1
@@ -25,9 +25,9 @@ Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 ## Current Position
 
 Phase: 5 de 18 (Catálogo) — EM EXECUÇÃO
-Plan: 2 de 8 (Wave 1 concluída e mergeada)
+Plan: 3 de 8 (Waves 1 e 2 concluídas)
 Status: Executing
-Last activity: 2026-08-19 -- Phase 05 wave 1 complete (05-01, 05-02)
+Last activity: 2026-08-19 -- Phase 05 wave 2 complete (05-03, taxonomia no CMS)
 
 Progress: [████░░░░░░] 36%
 
@@ -86,6 +86,7 @@ Nenhum `.planning/todos/` criado ainda.
 - **[Fase 15] CSP com nonce.** Conviver com styled-components e GTM sem `unsafe-inline` global é o risco técnico mais provável de gerar divergência.
 - **[Editorial] Esforço ~3×** em páginas com muitas Dynamic Zones se a cópia entre locales do Strapi falhar.
 - **[Requisitos] Sem PRD.** Requisitos e plano de execução vêm da mesma origem e não se validam mutuamente (ver `.planning/INGEST-CONFLICTS.md`).
+- **[Strapi — LIÇÃO da Fase 5] `"default"` em `schema.json` não faz backfill.** O default de atributo do Strapi é aplicado pelo ORM só na **criação** de um registro; não vira `DEFAULT` de coluna no Postgres nem preenche registros pré-existentes quando a coluna é adicionada no boot. `contagemSolicitacoes` nasceu `NULL` nos 10 produtos já cadastrados, com `schema.json` correto e `tsc` verde — falso-positivo clássico. Corrigido por `garantirContagemSolicitacoes` no bootstrap (`cms/src/index.ts`, commit `333f634`), idempotente. **Qualquer atributo novo com `default` em content-type que já tenha registros precisa de backfill explícito no bootstrap.** Em Postgres `ORDER BY x DESC` é `DESC NULLS FIRST`, então `NULL` residual inverte ranking em vez de só zerá-lo.
 
 ## Deferred Items
 
@@ -97,8 +98,8 @@ Nenhum `.planning/todos/` criado ainda.
 ## Session Continuity
 
 Última sessão: 2026-08-19
-Parou em: Fase 5 — Wave 1 concluída e mergeada em `fase-05-catalogo` (05-01 documental + 05-02 camada de lógica pura). Gate pós-merge verde: 231/231 testes, typecheck, lint e format.
+Parou em: Fase 5 — Waves 1 e 2 concluídas. 05-03 fechou com checkpoint bloqueante tripado e resolvido (backfill de contagemSolicitacoes). Gate verde: 231/231 testes, typecheck, lint, format, verifica:bundle-segredo.
 Arquivo de retomada: nenhum
-Próximo passo: Wave 2 — plano 05-03 (taxonomia `tipo-de-evento` no Strapi, permissões públicas, migração de `aplicacoes`). Tem checkpoint.
+Próximo passo: Wave 3 — plano 05-04 (rota /[locale]/catalogo, hero, card SOBRE OS VALORES, busca com estado busy, loading.tsx e error.tsx).
 
 **Decisão travada no checkpoint de 05-01 (2026-08-19):** taxonomia `tipo-de-evento` com 11 rótulos (`opcao-a` do RESEARCH §4). Ordem de exibição e slugs: Evento corporativo/`evento-corporativo`, Casamento/`casamento`, Aniversário/`aniversario`, Festa privada/`festa-privada`, Show/`show`, Festival/`festival`, Feira/`feira`, Ativação de marca/`ativacao-de-marca`, Formatura/`formatura`, Evento ao ar livre/`evento-ao-ar-livre`, Outro/`outro`. `Outro` entra com `exibirNoFiltroDoCatalogo: false` (oculto do painel de filtros por campo booleano, não por hardcode). Migração de `aplicacoes`: `"Festa"` → `"Festa privada"`. Registro auditável completo em `05-01-SUMMARY.md`.

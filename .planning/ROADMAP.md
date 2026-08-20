@@ -182,7 +182,7 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
-- [ ] 05-03-PLAN.md — Taxonomia `tipo-de-evento` no Strapi, permissões públicas, migração de `aplicacoes` e sync do schema [BLOCKING]
+- [x] 05-03-PLAN.md — Taxonomia `tipo-de-evento` no Strapi, permissões públicas, migração de `aplicacoes` e sync do schema [BLOCKING]
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
