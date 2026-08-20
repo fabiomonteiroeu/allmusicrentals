@@ -15,7 +15,7 @@ todo o conteúdo é pt-BR.
 
 **Estado real (2026-08-19):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
 (`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
-**Fase 5 (Catálogo) em execução:** 4/8 planos concluídos (Waves 1–3), branch corrente
+**Fase 5 (Catálogo) em execução:** 5/8 planos concluídos (Waves 1–4), branch corrente
 `fase-05-catalogo`. Fases 6–17 não iniciadas.
 
 ## Phases
@@ -191,7 +191,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 05-05-PLAN.md — Painel de filtros em acordeão (5 grupos, swatches multi-seleção) e toolbar com contagem e ordenação de 5 opções
+- [x] 05-05-PLAN.md — Painel de filtros em acordeão (5 grupos, swatches multi-seleção) e toolbar com contagem e ordenação de 5 opções
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
