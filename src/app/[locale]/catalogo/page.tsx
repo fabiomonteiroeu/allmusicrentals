@@ -7,7 +7,7 @@ import {
   getCoresDisponiveis,
   getProdutos,
 } from '@/lib/cms/adapters';
-import { parseFiltrosDaUrl } from '@/lib/catalogo/filtros';
+import { parseFiltrosDaUrl, contarFiltrosAtivos } from '@/lib/catalogo/filtros';
 import { coresProduto } from '@/lib/site/navigation';
 import { Container } from '@/components/primitives/Container';
 import { HeroCatalogo } from '@/components/catalogo/HeroCatalogo';
@@ -17,6 +17,11 @@ import { PainelDeFiltros } from '@/components/catalogo/PainelDeFiltros';
 import { ToolbarDoCatalogo } from '@/components/catalogo/ToolbarDoCatalogo';
 import { ChipsDeFiltroAtivo } from '@/components/catalogo/ChipsDeFiltroAtivo';
 import { DrawerDeFiltros } from '@/components/catalogo/DrawerDeFiltros';
+import { GradeDeProdutos } from '@/components/catalogo/GradeDeProdutos';
+import { EstadoSemResultados } from '@/components/catalogo/EstadoSemResultados';
+import { EstadoCatalogoVazio } from '@/components/catalogo/EstadoCatalogoVazio';
+import { EmissorSearch } from '@/components/analytics/EmissorSearch';
+import { EmissorFiltroAplicado } from '@/components/analytics/EmissorFiltroAplicado';
 
 /**
  * `/[locale]/catalogo` — a primeira rota dinâmica do projeto: `searchParams` é uma `Promise`
@@ -111,6 +116,13 @@ export default async function CatalogoPage({
     cor: coresDisponiveis,
   };
 
+  // Os quatro estados de CATA-04 são telas distintas (carregando/erro vieram em 05-04 como
+  // convenções de arquivo do App Router; aqui entram os outros dois). `temFiltroOuBusca`
+  // decide entre "catálogo sem produto publicado" (nenhum filtro, zero resultado) e "busca sem
+  // correspondência" (algum filtro ou busca ativo, zero resultado) — um único caminho por
+  // condição, sem estado intermediário.
+  const temFiltroOuBusca = Boolean(filtro.q) || contarFiltrosAtivos(filtro) > 0;
+
   return (
     <>
       <HeroCatalogo busca={<BarraDeBuscaCatalogo termoInicial={filtro.q ?? ''} />} />
@@ -128,6 +140,17 @@ export default async function CatalogoPage({
             tiposDeEvento={opcoesDeGrupo.evento}
             cores={Object.keys(coresProduto)}
           />
+
+          {produtos.length > 0 && <GradeDeProdutos produtos={produtos} locale={localeTipado} />}
+          {produtos.length === 0 && temFiltroOuBusca && (
+            <EstadoSemResultados locale={localeTipado} />
+          )}
+          {produtos.length === 0 && !temFiltroOuBusca && (
+            <EstadoCatalogoVazio locale={localeTipado} />
+          )}
+
+          <EmissorSearch termo={filtro.q ?? ''} />
+          <EmissorFiltroAplicado filtro={filtro} />
         </LayoutCatalogo>
       </ConteudoWrapper>
       <DrawerDeFiltros grupos={opcoesDeGrupo} total={produtos.length} />
