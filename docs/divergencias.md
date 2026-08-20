@@ -207,6 +207,44 @@ pode variar conforme o conteúdo editorial do CMS.
 **Reversível:** sim — trocar a chamada por um array literal de três nomes restaura exatamente o
 comportamento do layout, em uma linha.
 
+## D9 — Quarta tela de "nada para mostrar": catálogo sem produto publicado
+
+**Fase:** 05 · **Data:** 2026-08-20
+
+**No layout:** `Catalogo.dc.html` só prevê três estados para o bloco de resultados —
+`estadoCarregando`, `estadoVazio` (que na verdade é "sem correspondência": título "Amplie a
+busca ou fale com a equipe") e `estadoLista` (a grade cheia). Não existe, no layout-fonte,
+nenhum estado para "o catálogo não tem produto nenhum cadastrado" — o cenário simplesmente não
+foi desenhado, porque o layout estático sempre assume que a lista de produtos existe.
+
+**Divergência:** cria-se uma quarta tela, `EstadoCatalogoVazio`, distinta de
+`EstadoSemResultados` (que reaproveita a cópia literal de `estadoVazio` do layout-fonte).
+`EstadoCatalogoVazio` renderiza quando não há filtro nem busca ativos e ainda assim `getProdutos`
+devolve zero itens — ou seja, falta de conteúdo publicado, não falha de busca. A cópia é
+**inventada**, porque não há texto-fonte para transcrever:
+
+> **CATÁLOGO EM ATUALIZAÇÃO**
+> **Nosso catálogo está sendo montado**
+> Ainda não há produtos publicados neste catálogo. A equipe está cadastrando o acervo — volte em
+> breve ou descreva o que você precisa que a gente confirma o que já está disponível.
+
+**Motivo (técnico):** CATA-04 exige os quatro estados como telas distintas e observáveis, e a
+regra do projeto para lacuna de conteúdo real é sempre placeholder com legenda técnica, nunca
+conteúdo fictício — misturar as duas telas (usando a cópia de "sem correspondência" também para
+"catálogo vazio") esconderia do visitante que o problema é falta de cadastro, não um filtro
+malsucedido, e ofereceria sugestões de filtro ("Remover todos os filtros") que não fazem sentido
+quando não há filtro nenhum aplicado.
+
+**Escopo:** apenas a criação da tela `src/components/catalogo/EstadoCatalogoVazio.tsx` e a cópia
+nela contida. `EstadoSemResultados` (a tela de "sem correspondência") preserva a cópia literal do
+layout-fonte sem alteração.
+
+**Status:** ℹ️ INTENCIONAL — mesmo tratamento dado por D4 à cópia do estado "CMS indisponível" da
+Home: confirmar com o time na revisão de conteúdo (Fase 11/12) se a cópia final muda.
+
+**Reversível:** sim — o texto vive só nas duas constantes de módulo de
+`EstadoCatalogoVazio.tsx`; trocar a cópia não afeta nenhum outro arquivo.
+
 ## Item 6 (docs/00-divergencias.md) — hrefs de âncora `#led`/`#luzsom` no lugar dos slugs reais
 
 **Fase:** 04 · **Data:** 2026-08-18
