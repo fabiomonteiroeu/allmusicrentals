@@ -140,8 +140,13 @@ export function ToolbarDoCatalogo({ total, filtro }: ToolbarDoCatalogoProps) {
 
   return (
     <Linha>
+      {/* `id` estável consumido por `DrawerDeFiltros.tsx` (`onCloseAutoFocus`) para devolver o
+          foco a este botão ao fechar: o Radix só devolve foco automaticamente a um
+          `Dialog.Trigger`, e este botão não é um (o `Dialog.Root` vive em outro componente,
+          comandado pelo Redux) — sem o `id`, o Radix não tem para onde devolver o foco. */}
       <BotaoFiltros
         type="button"
+        id="botao-filtros-catalogo"
         onClick={aoAbrirDrawer}
         aria-label={filtrosAtivos > 0 ? `Filtros, ${filtrosAtivos} ativos` : 'Filtros'}
       >

@@ -22,17 +22,27 @@ import { PainelDeFiltros, type OpcoesDinamicasDeFiltro } from './PainelDeFiltros
  *   padrão — e nenhuma das props de escape hatch de foco/teclado do Radix é passada aqui, então
  *   nenhum comportamento padrão é sobrescrito);
  * - a tecla de saída padrão fecha o diálogo (handler nativo do `DismissableLayer`);
- * - ao fechar, o foco volta para o elemento que estava focado antes da abertura — o botão
- *   `FILTROS` da toolbar (05-05), já que este componente não renderiza `Dialog.Trigger`;
  * - scroll do fundo bloqueado enquanto aberto (`Dialog.Overlay` em modo modal).
  *
  * Abertura/fechamento é comandado pelo `uiSlice` (`drawerFiltrosAberto`/`definirDrawerFiltros`),
  * não por estado local: a toolbar despacha a abertura, este componente só lê o booleano e
  * despacha o fechamento (clique no X, `LIMPAR`, `Esc` ou aplicar).
  *
- * Registro para o SUMMARY: foco preso e retorno de foco não são verificáveis com fidelidade em
- * jsdom (RESEARCH §6 armadilha 3) — o teste unitário cobre montagem, nome acessível, `Esc` e
- * os textos/ações do rodapé; a prova real de foco fica no e2e Playwright de 05-08.
+ * BUG REAL encontrado pelo e2e de 05-08 (não só uma lacuna de prova): o comentário original
+ * deste arquivo assumia que "o foco volta para o botão FILTROS" de graça, por ser o padrão do
+ * Radix. **Não é.** O mecanismo de retorno de foco do Radix (`onCloseAutoFocus`) só sabe devolver
+ * foco a um `Dialog.Trigger` registrado no MESMO `Dialog.Root` (`triggerRef` interno,
+ * `node_modules/@radix-ui/react-dialog/dist/index.mjs`); este componente não renderiza
+ * `Dialog.Trigger` — o botão que abre o drawer vive em `ToolbarDoCatalogo.tsx`, um componente
+ * IRMÃO, comandado só pelo Redux. Sem correção, `triggerRef.current` é `null` e o foco não volta
+ * a lugar nenhum ao fechar (confirmado: `toBeFocused()` falhava em navegador real). O
+ * `onCloseAutoFocus` abaixo substitui o comportamento padrão por uma busca direta pelo `id`
+ * estável do botão (`ToolbarDoCatalogo.tsx`), que não depende da relação Trigger/Root do Radix.
+ *
+ * Registro para o SUMMARY: foco preso é verificável em jsdom, mas o RETORNO de foco ao fechar
+ * não é (RESEARCH §6 armadilha 3) — o teste unitário cobre montagem, nome acessível, `Esc` e os
+ * textos/ações do rodapé; a prova real de foco (e a descoberta deste bug) vêm do e2e Playwright
+ * de 05-08.
  */
 
 /** Só o Portal (Overlay + Content) some acima de 1080px — nenhum breakpoint novo (D-07/D7). */
@@ -163,6 +173,10 @@ const BotaoAplicar = styled.button`
  * `ChipsDeFiltroAtivo` (05-06 Task 1): limpar filtro não é o mesmo que apagar a busca ou a
  * ordenação escolhida.
  */
+/** `id` de `ToolbarDoCatalogo.tsx` — ver o comentário de topo deste arquivo sobre por que o
+ * retorno de foco não pode depender do mecanismo padrão de `Dialog.Trigger` do Radix. */
+const ID_BOTAO_FILTROS = 'botao-filtros-catalogo';
+
 function limparFiltros(params: URLSearchParams): URLSearchParams {
   const novo = new URLSearchParams();
   const q = params.get('q');
@@ -197,12 +211,23 @@ export function DrawerDeFiltros({ grupos, total }: DrawerDeFiltrosProps) {
     dispatch(definirDrawerFiltros(false));
   }
 
+  /**
+   * Substitui o retorno de foco padrão do Radix (que só funciona com `Dialog.Trigger`, ver
+   * comentário de topo) por uma busca direta pelo botão real via `id` estável. `preventDefault`
+   * cancela o comportamento padrão do Radix (que seria não fazer nada, já que `triggerRef` está
+   * vazio) antes de mover o foco manualmente.
+   */
+  function aoFecharDevolverFoco(evento: Event) {
+    evento.preventDefault();
+    document.getElementById(ID_BOTAO_FILTROS)?.focus();
+  }
+
   return (
     <Dialog.Root open={aberto} onOpenChange={(valor) => dispatch(definirDrawerFiltros(valor))}>
       <Dialog.Portal>
         <Envelope>
           <Overlay />
-          <Painel aria-describedby={undefined}>
+          <Painel aria-describedby={undefined} onCloseAutoFocus={aoFecharDevolverFoco}>
             <Cabecalho>
               <Titulo>Filtros</Titulo>
               <BotaoFechar aria-label="Fechar">×</BotaoFechar>
