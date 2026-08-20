@@ -15,6 +15,8 @@ import { BarraDeBuscaCatalogo } from '@/components/catalogo/BarraDeBuscaCatalogo
 import { LayoutCatalogo } from '@/components/catalogo/LayoutCatalogo';
 import { PainelDeFiltros } from '@/components/catalogo/PainelDeFiltros';
 import { ToolbarDoCatalogo } from '@/components/catalogo/ToolbarDoCatalogo';
+import { ChipsDeFiltroAtivo } from '@/components/catalogo/ChipsDeFiltroAtivo';
+import { DrawerDeFiltros } from '@/components/catalogo/DrawerDeFiltros';
 
 /**
  * `/[locale]/catalogo` — a primeira rota dinâmica do projeto: `searchParams` é uma `Promise`
@@ -100,6 +102,15 @@ export default async function CatalogoPage({
     porPagina: 100,
   });
 
+  // Uma única forma de opções de grupo, compartilhada pelo painel do aside, pelo drawer mobile
+  // e pelos chips — os três resolvem rótulo pela mesma fonte (categorias/eventos do servidor,
+  // cores da paleta), nunca por uma segunda consulta ao CMS.
+  const opcoesDeGrupo = {
+    categoria: categorias.map((c) => ({ valor: c.slug, rotulo: c.nome })),
+    evento: tiposDeEventoVisiveis.map((t) => ({ valor: t.slug, rotulo: t.nome })),
+    cor: coresDisponiveis,
+  };
+
   return (
     <>
       <HeroCatalogo busca={<BarraDeBuscaCatalogo termoInicial={filtro.q ?? ''} />} />
@@ -107,20 +118,19 @@ export default async function CatalogoPage({
         <LayoutCatalogo
           aside={
             <AsideFiltros aria-label="Filtros">
-              <PainelDeFiltros
-                idPrefixo="aside"
-                grupos={{
-                  categoria: categorias.map((c) => ({ valor: c.slug, rotulo: c.nome })),
-                  evento: tiposDeEventoVisiveis.map((t) => ({ valor: t.slug, rotulo: t.nome })),
-                  cor: coresDisponiveis,
-                }}
-              />
+              <PainelDeFiltros idPrefixo="aside" grupos={opcoesDeGrupo} />
             </AsideFiltros>
           }
         >
           <ToolbarDoCatalogo total={produtos.length} filtro={filtro} />
+          <ChipsDeFiltroAtivo
+            categorias={opcoesDeGrupo.categoria}
+            tiposDeEvento={opcoesDeGrupo.evento}
+            cores={Object.keys(coresProduto)}
+          />
         </LayoutCatalogo>
       </ConteudoWrapper>
+      <DrawerDeFiltros grupos={opcoesDeGrupo} total={produtos.length} />
     </>
   );
 }
