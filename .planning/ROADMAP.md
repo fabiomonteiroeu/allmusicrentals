@@ -15,7 +15,7 @@ todo o conteúdo é pt-BR.
 
 **Estado real (2026-08-19):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
 (`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
-**Fase 5 (Catálogo) em execução:** 6/8 planos concluídos (Waves 1–5), branch corrente
+**Fase 5 (Catálogo) em execução:** 7/8 planos concluídos (Waves 1–6), branch corrente
 `fase-05-catalogo`. Fases 6–17 não iniciadas.
 
 ## Phases
@@ -199,7 +199,7 @@ Plans:
 
 **Wave 6** *(blocked on Wave 5 completion)*
 
-- [ ] 05-07-PLAN.md — Grade de produtos, estados vazio e sem correspondência, e os emissores de `search`, `filter_applied` e `view_item_list`
+- [x] 05-07-PLAN.md — Grade de produtos, estados vazio e sem correspondência, e os emissores de `search`, `filter_applied` e `view_item_list`
 
 **Wave 7** *(blocked on Wave 6 completion)*
 

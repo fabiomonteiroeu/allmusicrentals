@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 last_updated: "2026-08-19T21:52:44.609Z"
-last_activity: 2026-08-20 -- Phase 05 wave 5 complete (05-06, drawer e chips)
+last_activity: 2026-08-20 -- Phase 05 wave 6 complete (05-07, grade, estados vazios e analytics)
 progress:
   total_phases: 18
   completed_phases: 1
@@ -25,9 +25,9 @@ Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 ## Current Position
 
 Phase: 5 de 18 (Catálogo) — EM EXECUÇÃO
-Plan: 6 de 8 (Waves 1-5 concluídas)
+Plan: 7 de 8 (Waves 1-6 concluídas)
 Status: Executing
-Last activity: 2026-08-20 -- Phase 05 wave 5 complete (05-06, drawer e chips)
+Last activity: 2026-08-20 -- Phase 05 wave 6 complete (05-07, grade, estados vazios e analytics)
 
 Progress: [████░░░░░░] 36%
 
@@ -98,8 +98,8 @@ Nenhum `.planning/todos/` criado ainda.
 ## Session Continuity
 
 Última sessão: 2026-08-19
-Parou em: Fase 5 — Waves 1-5 concluídas. 285/285 testes, typecheck, lint, format e verifica:bundle-segredo verdes. Drawer mobile e chips de filtro ativo montados na rota.
+Parou em: Fase 5 — Waves 1-6 concluídas. 308/308 testes, typecheck, lint, format e verifica:bundle-segredo verdes. Catálogo completo do lado do visitante; falta a prova em navegador real.
 Arquivo de retomada: nenhum
-Próximo passo: Wave 6 — plano 05-07 (grade de produtos, estados vazio e sem correspondência, emissores de search/filter_applied/view_item_list).
+Próximo passo: Wave 7 — plano 05-08 (e2e Playwright: foco preso no drawer, visibilidade por media query, não-duplicacao de search, acento na busca, axe em navegador real). TEM CHECKPOINT de fidelidade visual.
 
 **Decisão travada no checkpoint de 05-01 (2026-08-19):** taxonomia `tipo-de-evento` com 11 rótulos (`opcao-a` do RESEARCH §4). Ordem de exibição e slugs: Evento corporativo/`evento-corporativo`, Casamento/`casamento`, Aniversário/`aniversario`, Festa privada/`festa-privada`, Show/`show`, Festival/`festival`, Feira/`feira`, Ativação de marca/`ativacao-de-marca`, Formatura/`formatura`, Evento ao ar livre/`evento-ao-ar-livre`, Outro/`outro`. `Outro` entra com `exibirNoFiltroDoCatalogo: false` (oculto do painel de filtros por campo booleano, não por hardcode). Migração de `aplicacoes`: `"Festa"` → `"Festa privada"`. Registro auditável completo em `05-01-SUMMARY.md`.
