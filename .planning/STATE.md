@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: executing
 last_updated: "2026-08-19T21:52:44.609Z"
-last_activity: 2026-08-19 -- Phase 05 wave 2 complete (05-03, taxonomia no CMS)
+last_activity: 2026-08-19 -- Phase 05 wave 3 complete (05-04, rota do catálogo)
 progress:
   total_phases: 18
   completed_phases: 1
@@ -25,9 +25,9 @@ Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 ## Current Position
 
 Phase: 5 de 18 (Catálogo) — EM EXECUÇÃO
-Plan: 3 de 8 (Waves 1 e 2 concluídas)
+Plan: 4 de 8 (Waves 1-3 concluídas)
 Status: Executing
-Last activity: 2026-08-19 -- Phase 05 wave 2 complete (05-03, taxonomia no CMS)
+Last activity: 2026-08-19 -- Phase 05 wave 3 complete (05-04, rota do catálogo)
 
 Progress: [████░░░░░░] 36%
 
@@ -98,8 +98,8 @@ Nenhum `.planning/todos/` criado ainda.
 ## Session Continuity
 
 Última sessão: 2026-08-19
-Parou em: Fase 5 — Waves 1 e 2 concluídas. 05-03 fechou com checkpoint bloqueante tripado e resolvido (backfill de contagemSolicitacoes). Gate verde: 231/231 testes, typecheck, lint, format, verifica:bundle-segredo.
+Parou em: Fase 5 — Waves 1-3 concluídas. 248/248 testes, typecheck, lint, format, build e verifica:bundle-segredo verdes. A rota /[locale]/catalogo está no ar como dinâmica.
 Arquivo de retomada: nenhum
-Próximo passo: Wave 3 — plano 05-04 (rota /[locale]/catalogo, hero, card SOBRE OS VALORES, busca com estado busy, loading.tsx e error.tsx).
+Próximo passo: Wave 4 — plano 05-05 (painel de filtros em acordeão com os 5 grupos, swatches de cor multi-seleção, toolbar com contagem e as 5 ordenações).
 
 **Decisão travada no checkpoint de 05-01 (2026-08-19):** taxonomia `tipo-de-evento` com 11 rótulos (`opcao-a` do RESEARCH §4). Ordem de exibição e slugs: Evento corporativo/`evento-corporativo`, Casamento/`casamento`, Aniversário/`aniversario`, Festa privada/`festa-privada`, Show/`show`, Festival/`festival`, Feira/`feira`, Ativação de marca/`ativacao-de-marca`, Formatura/`formatura`, Evento ao ar livre/`evento-ao-ar-livre`, Outro/`outro`. `Outro` entra com `exibirNoFiltroDoCatalogo: false` (oculto do painel de filtros por campo booleano, não por hardcode). Migração de `aplicacoes`: `"Festa"` → `"Festa privada"`. Registro auditável completo em `05-01-SUMMARY.md`.

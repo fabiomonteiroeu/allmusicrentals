@@ -186,7 +186,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 05-04-PLAN.md — Rota `/[locale]/catalogo`, hero, card "SOBRE OS VALORES", busca com validação e estado `busy`, mais `loading.tsx` e `error.tsx`
+- [x] 05-04-PLAN.md — Rota `/[locale]/catalogo`, hero, card "SOBRE OS VALORES", busca com validação e estado `busy`, mais `loading.tsx` e `error.tsx`
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
