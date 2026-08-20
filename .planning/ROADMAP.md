@@ -15,7 +15,7 @@ todo o conteúdo é pt-BR.
 
 **Estado real (2026-08-19):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
 (`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
-**Fase 5 (Catálogo) em execução:** 5/8 planos concluídos (Waves 1–4), branch corrente
+**Fase 5 (Catálogo) em execução:** 6/8 planos concluídos (Waves 1–5), branch corrente
 `fase-05-catalogo`. Fases 6–17 não iniciadas.
 
 ## Phases
@@ -195,7 +195,7 @@ Plans:
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
-- [ ] 05-06-PLAN.md — Drawer mobile com foco preso e chips de filtro ativo com remoção individual
+- [x] 05-06-PLAN.md — Drawer mobile com foco preso e chips de filtro ativo com remoção individual
 
 **Wave 6** *(blocked on Wave 5 completion)*
 
