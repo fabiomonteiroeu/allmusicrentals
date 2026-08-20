@@ -13,10 +13,41 @@ a espinha dorsal aprovada pelo cliente. Os rótulos estruturais (`Phase`, `Goal`
 `Requirements`, `Success Criteria`, `Plans`) ficam em inglês porque são lidos pelas ferramentas GSD;
 todo o conteúdo é pt-BR.
 
-**Estado real (2026-08-19):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
+**Estado real (2026-08-20):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
 (`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
 **Fase 5 (Catálogo) em execução:** 7/8 planos concluídos (Waves 1–6), branch corrente
-`fase-05-catalogo`. Fases 6–17 não iniciadas.
+`fase-05-catalogo`.
+
+> ## ⚠ DESVIO DE ORDEM DE EXECUÇÃO — decisão do usuário, 2026-08-20
+>
+> O usuário precisa do site **no ar em 24h**. A ordem de execução passa a ser
+> **5 → 17 → (6..16)**, em vez da ordem numérica.
+>
+> **As fases 6 a 16 estão DIFERIDAS, não canceladas.** Nenhum requisito delas foi
+> abandonado; elas voltam à fila depois que a beta estiver publicada.
+>
+> **Escopo da beta publicada:** apenas `/[locale]` (Home) e `/[locale]/catalogo`. São as
+> únicas rotas que existem no código.
+>
+> **Gaps aceitos explicitamente pelo usuário nesta beta:**
+>
+> - **Clicar num produto do catálogo dá 404** — a rota `/[locale]/[categoria]/[slug]` é
+>   entrega da Fase 7, não implementada.
+> - Sem SEO, metadata, sitemap ou hreflang (Fase 12).
+> - Sem GTM/GA4/Pixel nem banner de consentimento (Fase 13) — o módulo `dataLayer` tipado
+>   existe e emite eventos, mas não está ligado a nenhuma ferramenta.
+> - Sem CSP com nonce nem rate limiting (Fase 15). O Caddy serve os headers básicos.
+> - Sem auditoria de performance / Core Web Vitals (Fase 14).
+> - Sem carrinho de orçamento (Fase 8) nem formulário de solicitação (Fase 9) — ou seja,
+>   **o core value do produto ainda não está entregue**: o visitante não consegue enviar
+>   uma solicitação de orçamento. Esta beta serve para aprovação visual e de navegação.
+> - Checkpoint de fidelidade visual do catálogo (Task 3 do plano 05-08) **adiado** para
+>   conferência no site publicado; registrado como pendência de UAT.
+>
+> A Fase 17 declara `Depends on: Phase 16`. Essa dependência está sendo **deliberadamente
+> quebrada**. A consequência concreta é que a Fase 16 (QA final: e2e nos 3 locales ×
+> mobile/desktop, axe, cobertura, handoff) não rodou — a cobertura de QA que vai ao ar é a
+> das suítes da Fase 5, restrita ao catálogo em pt-BR.
 
 ## Phases
 
@@ -476,7 +507,7 @@ Plans:
 | 2. Design system | 5/5 | Complete | 2026-08-14 |
 | 3. Strapi (CMS) | 6/6 | Complete | 2026-08-17 |
 | 4. Home | 7/7 | Complete | 2026-08-18 |
-| 5. Catálogo | 0/4 | Not started | - |
+| 5. Catálogo | 7/8 | In progress | - |
 | 6. Categoria | 0/3 | Not started | - |
 | 7. Produto | 0/5 | Not started | - |
 | 8. Carrinho de orçamento | 0/3 | Not started | - |
