@@ -13,9 +13,10 @@ a espinha dorsal aprovada pelo cliente. Os rótulos estruturais (`Phase`, `Goal`
 `Requirements`, `Success Criteria`, `Plans`) ficam em inglês porque são lidos pelas ferramentas GSD;
 todo o conteúdo é pt-BR.
 
-**Estado real (2026-08-18):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
+**Estado real (2026-08-19):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
 (`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
-Fases 5–17 não iniciadas. Branch corrente `fase-04-home`.
+**Fase 5 (Catálogo) em execução:** 4/8 planos concluídos (Waves 1–3), branch corrente
+`fase-05-catalogo`. Fases 6–17 não iniciadas.
 
 ## Phases
 
