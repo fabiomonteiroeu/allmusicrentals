@@ -24,6 +24,16 @@ ARG NEXT_PUBLIC_STRAPI_MEDIA_URL
 ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
 ENV NEXT_PUBLIC_STRAPI_MEDIA_URL=${NEXT_PUBLIC_STRAPI_MEDIA_URL}
 
+# STRAPI_API_URL também é necessária em BUILD TIME, não só em runtime: o layout e a home são
+# pré-renderizados (SSG) e chamam o Strapi durante o `next build`. Sem ela o cliente cai no
+# fallback `http://localhost:1337`, o fetch falha dentro do container e o build ABORTA
+# ("Export encountered an error ... exiting the build") — não é degradação silenciosa.
+# Continua sem o token: as coleções que a home e o catálogo leem estão liberadas para o role
+# público do Strapi (bootstrap em cms/src/index.ts), então o build lê anonimamente e nenhum
+# segredo precisa virar ARG.
+ARG STRAPI_API_URL
+ENV STRAPI_API_URL=${STRAPI_API_URL}
+
 RUN npm run build
 
 # ---- runner: imagem final enxuta ----
