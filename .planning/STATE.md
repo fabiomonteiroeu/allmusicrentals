@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-08-19T21:52:44.609Z"
-last_activity: 2026-08-20 -- Phase 05 wave 6 complete (05-07, grade, estados vazios e analytics)
+last_updated: "2026-08-20T21:10:00.000Z"
+last_activity: 2026-08-20 -- Fase 05 fechada com pendencia de verificacao local (05-08); Fase 17 iniciada por desvio de prazo (beta em 18h)
 progress:
   total_phases: 18
   completed_phases: 1
@@ -19,19 +19,21 @@ progress:
 
 Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
-**Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum.
-**Current focus:** Phase 5 — Catálogo: EM EXECUÇÃO (8 planos, 7 waves). Fase 4 (Home) fechada e verificada.
+**Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum. **Ainda não entregue nesta beta** — ver desvio de 2026-08-20 no ROADMAP.
+**Current focus:** Phase 17 — Deploy: EM EXECUÇÃO (desvio de ordem 5→17→(6..16), decisão do usuário em 2026-08-20, prazo de 18h para beta Home+Catálogo). Fase 5 (Catálogo) fechada com pendência explícita de verificação local (ver Blockers).
 
 ## Current Position
 
-Phase: 5 de 18 (Catálogo) — EM EXECUÇÃO
-Plan: 7 de 8 (Waves 1-6 concluídas)
+Phase: 17 de 18 (Deploy — GHCR + EasyPanel) — EM EXECUÇÃO (fora de ordem, por desvio deliberado)
+Plan: 17-01 iniciado
 Status: Executing
-Last activity: 2026-08-20 -- Phase 05 wave 6 complete (05-07, grade, estados vazios e analytics)
+Last activity: 2026-08-20 -- Fase 05 fechada com pendência de verificação local (05-08); Fase 17 iniciada
 
-Progress: [████░░░░░░] 36%
+Progress: [████░░░░░░] 36% (número herdado do ROADMAP; ver nota de reconciliação em Blockers)
 
-Branch corrente: `fase-05-catalogo`
+Branch corrente: `fase-05-catalogo` até o merge; recomenda-se abrir `fase-17-deploy` a partir daqui
+
+**Fases 6 a 16: DIFERIDAS**, não canceladas — ver ROADMAP.md § "DESVIO DE ORDEM DE EXECUÇÃO".
 
 ## Performance Metrics
 
@@ -67,6 +69,8 @@ Decisões recentes que afetam o trabalho atual:
 
 - [2026-08-17] 🔒 Rota canônica de produto: `/[locale]/[categoria]/[slug]` — exige guarda de colisão de slug e 301 na mudança de categoria (Fase 7); propaga para canônica/sitemap (Fase 12) e e2e (Fase 16)
 - [2026-08-17] 🔒 Deploy: GHCR + Caddy — build no Actions, push para GHCR, pull na VPS, TLS automático (Fase 17); anula a nota "Decisão aberta" de `docs/PLANO.md`
+- [2026-08-20] 🔒 **SUPERSEDE a decisão acima.** Deploy passa a ser GHCR + **EasyPanel** (não Caddy): a VPS já roda EasyPanel com WordPress real em produção em `allmusicbr.com`; um Caddy próprio faria bind em 80/443 e derrubaria esse site. EasyPanel assume proxy reverso, domínios e TLS. Registrado em `docs/adr/005-deploy-easypanel-em-vez-de-caddy.md` (plano 17-01).
+- [2026-08-20] 🔒 Desvio de ordem de execução: **5 → 17 → (6..16 diferidas)**, decisão do usuário, prazo de 18h para beta pública de Home + Catálogo. Core value (carrinho + formulário de orçamento) não entregue nesta beta.
 - [Fase 2] Troca desktop↔mobile do chrome por media query CSS em 1080px, não por `window.innerWidth` (`docs/divergencias.md` D1)
 - [Fase 0] Formulário tem 5 etapas, não 9 (`DEC-00-14`) e "Faixa de investimento" (US$) é a única exceção anti-preço (`DEC-00-15`)
 - [Fase 4] Nova: o módulo `dataLayer` tipado é criado na Fase 4 (porta de saída), e a Fase 13 apenas o liga a GTM/GA4/Pixel e ao consentimento — evita que as páginas 4–11 emitam eventos por caminho solto
@@ -82,7 +86,9 @@ Nenhum `.planning/todos/` criado ainda.
 - **[Fase 15] `verifica:bundle-segredo` não está no CI.** Roda sob demanda; entrar no pipeline é entrega da Fase 15.
 - **[GSD] Ferramentas de estado não leem este `.planning/`.** `state.advance-plan` corrompeu o frontmatter do `STATE.md` numa execução e `roadmap.update-plan-progress` escreveu progresso errado em duas. O `.planning/` veio de ingest em pt-BR. Atualizar STATE e ROADMAP à mão — e atualizar **os dois**, além da tabela de progresso: em 2026-08-17 o cabeçalho do ROADMAP e o STATE ficaram desatualizados após o fechamento da Fase 3, e o planner da Fase 4 leu o estado velho e reportou a fase como aberta.
 - **[Fase 7] Colisão de slug.** Com a rota `/[locale]/[categoria]/[slug]`, um produto com slug igual ao de uma categoria quebra o roteamento. A guarda precisa rodar no CI, não só em runtime.
-- **[Fase 17] RAM da VPS Hostinger.** Next + Strapi + Postgres + Caddy no mesmo host precisa ser dimensionado antes de executar a fase.
+- **[Fase 17] RAM da VPS Hostinger — gate removido por decisão do usuário (2026-08-20).** Total confirmado: 4 GB. O usuário decidiu explicitamente prosseguir sem medir RAM disponível/uso atual ("esquece esse critério") — não é mais bloqueante. Risco residual não eliminado, só aceito: se algum serviço reiniciar sozinho ou ficar lento após o deploy, é o primeiro lugar a olhar (`docker stats --no-stream` + painel de recursos do EasyPanel).
+- **[Fase 05 — 05-08] Verificação local não executada nesta sessão.** As suítes `e2e/catalogo-filtros.spec.ts` e `e2e/catalogo-acessibilidade.spec.ts` (Tasks 1-2 do plano) já existem no disco e cobrem por inspeção os critérios de aceitação, mas `npx playwright test`, `npm run check` e `npm run verifica:bundle-segredo` não foram rodados porque o `device_bash` (shell local) reportou "Workspace unavailable" durante toda a sessão de 2026-08-20. Rodar localmente antes de considerar CATA-01..06 verificados. Task 3 (checkpoint de fidelidade) está formalmente diferida para depois do deploy — ver `05-08-SUMMARY.md`.
+- **[GSD] Métrica do frontmatter (`progress.percent: 6`) diverge da tabela de progresso do ROADMAP.md ("26 de 73 planos, 36%").** Não reconciliado nesta sessão — é o mesmo tipo de deriva já registrada no item acima sobre ferramentas de estado. Tratar `ROADMAP.md` como fonte de verdade de progresso até uma reconciliação manual dedicada.
 - **[Fase 15] CSP com nonce.** Conviver com styled-components e GTM sem `unsafe-inline` global é o risco técnico mais provável de gerar divergência.
 - **[Editorial] Esforço ~3×** em páginas com muitas Dynamic Zones se a cópia entre locales do Strapi falhar.
 - **[Requisitos] Sem PRD.** Requisitos e plano de execução vêm da mesma origem e não se validam mutuamente (ver `.planning/INGEST-CONFLICTS.md`).
@@ -97,9 +103,9 @@ Nenhum `.planning/todos/` criado ainda.
 
 ## Session Continuity
 
-Última sessão: 2026-08-19
-Parou em: Fase 5 — Waves 1-6 concluídas. 308/308 testes, typecheck, lint, format e verifica:bundle-segredo verdes. Catálogo completo do lado do visitante; falta a prova em navegador real.
-Arquivo de retomada: nenhum
-Próximo passo: Wave 7 — plano 05-08 (e2e Playwright: foco preso no drawer, visibilidade por media query, não-duplicacao de search, acento na busca, axe em navegador real). TEM CHECKPOINT de fidelidade visual.
+Última sessão: 2026-08-20 (Cowork)
+Parou em: Fase 5 fechada com `05-08-SUMMARY.md` registrando pendência de verificação local; Fase 17 iniciada (plano 17-01 em progresso: parametrização de deploy). `device_bash` indisponível a sessão inteira — nenhum comando local (`npm`, `git`, `docker`) pôde ser executado por mim; todos os arquivos foram escritos por edição direta e precisam de conferência local antes do deploy.
+Arquivo de retomada: `.planning/phases/05-catalogo/05-08-SUMMARY.md`, `.planning/phases/17-deploy/17-01-SUMMARY.md` (quando criado)
+Próximo passo (atualizado 2026-08-20, RAM não é mais bloqueante): (1) usuário segue o passo a passo de `docs/DEPLOY.md` para criar Postgres + App `cms` + App `web` no EasyPanel (fonte Git + Dockerfile, deploy manual, sem GitHub Actions/GHCR — decisão do usuário); (2) usuário roda `npm run check && npx playwright test` localmente quando puder, para confirmar o 05-08; (3) assim que `device_bash` reconectar, aplicar `git add/commit/push` na `main` de tudo que foi escrito nesta sessão (ainda não commitado no git — só escrito em disco via bridge de arquivos).
 
 **Decisão travada no checkpoint de 05-01 (2026-08-19):** taxonomia `tipo-de-evento` com 11 rótulos (`opcao-a` do RESEARCH §4). Ordem de exibição e slugs: Evento corporativo/`evento-corporativo`, Casamento/`casamento`, Aniversário/`aniversario`, Festa privada/`festa-privada`, Show/`show`, Festival/`festival`, Feira/`feira`, Ativação de marca/`ativacao-de-marca`, Formatura/`formatura`, Evento ao ar livre/`evento-ao-ar-livre`, Outro/`outro`. `Outro` entra com `exibirNoFiltroDoCatalogo: false` (oculto do painel de filtros por campo booleano, não por hardcode). Migração de `aplicacoes`: `"Festa"` → `"Festa privada"`. Registro auditável completo em `05-01-SUMMARY.md`.

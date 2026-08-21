@@ -13,14 +13,19 @@ a espinha dorsal aprovada pelo cliente. Os rótulos estruturais (`Phase`, `Goal`
 `Requirements`, `Success Criteria`, `Plans`) ficam em inglês porque são lidos pelas ferramentas GSD;
 todo o conteúdo é pt-BR.
 
-**Estado real (2026-08-20):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
+**Estado real (2026-08-20, fim de dia):** Fases 0 a 4 concluídas — a Fase 4 (Home) fechou verificada
 (`.planning/phases/04-home/04-VERIFICATION.md`, `status: passed`), com 7/7 planos e 6/6 requisitos.
-**Fase 5 (Catálogo) em execução:** 7/8 planos concluídos (Waves 1–6), branch corrente
-`fase-05-catalogo`.
+**Fase 5 (Catálogo) fechada com pendência explícita:** 8/8 planos com código escrito; as suítes e2e
+do plano 05-08 (Tasks 1-2) existem e cobrem os critérios por inspeção, mas a execução local
+(`npx playwright test`, `npm run check`) não rodou nesta sessão — ver
+`.planning/phases/05-catalogo/05-08-SUMMARY.md`. Task 3 (checkpoint de fidelidade) segue diferida,
+como já registrado abaixo.
+**Fase 17 (Deploy) iniciada em 2026-08-20**, fora de ordem — plano 17-01 em progresso.
 
 > ## ⚠ DESVIO DE ORDEM DE EXECUÇÃO — decisão do usuário, 2026-08-20
 >
-> O usuário precisa do site **no ar em 24h**. A ordem de execução passa a ser
+> O usuário precisa do site **no ar em 18h** (prazo apertado em 2026-08-20, à noite — atualizado do
+> prazo original de 24h). A ordem de execução passa a ser
 > **5 → 17 → (6..16)**, em vez da ordem numérica.
 >
 > **As fases 6 a 16 estão DIFERIDAS, não canceladas.** Nenhum requisito delas foi
@@ -36,18 +41,30 @@ todo o conteúdo é pt-BR.
 > - Sem SEO, metadata, sitemap ou hreflang (Fase 12).
 > - Sem GTM/GA4/Pixel nem banner de consentimento (Fase 13) — o módulo `dataLayer` tipado
 >   existe e emite eventos, mas não está ligado a nenhuma ferramenta.
-> - Sem CSP com nonce nem rate limiting (Fase 15). O Caddy serve os headers básicos.
+> - Sem CSP com nonce nem rate limiting (Fase 15). O EasyPanel/Next servem os headers básicos
+>   (ver ADR-005 — Caddy foi substituído por EasyPanel como dono de portas 80/443 e TLS).
 > - Sem auditoria de performance / Core Web Vitals (Fase 14).
 > - Sem carrinho de orçamento (Fase 8) nem formulário de solicitação (Fase 9) — ou seja,
 >   **o core value do produto ainda não está entregue**: o visitante não consegue enviar
 >   uma solicitação de orçamento. Esta beta serve para aprovação visual e de navegação.
 > - Checkpoint de fidelidade visual do catálogo (Task 3 do plano 05-08) **adiado** para
 >   conferência no site publicado; registrado como pendência de UAT.
+> - **Verificação automatizada do 05-08 (`npx playwright test`, `npm run check`) não rodou
+>   antes deste desvio prosseguir** — o shell local ficou indisponível durante a sessão de
+>   2026-08-20. O código existe e cobre os critérios do plano por inspeção, mas ainda não foi
+>   provado em execução. Risco aceito implicitamente ao priorizar prazo; deve ser fechado
+>   assim que possível.
 >
 > A Fase 17 declara `Depends on: Phase 16`. Essa dependência está sendo **deliberadamente
 > quebrada**. A consequência concreta é que a Fase 16 (QA final: e2e nos 3 locales ×
 > mobile/desktop, axe, cobertura, handoff) não rodou — a cobertura de QA que vai ao ar é a
-> das suítes da Fase 5, restrita ao catálogo em pt-BR.
+> das suítes da Fase 5, restrita ao catálogo em pt-BR, e ainda pendente de execução local
+> (ver acima).
+>
+> **Mudança de arquitetura de deploy (registrada em `docs/adr/005-deploy-easypanel-em-vez-de-caddy.md`,
+> plano 17-01):** a VPS Hostinger já roda EasyPanel com WordPress real em produção em
+> `allmusicbr.com`. Um Caddy próprio faria bind em 80/443 e derrubaria esse site. GHCR continua
+> como registry; EasyPanel assume o papel que era do Caddy (proxy reverso, domínios, TLS).
 
 ## Phases
 
@@ -61,7 +78,7 @@ todo o conteúdo é pt-BR.
 - [x] **Phase 2: Design system** - Tema dos tokens, primitivos, chrome, feedback e card de produto
 - [x] **Phase 3: Strapi (CMS)** - Modelo, cliente server-only com Zod, sanitização e revalidação — verificada por UAT
 - [x] **Phase 4: Home** - `/[locale]` com os blocos da Home ligados ao CMS — verificada
-- [ ] **Phase 5: Catálogo** - Busca, filtros em acordeão, drawer mobile, chips, grade e estados
+- [x] **Phase 5: Catálogo** - Busca, filtros em acordeão, drawer mobile, chips, grade e estados (fechada com pendência de verificação local — ver 05-08-SUMMARY.md)
 - [ ] **Phase 6: Categoria** - Modelo único das 5 categorias e comparativo LED P1.9 × P3.9
 - [ ] **Phase 7: Produto** - PDP em `/[locale]/[categoria]/[slug]` com os 4 arquétipos
 - [ ] **Phase 8: Carrinho de orçamento** - Slice Redux persistido, prontidão e toast com DESFAZER
@@ -73,7 +90,7 @@ todo o conteúdo é pt-BR.
 - [ ] **Phase 14: Performance e Core Web Vitals** - Auditoria, correções e orçamento de JS no CI
 - [ ] **Phase 15: Segurança** - CSP com nonce, headers, rate limiting e revisão de segredos
 - [ ] **Phase 16: QA final** - e2e nos 3 locales × mobile/desktop, axe, cobertura e handoff
-- [ ] **Phase 17: Deploy — GHCR + Caddy na VPS Hostinger** - Pipeline de produção reproduzível
+- [ ] **Phase 17: Deploy — GHCR + EasyPanel na VPS Hostinger** - Pipeline de produção reproduzível (EM EXECUÇÃO, fora de ordem — Caddy substituído por EasyPanel, ver ADR-005)
 
 ## Phase Details
 
@@ -234,7 +251,7 @@ Plans:
 
 **Wave 7** *(blocked on Wave 6 completion)*
 
-- [ ] 05-08-PLAN.md — Suítes e2e Playwright (filtro, drawer, foco, chips, eventos), axe em navegador real e checkpoint de fidelidade
+- [x] 05-08-PLAN.md — Suítes e2e Playwright (filtro, drawer, foco, chips, eventos), axe em navegador real e checkpoint de fidelidade — código completo, verificação local pendente, Task 3 diferida (ver 05-08-SUMMARY.md)
 
 ### Phase 6: Categoria
 
@@ -473,7 +490,7 @@ Plans:
 - [ ] 16-03: Varredura anti-preço em todas as rotas, snapshot do dataLayer e axe em todas as rotas públicas
 - [ ] 16-04: Fechamento de cobertura ≥80%, revisão de conteúdo trilíngue e `docs/HANDOFF.md`
 
-### Phase 17: Deploy — GHCR + Caddy na VPS Hostinger
+### Phase 17: Deploy — GHCR + EasyPanel na VPS Hostinger
 
 **Goal**: Publicar e atualizar o site na VPS Hostinger a partir do GitHub, de forma reproduzível e com rollback
 **Depends on**: Phase 16
@@ -498,7 +515,8 @@ Plans:
 
 ## Progress
 
-**Ordem de execução:** as fases executam em ordem numérica: 0 → 1 → 2 → 3 → 4 → … → 17
+**Ordem de execução:** numérica até a Fase 4 (0 → 1 → 2 → 3 → 4). A partir de 2026-08-20, desvio
+deliberado do usuário: **5 → 17 → (6..16 diferidas)** — ver aviso no topo deste documento.
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -507,7 +525,7 @@ Plans:
 | 2. Design system | 5/5 | Complete | 2026-08-14 |
 | 3. Strapi (CMS) | 6/6 | Complete | 2026-08-17 |
 | 4. Home | 7/7 | Complete | 2026-08-18 |
-| 5. Catálogo | 7/8 | In progress | - |
+| 5. Catálogo | 8/8 | Fechada com pendência (ver 05-08-SUMMARY.md) | 2026-08-20 |
 | 6. Categoria | 0/3 | Not started | - |
 | 7. Produto | 0/5 | Not started | - |
 | 8. Carrinho de orçamento | 0/3 | Not started | - |
@@ -519,9 +537,10 @@ Plans:
 | 14. Performance e Core Web Vitals | 0/3 | Not started | - |
 | 15. Segurança | 0/3 | Not started | - |
 | 16. QA final | 0/4 | Not started | - |
-| 17. Deploy — GHCR + Caddy | 0/5 | Not started | - |
+| 17. Deploy — GHCR + EasyPanel | 0/5 | In progress (fora de ordem) | - |
 
-**Total:** 26 de 73 planos concluídos (36%) · 5 de 18 fases concluídas
+**Total:** 27 de 73 planos com código completo (37%) · 5 de 18 fases concluídas · 1 fase (17) em execução fora de ordem
+*05-08 conta como código completo, não como "concluído" no sentido pleno do GSD — falta confirmação de verificação local.*
 *(o total subiu de 70 para 73: a Fase 4 foi planejada em 7 planos, não 4 — ver `04-PLAN-OUTLINE.md`)*
 
 ---
