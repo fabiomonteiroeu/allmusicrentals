@@ -36,7 +36,13 @@ COPY --from=builder /app/favicon.png ./favicon.png
 COPY --from=builder /app/tsconfig.json ./tsconfig.json
 COPY --from=builder /app/dist ./dist
 
-RUN addgroup -S strapi && adduser -S strapi -G strapi \
+# `public/uploads` é ignorada pelo .gitignore do Strapi, então não existe no clone que o EasyPanel
+# faz do repositório — e o provider de upload local aborta o boot se a pasta não estiver acessível.
+# Criar aqui (em vez de depender de um .gitkeep versionado) mantém a imagem correta independente do
+# que o git carrega. Em produção esta pasta deve receber um volume persistente, senão cada redeploy
+# apaga as imagens já enviadas pelo admin.
+RUN mkdir -p ./public/uploads \
+  && addgroup -S strapi && adduser -S strapi -G strapi \
   && chown -R strapi:strapi /app
 USER strapi
 
