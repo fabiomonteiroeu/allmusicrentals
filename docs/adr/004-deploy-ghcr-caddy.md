@@ -1,6 +1,10 @@
 # ADR 004 — Deploy: registry GHCR + reverse proxy Caddy
 
-**Status:** Aceito (Fase 03) · **Data:** 2026-08-17
+**Status:** SUBSTITUÍDO por [ADR 005](./005-deploy-easypanel-em-vez-de-caddy.md) em 2026-08-20 · **Data original:** 2026-08-17
+
+> A escolha de registry (GHCR) continua valendo. A escolha de reverse proxy (Caddy) foi
+> substituída por EasyPanel — ver ADR 005 para o contexto e as consequências da mudança. Este
+> documento fica preservado como histórico da decisão original.
 
 ## Contexto
 `docs/PLANO.md` se contradizia na Fase 17: as Entregas já pressupunham GHCR ("push para registry

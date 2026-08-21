@@ -13,6 +13,17 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Variáveis públicas do build (Fase 17). NEXT_PUBLIC_* é inlinado no bundle do cliente em BUILD
+# TIME, não em runtime — por isso precisa chegar como build-arg do CI/CD (nunca hardcoded aqui,
+# porque o hostname de produção ainda não existe em DNS no momento em que este Dockerfile é
+# escrito). Segredos de servidor (STRAPI_API_TOKEN, REVALIDATE_SECRET etc.) NÃO entram aqui —
+# esses continuam só em variável de ambiente de runtime do container (EasyPanel), nunca em ARG.
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_STRAPI_MEDIA_URL
+ENV NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+ENV NEXT_PUBLIC_STRAPI_MEDIA_URL=${NEXT_PUBLIC_STRAPI_MEDIA_URL}
+
 RUN npm run build
 
 # ---- runner: imagem final enxuta ----
