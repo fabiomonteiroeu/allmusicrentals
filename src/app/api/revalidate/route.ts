@@ -17,6 +17,10 @@ const MODELO_TAG: Record<string, string> = {
   category: 'cms:categories',
   'faq-item': 'cms:faq',
   avaliacao: 'cms:avaliacoes',
+  // Sem o prefixo `cms:` por herança do adapters.ts — mantido idêntico lá para não invalidar
+  // o cache já emitido. A guarda de paridade no teste compara os valores dos dois objetos, e
+  // não mais só as strings `cms:*`, justamente porque esta entrada escapava do filtro antigo.
+  'tipo-de-evento': 'tipos-de-evento',
 };
 
 export async function POST(request: NextRequest) {

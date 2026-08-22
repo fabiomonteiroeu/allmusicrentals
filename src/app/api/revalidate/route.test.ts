@@ -103,25 +103,37 @@ describe('POST /api/revalidate', () => {
     ['category', 'cms:categories'],
     ['faq-item', 'cms:faq'],
     ['avaliacao', 'cms:avaliacoes'],
+    ['tipo-de-evento', 'tipos-de-evento'],
   ])('modelo %s resolve para a tag %s', async (model, tagEsperada) => {
     const resposta = await chamar({ model, event: 'entry.publish' }, 'segredo-de-teste');
     expect(resposta.status).toBe(200);
     expect(revalidateTag).toHaveBeenCalledWith(tagEsperada, 'max');
   });
 
-  it('o conjunto de tags cms:* em route.ts é idêntico ao de adapters.ts', () => {
+  it('o conjunto de tags em route.ts é idêntico ao de adapters.ts', () => {
     const routeSrc = readFileSync(join(process.cwd(), 'src/app/api/revalidate/route.ts'), 'utf8');
     const adaptersSrc = readFileSync(join(process.cwd(), 'src/lib/cms/adapters.ts'), 'utf8');
 
-    const extrairTags = (texto: string) => {
-      const matches = texto.match(/'cms:[a-z]+'/g) ?? [];
-      return Array.from(new Set(matches)).sort();
+    /**
+     * Extrai os VALORES do objeto `nome` — não as strings `cms:*` do arquivo inteiro.
+     * A versão anterior filtrava por /'cms:[a-z]+'/ e por isso não enxergava
+     * `tipos-de-evento`, a única tag sem o prefixo: a guarda passava com 8 tags enquanto
+     * a 9ª ficava sem cobertura, e o webhook nunca revalidava tipo-de-evento.
+     */
+    const extrairTags = (texto: string, nome: string) => {
+      const inicio = texto.indexOf(`const ${nome}`);
+      expect(inicio).toBeGreaterThanOrEqual(0);
+      const abre = texto.indexOf('{', inicio);
+      const fecha = texto.indexOf('}', abre);
+      const bloco = texto.slice(abre, fecha);
+      const valores = Array.from(bloco.matchAll(/:\s*'([^']+)'/g)).map((m) => m[1]);
+      return Array.from(new Set(valores)).sort();
     };
 
-    const tagsRoute = extrairTags(routeSrc);
-    const tagsAdapters = extrairTags(adaptersSrc);
+    const tagsRoute = extrairTags(routeSrc, 'MODELO_TAG');
+    const tagsAdapters = extrairTags(adaptersSrc, 'TAG');
 
     expect(tagsRoute).toEqual(tagsAdapters);
-    expect(tagsRoute).toHaveLength(8);
+    expect(tagsRoute).toHaveLength(9);
   });
 });
