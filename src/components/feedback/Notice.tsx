@@ -43,8 +43,20 @@ const Rotulo = styled.span<{ $variante: VarianteAviso }>`
   font-weight: ${({ theme }) => theme.peso.medio};
   font-size: ${({ theme }) => theme.tamanho[12]};
   letter-spacing: ${({ theme }) => theme.tracking.rotuloForte};
-  color: ${({ theme, $variante }) =>
-    $variante === 'neutro' ? theme.cor.textoMuted : theme.cor.tealLink};
+  /*
+   * Cor por variante porque cada uma pousa numa superfície diferente, e contraste se mede
+   * contra a superfície real — não contra branco. Medido com axe em navegador real:
+   *   neutro  (bg fundo #F1F2F2)         -> textoMuted  4.54:1
+   *   escuro  (bg tinta800 #1C1E20)      -> teal        6.78:1
+   *   default (bg superficie150 #E4E6E6) -> tealHover   4.85:1
+   * O tealLink que valia para as duas últimas dava 4.08 e 3.27 — reprovado nas duas.
+   * (Sem crases neste comentário: crase encerra o template literal do styled-components.)
+   */
+  color: ${({ theme, $variante }) => {
+    if ($variante === 'neutro') return theme.cor.textoMuted;
+    if ($variante === 'escuro') return theme.cor.teal;
+    return theme.cor.tealHover;
+  }};
 `;
 
 const Texto = styled.p<{ $variante: VarianteAviso }>`

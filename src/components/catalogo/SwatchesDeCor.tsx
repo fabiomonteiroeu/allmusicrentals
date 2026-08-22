@@ -57,7 +57,9 @@ const Nota = styled.p`
   margin: 0;
   font-family: ${({ theme }) => theme.fonte.mono};
   font-size: ${({ theme }) => theme.tamanho[12]};
-  color: ${({ theme }) => theme.cor.textoHint};
+  /* Mesma troca do PainelDeFiltros: textoHint não alcança AA para texto normal em nenhuma
+     superfície clara do projeto. */
+  color: ${({ theme }) => theme.cor.textoMuted};
 `;
 
 export interface SwatchesDeCorProps {

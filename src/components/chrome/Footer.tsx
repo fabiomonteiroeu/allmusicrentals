@@ -50,7 +50,10 @@ const Titulo = styled.p`
   font-weight: ${({ theme }) => theme.peso.medio};
   font-size: ${({ theme }) => theme.tamanho[12]};
   letter-spacing: ${({ theme }) => theme.tracking.rotuloForte};
-  color: ${({ theme }) => theme.cor.textoMuted};
+  /* textoMuted é token de superfície CLARA; aqui o fundo é tinta900 e dava 3.85:1.
+     textoMutedClaro é a variante para fundo escuro — 7.68:1 — e mantém o ar de rótulo apagado
+     (navInativo daria 12.02 e rodapeLink 14.74, brilhantes demais para um rótulo secundário). */
+  color: ${({ theme }) => theme.cor.textoMutedClaro};
 `;
 
 const Lista = styled.nav`
@@ -114,7 +117,8 @@ const Copyright = styled.p`
   margin: 0;
   font-family: ${({ theme }) => theme.fonte.mono};
   font-size: ${({ theme }) => theme.tamanho[13]};
-  color: ${({ theme }) => theme.cor.textoMuted};
+  /* Mesma troca do Titulo acima: fundo escuro pede a variante clara do muted. */
+  color: ${({ theme }) => theme.cor.textoMutedClaro};
 `;
 
 export interface FooterProps {

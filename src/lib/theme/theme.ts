@@ -20,7 +20,16 @@ export const theme = {
     superficie125: '#EDEEEE',
     hachuraClaro: '#DADCDC',
     textoMid: '#5A5F61',
-    textoMuted: '#6B7072',
+    // Escurecido de #6B7072 (−1 por canal) para cruzar 4.5:1 sobre `fundo` (#F1F2F2): estava em
+    // 4.47, agora 4.54. Sobre branco já passava (5.02 → 5.09). O axe pegou isso em navegador real
+    // no spec de acessibilidade do catálogo — contraste calculado contra a superfície onde o
+    // elemento realmente pousa, não contra branco.
+    textoMuted: '#6A6F71',
+    // ⚠ NÃO alcança WCAG AA (4.5:1) para texto normal em nenhuma superfície clara do projeto:
+    // 3.27:1 sobre branco, 2.92:1 sobre `fundo`. Escurecê-lo até passar o colapsaria em cima de
+    // `textoMuted`, ou seja, este degrau de cinza não é viável como cor de TEXTO. Os dois usos do
+    // catálogo foram movidos para `textoMuted`; resta `Field.tsx`, que precisa da mesma decisão
+    // (trocar o token ou aceitar a violação com registro). Não usar em texto novo.
     textoHint: '#8A8F91',
     textoMutedClaro: '#9EA3A5',
     // Nav inativo sobre fundo escuro (unificado de #C7CACB → #C9CBCC).
@@ -29,7 +38,9 @@ export const theme = {
     rodapeLink: '#DDE0E0',
     // Marca (teal)
     teal: '#2FB6B9',
-    tealLink: '#1A7F82',
+    // Escurecido de #1A7F82 (−5 por canal) pelo mesmo motivo: 4.25 → 4.55 sobre `fundo`.
+    // `teal` (#2FB6B9) NÃO muda — é cor de superfície/realce, não de texto, e não entra no cálculo.
+    tealLink: '#157A7D',
     tealHover: '#166D70',
     // Erro
     erro: '#8C2A2A',

@@ -112,7 +112,10 @@ const Nota = styled.p`
   margin: 0;
   font-family: ${({ theme }) => theme.fonte.mono};
   font-size: ${({ theme }) => theme.tamanho[12]};
-  color: ${({ theme }) => theme.cor.textoHint};
+  /* textoHint (#8A8F91) dá 2.92:1 sobre a página e 3.27:1 sobre o branco do drawer — reprovado
+     em AA nas duas superfícies onde esta nota aparece. É texto explicativo que o usuário
+     precisa ler, não decoração, então vai para textoMuted (4.54 / 5.09). */
+  color: ${({ theme }) => theme.cor.textoMuted};
 `;
 
 /** Opções resolvidas no servidor para os 3 grupos dinâmicos (D-02, D8). */

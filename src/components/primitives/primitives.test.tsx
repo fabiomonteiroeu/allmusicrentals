@@ -1,5 +1,6 @@
 import userEvent from '@testing-library/user-event';
 import { renderComProviders, screen } from '@/test-utils';
+import { theme } from '@/lib/theme/theme';
 import { ChipFiltro } from './Chip';
 import { MensagemErro } from './Field';
 import { Eyebrow, Heading } from './Typography';
@@ -23,16 +24,31 @@ describe('MensagemErro', () => {
 });
 
 describe('Eyebrow (E1 — $sobreEscuro)', () => {
-  it('sai em teal (#2FB6B9) sobre fundo escuro', () => {
+  /**
+   * Deriva o rgb do token em vez de fixar o hex: o que este teste protege é a ESCOLHA de token
+   * por variante, não o valor da cor. Fixar o literal fazia um ajuste de contraste na paleta
+   * (tealLink #1A7F82 → #157A7D, para cruzar 4.5:1) quebrar um teste que nada tem a ver com isso.
+   */
+  const rgbDoToken = (hex: string) => {
+    const h = hex.replace('#', '');
+    const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16));
+    return `rgb(${r}, ${g}, ${b})`;
+  };
+
+  it('sai em teal sobre fundo escuro', () => {
     renderComProviders(<Eyebrow $sobreEscuro>Rótulo</Eyebrow>);
     const no = screen.getByText('Rótulo');
-    expect(getComputedStyle(no).color).toBe('rgb(47, 182, 185)');
+    expect(getComputedStyle(no).color).toBe(rgbDoToken(theme.cor.teal));
   });
 
-  it('sai em tealLink (#1A7F82) sem a prop', () => {
+  it('sai em tealLink sem a prop', () => {
     renderComProviders(<Eyebrow>Rótulo</Eyebrow>);
     const no = screen.getByText('Rótulo');
-    expect(getComputedStyle(no).color).toBe('rgb(26, 127, 130)');
+    expect(getComputedStyle(no).color).toBe(rgbDoToken(theme.cor.tealLink));
+  });
+
+  it('os dois tokens são distintos — a variante escura não é cosmética', () => {
+    expect(theme.cor.teal).not.toBe(theme.cor.tealLink);
   });
 });
 
