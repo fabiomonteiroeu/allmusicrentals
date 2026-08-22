@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-last_updated: "2026-08-22T03:22:23.579Z"
-last_activity: 2026-08-22 -- Beta no ar (rentals + cms); pendência de verificação da Fase 05 FECHADA (58/58 e2e, 311 testes); contexto da Fase 06 capturado
+status: Discussed
+last_updated: "2026-08-22T03:36:25.727Z"
+last_activity: 2026-08-22 -- Beta no ar; pendência da Fase 05 fechada; 06-CONTEXT.md escrito
 progress:
   total_phases: 18
   completed_phases: 3
@@ -24,10 +24,10 @@ Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 ## Current Position
 
-Phase: 6 de 18 (Categoria) — contexto capturado em 2026-08-22
-Plan: nenhum ainda — próximo passo é `/gsd:ui-phase 6`, depois `/gsd:plan-phase 6`
-Status: Discussed
-Last activity: 2026-08-22 -- Beta no ar; pendência da Fase 05 fechada; 06-CONTEXT.md escrito
+Phase: 6 de 18 (Categoria) — contexto e contrato de UI capturados em 2026-08-22
+Plan: nenhum ainda — próximo passo é `/gsd:plan-phase 6`
+Status: UI-SPEC approved (5 PASS / 1 FLAG resolvido)
+Last activity: 2026-08-22 -- 06-CONTEXT.md e 06-UI-SPEC.md escritos e aprovados pelo gsd-ui-checker
 
 Progress: [████░░░░░░] 36% (número herdado do ROADMAP; ver nota de reconciliação em Blockers)
 
