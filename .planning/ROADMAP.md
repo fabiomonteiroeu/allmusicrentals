@@ -270,17 +270,25 @@ Plans:
 
   1. As 5 categorias reais (`estruturas`, `telas-de-led`, `luz-e-som`, `tendas`, `moveis`) abrem no mesmo modelo, com hero, subcategorias numeradas, aplicações e FAQ próprios do CMS
   2. `telas-de-led` — e só ela — mostra o comparativo P1.9 × P3.9 com régua 0–10m e tabela de 7 critérios, que empilha abaixo de 760px
-  3. `luz-e-som`, `tendas` e `moveis` mostram o estado "em preparação" em vez de uma grade vazia
-  4. A página tem breadcrumb navegável e emite `ItemList`
+  3. Uma categoria com a flag `emPreparacao` marcada, **ou** sem nenhum produto publicado, mostra o estado "em preparação" no lugar da grade, mantendo hero e subcategorias acima *(reescrito em 2026-08-22 por D-02 — o texto anterior fixava `luz-e-som`/`tendas`/`moveis`, mas a contagem real em produção é `estruturas` 0 · `telas-de-led` 4 · `luz-e-som` 0 · `tendas` 1 · `moveis` 5)*
+  4. A página tem breadcrumb navegável e a estrutura `ItemList` (a serialização em JSON-LD é da Fase 12)
 
-**Plans**: 3 plans
+**Plans**: 11 plans em 5 waves
 **UI hint**: yes
 
 Plans:
 
-- [ ] 06-01: Rota `/[locale]/categoria/[slug]`, hero por categoria, subcategorias numeradas, aplicações, FAQ e breadcrumb
-- [ ] 06-02: Filtros toggle horizontais da categoria e grade com estados "em preparação" e "sem resultado"
-- [ ] 06-03: Bloco `comparativo-led` — pixel pitch, cartões P1.9/P3.9, régua, tabela de 7 critérios com empilhamento em 760px e CTA "NÃO SEI QUAL ESCOLHER"
+- [ ] 06-01-PLAN.md — Modelagem CMS: `shared.aplicacao`, `emPreparacao`, `subcategoria` como content-type e single type Comparativo LED (wave 1)
+- [ ] 06-02-PLAN.md — Generalização aditiva de `filtros.ts` para o eixo `sub` e fim da duplicação em `EmissorFiltroAplicado` (wave 1)
+- [ ] 06-03-PLAN.md — Breadcrumb, trilha/`ItemList` e hero escuro da categoria (wave 1)
+- [ ] 06-04-PLAN.md — Assets de hero na imagem Docker e conteúdo pt-BR das 5 categorias versionado (wave 1)
+- [ ] 06-05-PLAN.md — Camada de leitura: Zod, `getSubcategorias`/`getComparativoLed`, filtro por subcategoria e `MODELO_TAG` (wave 2)
+- [ ] 06-06-PLAN.md — Bootstrap de seed: upload dos heros, 36 subcategorias, 12 aplicações, 11 FAQ e 7 linhas do comparativo (wave 2)
+- [ ] 06-07-PLAN.md — Subcategorias numeradas, aplicações e FAQ em accordion exclusivo (wave 3)
+- [ ] 06-08-PLAN.md — Filtros toggle horizontais e os estados "em preparação" e "sem resultado" (wave 3)
+- [ ] 06-09-PLAN.md — Comparativo LED: régua acessível, cartões P1.9/P3.9, tabela de 7 critérios e CTA (wave 3)
+- [ ] 06-10-PLAN.md — Rota `/[locale]/categoria/[slug]`: busca, saneamento, decisão de estado e composição (wave 4)
+- [ ] 06-11-PLAN.md — [BLOCKING] Redeploy do CMS, verificação dos endpoints públicos, e2e e axe (wave 5)
 
 ### Phase 7: Produto
 
