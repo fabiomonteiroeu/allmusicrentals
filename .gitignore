@@ -43,6 +43,12 @@ yarn-error.log*
 # Hoje só o gitignore global do dev protege isto; aqui vale para qualquer clone.
 /.claude/settings.local.json
 
+# Instalação local do GSD (`npx get-shit-done-cc --claude --local`, 2026-08-21): ~400 arquivos
+# de ferramental reinstaláveis por comando, não código do produto. `.claude/` nunca teve nada
+# versionado neste repo — ignorar mantém esse estado explícito, em vez de depender de ninguém
+# rodar `git add -A` por engano.
+/.claude/
+
 # strapi (quando adicionado em cms/)
 /cms/.tmp
 /cms/build
