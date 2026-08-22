@@ -22,6 +22,15 @@ do plano 05-08 (Tasks 1-2) existem e cobrem os critérios por inspeção, mas a 
 como já registrado abaixo.
 **Fase 17 (Deploy) iniciada em 2026-08-20**, fora de ordem — plano 17-01 em progresso.
 
+**Atualização de 2026-08-21 (beta publicada):** a beta está no ar — `rentals.allmusicbr.com` e
+`cms.allmusicbr.com`, com o conteúdo de dev migrado por `strapi transfer`. A **pendência de
+verificação da Fase 5 acima está FECHADA**: `npm run check` (311 testes, typecheck, lint) e
+`npx playwright test` (58/58, desktop + mobile) rodaram limpos. A execução pegou 6 falhas reais de
+contraste WCAG AA que a inspeção não tinha visto — corrigidas em `bc11c71`. A única violação
+`serious` remanescente é `document-title`, que depende da Fase 12 e está registrada em
+`REGRAS_ADIADAS` no spec, com instrução de remoção. Task 3 (fidelidade visual) **continua diferida**,
+agora conferível no site publicado.
+
 > ## ⚠ DESVIO DE ORDEM DE EXECUÇÃO — decisão do usuário, 2026-08-20
 >
 > O usuário precisa do site **no ar em 18h** (prazo apertado em 2026-08-20, à noite — atualizado do
@@ -49,11 +58,10 @@ como já registrado abaixo.
 >   uma solicitação de orçamento. Esta beta serve para aprovação visual e de navegação.
 > - Checkpoint de fidelidade visual do catálogo (Task 3 do plano 05-08) **adiado** para
 >   conferência no site publicado; registrado como pendência de UAT.
-> - **Verificação automatizada do 05-08 (`npx playwright test`, `npm run check`) não rodou
->   antes deste desvio prosseguir** — o shell local ficou indisponível durante a sessão de
->   2026-08-20. O código existe e cobre os critérios do plano por inspeção, mas ainda não foi
->   provado em execução. Risco aceito implicitamente ao priorizar prazo; deve ser fechado
->   assim que possível.
+> - ~~**Verificação automatizada do 05-08 (`npx playwright test`, `npm run check`) não rodou
+>   antes deste desvio prosseguir**~~ — **FECHADO em 2026-08-21** (`bc11c71`): 58/58 e2e e 311
+>   testes unitários passando. O risco era real: a execução revelou 6 falhas de contraste WCAG AA
+>   invisíveis à inspeção, incluindo dois tokens de texto usados sobre a superfície errada.
 >
 > A Fase 17 declara `Depends on: Phase 16`. Essa dependência está sendo **deliberadamente
 > quebrada**. A consequência concreta é que a Fase 16 (QA final: e2e nos 3 locales ×
