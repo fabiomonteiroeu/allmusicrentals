@@ -149,6 +149,25 @@ planner/executor devem tratá-la como bloqueante do seed (D-07), não como nice-
 
 ---
 
+## Foco Visual Primário
+
+**O hero da categoria é a âncora visual da página.** Em caso de dúvida sobre proeminência entre
+duas seções — hero, subcategorias, aplicações, comparativo LED, FAQ ou grade — o hero vence.
+
+Mesmo padrão que `04-UI-SPEC.md` fixou para a Home, e pela mesma razão: uma regra única, válida nas
+cinco categorias. Vale inclusive onde é contraintuitivo:
+
+- Em `telas-de-led`, o comparativo P1.9 × P3.9 é o conteúdo de maior valor informativo, mas **não**
+  é a âncora — ele é uma seção rica dentro de uma página cuja identidade continua sendo a categoria.
+  Isso evita que `telas-de-led` pareça uma página de outro tipo.
+- Em `estruturas` e `luz-e-som`, hoje sem produtos, a alternativa seria a grade — e a âncora viraria
+  o estado "em preparação", ou seja, o vazio seria o ponto mais forte da tela. Ancorar no hero
+  mantém a página legível quando ela ainda não tem o que mostrar.
+
+*(Resolve o FLAG da Dimensão 2 do checker. Decisão do usuário, 2026-08-22.)*
+
+---
+
 ## Contratos Específicos da Fase
 
 Os 6 problemas do prompt do orquestrador, cada um com uma técnica prescrita — não uma lista de
