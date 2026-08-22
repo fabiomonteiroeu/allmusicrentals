@@ -217,8 +217,8 @@ duas notas de público (menos de 2 m / mais de 4 m), a tabela de 7 critérios, e
 `NÃO SEI QUAL ESCOLHER — QUERO AJUDA`.
 
 **As 7 linhas da tabela** (array `COMPARATIVO`): Distância mínima confortável · Público típico ·
-Conteúdo que se sai melhor · Ambiente · Uso mais comum · Módulo · Área de tela pelo mesmo
-investimento.
+Conteúdo que se sai melhor · Ambiente · Uso mais comum · Módulo · Área de tela pela mesma
+quantidade de módulos.
 
 **Rótulo do grupo `sub` varia por categoria** — "Subcategoria" em `estruturas` e `luz-e-som`,
 "Configuração" em `telas-de-led`. O subtítulo da seção também muda: "Navegue por subcategoria" vs
@@ -227,11 +227,13 @@ investimento.
 </specifics>
 
 <pendencias>
-## Pendências levantadas e ainda não decididas
+## Pendências levantadas
 
-- **Rótulo do critério 7 do comparativo.** "Área de tela pelo mesmo **investimento**" não mostra
-  valor algum, mas a palavra encosta na regra transversal de não exibir preço. Decidir a redação
-  **antes** do seed, já que o cadastro entra no escopo desta fase.
+- ~~**Rótulo do critério 7 do comparativo.**~~ **RESOLVIDO em 2026-08-22, decisão do usuário.**
+  "Área de tela pelo mesmo **investimento**" passa a ser **"Área de tela pela mesma quantidade de
+  módulos"**, com `Menor`/`Maior` inalterados. É fiel à física — o módulo P1.9 é 500×500 mm e o
+  P3.9 é 500×1000 mm, então a mesma contagem cobre o dobro de área — e não menciona valor, o que
+  encerra o atrito com a regra de não exibir preço. Já está nos planos 06-04, 06-06 e 06-09.
 - **Tensão de rota com a Fase 7.** O PROD-01 exige guarda contra "colisão entre slug de produto e
   slug de categoria", mas a categoria vive sob `/[locale]/categoria/[slug]` (fixado pela Fase 4 e em
   produção) enquanto o produto é `/[locale]/[categoria]/[slug]`. Nesse desenho a colisão não pode
