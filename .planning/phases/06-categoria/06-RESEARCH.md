@@ -572,9 +572,11 @@ export default async function CategoriaPage({
 | A4 | O upload das 5 imagens de hero deve ser feito via chamada de API/admin contra um Strapi já rodando, não via cópia de arquivo para dentro do container | Pitfall 3 | Alto se ignorado — heroes ficam vazios em produção mesmo com o código "correto"; ver Open Question 1 para as opções concretas que o planner precisa escolher |
 | A5 | `emPreparacao` precisa de backfill idempotente no bootstrap, pelo mesmo motivo documentado para `contagemSolicitacoes` | Pitfall 4 | Médio — sem o backfill, o campo fica `NULL` nas 5 categorias existentes; o efeito prático em D-01 (OR com contagem zero) provavelmente mascara o bug no curto prazo, mas resolve errado no dia em que alguém fizer uma query Strapi direta por `emPreparacao[$eq]=false` |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Como as 5 imagens de `projeto-base/uploads/` chegam ao volume de produção?**
+   - **RESOLVIDA no plano 06-04** — opção (a): as 5 imagens são copiadas para `cms/seed-assets/` e
+     viajam dentro da imagem Docker do serviço `cms`; o bootstrap faz o upload idempotente.
    - O que sabemos: as imagens existem no repo, batem 1:1 com os 5 heros do layout-fonte; produção usa
      um volume persistente montado em `public/uploads` (Pitfall 3); o padrão do projeto para dados
      estruturais é bootstrap idempotente em `cms/src/index.ts`.
@@ -593,6 +595,8 @@ export default async function CategoriaPage({
 
 2. **O componente `shared/subcategoria.json` (órfão após a migração) deve ser removido do repositório
    nesta fase ou só deixado sem uso?**
+   - **RESOLVIDA no plano 06-01, Task 3** — o arquivo é REMOVIDO nesta fase, com a verificação de boot
+     local antes do deploy.
    - O que sabemos: nenhum outro content-type/componente referencia `shared.subcategoria` além de
      `category.subcategorias` (o campo que está sendo trocado).
    - O que não está claro: se remover o arquivo `.json` do componente exige uma migração de banco
@@ -606,6 +610,8 @@ export default async function CategoriaPage({
 3. **`getCategoriaPorSlug` deve continuar populando `produtos` diretamente na consulta de categoria, ou
    a Fase 6 deve migrar para usar exclusivamente `getProdutos(locale, {categoria: slug, ...})` (o padrão
    do catálogo)?**
+   - **RESOLVIDA no plano 06-05** — `getCategoriaPorSlug` deixa de popular `produtos`; a grade passa a
+     vir exclusivamente de `getProdutos`.
    - O que sabemos: `getCategoriaPorSlug` hoje popula `produtos,produtos.imagens` na mesma chamada;
      `getProdutos` já aceita `filtro.categoria` (legado, mantido "para não quebrar" per comentário no
      código) e é o caminho que suporta os filtros por eixo (subcategoria/ambiente/tipoDeItem) com a

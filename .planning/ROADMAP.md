@@ -273,7 +273,7 @@ Plans:
   3. Uma categoria com a flag `emPreparacao` marcada, **ou** sem nenhum produto publicado, mostra o estado "em preparação" no lugar da grade, mantendo hero e subcategorias acima *(reescrito em 2026-08-22 por D-02 — o texto anterior fixava `luz-e-som`/`tendas`/`moveis`, mas a contagem real em produção é `estruturas` 0 · `telas-de-led` 4 · `luz-e-som` 0 · `tendas` 1 · `moveis` 5)*
   4. A página tem breadcrumb navegável e a estrutura `ItemList` (a serialização em JSON-LD é da Fase 12)
 
-**Plans**: 11 plans em 5 waves
+**Plans**: 12 plans em 5 waves
 **UI hint**: yes
 
 Plans:
@@ -289,6 +289,7 @@ Plans:
 - [ ] 06-09-PLAN.md — Comparativo LED: régua acessível, cartões P1.9/P3.9, tabela de 7 critérios e CTA (wave 3)
 - [ ] 06-10-PLAN.md — Rota `/[locale]/categoria/[slug]`: busca, saneamento, decisão de estado e composição (wave 4)
 - [ ] 06-11-PLAN.md — [BLOCKING] Redeploy do CMS, verificação dos endpoints públicos, e2e e axe (wave 5)
+- [ ] 06-12-PLAN.md — Chips de filtro ativo por array de grupos e supressão do botão `FILTROS` fora do catálogo (wave 2)
 
 ### Phase 7: Produto
 
