@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-08-20T21:10:00.000Z"
-last_activity: 2026-08-20 -- Fase 05 fechada com pendencia de verificacao local (05-08); Fase 17 iniciada por desvio de prazo (beta em 18h)
+last_updated: "2026-08-22T03:22:23.579Z"
+last_activity: 2026-08-22 -- Beta no ar (rentals + cms); pendência de verificação da Fase 05 FECHADA (58/58 e2e, 311 testes); contexto da Fase 06 capturado
 progress:
   total_phases: 18
-  completed_phases: 1
-  total_plans: 18
-  completed_plans: 9
-  percent: 6
+  completed_phases: 3
+  total_plans: 20
+  completed_plans: 19
+  percent: 17
 ---
 
 # Estado do Projeto
@@ -20,20 +20,28 @@ progress:
 Ver: `.planning/PROJECT.md` (atualizado em 2026-08-17)
 
 **Core value:** O visitante monta e envia uma solicitação de orçamento de ponta a ponta, nos três idiomas, sem que nenhum preço apareça em lugar nenhum. **Ainda não entregue nesta beta** — ver desvio de 2026-08-20 no ROADMAP.
-**Current focus:** Phase 17 — Deploy: EM EXECUÇÃO (desvio de ordem 5→17→(6..16), decisão do usuário em 2026-08-20, prazo de 18h para beta Home+Catálogo). Fase 5 (Catálogo) fechada com pendência explícita de verificação local (ver Blockers).
+**Current focus:** Phase 6 — Categoria: CONTEXTO CAPTURADO, pronto para UI-SPEC e planejamento. A Fase 17 (Deploy) entregou a beta pública: `rentals.allmusicbr.com` e `cms.allmusicbr.com` no ar em 2026-08-21, com o conteúdo de dev migrado por `strapi transfer`.
 
 ## Current Position
 
-Phase: 17 de 18 (Deploy — GHCR + EasyPanel) — EM EXECUÇÃO (fora de ordem, por desvio deliberado)
-Plan: 17-01 iniciado
-Status: Executing
-Last activity: 2026-08-20 -- Fase 05 fechada com pendência de verificação local (05-08); Fase 17 iniciada
+Phase: 6 de 18 (Categoria) — contexto capturado em 2026-08-22
+Plan: nenhum ainda — próximo passo é `/gsd:ui-phase 6`, depois `/gsd:plan-phase 6`
+Status: Discussed
+Last activity: 2026-08-22 -- Beta no ar; pendência da Fase 05 fechada; 06-CONTEXT.md escrito
 
 Progress: [████░░░░░░] 36% (número herdado do ROADMAP; ver nota de reconciliação em Blockers)
 
-Branch corrente: `fase-05-catalogo` até o merge; recomenda-se abrir `fase-17-deploy` a partir daqui
+Branch corrente: `fase-06-categoria`, aberta a partir de `main` atualizada
 
-**Fases 6 a 16: DIFERIDAS**, não canceladas — ver ROADMAP.md § "DESVIO DE ORDEM DE EXECUÇÃO".
+**Fase 17 (Deploy): entregue.** Beta pública no ar desde 2026-08-21 — ver `docs/DEPLOY.md` e
+`docs/adr/005-deploy-easypanel-em-vez-de-caddy.md`.
+
+**Fase 5 (Catálogo): pendência de verificação FECHADA em 2026-08-21** (`bc11c71`) — `npm run check`
+(311 testes, typecheck, lint) e `npx playwright test` (58/58, desktop + mobile) rodaram limpos. A
+execução revelou 6 falhas reais de contraste WCAG AA, corrigidas. Segue diferida só a Task 3
+(checkpoint de fidelidade visual), agora conferível no site publicado.
+
+**Fases 7 a 16: DIFERIDAS**, não canceladas — ver ROADMAP.md § "DESVIO DE ORDEM DE EXECUÇÃO".
 
 ## Performance Metrics
 
